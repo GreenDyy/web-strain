@@ -35,3 +35,9 @@
     height: 500px;
     object-fit: contain;
 }
+
+.Home h1 {
+    font-family: "Coiny", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}

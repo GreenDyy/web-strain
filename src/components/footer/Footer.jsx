@@ -19,18 +19,20 @@ function Footer() {
 
                         At the bottom is also a footer menu for site navigation.
                     </p>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img className="icon" src={icons.phone} />
                         <strong style={{ fontSize: 18 }}>+8472838549294</strong>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img className="icon" src={icons.mail} />
                         <strong style={{ fontSize: 18 }}>daqstrain@company.com.vn</strong>
                     </div>
                     {/* searchbox */}
-                    <div style={{ display: 'flex', borderRadius: 50, backgroundColor: 'white', alignSelf: 'start', alignItems: 'center', justifyContent: 'space-between', fontSize: 18, paddingLeft: 10, marginTop: 20 }}>
+                    <div className="search-box">
                         <input type="text" placeholder="Nhập email của bạn" />
                         <button>Gửi</button>
+                    </div>
+                    <div style={{ display: 'flex', height: 100 }}>
                     </div>
 
                 </div>
@@ -59,15 +61,12 @@ function Footer() {
                         <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20 }} src="https://thanhnien.mediacdn.vn/uploaded/duyphuc/2020_02_12/corana_LOJR.jpg?width=689" alt="Image 1" />
                         <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20 }} src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/7/16/820047/Virus-Corona.jpg" alt="Image 1" />
                     </div>
-
-
-
                 </div>
             </div>
             {/* dòng 2 */}
             <hr style={{ border: '1px solid black', width: '100%' }} />
             <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                <ul style={{display:'flex', justifyContent:'start'}}>
+                <ul style={{ display: 'flex', justifyContent: 'start' }}>
                     <li>
                         <Link className='FooterLink' to='/' >Trang chủ</Link>
                     </li>

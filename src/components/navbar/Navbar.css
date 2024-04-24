@@ -73,6 +73,9 @@ ul li {
     background-color: #000;
     color: #fff
 }
+.dark .Link {
+    color: white;
+}
 
 .dark .search-box{
     background-color: #fff;
