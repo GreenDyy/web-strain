@@ -1,0 +1,58 @@
+.Product {
+    margin: 20px 100px;
+    color: black
+}
+
+.card-item {
+    width: 20%;
+    border-radius: 10px;
+    background-color: #FFFAFA;
+    margin: 10px;
+    padding: 15px 12px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.card-item:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+.Product h2 {
+    color: black;
+}
+
+.card-item img {
+    width: 200px;
+    height: 200px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.card-item .btn-cart
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00A551;
+    width: 140px;
+}
+
+.card-item .btn-buy
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: 1px solid #00A551;
+    width: 140px;
+    color: black
+}
+
+
+@media screen and (max-width: 600px) {
+    .card-item {
+        width: 100%;
+        /* Thiết lập chiều rộng của mỗi item về 100% */
+    }
+}

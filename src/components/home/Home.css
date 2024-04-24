@@ -1,0 +1,37 @@
+.Home {
+    display: flex;
+    flex-wrap: wrap;
+    color: black;
+    padding: 50px 200px;
+}
+
+.Home p {
+    font-size: 20px;
+}
+
+.Home button {
+    /* background-color: #00A551; */
+    display: flex;
+    width: 400px;
+    border: 2px solid #00A551;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    padding: 30px 20px;
+    font-size: 20px;
+    color: #00A551;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: 0.5s;
+}
+
+.Home button:hover {
+    background-color: #00A551;
+    color:white;
+    transition: 0.5s;
+}
+
+.Home img {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+}
