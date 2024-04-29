@@ -3,10 +3,9 @@ import {Link } from 'react-router-dom'
 
 import './Navbar.css'
 //assest
-import {icons, images} from '../../constants/constants'
+import {icons, images} from '../../constants'
 
 const Navbar = ({ theme, setTheme }) => {
-    const colorText = theme === 'light' ? '#00A551' : 'white'
     const ToggleTheme = () => {
         theme === 'light' ? setTheme('dark') : setTheme('light')
     }

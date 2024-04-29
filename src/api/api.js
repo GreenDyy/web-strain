@@ -1,5 +1,5 @@
 const API = {
-    dataAll: 'https://localhost:7168/api/Game',
+    getAllStrain: 'https://localhost:7168/api/Strain',
     dataTest: 'https://jsonplaceholder.typicode.com/posts',
 }
 
