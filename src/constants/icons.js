@@ -5,6 +5,7 @@ import logodark from '../assets/icons/logodark.png'
 import phone from '../assets/icons/phone.png'
 import mail from '../assets/icons/mail.png'
 import social from '../assets/icons/social.png'
+import previous from '../assets/icons/previous.png'
 
 const icons = {
     searchicon,
@@ -14,6 +15,7 @@ const icons = {
     phone,
     mail,
     social,
+    previous,
 }
 
 export default icons

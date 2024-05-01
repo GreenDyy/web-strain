@@ -1,8 +1,13 @@
 .Product {
+    display: flex;
     margin-right: 20px;
     margin-left: 20px;
     margin-top: 50px;
     margin-bottom: 100px;
+    color: black
+}
+
+.Product a {
     color: black
 }
 
@@ -33,8 +38,7 @@
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-.card-item .btn-cart
-{
+.card-item .btn-cart {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,8 +46,7 @@
     width: 140px;
 }
 
-.card-item .btn-buy
-{
+.card-item .btn-buy {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,6 +63,70 @@
     background-color: #00A551;
     width: 140px;
     margin: 10px 0px;
+}
+
+.btn-page {
+    color:black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    border-radius: 9999px;
+    border: 1px solid #00A551;
+    background: none;
+}
+
+.btn-page-active {
+    background-color: #00A551;
+}
+.btn-page-active a {
+    color:white;
+}
+
+.btn-previous {
+    border: 1px solid #00A551;
+    background: none;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    display: flex;
+    width: 150px;
+    font-size: 16px;
+    border-radius: 999px;
+}
+
+.btn-previous:hover,
+.btn-next:hover,
+.btn-page:hover {
+    background-color: #00A551;
+    transition: 0.3s;
+}
+
+.btn-previous img {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+}
+
+.btn-next {
+    border: 1px solid #00A551;
+    background: none;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    display: flex;
+    width: 150px;
+    font-size: 16px;
+    border-radius: 999px;
+}
+
+
+.btn-next img {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    transform: scaleX(-1);
 }
 
 @media screen and (max-width: 600px) {
