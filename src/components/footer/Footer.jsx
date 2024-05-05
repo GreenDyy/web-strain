@@ -68,22 +68,22 @@ function Footer() {
             <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <ul style={{ display: 'flex', justifyContent: 'start' }}>
                     <li>
-                        <Link className='FooterLink' to='/' >Trang chủ</Link>
+                        <Link className='Link' to='/' >Trang chủ</Link>
                     </li>
                     <li>
-                        <Link to='/Intro' className='FooterLink'>Sản phẩm</Link>
+                        <Link to='/Intro' className='Link'>Sản phẩm</Link>
                     </li>
                     <li>
-                        <Link to='/Intro' className='FooterLink'>Đăng nhập</Link>
+                        <Link to='/Intro' className='Link'>Đăng nhập</Link>
                     </li>
                     <li>
-                        <Link to='/Intro' className='FooterLink'>Nghiên cứu</Link>
+                        <Link to='/Intro' className='Link'>Nghiên cứu</Link>
                     </li>
                     <li>
-                        <Link to='/Intro' className='FooterLink'>Truyền thông</Link>
+                        <Link to='/Intro' className='Link'>Truyền thông</Link>
                     </li>
                     <li>
-                        <Link to='/Intro' className='FooterLink'>Về chúng tôi</Link>
+                        <Link to='/Intro' className='Link'>Về chúng tôi</Link>
                     </li>
                 </ul>
                 <img src={icons.logodark} />

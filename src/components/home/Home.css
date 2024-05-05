@@ -10,15 +10,13 @@
 }
 
 .Home button {
-    /* background-color: #00A551; */
     display: flex;
+    border-radius: 30px;
     width: 400px;
-    border: 2px solid #00A551;
+    border: 1.5px solid #00A551;
     justify-content: center;
-    align-items: center;
-    background: none;
-    padding: 30px 20px;
-    font-size: 20px;
+    padding: 25px 20px;
+    font-size: 22px;
     color: #00A551;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: 0.5s;

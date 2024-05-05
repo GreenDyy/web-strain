@@ -1,10 +1,9 @@
-
-.navbar {
+.Navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 3%;
-    /* background: white; */
+    background: (0, 255, 0, 0.3);
     transition: 0.5s;
 }
 
@@ -24,12 +23,13 @@ ul {
 
 ul li {
     margin: 10px 20px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
 }
 
 .Link {
-    color: #00A551; /* Màu chữ khi hover */
+    color: #00A551;
+    /* Màu chữ khi hover */
 }
 
 .toggle-icon {
@@ -45,10 +45,10 @@ ul li {
     align-items: center;
     justify-content: space-between;
     background: whitesmoke;
-    padding: 10px 20px;
-    border-radius: 50px;
+    padding: 5px 15px;
+    border-radius: 15px;
     margin: 20px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .search-box input {
@@ -56,16 +56,18 @@ ul li {
     background: transparent;
     outline: 0;
     border: 0;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .search-box input::placeholder {
-    color: #00A551
+    color: #00A551;
+    font-size: 16px;
+    
 }
 
 .search-box img {
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
     cursor: pointer;
 }
 
@@ -73,18 +75,32 @@ ul li {
     background-color: #000;
     color: #fff
 }
+
 .dark .Link {
     color: white;
 }
 
-.dark .search-box{
+.dark .search-box {
     background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .dark .search-box input {
-    color:#000
+    color: #000
 }
 
 .dark .search-box input::placeholder {
-    color:#000
+    color: #000
+}
+
+.Navbar .btn-login {
+    background: none;
+    border-radius: 10px;
+    padding: 5px 30px;
+    border: 1px solid black;
+}
+
+.Navbar .Link {
+    color: black;
+    font-size: 16px;
 }

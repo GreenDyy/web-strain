@@ -2,9 +2,9 @@
   font-family:  system-ui, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  font-size: 16px;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: black;
   background-color: #FFFAFA;
 
   font-synthesis: none;
@@ -24,13 +24,17 @@ a:hover {
   color: #070606;
 }
 
-/* body {
+body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-} */
+  background: url('./assets/images/bg-mushroom.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 
 h1 {
   font-size: 3em;
@@ -40,6 +44,7 @@ h1 {
 button {
   border: none;
   cursor: pointer;
+  font-size: 16px;
   font-family: "Baloo Tamma 2", system-ui;
   /* font-optical-sizing: auto; */
   font-weight: 700;

@@ -12,7 +12,7 @@ const Navbar = ({ theme, setTheme }) => {
 
     return (
         <div>
-            <nav className='navbar'>
+            <nav className='Navbar'>
                 <img src={theme === 'light' ? icons.logolight : icons.logodark} alt='Logo' className='logo' />
                 <ul >
                     <li>
@@ -40,7 +40,11 @@ const Navbar = ({ theme, setTheme }) => {
                     <img src={icons.searchicon} alt='Search Icon' />
                 </div>
 
-                <img src={icons.toggle} alt='Toggle' className='toggle-icon' onClick={() => ToggleTheme()} />
+                {/* <img src={icons.toggle} alt='Toggle' className='toggle-icon' onClick={() => ToggleTheme()} /> */}
+
+                <button className='btn-login'>
+                    <Link className='Link' to='/Login'>Đăng nhập</Link>
+                </button>
             </nav>
 
             
