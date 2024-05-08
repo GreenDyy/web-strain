@@ -1,5 +1,8 @@
 .Footer {
-    background-color: #00A551;
+    /* background-color: #00A551; */
+    /* background: rgba(46, 204, 113, 1); */
+    background: rgb(255, 255, 255);
+    background: linear-gradient(315deg, rgba(255, 255, 255, 1) 0%, rgba(0, 165, 81, 1) 61%);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -24,14 +27,14 @@
 
 .Footer .search-box {
     display: flex;
-    border-radius: 50;
+    border-radius: 50px;
     align-self: flex-start;
     align-items: center;
     justify-content: space-between;
     padding-left: 10px;
     margin-top: 20px;
-    padding: 10px 20px;
-    height:40px;
+    height: 40px;
+    position: relative;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
@@ -43,13 +46,15 @@
     flex: 1;
 }
 
-.Footer button {
-    background-color: orange;
+.Footer .search-box button {
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
     color: white;
     border-radius: 50px;
-    width: 100px;
+    width: 25%;
     height: 50px;
-    
+    position: absolute;
+    right: 0;
+
 }
 
 .Footer input::placeholder {

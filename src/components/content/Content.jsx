@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import './Content.css'
 
 //all pages
@@ -7,16 +7,24 @@ import Home from '../home/Home'
 import Product from '../product/Product'
 import Project from '../project/Project'
 import Login from '../login/Login'
+import Cart from '../cart/Cart'
 
 function Content() {
+    const location = useLocation();
+    const [isLoginPage, setIsLoginPage] = useState(false);
 
+    useEffect(() => {
+        setIsLoginPage(location.pathname === '/Login');
+    }, [location]);
     return (
-        <div className='container'>
+        <div className={`container ${isLoginPage ? 'login-background' : ''}`}>
             <Routes>
                 <Route path='/' element={<Home />} />
+                <Route path='/Home' element={<Home />} />
                 <Route path='/Product' element={<Product />} />
                 <Route path='/Project' element={<Project />} />
                 <Route path='/Login' element={<Login />} />
+                <Route path='/Cart' element={<Cart />} />
             </Routes>
         </div>
     )

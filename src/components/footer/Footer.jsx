@@ -28,11 +28,11 @@ function Footer() {
                         <strong style={{ fontSize: 18 }}>daqstrain@company.com.vn</strong>
                     </div>
                     {/* searchbox */}
-                    <div className="search-box">
-                        <input type="text" placeholder="Nhập email của bạn" />
-                        <button>Gửi</button>
-                    </div>
-                    <div style={{ display: 'flex', height: 100 }}>
+                    <div style={{display:'flex'}}>
+                        <div className="search-box">
+                            <input type="text" placeholder="Nhập email của bạn" />
+                            <button>Gửi</button>
+                        </div>
                     </div>
 
                 </div>
@@ -56,10 +56,10 @@ function Footer() {
                 <div style={{ display: 'flex', flexDirection: 'column', flex: 30, marginLeft: 10, marginRight: 10 }}>
                     <h2>Mạng xã hội</h2>
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20 }} src="https://www.pace.edu.vn/uploads/news/2023/11/social-media.jpg" alt="Image 1" />
-                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20 }} src="https://mpost.io/wp-content/uploads/image-74-7-1024x1024.jpg" alt="Image 1" />
-                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20 }} src="https://thanhnien.mediacdn.vn/uploaded/duyphuc/2020_02_12/corana_LOJR.jpg?width=689" alt="Image 1" />
-                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20 }} src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/7/16/820047/Virus-Corona.jpg" alt="Image 1" />
+                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src="https://www.pace.edu.vn/uploads/news/2023/11/social-media.jpg" alt="Image 1" />
+                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src="https://mpost.io/wp-content/uploads/image-74-7-1024x1024.jpg" alt="Image 1" />
+                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src="https://thanhnien.mediacdn.vn/uploaded/duyphuc/2020_02_12/corana_LOJR.jpg?width=689" alt="Image 1" />
+                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/7/16/820047/Virus-Corona.jpg" alt="Image 1" />
                     </div>
                 </div>
             </div>

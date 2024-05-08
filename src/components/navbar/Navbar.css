@@ -3,8 +3,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 3%;
-    background: (0, 255, 0, 0.3);
+    /* background: transparent; */
+    background: #00A551;
     transition: 0.5s;
+}
+
+.hovered {
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .logo {
@@ -25,11 +30,6 @@ ul li {
     margin: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-}
-
-.Link {
-    color: #00A551;
-    /* Màu chữ khi hover */
 }
 
 .toggle-icon {
@@ -62,7 +62,7 @@ ul li {
 .search-box input::placeholder {
     color: #00A551;
     font-size: 16px;
-    
+
 }
 
 .search-box img {
@@ -95,12 +95,45 @@ ul li {
 
 .Navbar .btn-login {
     background: none;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 5px 30px;
-    border: 1px solid black;
+    border: 1px solid #fff;
+    transition: 0.5s;
 }
 
-.Navbar .Link {
+.Navbar .btn-login:hover {
+    border: 1px solid black;
+    padding: 5px 50px;
     color: black;
+    transition: 0.5s;
+}
+
+.Navbar .btn-login:hover .Link {
+    color: black; /* Thay đổi màu của Link bên trong btn-login */
+    transition: 0.5s;
+    border: none;
+}
+
+.Link {
+    color: #fff;
     font-size: 16px;
+    transition: 0.5s;
+}
+
+
+.Link:hover {
+    color: black;
+    transition: 0.5s;
+    border-bottom: 2px solid RGBA( 144, 238, 144, 1 );
+    border-top: 2px solid rgba( 144, 238, 144, 1 );
+}
+
+.Navbar .btn-cart {
+    margin-left: 10px;
+    background: transparent;
+    border: none;
+}
+.img-cart {
+    width: 40px;
+    height: auto;
 }

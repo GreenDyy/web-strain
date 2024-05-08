@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import './Product.css'
-import axios from 'axios'
-import API from '../../api/api'
 import { images, icons } from '../../constants'
 import ReactPaginate from 'react-paginate';
+import { getAllStrainApi, getAllStrainNoPagingApi } from '../../apis/apiStrain'
 
 const Item = ({ item }) => {
-    const imageSrc = `data:image/jpeg;base64,${item.imageStrain}`;
+    //xử lý ảnh
+    const imageSrc = item.imageStrain ? `data:image/jpeg;base64,${item.imageStrain}` : images.strainnull
+
     return (
 
         <div className='card-item'>
@@ -36,13 +37,7 @@ function Product() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(API.getAllStrain, {
-                    params: {
-                        search: search,
-                        sortBy: sortBy,
-                        page: page
-                    }
-                });
+                const response = await getAllStrainApi(search, sortBy, page)
                 setData(response.data);
                 setTotalPage(response.data[0].totalPage)
             }
@@ -51,7 +46,7 @@ function Product() {
             }
         }
         fetchData()
-    })
+    }, [search, sortBy, page])
 
     //paging
 
@@ -60,7 +55,7 @@ function Product() {
 
             <div style={{ display: 'flex', width: '100%' }}>
                 {/* cột lọc */}
-                <div style={{flex: 12, flexDirection: 'column', border: '1px solid black', alignItems: 'center'}}>
+                <div style={{ flex: 12, flexDirection: 'column', border: '1px solid black' }}>
                     <button className='btn-filter' >mấy nút này để lọc</button>
                     <button className='btn-filter' >mấy nút này để lọc</button>
                     <button className='btn-filter' >mấy nút này để lọc</button>
@@ -69,7 +64,7 @@ function Product() {
                     <button className='btn-filter' >mấy nút này để lọc</button>
                 </div>
                 {/* cột ds strain */}
-                <div style={{ flex: 88, flexWrap:'wrap', flexDirection: 'column', justifyContent: 'center', border: '1px solid red' }}>
+                <div style={{ flex: 88, flexWrap: 'wrap', flexDirection: 'column', justifyContent: 'center', borderRadius: 20, backgroundColor: 'rgba(238, 238, 238, 0.13)' }}>
                     <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
                         {
@@ -81,31 +76,9 @@ function Product() {
                                 <p>Đang load...</p>
                         }
                     </div>
-                    {/* số trang */}
-                    {/* {
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems:'center' }}>
-                            <button className='btn-previous'>
-                                <img src={icons.previous} />
-                                <p>Trang trước</p>
-                            </button>
-                            {[...Array(totalPage)].map((_, index) => (
-                                <button
-                                    key={index}
-                                    className='btn-page'
-                                    style={{ background: (page == index + 1) && 'red' }}
-                                    onClick={()=>setPage(index+1)}>
-                                    <p>{index + 1}</p>
-                                </button>
-                            ))}
-                               <button className='btn-next'>
-                               <p>Trang sau</p>
-                                <img src={icons.previous} />
-     
-                            </button>
-                        </div>
-                    } */}
 
-                    {/* new */}
+                    {/* số trang */}
+
                     <ReactPaginate
                         breakLabel="..."
                         nextLabel="next >"

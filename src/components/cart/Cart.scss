@@ -1,0 +1,166 @@
+.Cart {
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(90deg, #fdfbfb 0%, #ebedee 100%);
+    justify-content: center;
+    padding: 5vh 5vw;
+
+    h2 {
+        border-bottom: 4px solid #00A551;
+        padding-bottom: 20px;
+    }
+
+    .col-1 {
+        display: flex;
+        flex: 8;
+        flex-direction: column;
+
+        table {
+            border-collapse: collapse;
+
+            tr {
+                border-bottom: 1px solid black;
+            }
+        }
+
+        th {
+            text-align: start;
+        }
+
+
+        .card-product {
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+
+            img {
+                border-radius: 20px;
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+            }
+
+            .card-text {
+                margin-left: 10px;
+
+                .title {
+                    font-weight: bold;
+                }
+
+                .des {
+                    font-size: 14px;
+                    color: #333;
+                }
+            }
+        }
+
+        .price {
+            font-weight: 700;
+        }
+
+        .card-quantity {
+            display: flex;
+            align-items: center;
+
+            .btn-increase {
+                display: flex;
+                border-top-left-radius: 20%;
+                border-bottom-left-radius: 20%;
+                background-color: white;
+                border: none;
+                height: 30px;
+                width: 30px;
+                justify-content: center;
+            }
+
+            .quantity {
+                display: flex;
+                background-color: white;
+                height: 30px;
+                width: 30px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .btn-decrease {
+                display: flex;
+                border-top-right-radius: 20%;
+                border-bottom-right-radius: 20%;
+                background-color: white;
+                border: none;
+                height: 30px;
+                width: 30px;
+                justify-content: center;
+            }
+        }
+    }
+
+    .col-2 {
+        display: flex;
+        flex-direction: column;
+        flex: 3;
+        height: auto;
+        // background: linear-gradient(90deg, #ff00cc 0%, #333399 100%);
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 20px;
+        color: white;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 2%;
+        padding-right: 2%;
+        margin-left: 40px;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+        .box-voucher {
+            display: flex;
+            position: relative;
+            border: 1px solid white;
+            height: 50px;
+            border-radius: 40px;
+            margin-bottom: 50px;
+
+            input {
+                padding-left: 20px;
+                display: flex;
+                flex: 1;
+                outline: none;
+                border: none;
+                background: none;
+                color: white
+            }
+
+            input::placeholder {
+                color: white
+            }
+
+            button {
+                position: absolute;
+                right: 0;
+                background: #00A551;
+                border: none;
+                border-radius: 40px;
+                padding: 5px 30px;
+                height: 50px;
+                color: white;
+            }
+        }
+
+        .btn-thanh-toan {
+            background: #00A551;
+            border-radius: 40px;
+            height: 70px;
+            color: white;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .btn-continue {
+            border: 1px solid white;
+            background: transparent;
+            border-radius: 40px;
+            height: 60px;
+            color: white;
+            font-size: 18px;
+        }
+    }
+}

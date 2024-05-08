@@ -40,20 +40,29 @@
 
 .card-item .btn-cart {
     display: flex;
+    flex: 1;
     justify-content: center;
     align-items: center;
+    border-radius: 15px;
     background-color: #00A551;
-    width: 140px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 10px;
 }
 
 .card-item .btn-buy {
     display: flex;
+    flex: 1;
     justify-content: center;
     align-items: center;
+    border-radius: 15px;
     background: none;
     border: 1px solid #00A551;
-    width: 140px;
-    color: black
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 10px;
 }
 
 .Product .btn-filter {
