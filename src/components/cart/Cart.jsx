@@ -73,7 +73,7 @@ function Cart() {
     const [tongTien, setTongTien] = useState(0)
     const [thanhTien, setThanhTien] = useState(0)
 
-    useEffect(() => { 
+    useEffect(() => {
         console.log('useEffect')
         const cartDataLocal = JSON.parse(localStorage.getItem('cart'));
         if (cartDataLocal) {
@@ -125,11 +125,11 @@ function Cart() {
 
 
     return (
-       
+
         <div className='Cart'>
- {
-            console.log('cc')
-        }
+            {
+                console.log('cc')
+            }
             <div className='col-1'>
                 <h1>Giỏ hàng</h1>
                 <table>
@@ -187,18 +187,18 @@ function Cart() {
                     <label style={{ display: 'flex', alignItems: 'center' }}>
                         <input
                             type="radio"
-                            value="option1"
-                            checked={paymentMethod === 'option1'}
-                            onChange={(text) => setPaymentMethod(text.target.value)}
+                            value="khinhanhang"
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                            checked={paymentMethod === 'khinhanhang'}
                         />
                         Thanh toán khi nhận hàng
                     </label>
                     <div style={{ display: 'flex' }}>
                         <input
                             type="radio"
-                            value="option1"
-                            checked={paymentMethod === 'option1'}
-                            onChange={(text) => setPaymentMethod(text.target.value)}
+                            value="momo"
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                            checked={paymentMethod === 'momo'}
                         />
                         <img src={icons.momo} style={{ height: 40, width: 40 }} />
                     </div>

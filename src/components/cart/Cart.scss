@@ -64,8 +64,8 @@
 
             .btn-increase {
                 display: flex;
-                border-top-left-radius: 20%;
-                border-bottom-left-radius: 20%;
+                border-top-right-radius: 20%;
+                border-bottom-right-radius: 20%;
                 background-color: white;
                 border: none;
                 height: 30px;
@@ -84,8 +84,8 @@
 
             .btn-decrease {
                 display: flex;
-                border-top-right-radius: 20%;
-                border-bottom-right-radius: 20%;
+                border-top-left-radius: 20%;
+                border-bottom-left-radius: 20%;
                 background-color: white;
                 border: none;
                 height: 30px;

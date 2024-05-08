@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import './Navbar.css'
-import { LuShoppingCart } from "react-icons/lu";
 //assest
 import { icons, images } from '../../constants'
 
@@ -29,6 +28,7 @@ const listNavbarItem = [
     },
 ]
 const Navbar = ({ theme, setTheme }) => {
+    const navigate = useNavigate()
     const ToggleTheme = () => {
         theme === 'light' ? setTheme('dark') : setTheme('light')
     }
@@ -67,7 +67,7 @@ const Navbar = ({ theme, setTheme }) => {
                 </div> */}
 
                 {/* <img src={icons.toggle} alt='Toggle' className='toggle-icon' onClick={() => ToggleTheme()} /> */}
-
+                
                 {
                     username ?
                         <div>
@@ -85,13 +85,7 @@ const Navbar = ({ theme, setTheme }) => {
                                 onMouseLeave={() => setIsHovered(false)}>Đăng nhập</Link>
                         </button>
                 }
-
-                <button className='btn-cart' onC>
-                    <Link to='/Cart'>
-                        <img src={icons.cart} alt='cart' className='img-cart' />
-                        {/* <LuShoppingCart className='icon' /> */}
-                    </Link>
-                </button>
+                <img src={icons.cart} alt='cart' className='img-cart' onClick={() => navigate('/Cart')} />
             </nav>
 
 

@@ -128,12 +128,9 @@ ul li {
     border-top: 2px solid rgba( 144, 238, 144, 1 );
 }
 
-.Navbar .btn-cart {
-    margin-left: 10px;
-    background: transparent;
-    border: none;
-}
 .img-cart {
     width: 40px;
     height: auto;
+    cursor: pointer;
+    margin-left: 20px;
 }

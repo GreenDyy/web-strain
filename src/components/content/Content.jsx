@@ -8,6 +8,7 @@ import Product from '../product/Product'
 import Project from '../project/Project'
 import Login from '../login/Login'
 import Cart from '../cart/Cart'
+import TestArea from '../testArea/TestArea'
 
 function Content() {
     const location = useLocation();
@@ -25,6 +26,7 @@ function Content() {
                 <Route path='/Project' element={<Project />} />
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Cart' element={<Cart />} />
+                <Route path='/TestArea' element={<TestArea />} />
             </Routes>
         </div>
     )
