@@ -10,7 +10,7 @@ function Footer() {
             <div style={{ display: "flex", flexWrap: 'wrap' }}>
                 {/* cột 1 */}
                 <div style={{ display: 'flex', flexDirection: 'column', flex: 40, marginLeft: 10, marginRight: 10 }}>
-                    <h2>About Us</h2>
+                    <h2>Về chúng tôi</h2>
                     <p>This powerful and all-around free Bootstrap footer works for all types of websites, online stores, and blogs.
 
                         However, it will work best for everyone looking to add Twitter and Instagram feeds into their footer area.

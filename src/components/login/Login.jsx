@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css'
 import { FaUser, FaLock } from "react-icons/fa";
 import { loginCustomerApi } from "../../apis/apiLogin";
+import { useDispatch } from "react-redux";
+import { login } from "../../srcRedux/features/customerSlice";
 
 function Login() {
+    const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
@@ -13,35 +16,49 @@ function Login() {
     const handleLogin = async () => {
         if (!username || !password) {
             console.log('Nhập đủ thông tin đi ba')
+
             alert('Vui lòng nhập đủ thông tin')
             //sau làm thêm cái Toast nữa
             return;
         }
         try {
             const response = await loginCustomerApi(username, password)
-            if (response?.token) {
-                localStorage.setItem('token', response.token)
+            // if (response?.token) {
+            //     localStorage.setItem('token', response.token)
+            // }
+          
+            if (response != null) {
+                console.log(response.data)
+                alert('dang nhap thanh cong')
+
+                dispatch(login(response.data))
+
+                navigate('/Home')
             }
-            console.log(response.data)
-            localStorage.setItem('userName', 'duy');
-            console.log("luu duy thanh cong")
-            localStorage.setItem('profileUser', JSON.stringify(response.data));
-            alert('dang nhap thanh cong')
-            console.log("Đăng nhap thanh cong va luu thong tin user")
         }
         catch (e) {
+            if(e.response   && e.response.status === 404)
+                {
+                    alert('Sai tên tài khoản hoặc mật khẩu')
+                }
             console.log("Lỗi lấy API ", e)
+            localStorage.setItem('loginError', e)
+            localStorage.setItem('user', username)
+            localStorage.setItem('pass', password)
         }
     }
 
-    const handleLoginTest = ()=>{
+    const handleLoginTest = () => {
         if (!username || !password) {
             console.log('Nhập đủ thông tin đi ba')
             alert('Vui lòng nhập đủ thông tin')
             //sau làm thêm cái Toast nữa
             return;
         }
-        localStorage.setItem('username', username);
+        dispatch(login({
+            id: '1',
+            name: 'khánh duy'
+        }))
 
         // Chuyển hướng đến trang Home
         navigate('/Home')
@@ -68,7 +85,7 @@ function Login() {
 
                 <button
                     // type="submit"
-                    onClick={() => handleLoginTest()}
+                    onClick={handleLogin}
                 >Đăng nhập</button>
 
                 <div className="register-link">

@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 //assest
 import { icons, images } from '../../constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../srcRedux/features/customerSlice'
 
 const listNavbarItem = [
     {
@@ -34,9 +36,14 @@ const Navbar = ({ theme, setTheme }) => {
     }
     const [isHovered, setIsHovered] = useState(false)
     const [username, setUsername] = useState(localStorage.getItem('username'))
+    //redux
+    const cc = useSelector(state => state.customer.customerName)
+    const isLogin = useSelector(state => state.customer.isLogin)
+    const dispatch = useDispatch()
     //dùng redux
 
     const handleLogout = () => {
+        dispatch(logout())
         localStorage.removeItem('username');
     };
 
@@ -69,9 +76,9 @@ const Navbar = ({ theme, setTheme }) => {
                 {/* <img src={icons.toggle} alt='Toggle' className='toggle-icon' onClick={() => ToggleTheme()} /> */}
                 
                 {
-                    username ?
+                    isLogin ?
                         <div>
-                            <span className='username'>{username}</span>
+                            <span className='username'>{cc}</span>
                             <button className='btn-logout' onClick={handleLogout}>
                                 Đăng xuất
                             </button>

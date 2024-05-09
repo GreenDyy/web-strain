@@ -2,15 +2,16 @@ import axios from "axios"
 import domain from "./domain"
 
 const loginCustomerApi = (username, password) => {
-    console.log(axios.post(`${domain}/api/Customer/Login`, { username, password }))
-    return axios.post(`${domain}/api/Customer/Login`, { username, password })
+    const response = axios.post(`${domain}/api/Customer/Login`, { username, password })
+    return response
 }
 
-const loginCustomerApi2 = (username, password) => {
-    return axios.post(`${domain}/api/Customer/Login`, { username, password })
+const getAllCustomer = () => {
+    const response = axios.get(`${domain}/api/Customer`)
+    return response
 }
 
 export {
-    loginCustomerApi, 
-    loginCustomerApi2
-}
+    loginCustomerApi,
+    getAllCustomer
+}   

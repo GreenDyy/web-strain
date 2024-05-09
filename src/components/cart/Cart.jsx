@@ -56,7 +56,8 @@ const ItemCart = ({ item, onIncrease, onDecrease }) => {
             <td >
                 <div className='card-quantity'>
                     <button className='btn-decrease' onClick={() => { onDecrease(item) }}>-</button>
-                    <p className='quantity'>{item.quantity}</p>
+                    {/* <p className='quantity'>{item.quantity}</p> */}
+                    <input className='quantity' type='text' value={item.quantity}/>
                     <button className='btn-increase' onClick={() => { onIncrease(item) }}>+</button>
                 </div>
 
