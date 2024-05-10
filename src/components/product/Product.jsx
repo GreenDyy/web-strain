@@ -43,6 +43,7 @@ function Product() {
             }
             catch (error) {
                 console.log('Lỗi fetching data: ', error)
+                console.log(data)
             }
         }
         fetchData()
@@ -68,7 +69,7 @@ function Product() {
                     <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
                         {
-                            data ?
+                            data != [] ?
                                 data.map((item, index) => (
                                     <Item key={index} item={item} />
                                 ))

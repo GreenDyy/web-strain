@@ -31,7 +31,6 @@ const listNavbarItem = [
 ]
 const Navbar = ({ theme, setTheme }) => {
     const navigate = useNavigate()
-    const [isHovered, setIsHovered] = useState(false)
     const [isHoveredDropdown, setIsHoveredDropdown] = useState(false)
 
     //redux
@@ -47,18 +46,15 @@ const Navbar = ({ theme, setTheme }) => {
 
     return (
         <div>
-            <nav className={!isHovered ? 'Navbar' : 'Navbar hovered'}>
-                <img src={theme === 'light' ? icons.logolight : icons.logodark} alt='Logo' className='logo' />
+            <nav className='Navbar'>
+                <img src={icons.logolight} alt='Logo' className='logo' />
                 <ul >
                     {
                         listNavbarItem.map((item, index) => (
                             <li key={index}>
                                 <Link
                                     className='Link'
-                                    to={item.to}
-                                    onMouseEnter={() => { setIsHovered(true) }}
-                                    onMouseLeave={() => setIsHovered(false)}
-                                >
+                                    to={item.to}>
                                     {item.title}
                                 </Link>
                             </li>
@@ -95,16 +91,12 @@ const Navbar = ({ theme, setTheme }) => {
 
                             }
 
-
-
                         </div> :
 
                         <button className='btn-login'
-                            onMouseEnter={() => { setIsHovered(true) }}
-                            onMouseLeave={() => setIsHovered(false)}>
+                           >
                             <Link className='Link' to='/Login'
-                                onMouseEnter={() => { setIsHovered(true) }}
-                                onMouseLeave={() => setIsHovered(false)}>Đăng nhập</Link>
+                               >Đăng nhập</Link>
                         </button>
                 }
                 <img src={icons.cart} alt='cart' className='img-cart' onClick={() => navigate('/Cart')} />
