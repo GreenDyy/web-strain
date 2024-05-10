@@ -31,20 +31,18 @@ const listNavbarItem = [
 ]
 const Navbar = ({ theme, setTheme }) => {
     const navigate = useNavigate()
-    const ToggleTheme = () => {
-        theme === 'light' ? setTheme('dark') : setTheme('light')
-    }
     const [isHovered, setIsHovered] = useState(false)
-    const [username, setUsername] = useState(localStorage.getItem('username'))
+    const [isHoveredDropdown, setIsHoveredDropdown] = useState(false)
+
     //redux
-    const cc = useSelector(state => state.customer.customerName)
-    const isLogin = useSelector(state => state.customer.isLogin)
     const dispatch = useDispatch()
+    const username = useSelector(state => state.customer.customerData?.data?.fullName)
+    const isLogin = useSelector(state => state.customer.isLogin)
     //dùng redux
 
     const handleLogout = () => {
         dispatch(logout())
-        localStorage.removeItem('username');
+        localStorage.removeItem('user');
     };
 
     return (
@@ -73,15 +71,32 @@ const Navbar = ({ theme, setTheme }) => {
                     <img src={icons.searchicon} alt='Search Icon' />
                 </div> */}
 
-                {/* <img src={icons.toggle} alt='Toggle' className='toggle-icon' onClick={() => ToggleTheme()} /> */}
-                
                 {
                     isLogin ?
-                        <div>
-                            <span className='username'>{cc}</span>
-                            <button className='btn-logout' onClick={handleLogout}>
-                                Đăng xuất
-                            </button>
+                        <div className='dropwdown-wrap'
+                            onMouseEnter={() => { setIsHoveredDropdown(true) }}
+                            onMouseLeave={() => setIsHoveredDropdown(false)}>
+                            <div className='dropdown-trigger'>
+                                <Link className='username'>{username}</Link>
+                            </div>
+                            {
+                                isHoveredDropdown &&
+                                <div className='dropdown-content' style={{ position: 'absolute' }}>
+                                    <ul style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <li>
+                                            <button className='btn-logout' onClick={handleLogout}>
+                                                Đăng xuất
+                                            </button>
+                                        </li>
+                                        <li>Item 2</li>
+                                        <li>Item 3</li>
+                                    </ul>
+                                </div>
+
+                            }
+
+
+
                         </div> :
 
                         <button className='btn-login'
