@@ -3,22 +3,25 @@ import './Product.css'
 import { images, icons } from '../../constants'
 import ReactPaginate from 'react-paginate';
 import { getAllStrainApi, getAllStrainNoPagingApi } from '../../apis/apiStrain'
+import { useNavigate } from 'react-router-dom';
+import { addDetailCart, getAllDetailCart } from '../../apis/apiCart';
+import { getDataLocalStorage, setDataLocalStorage } from '../../utils/Utils';
 
-const Item = ({ item }) => {
+const Item = ({ item, idCart, onClickToDetail, onClickAddToCart }) => {
     //xử lý ảnh
     const imageSrc = item.imageStrain ? `data:image/jpeg;base64,${item.imageStrain}` : images.strainnull
 
     return (
 
         <div className='card-item'>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className='img-item' onClick={() => onClickToDetail(item.idStrain)}>
                 <img src={imageSrc} alt={item.scientificName} />
             </div>
             <h2 >{item.scientificName}</h2>
             <p style={{ fontSize: 14, fontWeight: 500 }}>Tình trạng: Có sẳn</p>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <button className='btn-cart'>Thêm vào giỏ hàng</button>
+                <button className='btn-cart' onClick={() => onClickAddToCart(idCart, item.idStrain, 1)} >Thêm vào giỏ hàng</button>
                 <button className='btn-buy'>Mua ngay</button>
             </div>
         </div>
@@ -33,6 +36,9 @@ function Product() {
     const [totalPage, setTotalPage] = useState(0)
     const [itemOffset, setItemOffset] = useState(0);
 
+    const [idCart, setIdCart] = useState(getDataLocalStorage('idCart') ? getDataLocalStorage('idCart') : null)
+
+    const navigate = useNavigate()
     //get data strain
     useEffect(() => {
         const fetchData = async () => {
@@ -43,7 +49,6 @@ function Product() {
             }
             catch (error) {
                 console.log('Lỗi fetching data: ', error)
-                console.log(data)
             }
         }
         fetchData()
@@ -51,12 +56,62 @@ function Product() {
 
     //paging
 
+    const handleGoToDetail = (idStrain) => {
+        navigate(`/ProductDetail/${idStrain}`);
+        // navigate('/ProductDetail')
+    }
+
+    const handleAddToCart = async (idCart, idStrain, quantityOfStrain) => {
+        try {
+            // Lấy danh sách sản phẩm trong giỏ hàng từ localStorage
+            // const listDetailCart = await getDataLocalStorage('cart').data;
+            const listDetailCart = await getAllDetailCart(idCart)
+            console.log('list cart nè: ', listDetailCart.data)
+            if (listDetailCart.data.length != 0) {
+                // Kiểm tra xem idStrain của sản phẩm đã tồn tại trong giỏ hàng hay chưa
+                const curIndex = listDetailCart.data.findIndex(item => item.idStrain === idStrain);
+
+                if (curIndex !== -1) {
+                    // Nếu idStrain đã tồn tại, cập nhật số lượng cho sản phẩm đó
+                    // const listDetailCartNew = [...listDetailCart];
+                    // listDetailCartNew[curIndex].quantityOfStrain += quantityOfStrain;
+                    // setListCartItem(listDetailCartNew);
+                    // setDataLocalStorage('cart', listDetailCartNew);
+                    alert('Sản phẩm đã có trong giỏ hàng')
+                } else {
+                    // Nếu idStrain chưa tồn tại, thêm sản phẩm mới vào giỏ hàng
+                    // const newCartItem = {
+                    //     idStrain: idStrain,
+                    //     quantityOfStrain: quantityOfStrain
+                    // };
+                    // const listDetailCartNew = [...listDetailCart, newCartItem];
+                    // setListCartItem(listDetailCartNew);
+                    addDetailCart(idCart, idStrain, quantityOfStrain)
+                    // setDataLocalStorage('cart', listDetailCartNew);
+                    alert('Thêm vào giỏ hàng thành công');
+                }
+
+              
+            }
+            else {
+                addDetailCart(idCart, idStrain, quantityOfStrain)
+                alert('Thêm vào giỏ hàng thành công');
+            }
+
+
+        } catch (error) {
+            console.log('Thêm vào giỏ hàng thất bại:', error);
+            alert('Thêm vào giỏ hàng thất bại');
+        }
+    };
+
+
     return (
         <div className='Product'>
 
-            <div style={{ display: 'flex', width: '100%' }}>
+            <div className='row-category-item'>
                 {/* cột lọc */}
-                <div style={{ flex: 12, flexDirection: 'column', border: '1px solid black' }}>
+                <div className='col-category'>
                     <button className='btn-filter' >mấy nút này để lọc</button>
                     <button className='btn-filter' >mấy nút này để lọc</button>
                     <button className='btn-filter' >mấy nút này để lọc</button>
@@ -65,13 +120,18 @@ function Product() {
                     <button className='btn-filter' >mấy nút này để lọc</button>
                 </div>
                 {/* cột ds strain */}
-                <div style={{ flex: 88, flexWrap: 'wrap', flexDirection: 'column', justifyContent: 'center', borderRadius: 20, backgroundColor: 'rgba(238, 238, 238, 0.13)' }}>
+                <div className='col-all-item'>
                     <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
-                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <div className='wrap-item'>
                         {
                             data != [] ?
                                 data.map((item, index) => (
-                                    <Item key={index} item={item} />
+                                    <Item 
+                                    key={index} 
+                                    item={item} 
+                                    idCart={idCart}
+                                    onClickToDetail={handleGoToDetail} 
+                                    onClickAddToCart={handleAddToCart} />
                                 ))
                                 :
                                 <p>Đang load...</p>

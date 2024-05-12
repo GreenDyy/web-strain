@@ -13,10 +13,10 @@ function App() {
         localStorage.setItem('currentTheme', theme)
     }, [theme])
     return (
-        <div className={`container ${theme}`}>
+        <div className='container'>
 
             {/* hearder */}
-            <Navbar theme={theme} setTheme={setTheme} />
+            <Navbar />
             {/* body */}
             <Content />
 

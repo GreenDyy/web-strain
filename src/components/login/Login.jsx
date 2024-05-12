@@ -5,6 +5,9 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { loginCustomerApi } from "../../apis/apiLogin";
 import { useDispatch } from "react-redux";
 import { login } from "../../srcRedux/features/customerSlice";
+import { getDataLocalStorage, setDataLocalStorage } from "../../utils/Utils";
+import { toast } from "react-toastify";
+import { getAllDetailCart, getCartByIdCustomer } from "../../apis/apiCart";
 
 function Login() {
     const dispatch = useDispatch()
@@ -15,21 +18,22 @@ function Login() {
 
     useEffect(() => {
         const checkLogined = async () => {
-            const user = JSON.parse(localStorage.getItem('user'));
-            console.log(user)
+            const user = getDataLocalStorage('user');
             if (!user) {
-                console.log('ko tim thay user trong local')
+                console.log('Check xem có user trong local chưa')
                 return
             }
             else {
 
                 const response = await loginCustomerApi(user.data.username, user.data.password)
+                const cart = await getCartByIdCustomer(response.data.data.idCustomer)
                 //lưu vào redux
                 dispatch(login(response.data))
                 //lưu vào local
-                localStorage.setItem('user', JSON.stringify(response.data))
+                setDataLocalStorage('user', response.data)
+                setDataLocalStorage('idCart', cart.data.idCart)
                 navigate('/Home')
-                console.log('Tự dang nhap')
+                console.log('Đã Auto Login')
             }
         }
         checkLogined()
@@ -39,25 +43,28 @@ function Login() {
     const handleLogin = async () => {
         console.log(username, password)
         if (!username || !password) {
-            console.log('Nhập đủ thông tin đi ba')
-
-            alert('Vui lòng nhập đủ thông tin')
+            // alert('Vui lòng nhập đủ thông tin')
+            toast("Vui lòng nhập đủ thông tin")
             //sau làm thêm cái Toast nữa
             return;
         }
         try {
             const response = await loginCustomerApi(username, password)
+            const cart = await getCartByIdCustomer(response.data.data.idCustomer)
+            const listDetailCart = await getAllDetailCart(cart.data.idCart)
             // if (response?.token) {
             //     localStorage.setItem('token', response.token)
             // }
 
             if (response.data.success) {
                 console.log(response.data)
-                alert('dang nhap thanh cong')
+                alert('Đăng nhập thành công')
                 //lưu vào redux
                 dispatch(login(response.data))
                 //lưu vào local
-                localStorage.setItem('user', JSON.stringify(response.data))
+                setDataLocalStorage('user', response.data)
+                setDataLocalStorage('idCart', cart.data.idCart)
+                setDataLocalStorage('cart', listDetailCart)
                 navigate('/Home')
             }
             else
