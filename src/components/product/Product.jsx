@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import './Product.css'
-import { images, icons } from '../../constants'
+import { images } from '../../constants'
 import ReactPaginate from 'react-paginate';
-import { getAllStrainApi, getAllStrainNoPagingApi } from '../../apis/apiStrain'
+import { getAllStrainApi } from '../../apis/apiStrain'
 import { useNavigate } from 'react-router-dom';
-import { addDetailCart, getAllDetailCart } from '../../apis/apiCart';
-import { getDataLocalStorage, setDataLocalStorage } from '../../utils/Utils';
+import { useSelector } from 'react-redux';
+import { addDetailCartApi, getAllDetailCartApi } from '../../apis/apiCart';
+import { convertImageByte } from '../../utils/Utils';
 
 const Item = ({ item, idCart, onClickToDetail, onClickAddToCart }) => {
     //xử lý ảnh
-    const imageSrc = item.imageStrain ? `data:image/jpeg;base64,${item.imageStrain}` : images.strainnull
+    const imageSrc = item.imageStrain ? convertImageByte(item.imageStrain) : images.strainnull
 
     return (
 
@@ -36,7 +37,8 @@ function Product() {
     const [totalPage, setTotalPage] = useState(0)
     const [itemOffset, setItemOffset] = useState(0);
 
-    const [idCart, setIdCart] = useState(getDataLocalStorage('idCart') ? getDataLocalStorage('idCart') : null)
+    // const [idCart, setIdCart] = useState(getDataLocalStorage('idCart') ? getDataLocalStorage('idCart') : null)
+    const idCart = useSelector(state => state.customer.idCart)
 
     const navigate = useNavigate()
     //get data strain
@@ -63,10 +65,8 @@ function Product() {
 
     const handleAddToCart = async (idCart, idStrain, quantityOfStrain) => {
         try {
-            // Lấy danh sách sản phẩm trong giỏ hàng từ localStorage
-            // const listDetailCart = await getDataLocalStorage('cart').data;
-            const listDetailCart = await getAllDetailCart(idCart)
-            console.log('list cart nè: ', listDetailCart.data)
+            const listDetailCart = await getAllDetailCartApi(idCart)
+            console.log('list cart lúc bấm add to cart nè: ', listDetailCart.data)
             if (listDetailCart.data.length != 0) {
                 // Kiểm tra xem idStrain của sản phẩm đã tồn tại trong giỏ hàng hay chưa
                 const curIndex = listDetailCart.data.findIndex(item => item.idStrain === idStrain);
@@ -86,15 +86,15 @@ function Product() {
                     // };
                     // const listDetailCartNew = [...listDetailCart, newCartItem];
                     // setListCartItem(listDetailCartNew);
-                    addDetailCart(idCart, idStrain, quantityOfStrain)
+                    addDetailCartApi(idCart, idStrain, quantityOfStrain)
                     // setDataLocalStorage('cart', listDetailCartNew);
                     alert('Thêm vào giỏ hàng thành công');
                 }
 
-              
+
             }
             else {
-                addDetailCart(idCart, idStrain, quantityOfStrain)
+                addDetailCartApi(idCart, idStrain, quantityOfStrain)
                 alert('Thêm vào giỏ hàng thành công');
             }
 
@@ -126,12 +126,12 @@ function Product() {
                         {
                             data != [] ?
                                 data.map((item, index) => (
-                                    <Item 
-                                    key={index} 
-                                    item={item} 
-                                    idCart={idCart}
-                                    onClickToDetail={handleGoToDetail} 
-                                    onClickAddToCart={handleAddToCart} />
+                                    <Item
+                                        key={index}
+                                        item={item}
+                                        idCart={idCart}
+                                        onClickToDetail={handleGoToDetail}
+                                        onClickAddToCart={handleAddToCart} />
                                 ))
                                 :
                                 <p>Đang load...</p>

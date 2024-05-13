@@ -7,7 +7,8 @@ import { useDispatch } from "react-redux";
 import { login } from "../../srcRedux/features/customerSlice";
 import { getDataLocalStorage, setDataLocalStorage } from "../../utils/Utils";
 import { toast } from "react-toastify";
-import { getAllDetailCart, getCartByIdCustomer } from "../../apis/apiCart";
+import { getAllDetailCartApi, getCartByIdCustomerApi } from "../../apis/apiCart";
+import { setAllDetailCart } from "../../srcRedux/features/cartSlice";
 
 function Login() {
     const dispatch = useDispatch()
@@ -15,30 +16,6 @@ function Login() {
     const [password, setPassword] = useState('')
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const checkLogined = async () => {
-            const user = getDataLocalStorage('user');
-            if (!user) {
-                console.log('Check xem có user trong local chưa')
-                return
-            }
-            else {
-
-                const response = await loginCustomerApi(user.data.username, user.data.password)
-                const cart = await getCartByIdCustomer(response.data.data.idCustomer)
-                //lưu vào redux
-                dispatch(login(response.data))
-                //lưu vào local
-                setDataLocalStorage('user', response.data)
-                setDataLocalStorage('idCart', cart.data.idCart)
-                navigate('/Home')
-                console.log('Đã Auto Login')
-            }
-        }
-        checkLogined()
-    }, [])
-
 
     const handleLogin = async () => {
         console.log(username, password)
@@ -49,22 +26,23 @@ function Login() {
             return;
         }
         try {
-            const response = await loginCustomerApi(username, password)
-            const cart = await getCartByIdCustomer(response.data.data.idCustomer)
-            const listDetailCart = await getAllDetailCart(cart.data.idCart)
+            const user = await loginCustomerApi(username, password)
+
             // if (response?.token) {
             //     localStorage.setItem('token', response.token)
             // }
 
-            if (response.data.success) {
-                console.log(response.data)
-                alert('Đăng nhập thành công')
+            if (user.data.success) {
+                const cart = await getCartByIdCustomerApi(user.data.data.idCustomer)
+                const listDetailCart = await getAllDetailCartApi(cart.data.idCart)
+
                 //lưu vào redux
-                dispatch(login(response.data))
-                //lưu vào local
-                setDataLocalStorage('user', response.data)
-                setDataLocalStorage('idCart', cart.data.idCart)
-                setDataLocalStorage('cart', listDetailCart)
+                dispatch(login({
+                    customerData: user.data,
+                    idCart: cart.data.idCart
+                }))
+                dispatch(setAllDetailCart(listDetailCart.data))
+                alert('Đăng nhập thành công')
                 navigate('/Home')
             }
             else

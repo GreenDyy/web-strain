@@ -19,9 +19,14 @@ const formatCurrency = (number) => {
     return formattedNumber;
 }
 
+const convertImageByte = (imageByte) => {
+    return `data:image/jpeg;base64,${imageByte}`
+}
+
 export {
     getDataLocalStorage,
     setDataLocalStorage,
     removeDataLocalStorage,
     formatCurrency,
+    convertImageByte,
 }

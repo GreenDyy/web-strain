@@ -2,16 +2,21 @@ import React, { useEffect, useState } from 'react'
 import './Cart.scss'
 
 import { icons, images } from '../../constants'
-import { Link, useNavigate } from 'react-router-dom'
-import { getCartByIdCustomer, getAllDetailCart, updateDetailCart } from '../../apis/apiCart'
-import { formatCurrency, getDataLocalStorage, setDataLocalStorage } from '../../utils/Utils'
+import { useNavigate } from 'react-router-dom'
+import { getAllDetailCartApi, removeDetailCartApi, updateDetailCartApi } from '../../apis/apiCart'
+import { convertImageByte, formatCurrency } from '../../utils/Utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { RiDeleteBin5Fill } from "react-icons/ri";
+import { toast } from 'react-toastify';
+import { setAllDetailCart } from '../../srcRedux/features/cartSlice'
 
-const ItemCart = ({ item, onIncrease, onDecrease }) => {
+
+const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
     const tongTien = formatCurrency(item.idStrainNavigation.price * item.quantityOfStrain)
     return (
         <tr style={{ alignItems: 'center', justifyContent: 'center' }}>
             <td className='card-product'>
-                <img src={images.mario} style={{}} />
+                <img src={convertImageByte(item.idStrainNavigation.imageStrain)} style={{}} />
                 <div className='card-text'>
                     <p className='title'>{item.idStrainNavigation.scientificName}</p>
                     <p className='des'>Môi trường sống: {item.idStrainNavigation.isolationSource}</p>
@@ -27,43 +32,37 @@ const ItemCart = ({ item, onIncrease, onDecrease }) => {
                     <input className='quantity' type='text' value={item.quantityOfStrain} />
                     <button className='btn-increase' onClick={() => { onIncrease(item) }}>+</button>
                 </div>
-
             </td>
+
             <td className='price'>{tongTien} VNĐ</td>
+
+            <td>
+                <RiDeleteBin5Fill className='icon-cart' onClick={() => onRemove(item)} />
+            </td>
         </tr>
     )
 }
-
+//--MAIN
 function Cart() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('')
     const navigate = useNavigate()
     const [listCartItem, setListCartItem] = useState([])
     const [tongTien, setTongTien] = useState(0)
     const [thanhTien, setThanhTien] = useState(0)
 
-    // Kiểm tra xem có người dùng trong localStorage không
-    useEffect(() => {
-        const user = getDataLocalStorage('user');
-        setIsLoggedIn(user ? true : false);
-    }, []);
+    const dispatch = useDispatch()
+    const isLogin = useSelector(state => state.customer.isLogin)
+    // const dataDetailCart = useSelector(state => state.cart)
+    const idCart = useSelector(state => state.customer.idCart)
 
-    //check xem đang login chưa, hay có idCart trog local chưa, idCart có khi login thôi
+
     useEffect(() => {
-        // Nếu không có người dùng đăng nhập, hiển thị nút đăng nhập
-        if (!isLoggedIn) {
-            return;
-        }
-        
         const fetchData = async () => {
-            const idCustomer = await getDataLocalStorage('user').data.idCustomer;
-            const cart = await getCartByIdCustomer(idCustomer);
-            const allDetailCart = await getAllDetailCart(cart.data.idCart);
-            setListCartItem(allDetailCart.data);
-            setDataLocalStorage('user')
-        };
-        fetchData();
-    }, [isLoggedIn]);
+            const data = await getAllDetailCartApi(idCart)
+            setListCartItem(data.data)
+        }
+        fetchData()
+    }, [])
 
     //cập nhật tiền
     useEffect(() => {
@@ -80,7 +79,7 @@ function Cart() {
             if (cartDetail.idCartDetail === item.idCartDetail) {
                 const newQuantity = cartDetail.quantityOfStrain + 1;
                 // Gọi hàm cập nhật chi tiết giỏ hàng trên server
-                updateDetailCart(cartDetail.idCartDetail, { idStrain: cartDetail.idStrain, quantityOfStrain: newQuantity });
+                updateDetailCartApi(cartDetail.idCartDetail, { idStrain: cartDetail.idStrain, quantityOfStrain: newQuantity });
                 return {
                     ...cartDetail,
                     quantityOfStrain: newQuantity
@@ -89,7 +88,6 @@ function Cart() {
             return cartDetail;
         });
         setListCartItem(updatedCartItems);
-        setDataLocalStorage('cart', updatedCartItems)
     };
 
     const decreaseQuantity = (item) => {
@@ -97,7 +95,7 @@ function Cart() {
             if (cartDetail.idCartDetail === item.idCartDetail && cartDetail.quantityOfStrain > 1) {
                 const newQuantity = cartDetail.quantityOfStrain - 1;
                 // Gọi hàm cập nhật chi tiết giỏ hàng trên server
-                updateDetailCart(cartDetail.idCartDetail, { idStrain: cartDetail.idStrain, quantityOfStrain: newQuantity });
+                updateDetailCartApi(cartDetail.idCartDetail, { idStrain: cartDetail.idStrain, quantityOfStrain: newQuantity });
                 return {
                     ...cartDetail,
                     quantityOfStrain: newQuantity
@@ -106,15 +104,59 @@ function Cart() {
             return cartDetail;
         });
         setListCartItem(updatedCartItems);
-        setDataLocalStorage('cart', updatedCartItems)
     };
 
+    const removeDetailCart = (item) => {
+        toast.warning(
+            <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <p style={{ color: 'black' }}>Bạn có muốn xoá <strong>{item.idStrainNavigation.scientificName}</strong> khỏi giỏ hàng không?</p>
+
+                <div className='toast-confirm' style={{ display: 'flex', justifyContent: 'center' }}>
+                    <button className='btn-cancel'
+                        style={{ backgroundColor: '#00A551', color: 'white', borderRadius: 3, flex: 1, marginRight: 5 }}
+                        onClick={() => confirmRemove(item)}>Có</button>
+                    <button className='btn-comfirm'
+                        style={{ backgroundColor: 'white', color: 'black', border: '0.5px solid gray', borderRadius: 3, flex: 1, marginLeft: 5 }}
+                        onClick={() => toast.dismiss()}>Không</button>
+                </div>
+
+            </div>,
+            {
+                position: "top-center",
+                autoClose: false,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+            });
+    }
+
+    const confirmRemove = async (item) => {
+        removeDetailCartApi(item.idCartDetail)
+        //remove xong update lại cái giỏ hàng
+        const listDetailCart = await getAllDetailCartApi(idCart)
+        setListCartItem(listDetailCart.data)
+        // dispatch(setAllDetailCart(listDetailCart.data))
+        toast.dismiss()
+        toast.success('Xoá thành công!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+        // alert('day là idCartDetail: ', item.idCartDetail)
+    }
 
     return (
-
         <div className='Cart'>
             {
-                isLoggedIn && listCartItem.length != 0 ?
+                isLogin && listCartItem.length != 0 ?
                     (
                         <>
                             <div className='col-1'>
@@ -126,6 +168,7 @@ function Cart() {
                                             <th>Giá</th>
                                             <th>Số lượng</th>
                                             <th>Tổng tiền</th>
+
                                         </tr>
                                     </thead>
 
@@ -136,7 +179,8 @@ function Cart() {
                                                     key={index}
                                                     item={item}
                                                     onIncrease={increaseQuantity}
-                                                    onDecrease={decreaseQuantity} />
+                                                    onDecrease={decreaseQuantity}
+                                                    onRemove={removeDetailCart} />
                                             ))
                                         }
                                     </tbody>
@@ -204,13 +248,13 @@ function Cart() {
                     :
                     <div>
                         {
-                            isLoggedIn ?
-                            <h2>Không có gì trong giỏ</h2>
-                            :
-                            <button>Đăng nhập</button>
+                            isLogin ?
+                                <h2>Không có gì trong giỏ</h2>
+                                :
+                                <button>Đăng nhập</button>
 
                         }
-                       
+
                     </div>
             }
 

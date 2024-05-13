@@ -37,35 +37,12 @@ const Navbar = () => {
 
     //redux
     const dispatch = useDispatch()
-    const username = useSelector(state => state.customer.customerData?.data?.fullName)
+    const customerData = useSelector(state => state.customer.customerData?.data)
     const isLogin = useSelector(state => state.customer.isLogin)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const user = await getDataLocalStorage('user');
-                console.log("User from Local Storage:", user);
-                if (user) {
-                    setUser(user);
-                    console.log("a", user.data);
-                } else {
-                    console.log("No user data found in Local Storage");
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        };
-        fetchData();
-    }, []);
 
     const handleLogout = () => {
         dispatch(logout())
-        removeDataLocalStorage('user');
-        setUser(null)
-        removeDataLocalStorage('idCart');
-        removeDataLocalStorage('cart');
         alert('Đăng xuất thành công')
-        console.log('Đã logout, xoá user khỏi local')
     };
 
     return (
@@ -92,12 +69,12 @@ const Navbar = () => {
                 </div> */}
 
                 {
-                    (isLogin || user) ?
+                    (isLogin) ?
                         <div className='dropwdown-wrap'
                             onMouseEnter={() => { setIsHoveredDropdown(true) }}
                             onMouseLeave={() => setIsHoveredDropdown(false)}>
                             <div className='dropdown-trigger'>
-                                <Link className='Link'>{user?.data?.fullName}</Link>
+                                <Link className='Link'>{customerData?.fullName}</Link>
                             </div>
                             {
                                 isHoveredDropdown &&

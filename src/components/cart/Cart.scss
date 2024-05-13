@@ -93,6 +93,8 @@
                 width: 30px;
                 justify-content: center;
             }
+
+
         }
     }
 
@@ -164,4 +166,24 @@
             font-size: 18px;
         }
     }
+}
+
+.icon-cart {
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.toast-confirm {
+    display: flex;
+}
+
+.btn-confirm {
+    background: #00A551;
+    color: #fdfbfb;
+}
+
+.btn-cancel {
+    background: #fdfbfb;
+    color: black;
 }

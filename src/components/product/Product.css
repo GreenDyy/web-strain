@@ -59,8 +59,8 @@
     display: flex;
     justify-content: center;
     width: 100%;
-  
-    
+
+
 }
 
 .card-item img {
@@ -120,7 +120,7 @@
     margin-left: 10px;
     margin-right: 10px;
     padding: 20px;
-    border-radius: 9999px;
+    border-radius: 8px;
     border: 1px solid #00A551;
     background: none;
 }
@@ -142,7 +142,10 @@
     display: flex;
     width: 150px;
     font-size: 16px;
-    border-radius: 999px;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .btn-previous:hover,
@@ -167,7 +170,10 @@
     display: flex;
     width: 150px;
     font-size: 16px;
-    border-radius: 999px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
 }
 
 

@@ -5,16 +5,19 @@ const customerSlice = createSlice({
     initialState: {
         isLogin: false,
         customerData: null,
+        idCart: null,
     },
     reducers: {
         login: (state, action) => {
             state.isLogin = true
-            state.customerData = action.payload
+            state.customerData = action.payload.customerData;
+            state.idCart = action.payload.idCart;
         },
 
         logout: (state) => {
             state.isLogin = false
             state.customerData = null
+            state.idCart = null
         }
     }
 

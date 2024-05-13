@@ -1,26 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginCustomerApi, getAllCustomer } from "../../apis/apiLogin";
-import { getAllStrainApi } from "../../apis/apiStrain";
-import { getCartByIdCustomer, getAllDetailCart } from "../../apis/apiCart";
+// import { loginCustomerApi, getAllCustomer } from "../../apis/apiLogin";
+// import { getAllStrainApi } from "../../apis/apiStrain";
+// import { getCartByIdCustomerApi, getAllDetailCartApi } from "../../apis/apiCart";
 import axios from "axios";
 import Dropdown from "../Dropdown/Dropdown";
+import { toast } from "react-toastify";
 
 function TestArea() {
-   useEffect(() => {
-      const fetchData = async () => {
-          const cart = await getCartByIdCustomer('KH00001')
-          console.log("cart nè: ", cart.data)
+   const handleConfirm = () => {
+      // Xử lý hành động khi người dùng xác nhận
+      console.log('Người dùng đã xác nhận');
+      toast.dismiss();
+   };
 
-      
-          const allDetailCart = await getAllDetailCart(cart.idCart)
-          console.log(allDetailCart)
-      }
-      fetchData()
-  }, [])
+   const showToast = () => {
+      toast.info(
+         <div>
+            <div>🦄 Bạn có chắc chắn muốn xoá mục này không?</div>
+            <button onClick={handleConfirm}>Xác nhận</button>
+         </div>,
+         {
+            autoClose: false,
+            closeButton: true,
+            closeOnClick: false,
+            draggable: true,
+            progress: undefined,
+            hideProgressBar: true
+         }
+      );
+   };
+
    return (
       <div>
-         <p>a</p>
+         <button onClick={showToast}>Hiển thị Toast</button>
       </div>
    )
 }
