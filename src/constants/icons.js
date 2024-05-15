@@ -1,7 +1,6 @@
 import searchicon from '../assets/icons/searchblack.png'
 import toggle from '../assets/icons/toggle.png'
-import logolight from '../assets/icons/logolight.png'
-import logodark from '../assets/icons/logodark.png'
+import logo from '../assets/icons/logo.png'
 import phone from '../assets/icons/phone.png'
 import mail from '../assets/icons/mail.png'
 import social from '../assets/icons/social.png'
@@ -12,8 +11,7 @@ import momo from '../assets/icons/momo.png'
 const icons = {
     searchicon,
     toggle,
-    logolight,
-    logodark,
+    logo,
     phone,
     mail,
     social,

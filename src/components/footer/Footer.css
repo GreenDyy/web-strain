@@ -18,11 +18,11 @@
     /* width: 100%; */
 }
 
-.Footer .icon {
-    height: 25px;
-    width: 25px;
-    margin-right: 10px;
+.logo {
+    width: 60px;
+    height: 60px;
     object-fit: contain;
+    cursor: pointer;
 }
 
 .Footer .search-box {

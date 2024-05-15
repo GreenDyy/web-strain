@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import './Navbar.css'
@@ -6,7 +6,7 @@ import './Navbar.css'
 import { icons } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../srcRedux/features/customerSlice'
-import { getDataLocalStorage, removeDataLocalStorage } from '../../utils/Utils'
+import { TfiShoppingCartFull } from "react-icons/tfi";
 
 const listNavbarItem = [
     {
@@ -32,7 +32,6 @@ const listNavbarItem = [
 ]
 const Navbar = () => {
     const navigate = useNavigate()
-    const [user, setUser] = useState(null)
     const [isHoveredDropdown, setIsHoveredDropdown] = useState(false)
 
     //redux
@@ -48,7 +47,7 @@ const Navbar = () => {
     return (
         <div>
             <nav className='Navbar'>
-                <img src={icons.logolight} alt='Logo' className='logo' />
+                <img src={icons.logo} alt='Logo' className='logo' />
                 <ul >
                     {
                         listNavbarItem.map((item, index) => (
@@ -68,39 +67,50 @@ const Navbar = () => {
                     <img src={icons.searchicon} alt='Search Icon' />
                 </div> */}
 
-                {
-                    (isLogin) ?
-                        <div className='dropwdown-wrap'
-                            onMouseEnter={() => { setIsHoveredDropdown(true) }}
-                            onMouseLeave={() => setIsHoveredDropdown(false)}>
-                            <div className='dropdown-trigger'>
-                                <Link className='Link'>{customerData?.fullName}</Link>
-                            </div>
-                            {
-                                isHoveredDropdown &&
-                                <div className='dropdown-content' style={{ position: 'absolute' }}>
-                                    <ul style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <li>
-                                            <button className='btn-logout' onClick={handleLogout}>
-                                                Đăng xuất
-                                            </button>
-                                        </li>
-                                        <li>Item 2</li>
-                                        <li>Item 3</li>
-                                    </ul>
+                <div className='col-3'>
+                    {
+                        (isLogin) ?
+                            <div className='dropwdown-wrap'
+                                onMouseEnter={() => { setIsHoveredDropdown(true) }}
+                                onMouseLeave={() => setIsHoveredDropdown(false)}>
+                                <div className='dropdown-trigger'>
+                                    <Link className='Link'>{customerData?.fullName}</Link>
                                 </div>
+                                {
+                                    isHoveredDropdown &&
+                                    <div className='dropdown-content' style={{ position: 'absolute' }}>
+                                        <ul style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <li>
+                                                <button className='btn-logout' onClick={handleLogout}>
+                                                    Thông tin cá nhân
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button className='btn-logout' onClick={handleLogout}>
+                                                    Đơn hàng của tôi
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button className='btn-logout' onClick={handleLogout}>
+                                                    Đăng xuất
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                            }
+                                }
 
-                        </div> :
+                            </div> :
 
-                        <button className='btn-login'
-                        >
-                            <Link className='Link' to='/Login'
-                            >Đăng nhập</Link>
-                        </button>
-                }
-                <img src={icons.cart} alt='cart' className='img-cart' onClick={() => navigate('/Cart')} />
+                            <button className='btn-login'
+                            >
+                                <Link className='Link' to='/Login'
+                                >Đăng nhập</Link>
+                            </button>
+                    }
+                    {/* <img src={icons.cart} alt='cart' className='img-cart' onClick={() => navigate('/Cart')} /> */}
+                    <TfiShoppingCartFull style={{ color: 'white', marginLeft: 15, fontSize: 30, cursor: 'pointer' }} onClick={() => navigate('/Cart')} />
+                </div>
             </nav>
 
 

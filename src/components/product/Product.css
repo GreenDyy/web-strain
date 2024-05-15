@@ -51,7 +51,7 @@
 }
 
 .card-item:hover {
-    transform: scale(1.05);
+    scale: 1.05;
     transition: 0.3s;
 }
 

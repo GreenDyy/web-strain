@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './Cart.scss'
 
-import { icons, images } from '../../constants'
+import { icons } from '../../constants'
 import { useNavigate } from 'react-router-dom'
 import { getAllDetailCartApi, removeDetailCartApi, updateDetailCartApi } from '../../apis/apiCart'
 import { convertImageByte, formatCurrency } from '../../utils/Utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { toast } from 'react-toastify';
-import { setAllDetailCart } from '../../srcRedux/features/cartSlice'
 import { getInventoryByIdStrainApi } from '../../apis/apiInventory'
-
+import { toastSuccess } from '../Toast/Toast'
 
 const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
     const [tongTien, setTongTien] = useState(null)
@@ -42,7 +41,6 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
             <td >
                 <div className='card-quantity'>
                     <button className='btn-decrease' onClick={() => { onDecrease(item) }}>-</button>
-                    {/* <p className='quantity'>{item.quantity}</p> */}
                     <input className='quantity' type='text' value={item.quantityOfStrain} />
                     <button className='btn-increase' onClick={() => { onIncrease(item) }}>+</button>
                 </div>
@@ -63,10 +61,10 @@ function Cart() {
     const [listCartItem, setListCartItem] = useState([])
     const [tongTien, setTongTien] = useState(0)
     const [thanhTien, setThanhTien] = useState(0)
+    const [reloadData, setReloadData] = useState(false);
 
     const dispatch = useDispatch()
     const isLogin = useSelector(state => state.customer.isLogin)
-    // const dataDetailCart = useSelector(state => state.cart)
     const idCart = useSelector(state => state.customer.idCart)
 
 
@@ -76,7 +74,7 @@ function Cart() {
             setListCartItem(data.data)
         }
         fetchData()
-    }, [])
+    }, [reloadData])
 
     //cập nhật tiền
     useEffect(() => {
@@ -93,36 +91,51 @@ function Cart() {
         updateTongTien()
     }, [listCartItem])
 
-    const increaseQuantity = (item) => {
-        const updatedCartItems = listCartItem.map(cartDetail => {
-            if (cartDetail.idCartDetail === item.idCartDetail) {
-                const newQuantity = cartDetail.quantityOfStrain + 1;
-                // Gọi hàm cập nhật chi tiết giỏ hàng trên server
-                updateDetailCartApi(cartDetail.idCartDetail, { idStrain: cartDetail.idStrain, quantityOfStrain: newQuantity });
-                return {
-                    ...cartDetail,
-                    quantityOfStrain: newQuantity
-                };
+    const increaseQuantity = async (item) => {
+        // const updatedCartItems = listCartItem.map(cartDetail => {
+        //     if (cartDetail.idCartDetail === item.idCartDetail) {
+        //         const newQuantity = cartDetail.quantityOfStrain + 1;
+        //         // Gọi hàm cập nhật chi tiết giỏ hàng trên server
+        //         updateDetailCartApi(cartDetail.idCartDetail, { idStrain: cartDetail.idStrain, quantityOfStrain: newQuantity });
+        //         return {
+        //             ...cartDetail,
+        //             quantityOfStrain: newQuantity
+        //         };
+        //     }
+        //     return cartDetail;
+        // });
+        // setListCartItem(updatedCartItems);
+        for (let i = 0; i < listCartItem.length; i++) {
+            if (listCartItem[i].idCartDetail === item.idCartDetail) {
+                const newQuantity = listCartItem[i].quantityOfStrain + 1;
+                updateDetailCartApi(listCartItem[i].idCartDetail, { idStrain: listCartItem[i].idStrain, quantityOfStrain: newQuantity });
+                //cập nhật quantity
+                listCartItem[i].quantityOfStrain = newQuantity;
+                setListCartItem([...listCartItem]);
+                return
             }
-            return cartDetail;
-        });
-        setListCartItem(updatedCartItems);
-    };
+        }
+        setListCartItem(listCartItem);
+    }
 
     const decreaseQuantity = (item) => {
-        const updatedCartItems = listCartItem.map(cartDetail => {
-            if (cartDetail.idCartDetail === item.idCartDetail && cartDetail.quantityOfStrain > 1) {
-                const newQuantity = cartDetail.quantityOfStrain - 1;
-                // Gọi hàm cập nhật chi tiết giỏ hàng trên server
-                updateDetailCartApi(cartDetail.idCartDetail, { idStrain: cartDetail.idStrain, quantityOfStrain: newQuantity });
-                return {
-                    ...cartDetail,
-                    quantityOfStrain: newQuantity
-                };
+        for (let i = 0; i < listCartItem.length; i++) {
+            if (listCartItem[i].idCartDetail === item.idCartDetail) {
+                if (listCartItem[i].quantityOfStrain > 1) {
+                    const newQuantity = listCartItem[i].quantityOfStrain - 1;
+                    updateDetailCartApi(listCartItem[i].idCartDetail, { idStrain: listCartItem[i].idStrain, quantityOfStrain: newQuantity });
+                    //cập nhật quantity
+                    listCartItem[i].quantityOfStrain = newQuantity;
+                    setListCartItem([...listCartItem]);
+                    return
+                }
+                else {
+                    removeDetailCart(item)
+                    return
+                }
             }
-            return cartDetail;
-        });
-        setListCartItem(updatedCartItems);
+        }
+        setListCartItem(listCartItem);
     };
 
     const removeDetailCart = (item) => {
@@ -153,23 +166,16 @@ function Cart() {
     }
 
     const confirmRemove = async (item) => {
-        removeDetailCartApi(item.idCartDetail)
+        console.log('trước khi xoá: ', listCartItem)
+        await removeDetailCartApi(item.idCartDetail)
         //remove xong update lại cái giỏ hàng
         const listDetailCart = await getAllDetailCartApi(idCart)
         setListCartItem(listDetailCart.data)
+        setReloadData(!reloadData);
+        console.log('sau khi xoá: ', listCartItem)
         // dispatch(setAllDetailCart(listDetailCart.data))
         toast.dismiss()
-        toast.success('Xoá thành công!', {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-        // alert('day là idCartDetail: ', item.idCartDetail)
+        toastSuccess('Xoá thành công', 'top-right')
     }
 
     return (
@@ -256,7 +262,7 @@ function Cart() {
                                 </div>
 
 
-                                <button className='btn-thanh-toan'>THANH TOÁN</button>
+                                <button className='btn-thanh-toan' onClick={() => { navigate('/Payment') }}>THANH TOÁN</button>
 
                                 <p style={{ textAlign: 'center' }}>Hoặc</p>
 

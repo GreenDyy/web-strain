@@ -10,6 +10,7 @@ import Login from '../login/Login'
 import Cart from '../cart/Cart'
 import TestArea from '../testArea/TestArea'
 import ProductDetail from '../product/ProductDetail'
+import Payment from '../payment/Payment'
 
 function Content() {
     const location = useLocation();
@@ -29,6 +30,7 @@ function Content() {
                 <Route path='/Cart' element={<Cart />} />
                 <Route path='/TestArea' element={<TestArea />} />
                 <Route path='/ProductDetail/:id' element={<ProductDetail />} />
+                <Route path='/Payment' element={<Payment />} />
             </Routes>
         </div>
     )

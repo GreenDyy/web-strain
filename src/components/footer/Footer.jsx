@@ -86,7 +86,7 @@ function Footer() {
                         <Link to='/Intro' className='Link'>Về chúng tôi</Link>
                     </li>
                 </ul>
-                <img src={icons.logodark} />
+                <img className="logo" src={icons.logo} />
             </div>
         </div>
     )

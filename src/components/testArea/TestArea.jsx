@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { getAllStrainApi } from "../../apis/apiStrain";
 // import { getCartByIdCustomerApi, getAllDetailCartApi } from "../../apis/apiCart";
 import axios from "axios";
-import Dropdown from "../Dropdown/Dropdown";
+import Dropdown from "../dropdown/Dropdown";
 import { toast } from "react-toastify";
 
 function TestArea() {

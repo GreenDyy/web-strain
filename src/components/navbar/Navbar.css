@@ -2,22 +2,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 3%;
+    padding: 5px 3%;
     /* background: transparent; */
     background: #00A551;
     transition: 0.5s;
+
 }
 
-.logo {
-    width: 80px;
-    height: 80px;
+.Navbar .logo {
+    width: 60px;
+    height: 60px;
     object-fit: contain;
     cursor: pointer;
+    filter: invert(100%);
+    transition: 0.3s ease-in-out;
+   
+}
+
+.Navbar .logo:hover {
+    scale: 1.2;
+    transition: 0.3s ease-in-out;
 }
 
 ul {
     display: flex;
-    flex: 7;
     list-style: none;
     justify-content: center;
 }
@@ -30,7 +38,6 @@ ul li {
 
 .search-box {
     display: flex;
-    flex: 2;
     align-items: center;
     justify-content: space-between;
     background: whitesmoke;
@@ -60,28 +67,6 @@ ul li {
     cursor: pointer;
 }
 
-.dark .navbar {
-    background-color: #000;
-    color: #fff
-}
-
-.dark .Link {
-    color: white;
-}
-
-.dark .search-box {
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
-
-.dark .search-box input {
-    color: #000
-}
-
-.dark .search-box input::placeholder {
-    color: #000
-}
-
 .Navbar .btn-login {
     background: none;
     border-radius: 15px;
@@ -98,7 +83,8 @@ ul li {
 }
 
 .Navbar .btn-login:hover .Link {
-    color: black; /* Thay đổi màu của Link bên trong btn-login */
+    color: black;
+    /* Thay đổi màu của Link bên trong btn-login */
     transition: 0.5s;
     border: none;
 }
@@ -113,8 +99,8 @@ ul li {
 .Link:hover {
     color: black;
     transition: 0.5s;
-    border-bottom: 2px solid RGBA( 144, 238, 144, 1 );
-    border-top: 2px solid rgba( 144, 238, 144, 1 );
+    border-bottom: 2px solid RGBA(144, 238, 144, 1);
+    border-top: 2px solid rgba(144, 238, 144, 1);
 }
 
 .img-cart {
@@ -124,12 +110,12 @@ ul li {
     margin-left: 20px;
 }
 
-/* Mobile: width <740px */
-@media only screen and (min-width: 46.1875em){
-    
+.Navbar .col-3 {
+    display: flex;
 }
 
+/* Mobile: width <740px */
+@media only screen and (min-width: 46.1875em) {}
+
 /* tablet width >= 740px và < 1024px */
-@media only screen and (min-width: 46.25em) and (max-width:63.9375em){
-    
-}
+@media only screen and (min-width: 46.25em) and (max-width:63.9375em) {}

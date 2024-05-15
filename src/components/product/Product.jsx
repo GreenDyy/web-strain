@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { addDetailCartApi, getAllDetailCartApi, updateDetailCartApi } from '../../apis/apiCart';
 import { convertImageByte } from '../../utils/Utils';
+import { toastError, toastSuccess } from '../Toast/Toast';
 
 const Item = ({ item, idCart, onClickToDetail, onClickAddToCart }) => {
     //xử lý ảnh
@@ -45,7 +46,7 @@ function Product() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-              
+
                 const response = await getAllStrainApi(search, sortBy, "Yes", pageRouter)
                 setTotalPage(response.data[0]?.totalPage)
                 setData(response.data);
@@ -61,7 +62,6 @@ function Product() {
 
     const handleGoToDetail = (idStrain) => {
         navigate(`/ProductDetail/${idStrain}`);
-        // navigate('/ProductDetail')
     }
 
     const handleAddToCart = async (idCart, idStrain) => {
@@ -79,26 +79,21 @@ function Product() {
                         idStrain: idStrain,
                         quantityOfStrain: listDetailCart.data[curIndex].quantityOfStrain + 1,
                     })
-
-                    console.log('detail cart đã có: ', listDetailCart.data[curIndex].idCartDetail)
-                    alert('Sản phẩm đã có trong giỏ hàng, + 1 số lượng')
+                    toastSuccess('Sản phẩm đã có trong giỏ hàng, + 1 số lượng', 'top-center')
                 } else {
                     addDetailCartApi(idCart, idStrain, 1)
-                    // setDataLocalStorage('cart', listDetailCartNew);
-                    alert('Thêm vào giỏ hàng thành công');
+                    toastSuccess('Thêm vào giỏ hàng thành công', 'top-center')
                 }
             }
             else {
                 addDetailCartApi(idCart, idStrain, 1)
-                alert('Thêm vào giỏ hàng thành công');
+                toastSuccess('Thêm vào giỏ hàng thành công', 'top-center')
             }
 
         } catch (error) {
-            console.log('Thêm vào giỏ hàng thất bại:', error);
-            alert('Thêm vào giỏ hàng thất bại');
+            toastError('Thêm vào giỏ hàng thất bại, có lỗi xảy ra', 'top-center')
         }
     };
-
 
     return (
         <div className='Product'>
@@ -122,7 +117,7 @@ function Product() {
                             type='text'
                             placeholder='Nhập nội dung tìm kiếm...'
                             value={search}
-                            onChange={(e)=>{
+                            onChange={(e) => {
                                 setSearch(e.target.value)
                             }}
                         />

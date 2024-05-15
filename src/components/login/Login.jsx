@@ -9,6 +9,7 @@ import { getDataLocalStorage, setDataLocalStorage } from "../../utils/Utils";
 import { toast } from "react-toastify";
 import { getAllDetailCartApi, getCartByIdCustomerApi } from "../../apis/apiCart";
 import { setAllDetailCart } from "../../srcRedux/features/cartSlice";
+import { toastSuccess } from "../Toast/Toast";
 
 function Login() {
     const dispatch = useDispatch()
@@ -42,11 +43,10 @@ function Login() {
                     idCart: cart.data.idCart
                 }))
                 dispatch(setAllDetailCart(listDetailCart.data))
-                alert('Đăng nhập thành công')
                 navigate('/Home')
             }
             else
-                alert('Sai tên tài khoản hoặc mật khẩu')
+                toast.error("Sai tên tài khoản hoặc mật khẩu")
 
         }
         catch (e) {
