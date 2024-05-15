@@ -1,8 +1,8 @@
 import axios from "axios";
 import domain from "./domain";
 
-const getAllStrainApi = (search, sortBy, page) => {
-    return axios.get(`${domain}/api/Strain`, { search, sortBy, page });
+const getAllStrainApi = (search, sortBy, statusSell, page) => {
+    return axios.get(`${domain}/api/Strain?search=${search}&sortBy=${sortBy}&statusSell=${statusSell}&page=${page}`)
 };
 
 const getAllStrainNoPagingApi = () => {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './Product.css'
-import { images } from '../../constants'
+import { images, icons } from '../../constants'
 import ReactPaginate from 'react-paginate';
 import { getAllStrainApi } from '../../apis/apiStrain'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { addDetailCartApi, getAllDetailCartApi } from '../../apis/apiCart';
+import { addDetailCartApi, getAllDetailCartApi, updateDetailCartApi } from '../../apis/apiCart';
 import { convertImageByte } from '../../utils/Utils';
 
 const Item = ({ item, idCart, onClickToDetail, onClickAddToCart }) => {
@@ -22,82 +22,76 @@ const Item = ({ item, idCart, onClickToDetail, onClickAddToCart }) => {
             <p style={{ fontSize: 14, fontWeight: 500 }}>Tình trạng: Có sẳn</p>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <button className='btn-cart' onClick={() => onClickAddToCart(idCart, item.idStrain, 1)} >Thêm vào giỏ hàng</button>
+                <button className='btn-cart' onClick={() => onClickAddToCart(idCart, item.idStrain)} >Thêm vào giỏ hàng</button>
                 <button className='btn-buy'>Mua ngay</button>
             </div>
         </div>
     )
 }
-
+//MAIN-------
 function Product() {
+    const { pageRouter } = useParams();
     const [data, setData] = useState([])
     const [search, setSearch] = useState('')
     const [sortBy, setSortBy] = useState('')
-    const [page, setPage] = useState(1)
+    const [isSearch, setIsSearch] = useState(false) //tìm cách sao mà search thì trả về page 1
+    // const [page, setPage] = useState(2)
     const [totalPage, setTotalPage] = useState(0)
-    const [itemOffset, setItemOffset] = useState(0);
 
-    // const [idCart, setIdCart] = useState(getDataLocalStorage('idCart') ? getDataLocalStorage('idCart') : null)
     const idCart = useSelector(state => state.customer.idCart)
-
+    console.log('routePage:', pageRouter)
     const navigate = useNavigate()
     //get data strain
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getAllStrainApi(search, sortBy, page)
+              
+                const response = await getAllStrainApi(search, sortBy, "Yes", pageRouter)
+                setTotalPage(response.data[0]?.totalPage)
                 setData(response.data);
-                setTotalPage(response.data[0].totalPage)
+
+                console.log(response.data)
             }
             catch (error) {
                 console.log('Lỗi fetching data: ', error)
             }
         }
         fetchData()
-    }, [search, sortBy, page])
-
-    //paging
+    }, [search, sortBy, pageRouter])
 
     const handleGoToDetail = (idStrain) => {
         navigate(`/ProductDetail/${idStrain}`);
         // navigate('/ProductDetail')
     }
 
-    const handleAddToCart = async (idCart, idStrain, quantityOfStrain) => {
+    const handleAddToCart = async (idCart, idStrain) => {
         try {
             const listDetailCart = await getAllDetailCartApi(idCart)
             console.log('list cart lúc bấm add to cart nè: ', listDetailCart.data)
-            if (listDetailCart.data.length != 0) {
+            if (listDetailCart.data.length !== 0) {
                 // Kiểm tra xem idStrain của sản phẩm đã tồn tại trong giỏ hàng hay chưa
                 const curIndex = listDetailCart.data.findIndex(item => item.idStrain === idStrain);
 
                 if (curIndex !== -1) {
                     // Nếu idStrain đã tồn tại, cập nhật số lượng cho sản phẩm đó
-                    // const listDetailCartNew = [...listDetailCart];
-                    // listDetailCartNew[curIndex].quantityOfStrain += quantityOfStrain;
-                    // setListCartItem(listDetailCartNew);
-                    // setDataLocalStorage('cart', listDetailCartNew);
-                    alert('Sản phẩm đã có trong giỏ hàng')
+                    updateDetailCartApi(listDetailCart.data[curIndex].idCartDetail, {
+                        idCart: idCart,
+                        idStrain: idStrain,
+                        quantityOfStrain: listDetailCart.data[curIndex].quantityOfStrain + 1,
+                    })
+
+                    console.log('detail cart đã có: ', listDetailCart.data[curIndex].idCartDetail)
+                    alert('Sản phẩm đã có trong giỏ hàng, + 1 số lượng')
                 } else {
-                    // Nếu idStrain chưa tồn tại, thêm sản phẩm mới vào giỏ hàng
-                    // const newCartItem = {
-                    //     idStrain: idStrain,
-                    //     quantityOfStrain: quantityOfStrain
-                    // };
-                    // const listDetailCartNew = [...listDetailCart, newCartItem];
-                    // setListCartItem(listDetailCartNew);
-                    addDetailCartApi(idCart, idStrain, quantityOfStrain)
+                    addDetailCartApi(idCart, idStrain, 1)
                     // setDataLocalStorage('cart', listDetailCartNew);
                     alert('Thêm vào giỏ hàng thành công');
                 }
-
-
             }
             else {
-                addDetailCartApi(idCart, idStrain, quantityOfStrain)
+                addDetailCartApi(idCart, idStrain, 1)
                 alert('Thêm vào giỏ hàng thành công');
             }
-
 
         } catch (error) {
             console.log('Thêm vào giỏ hàng thất bại:', error);
@@ -122,9 +116,26 @@ function Product() {
                 {/* cột ds strain */}
                 <div className='col-all-item'>
                     <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
+
+                    <div className='search-box'>
+                        <input
+                            type='text'
+                            placeholder='Nhập nội dung tìm kiếm...'
+                            value={search}
+                            onChange={(e)=>{
+                                setSearch(e.target.value)
+                            }}
+                        />
+                        <img src={icons.searchicon} alt='Search Icon'
+                            onClick={() => {
+
+                            }}
+                        />
+                    </div>
+
                     <div className='wrap-item'>
                         {
-                            data != [] ?
+                            data.length !== 0 ?
                                 data.map((item, index) => (
                                     <Item
                                         key={index}
@@ -143,7 +154,12 @@ function Product() {
                     <ReactPaginate
                         breakLabel="..."
                         nextLabel="next >"
-                        onPageChange={(selectedPage) => setPage(selectedPage.selected + 1)}
+
+                        onPageChange={(event) => {
+                            const selectedPage = event.selected;
+                            navigate(`/Product/${selectedPage + 1}`);
+
+                        }}
                         pageRangeDisplayed={5}
                         pageCount={totalPage}
                         previousLabel="< previous"

@@ -15,7 +15,7 @@ const listNavbarItem = [
     },
     {
         title: 'Sản phẩm',
-        to: '/Product'
+        to: '/Product/1'
     },
     {
         title: 'Nghiên cứu',

@@ -9,10 +9,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { toast } from 'react-toastify';
 import { setAllDetailCart } from '../../srcRedux/features/cartSlice'
+import { getInventoryByIdStrainApi } from '../../apis/apiInventory'
 
 
 const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
-    const tongTien = formatCurrency(item.idStrainNavigation.price * item.quantityOfStrain)
+    const [tongTien, setTongTien] = useState(null)
+    const [price, setPrice] = useState(0)
+
+    useEffect(() => {
+        const fetchInventory = async () => {
+            const response = await getInventoryByIdStrainApi(item.idStrain)
+            const inventory = response.data;
+            const totalPrice = inventory.price * item.quantityOfStrain
+            setPrice(formatCurrency(inventory.price))
+            setTongTien(formatCurrency(totalPrice))
+        };
+
+        fetchInventory();
+    }, [item]);
     return (
         <tr style={{ alignItems: 'center', justifyContent: 'center' }}>
             <td className='card-product'>
@@ -23,7 +37,7 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
                 </div>
             </td>
 
-            <td className='price'>{formatCurrency(item.idStrainNavigation.price)} VNĐ</td>
+            <td className='price'>{price} VNĐ</td>
 
             <td >
                 <div className='card-quantity'>
@@ -66,13 +80,18 @@ function Cart() {
 
     //cập nhật tiền
     useEffect(() => {
-        let totalPrice = 0;
-        listCartItem.forEach(item => {
-            totalPrice += item.idStrainNavigation.price * item.quantityOfStrain
-        })
-        setTongTien(totalPrice)
-        setThanhTien(totalPrice + totalPrice * 0.1)
-    }, [listCartItem]) //khi list item dc cập nhật giá trị khác thì nó chạy lại cái này
+        let totalPrice = 0
+        const updateTongTien = async () => {
+            for (const item of listCartItem) {
+                const response = await getInventoryByIdStrainApi(item.idStrain)
+                const inventory = response.data
+                totalPrice += inventory.price * item.quantityOfStrain
+            }
+            setTongTien(totalPrice)
+            setThanhTien(totalPrice + totalPrice * 0.1)
+        }
+        updateTongTien()
+    }, [listCartItem])
 
     const increaseQuantity = (item) => {
         const updatedCartItems = listCartItem.map(cartDetail => {

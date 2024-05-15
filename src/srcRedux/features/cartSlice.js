@@ -8,6 +8,10 @@ const cartSlice = createSlice({
             // state = action.payload;
             return action.payload;  
         }
+
+        // deleteDetailCart: (state, action) => {
+
+        // }
     }
 });
 
