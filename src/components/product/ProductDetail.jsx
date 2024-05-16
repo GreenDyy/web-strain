@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import './ProductDetail.scss'
 import { getConditionByIdApi, getSpeciesByIdApi, getStrainByIdApi } from "../../apis/apiStrain";
 import { useParams } from "react-router-dom";
 import { images } from "../../constants";
+
+
 
 function ProductDetail() {
     const { id } = useParams();
@@ -26,37 +29,44 @@ function ProductDetail() {
     }, []);
     // const imageSrc = item.imageStrain ? `data:image/jpeg;base64,${item.imageStrain}` : images.strainnull
     return (
-        <div>
+        <div className="ProductDetail">
             {product ? (
-                <>
-                    <h1>id: {product?.idStrain}</h1>
-                    <h1>Strain number: {product?.strainNumber}</h1>
-                    <p>{product?.idSpecies}</p>
-                    <h2>Conditional Strain</h2>
-                    <div style={{display:'flex'}}>  
-                        <p>Medium: {condition?.medium}</p>
-                        <p>Temperature: {condition?.temperature}</p>
-                        <p>Light Intensity: {condition?.lightIntensity}</p>
-                        <p>Duration: {condition?.duration}</p>
+                <div className="wrap-row-1">
+                    <div className="wrap-image">
+                        <img className="image-item" src="https://static.vecteezy.com/system/resources/thumbnails/025/067/762/small_2x/4k-beautiful-colorful-abstract-wallpaper-photo.jpg" alt="image-item" />
+
                     </div>
-                    
-                    <p>scientificName: {product?.scientificName}</p>
-                    <p>synonymStrain: {product?.synonymStrain}</p>
-                    <p>formerName: {product?.formerName}</p>
-                    <p>commonName: {product?.commonName}</p>
-                    <p>cellSize: {product?.cellSize}</p>
-                    <p>organization: {product?.organization}</p>
-                    <p>characteristics: {product?.characteristics}</p>
-                    <p>collectionSite: {product?.collectionSite}</p>
-                    <p>continent: {product?.continent}</p>
-                    <p>country: {product?.country}</p>
-                    <p>isolationSource: {product?.isolationSource}</p>
-                    <p>toxinProducer: {product?.toxinProducer}</p>
-                    <p>stateOfStrain: {product?.stateOfStrain}</p>
-                    <p>agitationResistance: {product?.agitationResistance}</p>
-                    <p>remarks: {product?.remarks}</p>
-                    <p>geneInformation: {product?.geneInformation}</p>
-                </>
+
+                    <div className="wrap-content">
+                        <h2 className="title">Meat Vegegate</h2>
+                        <div className="wrap-price">
+                            <p className="price1">$100</p>
+                            <p className="price2">$150</p>
+                        </div>
+                        <p>hiển thị star</p>
+                        <p className="des">Mô tả</p>
+                        <div className="wrap-all-btn">
+                            <div className="wrap-btn-amount">
+                                <button className="btn-increase">-</button>
+                                <input className="input-number" type="text" />
+                                <button className="btn-decrease">+</button>
+                            </div>
+
+                            <button className="btn-add-cart">
+                                <p>Thêm vào giỏ hàng</p>
+                            </button>
+                        </div>
+                        <div className="wrap-des">
+                            <div className="wrap-des-col-1">
+
+                            </div>
+
+                            <div className="wrap-des-col-2">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             ) : (
                 <p>Đang load</p>
             )}
