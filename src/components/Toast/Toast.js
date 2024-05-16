@@ -16,7 +16,20 @@ const toastSuccess = (message, position) => {
 }
 
 const toastError = (message, position) => {
-    toast.success(message, {
+    toast.error(message, {
+        position: position,
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    })
+}
+
+const toastWarning = (message, position) => {
+    toast.warning(message, {
         position: position,
         autoClose: 2000,
         hideProgressBar: false,
@@ -31,4 +44,5 @@ const toastError = (message, position) => {
 export {
     toastSuccess,
     toastError,
+    toastWarning,
 }

@@ -1,39 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { loginCustomerApi, getAllCustomer } from "../../apis/apiLogin";
-// import { getAllStrainApi } from "../../apis/apiStrain";
-// import { getCartByIdCustomerApi, getAllDetailCartApi } from "../../apis/apiCart";
 import axios from "axios";
 import Dropdown from "../dropdown/Dropdown";
 import { toast } from "react-toastify";
+import { getAllTotalQuantityApi } from "../../apis/apiCart";
 
 function TestArea() {
-   const handleConfirm = () => {
-      // Xử lý hành động khi người dùng xác nhận
-      console.log('Người dùng đã xác nhận');
-      toast.dismiss();
-   };
-
-   const showToast = () => {
-      toast.info(
-         <div>
-            <div>🦄 Bạn có chắc chắn muốn xoá mục này không?</div>
-            <button onClick={handleConfirm}>Xác nhận</button>
-         </div>,
-         {
-            autoClose: false,
-            closeButton: true,
-            closeOnClick: false,
-            draggable: true,
-            progress: undefined,
-            hideProgressBar: true
-         }
-      );
-   };
+   const [quantity, setQuantity] = useState(0)
+   useEffect(() => {
+      const fetchData = async () => {
+         const totalQuantity = await getAllTotalQuantityApi(1)
+         setQuantity(totalQuantity.data)
+         console.log(totalQuantity.status)
+      }
+      fetchData()
+   })
+   const totalQuantity = useSelector(state => state.totalProduct);
+   console.log('test area:', totalQuantity)
 
    return (
       <div>
-         <button onClick={showToast}>Hiển thị Toast</button>
+         <p>{totalQuantity}</p>
       </div>
    )
 }

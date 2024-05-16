@@ -92,19 +92,6 @@ function Cart() {
     }, [listCartItem])
 
     const increaseQuantity = async (item) => {
-        // const updatedCartItems = listCartItem.map(cartDetail => {
-        //     if (cartDetail.idCartDetail === item.idCartDetail) {
-        //         const newQuantity = cartDetail.quantityOfStrain + 1;
-        //         // Gọi hàm cập nhật chi tiết giỏ hàng trên server
-        //         updateDetailCartApi(cartDetail.idCartDetail, { idStrain: cartDetail.idStrain, quantityOfStrain: newQuantity });
-        //         return {
-        //             ...cartDetail,
-        //             quantityOfStrain: newQuantity
-        //         };
-        //     }
-        //     return cartDetail;
-        // });
-        // setListCartItem(updatedCartItems);
         for (let i = 0; i < listCartItem.length; i++) {
             if (listCartItem[i].idCartDetail === item.idCartDetail) {
                 const newQuantity = listCartItem[i].quantityOfStrain + 1;
@@ -166,16 +153,13 @@ function Cart() {
     }
 
     const confirmRemove = async (item) => {
-        console.log('trước khi xoá: ', listCartItem)
         await removeDetailCartApi(item.idCartDetail)
         //remove xong update lại cái giỏ hàng
         const listDetailCart = await getAllDetailCartApi(idCart)
         setListCartItem(listDetailCart.data)
         setReloadData(!reloadData);
-        console.log('sau khi xoá: ', listCartItem)
-        // dispatch(setAllDetailCart(listDetailCart.data))
         toast.dismiss()
-        toastSuccess('Xoá thành công', 'top-right')
+        toastSuccess('Xoá thành công!', 'top-right')
     }
 
     return (

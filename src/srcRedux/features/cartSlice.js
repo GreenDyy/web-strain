@@ -1,17 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: [],
     reducers: {
-        setAllDetailCart: (state, action) => {
-            // state = action.payload;
-            return action.payload;  
-        }
-
-        // deleteDetailCart: (state, action) => {
-
-        // }
+        setAllDetailCart: (action) => {
+            return action.payload;
+        },
     }
 });
 

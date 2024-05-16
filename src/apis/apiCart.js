@@ -31,6 +31,10 @@ const removeDetailCartApi = (idCartDetail) => {
     axios.delete(`${domain}/api/CartDetail/${idCartDetail}`)
 }
 
+const getAllTotalQuantityApi = (idCart) => {
+    return axios.get(`${domain}/api/CartDetail/GetAllTotalQuantity/${idCart}`)
+}
+
 export {
     getCartByIdCustomerApi,
     getAllDetailCartApi,
@@ -38,4 +42,5 @@ export {
     updateDetailCartApi,
     addDetailCartApi,
     removeDetailCartApi,
+    getAllTotalQuantityApi,
 }   

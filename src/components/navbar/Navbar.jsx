@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import './Navbar.css'
@@ -38,6 +38,7 @@ const Navbar = () => {
     const dispatch = useDispatch()
     const customerData = useSelector(state => state.customer.customerData?.data)
     const isLogin = useSelector(state => state.customer.isLogin)
+
 
     const handleLogout = () => {
         dispatch(logout())
@@ -109,7 +110,10 @@ const Navbar = () => {
                             </button>
                     }
                     {/* <img src={icons.cart} alt='cart' className='img-cart' onClick={() => navigate('/Cart')} /> */}
-                    <TfiShoppingCartFull style={{ color: 'white', marginLeft: 15, fontSize: 30, cursor: 'pointer' }} onClick={() => navigate('/Cart')} />
+                    <div className='btn-cart'>
+                        <TfiShoppingCartFull style={{ color: 'white', marginLeft: 15, fontSize: 30, cursor: 'pointer' }} onClick={() => navigate('/Cart')} />
+                        <p>8</p>
+                    </div>
                 </div>
             </nav>
 

@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css'
 import { FaUser, FaLock } from "react-icons/fa";
 import { loginCustomerApi } from "../../apis/apiLogin";
+import { getAllDetailCartApi, getAllTotalQuantityApi, getCartByIdCustomerApi } from "../../apis/apiCart";
+import { toastError, toastWarning } from "../Toast/Toast";
+//redux
 import { useDispatch } from "react-redux";
 import { login } from "../../srcRedux/features/customerSlice";
-import { getDataLocalStorage, setDataLocalStorage } from "../../utils/Utils";
-import { toast } from "react-toastify";
-import { getAllDetailCartApi, getCartByIdCustomerApi } from "../../apis/apiCart";
 import { setAllDetailCart } from "../../srcRedux/features/cartSlice";
-import { toastSuccess } from "../Toast/Toast";
+import { setDataLocalStorage } from "../../utils/Utils";
+
 
 function Login() {
     const dispatch = useDispatch()
@@ -21,9 +22,7 @@ function Login() {
     const handleLogin = async () => {
         console.log(username, password)
         if (!username || !password) {
-            // alert('Vui lòng nhập đủ thông tin')
-            toast("Vui lòng nhập đủ thông tin")
-            //sau làm thêm cái Toast nữa
+            toastWarning('Vui lòng nhập đầy đủ thông tin')
             return;
         }
         try {
@@ -36,21 +35,27 @@ function Login() {
             if (user.data.success) {
                 const cart = await getCartByIdCustomerApi(user.data.data.idCustomer)
                 const listDetailCart = await getAllDetailCartApi(cart.data.idCart)
+                const allTotalProductInCart = await getAllTotalQuantityApi(cart.data.idCart)
+
+                console.log("total bên login từ API", allTotalProductInCart.data)
 
                 //lưu vào redux
                 dispatch(login({
                     customerData: user.data,
                     idCart: cart.data.idCart
                 }))
-                dispatch(setAllDetailCart(listDetailCart.data))
+                // dispatch(setAllDetailCart(listDetailCart.data))
+                // dispatch(setTotalQuantity(allTotalProductInCart.data))
+                setDataLocalStorage('totalProductInCart', allTotalProductInCart.data)
                 navigate('/Home')
             }
             else
-                toast.error("Sai tên tài khoản hoặc mật khẩu")
+                toastError("Sai tên tài khoản hoặc mật khẩu")
 
         }
         catch (e) {
-            console.log("Lỗi lấy API: " + e)
+            console.log(e)
+            toastError("Lỗi đăng nhập, xem lại handleLogin")
         }
     }
 
