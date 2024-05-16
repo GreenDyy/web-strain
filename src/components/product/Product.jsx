@@ -18,8 +18,8 @@ const Item = ({ item, idCart, onClickToDetail, onClickAddToCart }) => {
     return (
 
         <div className='card-item'>
-            <div className='img-item' onClick={() => onClickToDetail(item.idStrain)}>
-                <img src={imageSrc} alt={item.scientificName} />
+            <div className='card-image' onClick={() => onClickToDetail(item.idStrain)}>
+                <img className='image-strain' src={imageSrc} alt={item.scientificName} />
             </div>
             <h2 >{item.scientificName}</h2>
             <p style={{ fontSize: 14, fontWeight: 500 }}>Tình trạng: Có sẳn</p>
@@ -40,12 +40,14 @@ function Product() {
     const [isSearch, setIsSearch] = useState(false) //tìm cách sao mà search thì trả về page 1
     // const [page, setPage] = useState(2)
     const [totalPage, setTotalPage] = useState(0)
-    
+
     //redux
     const dispatch = useDispatch()
     const idCart = useSelector(state => state.customer.idCart)
     const totalAllProduct = useSelector(state => state.cart.totalAllProduct)
+    const isLogin = useSelector(state => state.customer.isLogin)
     console.log('routePage:', pageRouter)
+
     const navigate = useNavigate()
     //get data strain
     useEffect(() => {
@@ -71,30 +73,36 @@ function Product() {
 
     const handleAddToCart = async (idCart, idStrain) => {
         try {
-            const listDetailCart = await getAllDetailCartApi(idCart)
-            if (listDetailCart.data.length !== 0) {
-                // Kiểm tra xem idStrain của sản phẩm đã tồn tại trong giỏ hàng hay chưa
-                const curIndex = listDetailCart.data.findIndex(item => item.idStrain === idStrain);
+            if (isLogin) {
+                const listDetailCart = await getAllDetailCartApi(idCart)
+                if (listDetailCart.data.length !== 0) {
+                    // Kiểm tra xem idStrain của sản phẩm đã tồn tại trong giỏ hàng hay chưa
+                    const curIndex = listDetailCart.data.findIndex(item => item.idStrain === idStrain);
 
-                if (curIndex !== -1) {
-                    // Nếu idStrain đã tồn tại, cập nhật số lượng cho sản phẩm đó
-                    updateDetailCartApi(listDetailCart.data[curIndex].idCartDetail, {
-                        idCart: idCart,
-                        idStrain: idStrain,
-                        quantityOfStrain: listDetailCart.data[curIndex].quantityOfStrain + 1,
-                    })
-                    toastSuccess('Sản phẩm đã có trong giỏ hàng, + 1 số lượng', 'top-center')
-                } else {
+                    if (curIndex !== -1) {
+                        // Nếu idStrain đã tồn tại, cập nhật số lượng cho sản phẩm đó
+                        updateDetailCartApi(listDetailCart.data[curIndex].idCartDetail, {
+                            idCart: idCart,
+                            idStrain: idStrain,
+                            quantityOfStrain: listDetailCart.data[curIndex].quantityOfStrain + 1,
+                        })
+                        toastSuccess('Sản phẩm đã có trong giỏ hàng, + 1 số lượng', 'top-center')
+                    } else {
+                        addDetailCartApi(idCart, idStrain, 1)
+                        toastSuccess('Thêm vào giỏ hàng thành công', 'top-center')
+                    }
+                }
+                else {
                     addDetailCartApi(idCart, idStrain, 1)
                     toastSuccess('Thêm vào giỏ hàng thành công', 'top-center')
                 }
+                //dù thêm bằng cách nào thì cũng tăng 1
+                dispatch(setTotalAllProduct(totalAllProduct + 1))
             }
-            else {
-                addDetailCartApi(idCart, idStrain, 1)
-                toastSuccess('Thêm vào giỏ hàng thành công', 'top-center')
+            else{
+                navigate('/Login')
             }
-            //dù thêm bằng cách nào thì cũng tăng 1
-            dispatch(setTotalAllProduct(totalAllProduct + 1))
+
 
         } catch (error) {
             toastError('Thêm vào giỏ hàng thất bại, có lỗi xảy ra', 'top-center')

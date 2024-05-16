@@ -76,7 +76,11 @@ function Cart() {
             const data = await getAllDetailCartApi(idCart)
             setListCartItem(data.data)
         }
-        fetchData()
+        if (isLogin) {
+            //có đăng nhập thì mới lấy data, tránh lỗi
+            fetchData()
+        }
+
     }, [reloadData])
 
     //cập nhật tiền
@@ -162,7 +166,7 @@ function Cart() {
         //remove xong update lại cái giỏ hàng
         const listDetailCart = await getAllDetailCartApi(idCart)
         setListCartItem(listDetailCart.data)
-       
+
         setReloadData(!reloadData);
         toast.dismiss()
         toastSuccess('Xoá thành công!', 'top-right')

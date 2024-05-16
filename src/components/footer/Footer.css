@@ -18,7 +18,12 @@
     /* width: 100%; */
 }
 
-.logo {
+.Footer .icon {
+    height: 30px;
+    margin-right: 5px;
+}
+
+.Footer .logo {
     width: 60px;
     height: 60px;
     object-fit: contain;
@@ -33,8 +38,9 @@
     justify-content: space-between;
     padding-left: 10px;
     margin-top: 20px;
-    height: 40px;
+    height: 30px;
     position: relative;
+    width: 50%;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
@@ -42,8 +48,8 @@
     background: transparent;
     outline: 0;
     border: 0;
-    font-size: 18px;
-    flex: 1;
+    font-size: 16px;
+    width: 70%;
 }
 
 .Footer .search-box button {
@@ -51,14 +57,16 @@
     color: white;
     border-radius: 50px;
     width: 25%;
-    height: 50px;
+    height: 40px;
     position: absolute;
-    right: 0;
+    right: 0px;
+    font-size: 16px;
 
 }
 
 .Footer input::placeholder {
-    color: #00A551
+    color: black;
+
 }
 
 

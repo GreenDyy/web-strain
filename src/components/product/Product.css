@@ -20,7 +20,6 @@
     display: flex;
     flex: 12;
     flex-direction: column;
-    border: 1px solid black;
 }
 
 .col-all-item {
@@ -41,11 +40,11 @@
 
 .card-item {
     width: 20%;
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: #FFFAFA;
     margin: 10px;
     padding: 15px 12px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: 0.3s;
     cursor: pointer;
 }
@@ -55,19 +54,19 @@
     transition: 0.3s;
 }
 
-.img-item {
+.card-image {
     display: flex;
     justify-content: center;
     width: 100%;
-
-
-}
-
-.card-item img {
-    width: 100%;
     height: 250px;
     border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.card-image .image-strain {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -82,7 +81,7 @@
     flex: 1;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 10px;
     background-color: #00A551;
     color: white;
     padding-top: 10px;
@@ -95,7 +94,7 @@
     flex: 1;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 10px;
     background: none;
     border: 1px solid #00A551;
     color: black;
@@ -184,6 +183,37 @@
     transform: scaleX(-1);
 }
 
+.Product .search-box {
+    display: flex;
+    width: 20%;
+    align-items: center;
+    justify-content: space-between;
+    background: whitesmoke;
+    padding: 5px 15px;
+    border-radius: 15px;
+    margin: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.Product .search-box input {
+    padding: 6px;
+    background: transparent;
+    outline: 0;
+    border: 0;
+    font-size: 16px;
+}
+
+.Product .search-box input::placeholder {
+    color: #00A551;
+    font-size: 16px;
+
+}
+
+.Product .search-box img {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}
 
 
 /* Mobile: width <740px */

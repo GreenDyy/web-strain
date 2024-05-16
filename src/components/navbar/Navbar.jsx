@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../srcRedux/features/customerSlice'
 import { TfiShoppingCartFull } from "react-icons/tfi";
 import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
+import { FaUserAstronaut } from "react-icons/fa6";
+
 
 const listNavbarItem = [
     {
@@ -77,7 +79,10 @@ const Navbar = () => {
                                 onMouseEnter={() => { setIsHoveredDropdown(true) }}
                                 onMouseLeave={() => setIsHoveredDropdown(false)}>
                                 <div className='dropdown-trigger'>
-                                    <Link className='Link'>{customerData?.fullName}</Link>
+                                    <div className='user'>
+                                        <FaUserAstronaut className='user-icon' />
+                                        <p className='user-name'>{customerData?.fullName}</p>
+                                    </div>
                                 </div>
                                 {
                                     isHoveredDropdown &&
@@ -105,15 +110,21 @@ const Navbar = () => {
 
                             </div> :
 
-                            <button className='btn-login'
-                            >
-                                <Link className='Link' to='/Login'
-                                >Đăng nhập</Link>
-                            </button>
+                            <div>
+                                <button className='btn-login' onClick={() => navigate('/Login')} >
+                                    Đăng nhập
+                                </button>
+
+                                <button className='btn-register' onClick={() => navigate('/Login')} >
+                                    Đăng ký
+                                </button>
+                            </div>
+
+
                     }
                     {/* <img src={icons.cart} alt='cart' className='img-cart' onClick={() => navigate('/Cart')} /> */}
                     <div className='btn-cart'>
-                        <TfiShoppingCartFull style={{ color: 'white', marginLeft: 15, fontSize: 30, cursor: 'pointer' }} onClick={() => navigate('/Cart')} />
+                        <TfiShoppingCartFull style={{ color: '#00A551', marginLeft: 15, fontSize: 30, cursor: 'pointer' }} onClick={() => navigate('/Cart')} />
                         <div className='cover-quantity'>
                             <p>{totalAllProduct}</p>
                         </div>

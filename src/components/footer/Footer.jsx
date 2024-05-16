@@ -28,7 +28,7 @@ function Footer() {
                         <strong style={{ fontSize: 18 }}>daqstrain@company.com.vn</strong>
                     </div>
                     {/* searchbox */}
-                    <div style={{display:'flex'}}>
+                    <div style={{ display: 'flex' }}>
                         <div className="search-box">
                             <input type="text" placeholder="Nhập email của bạn" />
                             <button>Gửi</button>

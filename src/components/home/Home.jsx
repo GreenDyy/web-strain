@@ -6,7 +6,7 @@ import { images } from '../../constants'
 function Home() {
     return (
         <div className="Home">
-            <div style={{ display: 'flex', flex: 50, flexDirection: 'column' }}>
+            <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                 <h1>STRAIN IS YOUR LIFE.</h1>
                 <h1 style={{ marginTop: -10 }}>Với hơn 3000 chủng tảo và động vật nguyên sinh.</h1>
                 <p>
@@ -16,8 +16,9 @@ function Home() {
                     <button>Xem các strain của chúng tôi</button>
                 </Link>
             </div>
-            <div style={{ display: 'flex', flex: 50, flexDirection: 'column', alignItems: 'center' }}>
-                <img src={images.doctor} />
+            <div style={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
+                {/* <img src={images.doctor} /> */}
+                <img src="https://www.pixel4k.com/wp-content/uploads/2019/06/spring-autumn-colorful-nature-magical-forest-4k_1560535373.jpg"/>
             </div>
         </div>
     )

@@ -3,8 +3,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px 3%;
-    /* background: transparent; */
-    background: #00A551;
+    background: whitesmoke;
+    /* background: #00A551; */
     transition: 0.5s;
 
 }
@@ -14,7 +14,7 @@
     height: 60px;
     object-fit: contain;
     cursor: pointer;
-    filter: invert(100%);
+    /* filter: invert(100%); */
     transition: 0.3s ease-in-out;
 
 }
@@ -34,6 +34,52 @@ ul li {
     margin: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.Navbar .user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.Navbar .user .user-icon {
+    color: #76B947;
+    margin-right: 5px;
+}
+
+.Navbar .user .user-name {
+    color: #76B947;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.Navbar .user:hover {
+    scale: 1.05;
+    transition: 0.5s;
+}
+
+.Navbar .dropwdown-wrap {
+    
+}
+
+.Navbar .dropdown-trigger {
+    
+}
+
+.Navbar .dropdown-content {
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 50px;
+    transition: 0.5s ease-in-out;
+}
+
+.Navbar .dropdown-content button{
+ 
+
+    width: 200px;
 }
 
 .search-box {
@@ -68,39 +114,51 @@ ul li {
 }
 
 .Navbar .btn-login {
-    background: none;
-    border-radius: 15px;
+    background: #76B947;
+    border-radius: 10px;
     padding: 5px 30px;
-    border: 1px solid #fff;
+    color: white;
     transition: 0.5s;
 }
 
 .Navbar .btn-login:hover {
-    border: 1px solid black;
     padding: 5px 50px;
+    color: white;
+    transition: 0.5s;
     color: black;
+    background: none;
+    border: 1px solid black;
     transition: 0.5s;
 }
 
-.Navbar .btn-login:hover .Link {
-    color: black;
-    /* Thay đổi màu của Link bên trong btn-login */
+.Navbar .btn-register {
+    margin-left: 10px;
+    background: none;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px 30px;
     transition: 0.5s;
+}
+
+.Navbar .btn-register:hover {
     border: none;
+    padding: 5px 50px;
+    color: white;
+    background: #76B947;
+    transition: 0.5s;
 }
 
 .Link {
-    color: #fff;
+    color: black;
     font-size: 16px;
     transition: 0.5s;
 }
 
-
 .Link:hover {
-    color: black;
+    color: #76B947;
+    border-bottom: 2px solid rgb(156, 111, 6);
+    border-top: 2px solid rgb(156, 111, 6);
     transition: 0.5s;
-    border-bottom: 2px solid RGBA(144, 238, 144, 1);
-    border-top: 2px solid rgba(144, 238, 144, 1);
 }
 
 .img-cart {
@@ -117,6 +175,7 @@ ul li {
 .Navbar .btn-cart {
     display: flex;
     position: relative;
+    align-items: center;
 }
 
 .cover-quantity {
@@ -127,7 +186,7 @@ ul li {
     position: absolute;
     height: 8px;
     right: -8px;
-    top: -12px;
+    top: -6px;
     background: red;
     border-radius: 999px;
 }
