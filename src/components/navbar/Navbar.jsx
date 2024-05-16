@@ -7,6 +7,7 @@ import { icons } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../srcRedux/features/customerSlice'
 import { TfiShoppingCartFull } from "react-icons/tfi";
+import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
 
 const listNavbarItem = [
     {
@@ -38,10 +39,11 @@ const Navbar = () => {
     const dispatch = useDispatch()
     const customerData = useSelector(state => state.customer.customerData?.data)
     const isLogin = useSelector(state => state.customer.isLogin)
-
+    const totalAllProduct = useSelector(state => state.cart.totalAllProduct)
 
     const handleLogout = () => {
         dispatch(logout())
+        dispatch(setTotalAllProduct(0))
         alert('Đăng xuất thành công')
     };
 
@@ -112,7 +114,9 @@ const Navbar = () => {
                     {/* <img src={icons.cart} alt='cart' className='img-cart' onClick={() => navigate('/Cart')} /> */}
                     <div className='btn-cart'>
                         <TfiShoppingCartFull style={{ color: 'white', marginLeft: 15, fontSize: 30, cursor: 'pointer' }} onClick={() => navigate('/Cart')} />
-                        <p>8</p>
+                        <div className='cover-quantity'>
+                            <p>{totalAllProduct}</p>
+                        </div>
                     </div>
                 </div>
             </nav>

@@ -10,6 +10,7 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { toast } from 'react-toastify';
 import { getInventoryByIdStrainApi } from '../../apis/apiInventory'
 import { toastSuccess } from '../Toast/Toast'
+import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
 
 const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
     const [tongTien, setTongTien] = useState(null)
@@ -41,7 +42,8 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
             <td >
                 <div className='card-quantity'>
                     <button className='btn-decrease' onClick={() => { onDecrease(item) }}>-</button>
-                    <input className='quantity' type='text' value={item.quantityOfStrain} />
+                    {/* <input className='quantity' type='text' value={item.quantityOfStrain}/> */}
+                    <p className='quantity'>{item.quantityOfStrain}</p>
                     <button className='btn-increase' onClick={() => { onIncrease(item) }}>+</button>
                 </div>
             </td>
@@ -66,6 +68,7 @@ function Cart() {
     const dispatch = useDispatch()
     const isLogin = useSelector(state => state.customer.isLogin)
     const idCart = useSelector(state => state.customer.idCart)
+    const totalAllProduct = useSelector(state => state.cart.totalAllProduct)
 
 
     useEffect(() => {
@@ -99,10 +102,10 @@ function Cart() {
                 //cập nhật quantity
                 listCartItem[i].quantityOfStrain = newQuantity;
                 setListCartItem([...listCartItem]);
+                dispatch(setTotalAllProduct(totalAllProduct + 1))
                 return
             }
         }
-        setListCartItem(listCartItem);
     }
 
     const decreaseQuantity = (item) => {
@@ -114,6 +117,7 @@ function Cart() {
                     //cập nhật quantity
                     listCartItem[i].quantityOfStrain = newQuantity;
                     setListCartItem([...listCartItem]);
+                    dispatch(setTotalAllProduct(totalAllProduct - 1))
                     return
                 }
                 else {
@@ -122,8 +126,7 @@ function Cart() {
                 }
             }
         }
-        setListCartItem(listCartItem);
-    };
+    }
 
     const removeDetailCart = (item) => {
         toast.warning(
@@ -153,10 +156,13 @@ function Cart() {
     }
 
     const confirmRemove = async (item) => {
+        //set lại total product trong cart xong mới xóa
+        dispatch(setTotalAllProduct(totalAllProduct - item.quantityOfStrain))
         await removeDetailCartApi(item.idCartDetail)
         //remove xong update lại cái giỏ hàng
         const listDetailCart = await getAllDetailCartApi(idCart)
         setListCartItem(listDetailCart.data)
+       
         setReloadData(!reloadData);
         toast.dismiss()
         toastSuccess('Xoá thành công!', 'top-right')

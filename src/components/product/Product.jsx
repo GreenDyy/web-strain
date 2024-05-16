@@ -4,10 +4,12 @@ import { images, icons } from '../../constants'
 import ReactPaginate from 'react-paginate';
 import { getAllStrainApi } from '../../apis/apiStrain'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addDetailCartApi, getAllDetailCartApi, updateDetailCartApi } from '../../apis/apiCart';
 import { convertImageByte } from '../../utils/Utils';
 import { toastError, toastSuccess } from '../Toast/Toast';
+import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
+
 
 const Item = ({ item, idCart, onClickToDetail, onClickAddToCart }) => {
     //xử lý ảnh
@@ -38,8 +40,11 @@ function Product() {
     const [isSearch, setIsSearch] = useState(false) //tìm cách sao mà search thì trả về page 1
     // const [page, setPage] = useState(2)
     const [totalPage, setTotalPage] = useState(0)
-
+    
+    //redux
+    const dispatch = useDispatch()
     const idCart = useSelector(state => state.customer.idCart)
+    const totalAllProduct = useSelector(state => state.cart.totalAllProduct)
     console.log('routePage:', pageRouter)
     const navigate = useNavigate()
     //get data strain
@@ -67,7 +72,6 @@ function Product() {
     const handleAddToCart = async (idCart, idStrain) => {
         try {
             const listDetailCart = await getAllDetailCartApi(idCart)
-            console.log('list cart lúc bấm add to cart nè: ', listDetailCart.data)
             if (listDetailCart.data.length !== 0) {
                 // Kiểm tra xem idStrain của sản phẩm đã tồn tại trong giỏ hàng hay chưa
                 const curIndex = listDetailCart.data.findIndex(item => item.idStrain === idStrain);
@@ -89,6 +93,8 @@ function Product() {
                 addDetailCartApi(idCart, idStrain, 1)
                 toastSuccess('Thêm vào giỏ hàng thành công', 'top-center')
             }
+            //dù thêm bằng cách nào thì cũng tăng 1
+            dispatch(setTotalAllProduct(totalAllProduct + 1))
 
         } catch (error) {
             toastError('Thêm vào giỏ hàng thất bại, có lỗi xảy ra', 'top-center')

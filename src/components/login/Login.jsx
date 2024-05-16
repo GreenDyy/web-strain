@@ -8,8 +8,7 @@ import { toastError, toastWarning } from "../Toast/Toast";
 //redux
 import { useDispatch } from "react-redux";
 import { login } from "../../srcRedux/features/customerSlice";
-import { setAllDetailCart } from "../../srcRedux/features/cartSlice";
-import { setDataLocalStorage } from "../../utils/Utils";
+import { setAllDetailCart, setTotalAllProduct } from "../../srcRedux/features/cartSlice";
 
 
 function Login() {
@@ -34,7 +33,7 @@ function Login() {
 
             if (user.data.success) {
                 const cart = await getCartByIdCustomerApi(user.data.data.idCustomer)
-                const listDetailCart = await getAllDetailCartApi(cart.data.idCart)
+                // const listDetailCart = await getAllDetailCartApi(cart.data.idCart)
                 const allTotalProductInCart = await getAllTotalQuantityApi(cart.data.idCart)
 
                 console.log("total bên login từ API", allTotalProductInCart.data)
@@ -44,9 +43,7 @@ function Login() {
                     customerData: user.data,
                     idCart: cart.data.idCart
                 }))
-                // dispatch(setAllDetailCart(listDetailCart.data))
-                // dispatch(setTotalQuantity(allTotalProductInCart.data))
-                setDataLocalStorage('totalProductInCart', allTotalProductInCart.data)
+                dispatch(setTotalAllProduct(allTotalProductInCart.data));
                 navigate('/Home')
             }
             else
