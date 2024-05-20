@@ -45,15 +45,17 @@ function Product() {
     const [totalPage, setTotalPage] = useState(0)
 
     //cột filter
-    const [dataPhylum, setDataPhylum] = useState(false)
-    const [dataClass, setDataClass] = useState(false)
-    const [dataGenus, setDataGenus] = useState(false)
-    const [dataSpecies, setDataSpecies] = useState(false)
+    const [dataPhylum, setDataPhylum] = useState(null)
+    const [dataClass, setDataClass] = useState(null)
+    const [dataGenus, setDataGenus] = useState(null)
+    const [dataSpecies, setDataSpecies] = useState(null)
 
     const [showPhylum, setShowPhylum] = useState(false)
     const [showClass, setShowClass] = useState(false)
     const [showGenus, setShowGenus] = useState(false)
     const [showSpecies, setShowSpecies] = useState(false)
+
+    const [selectedPhylumId, setSelectedPhylumId] = useState(null);
 
     //redux
     const dispatch = useDispatch()
@@ -134,6 +136,11 @@ function Product() {
         }
     };
 
+    const handlePhylumClick = (idPhylum) => {
+        setSelectedPhylumId(idPhylum);
+        setShowClass(true);
+    };
+
     return (
         <div className='Product'>
 
@@ -154,27 +161,102 @@ function Product() {
                         </button>
 
                     </div>
-                    {dataPhylum.map((item, index) => {
-                        return (
-                            <button key={index} className='btn-filter' onClick={() => { setShowPhylum(!showPhylum) }}>
-                                <p>{item.namePhylum}</p>
-                                <IoIosArrowDropdown className='icon-dropdown' />
-                            </button>
-                        )
-                    })}
-
-                    {
-                        showPhylum && (
-                            <div className='wrap-checkbox'>
-                                {dataPhylum.map((item, index) => {
-                                    return (
-                                        <p key={index}><input type="radio" name='phylum' onChange={() => { console.log('You choose me, right?', item.idPhylum) }} />{item.namePhylum}</p>
-                                    )
-                                })}
-
-                            </div>
-                        )
+                    {/* show ds phylum */}
+                    {/* {
+                        dataPhylum?.map((item, index) => {
+                            return (
+                                <button key={index} className='btn-phylum' onClick={() => handlePhylumClick(item.idPhylum)}>
+                                    <p>{item?.namePhylum}</p>
+                                    <IoIosArrowDropdown className='icon-dropdown' />
+                                </button>
+                            );
+                        })
                     }
+
+                    {showClass && selectedPhylumId && (
+                        <div className='wrap-class'>
+                            {dataClass
+                                .filter(item => item.idPhylum === selectedPhylumId)
+                                .map((item, index) => (
+                                    <button
+                                        key={index}
+                                        className='btn-class'
+                                        onClick={() => setShowClass(false)}
+                                    >
+                                        <p>{item.className}</p>
+                                        <IoIosArrowDropdown className='icon-dropdown' />
+                                    </button>
+                                ))}
+                        </div>
+                    )} */}
+
+                    <ul className='tree'>
+                        <li className='parent'>
+                            <details>
+                                <summary>Phylum 1</summary>
+                                <ul>
+                                    <li className='parent'>
+                                        <details style={{display:'flex', flexDirection:'column'}}>
+                                            <summary>Class 1</summary>
+                                            <ul>
+                                                <li className='parent'>
+                                                    <details>
+                                                        <summary>Genus 1</summary>
+                                                        <ul>
+                                                            <li>Species 1</li>
+                                                            <li>Species 2</li>
+                                                        </ul>
+                                                    </details>
+                                                </li>
+                                                <li className='parent'>
+                                                    <details>
+                                                        <summary>Genus 2</summary>
+                                                        <ul>
+                                                            <li>Species 3</li>
+                                                            <li>Species 4</li>
+                                                        </ul>
+                                                    </details>
+                                                </li>
+                                            </ul>
+                                        </details>
+                                    </li>
+                                    <li className='parent'>
+                                        <details>
+                                            <summary>Class 2</summary>
+                                            <ul>
+                                                <li className='parent'>
+                                                    <details>
+                                                        <summary>Genus 3</summary>
+                                                        <ul>
+                                                            <li>Species 5</li>
+                                                            <li>Species 6</li>
+                                                        </ul>
+                                                    </details>
+                                                </li>
+                                                <li className='parent'>
+                                                    <details>
+                                                        <summary>Genus 4</summary>
+                                                        <ul>
+                                                            <li>Species 7</li>
+                                                            <li>Species 8</li>
+                                                        </ul>
+                                                    </details>
+                                                </li>
+                                            </ul>
+                                        </details>
+                                    </li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li className='parent'>
+                            <details>
+                                <summary>Phylum 2</summary>
+                                {/* Tương tự cho các phylum khác */}
+                            </details>
+                        </li>
+                    </ul>
+
+
                 </div>
                 {/* cột ds strain */}
                 <div className='col-all-item'>

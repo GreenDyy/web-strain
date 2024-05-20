@@ -138,7 +138,7 @@
     margin-left: 10px;
 }
 
-.Product .btn-filter {
+.Product .btn-phylum {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -148,8 +148,91 @@
     margin-bottom: 5px;
 }
 
-.Product .btn-filter p {
-    
+.tree {
+    display: flex;
+    flex-direction: column;
+}
+
+ul li {
+    position: relative;
+    list-style: none;
+}
+
+li:before, li:before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    background-color: #979797;
+}
+
+li:before {
+  height: 1px;
+  width: 16px;
+  top: 12px;
+}
+
+li:after {
+   height: 26px;
+   width: 1px;
+   top: -14px;
+}
+
+li.parent:after {
+    height: 100%;
+    top:16px
+}
+
+.parent {
+    display: flex;
+    flex-direction: column;
+}
+
+.Product .btn-class {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    background: none;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.Product .btn-genus {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    background: none;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.Product .btn-species {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    background: none;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.Product .wrap-class {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Product .wrap-genus {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Product .wrap-species {
+    margin-left: 60px;
+    display: flex;
+    flex-direction: column;
 }
 
 .Product .btn-filter .icon-dropdown {
