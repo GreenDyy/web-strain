@@ -1,6 +1,6 @@
 import searchicon from '../assets/icons/searchblack.png'
 import toggle from '../assets/icons/toggle.png'
-import logo from '../assets/icons/logo.png'
+import logo from '../assets/icons/logo.jpg'
 import phone from '../assets/icons/phone.png'
 import mail from '../assets/icons/mail.png'
 import social from '../assets/icons/social.png'

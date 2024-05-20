@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react'
 import './Product.css'
 import { images, icons } from '../../constants'
 import ReactPaginate from 'react-paginate';
-import { getAllStrainApi } from '../../apis/apiStrain'
+import { getAllClassApi, getAllGenusApi, getAllPhylumApi, getAllSpeciesApi, getAllStrainApi } from '../../apis/apiStrain'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDetailCartApi, getAllDetailCartApi, updateDetailCartApi } from '../../apis/apiCart';
 import { convertImageByte } from '../../utils/Utils';
 import { toastError, toastSuccess } from '../Toast/Toast';
 import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
+import { IoIosArrowDropdown } from "react-icons/io";
+import { FaSearch } from "react-icons/fa";
+
 
 
 const Item = ({ item, idCart, onClickToDetail, onClickAddToCart }) => {
@@ -41,6 +44,17 @@ function Product() {
     // const [page, setPage] = useState(2)
     const [totalPage, setTotalPage] = useState(0)
 
+    //cột filter
+    const [dataPhylum, setDataPhylum] = useState(false)
+    const [dataClass, setDataClass] = useState(false)
+    const [dataGenus, setDataGenus] = useState(false)
+    const [dataSpecies, setDataSpecies] = useState(false)
+
+    const [showPhylum, setShowPhylum] = useState(false)
+    const [showClass, setShowClass] = useState(false)
+    const [showGenus, setShowGenus] = useState(false)
+    const [showSpecies, setShowSpecies] = useState(false)
+
     //redux
     const dispatch = useDispatch()
     const idCart = useSelector(state => state.customer.idCart)
@@ -53,8 +67,19 @@ function Product() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                //lấy data cho cột filter
+                const dataPhylum = await getAllPhylumApi()
+                const dataClass = await getAllClassApi()
+                const dataGenus = await getAllGenusApi()
+                const dataSpecies = await getAllSpeciesApi()
 
-                const response = await getAllStrainApi(search, sortBy, "Yes", pageRouter)
+                const response = await getAllStrainApi(search, sortBy, pageRouter)
+
+                setDataPhylum(dataPhylum.data)
+                setDataClass(dataClass.data)
+                setDataGenus(dataGenus.data)
+                setDataSpecies(dataSpecies.data)
+
                 setTotalPage(response.data[0]?.totalPage)
                 setData(response.data);
 
@@ -99,7 +124,7 @@ function Product() {
                 //dù thêm bằng cách nào thì cũng tăng 1
                 dispatch(setTotalAllProduct(totalAllProduct + 1))
             }
-            else{
+            else {
                 navigate('/Login')
             }
 
@@ -115,32 +140,45 @@ function Product() {
             <div className='row-category-item'>
                 {/* cột lọc */}
                 <div className='col-category'>
-                    <button className='btn-filter' >mấy nút này để lọc</button>
-                    <button className='btn-filter' >mấy nút này để lọc</button>
-                    <button className='btn-filter' >mấy nút này để lọc</button>
-                    <button className='btn-filter' >mấy nút này để lọc</button>
-                    <button className='btn-filter' >mấy nút này để lọc</button>
-                    <button className='btn-filter' >mấy nút này để lọc</button>
-                </div>
-                {/* cột ds strain */}
-                <div className='col-all-item'>
-                    <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
-
                     <div className='search-box'>
-                        <input
+                        <input className='input-search'
                             type='text'
-                            placeholder='Nhập nội dung tìm kiếm...'
+                            placeholder='Search...'
                             value={search}
                             onChange={(e) => {
                                 setSearch(e.target.value)
                             }}
                         />
-                        <img src={icons.searchicon} alt='Search Icon'
-                            onClick={() => {
+                        <button className='btn-search'>
+                            <FaSearch className='icon-search' />
+                        </button>
 
-                            }}
-                        />
                     </div>
+                    {dataPhylum.map((item, index) => {
+                        return (
+                            <button key={index} className='btn-filter' onClick={() => { setShowPhylum(!showPhylum) }}>
+                                <p>{item.namePhylum}</p>
+                                <IoIosArrowDropdown className='icon-dropdown' />
+                            </button>
+                        )
+                    })}
+
+                    {
+                        showPhylum && (
+                            <div className='wrap-checkbox'>
+                                {dataPhylum.map((item, index) => {
+                                    return (
+                                        <p key={index}><input type="radio" name='phylum' onChange={() => { console.log('You choose me, right?', item.idPhylum) }} />{item.namePhylum}</p>
+                                    )
+                                })}
+
+                            </div>
+                        )
+                    }
+                </div>
+                {/* cột ds strain */}
+                <div className='col-all-item'>
+                    <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
 
                     <div className='wrap-item'>
                         {

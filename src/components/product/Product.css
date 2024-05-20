@@ -1,7 +1,7 @@
 .Product {
     display: flex;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-right: 10vw;
+    margin-left: 10vw;
     margin-top: 50px;
     margin-bottom: 100px;
     color: black
@@ -18,8 +18,43 @@
 
 .col-category {
     display: flex;
-    flex: 12;
     flex-direction: column;
+}
+
+.Product .search-box {
+    display: flex;
+    border-radius: 70px;
+    align-items: center;
+    justify-content: space-between;
+    background: #00A551;
+}
+
+.Product .search-box .input-search {
+    background: white;
+    border-radius: 70px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    height: 30px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.Product .search-box .input-search::placeholder {
+    color: gray;
+    font-size: 16px;
+
+}
+
+.Product .search-box .btn-search {
+    background-color: #00A551;
+    display: flex;
+    align-items: center;
+}
+
+.Product .search-box .icon-search{
+    color: white;
+    font-size: 30px;
 }
 
 .col-all-item {
@@ -105,11 +140,20 @@
 
 .Product .btn-filter {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    background-color: #00A551;
-    width: 140px;
-    margin: 10px 0px;
+    border-bottom: 1px solid black;
+    background: none;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.Product .btn-filter p {
+    
+}
+
+.Product .btn-filter .icon-dropdown {
+    font-size: 20px;
 }
 
 .btn-page {
@@ -181,38 +225,6 @@
     width: 40px;
     object-fit: contain;
     transform: scaleX(-1);
-}
-
-.Product .search-box {
-    display: flex;
-    width: 20%;
-    align-items: center;
-    justify-content: space-between;
-    background: whitesmoke;
-    padding: 5px 15px;
-    border-radius: 15px;
-    margin: 20px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
-
-.Product .search-box input {
-    padding: 6px;
-    background: transparent;
-    outline: 0;
-    border: 0;
-    font-size: 16px;
-}
-
-.Product .search-box input::placeholder {
-    color: #00A551;
-    font-size: 16px;
-
-}
-
-.Product .search-box img {
-    height: 25px;
-    width: 25px;
-    cursor: pointer;
 }
 
 

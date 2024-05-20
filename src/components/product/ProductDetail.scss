@@ -73,7 +73,7 @@
 
                 .wrap-all-btn {
                     display: flex;
-                    width: 60%;
+                    width: 50%;
                     justify-content: space-between;
                     align-items: center;
                     flex-wrap: wrap;
@@ -134,14 +134,15 @@
 
                 .wrap-des {
                     display: flex;
-                    width: 60%;
+                 
                     justify-content: space-between;
 
                     .wrap-des-col-1,
                     .wrap-des-col-2 {
                         display: flex;
                         flex-direction: column;
-
+                        flex: 1;
+                       
                         .head {
                             color: gray;
                             font-weight: 600;
@@ -184,10 +185,53 @@
 
             .nav-content {
                 display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
                 width: 70%;
                 margin-top: 40px;
                 color: gray;
                 font-weight: 600;
+
+                .table-detail {
+                    display: flex;
+                    flex-direction: column;
+
+                    .table-title {
+                        border: 1px solid gray;
+                        font-weight: 700;
+                        display: flex;
+                        justify-content: center;
+                        color:black;
+                        font-size: 18px;
+                    }
+
+                    .table-content {
+                        display: flex;
+
+                        .table-col-1, .table-col-2 {
+                            border: 1px solid gray;
+
+                            .cell {
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                border: 1px solid gray;
+                                font-weight: 700;
+                            }
+                        }
+
+                        .table-col-2 {
+                            display: flex;
+                            flex-direction: column;
+                            flex: 1;
+
+                            .cell {
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+                        }
+                    }
+                }
             }
         }
 

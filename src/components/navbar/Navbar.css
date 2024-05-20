@@ -3,15 +3,16 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px 3%;
-    background: whitesmoke;
+    background: white;
     /* background: #00A551; */
     transition: 0.5s;
 
 }
 
 .Navbar .logo {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
+    border-radius: 999px;
     object-fit: contain;
     cursor: pointer;
     /* filter: invert(100%); */
