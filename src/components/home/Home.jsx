@@ -12,7 +12,7 @@ function Home() {
                 <p>
                     <strong>DAQStrain</strong> là bộ sưu tập dịch vụ lớn nhất và đa dạng nhất của Châu Âu dành cho các chủng sinh vật sống từ môi trường biển, nước ngọt và trên cạn cũng như bộ sưu tập tảo cát vùng cực ngày càng tăng
                 </p>
-                <Link to='/Product'>
+                <Link to='/Product/1'>
                     <button>Xem các strain của chúng tôi</button>
                 </Link>
             </div>

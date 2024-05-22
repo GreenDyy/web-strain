@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import './ProductDetail.scss'
-import { getClassByIdApi, getConditionByIdApi, getGenusByIdApi, getPhylumByIdApi, getSpeciesByIdApi, getStrainByIdApi } from "../../apis/apiStrain";
-import { useParams } from "react-router-dom";
+import { getClassByIdApi, getConditionByIdApi, getGenusByIdApi, getPhylumByIdApi, getRandomStrainApi, getSpeciesByIdApi, getStrainByIdApi } from "../../../apis/apiStrain";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaStar, FaRegHeart } from "react-icons/fa";
-
-import { images } from "../../constants";
-import { convertImageByte } from "../../utils/Utils";
+import { convertImageByte, formatCurrency } from "../../../utils/Utils";
+import { getInventoryByIdStrainApi, updateInventoryByIdStrainApi } from "../../../apis/apiInventory";
+import { useDispatch, useSelector } from "react-redux";
+import { addDetailCartApi, getAllDetailCartApi, updateDetailCartApi } from "../../../apis/apiCart";
+import { toastError, toastSuccess, toastWarning } from "../../Toast/Toast";
+import { setTotalAllProduct } from "../../../srcRedux/features/cartSlice";
+import Slider from "react-slick";
 
 const dataMota = 'Trong vi sinh vật học, "strain" thường được dịch là "dòng" hoặc "chủng", và nó đề cập đến một nhóm vi sinh vật có đặc điểm di truyền tương tự nhau. Các dòng vi sinh vật có thể khác nhau về các tính chất như khả năng gây bệnh, sức đề kháng kháng sinh, hoặc khả năng sản xuất các chất sinh học cụ thể.'
 const dataReview = 'Trong ngữ cảnh của vi sinh vật học, "strain" không chỉ đơn thuần là một khái niệm mà còn là nền tảng cho sự hiểu biết và ứng dụng trong nhiều lĩnh vực khác nhau. Sự đa dạng của các strain mở ra cơ hội cho việc nghiên cứu sâu rộng và phát triển các giải pháp đa dạng cho các thách thức y tế và công nghiệp hiện đại'
@@ -32,9 +36,22 @@ function ProductDetail() {
     const [species, setSpecies] = useState(null);
     const [genus, setGenus] = useState(null);
     const [condition, setCondition] = useState()
+    const [quantity, setQuantity] = useState(0) //tổng số sp còn trong kho
+    const [price, setPrice] = useState(0)
+    const [count, setCount] = useState(0)
+    const [entryDate, setEntryDate] = useState('')
+    const [dataRandomStrain, setDataRandomStrain] = useState([])
 
     //cho navbar con
     const [selectedNav, setSelectedNav] = useState(1)
+
+    //redux
+    const dispatch = useDispatch()
+    const idCart = useSelector(state => state.customer.idCart)
+    const totalAllProduct = useSelector(state => state.cart.totalAllProduct)
+    const isLogin = useSelector(state => state.customer.isLogin)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,37 +62,118 @@ function ProductDetail() {
                 const apiClass = await getClassByIdApi(apiGenus.data.idClass)
                 const apiPhylum = await getPhylumByIdApi(apiClass.data.idPhylum)
                 const apiCondition = await getConditionByIdApi(apiProduct.data.idCondition)
+                const apiInventory = await getInventoryByIdStrainApi(id)
+                const apiRandomStrain = await getRandomStrainApi()
+
                 setProduct(apiProduct.data)
                 setSpecies(apiSpecies.data)
                 setGenus(apiGenus.data)
                 setClasses(apiClass.data)
                 setPhylum(apiPhylum.data)
                 setCondition(apiCondition.data)
+                setQuantity(apiInventory.data.quantity)
+                setPrice(apiInventory.data.price)
+                setEntryDate(apiInventory.data.intryDate)
+                setDataRandomStrain(apiRandomStrain.data)
+
             } catch (error) {
                 console.error("Lỗi fetchdata trong productdetail:", error);
             }
         };
         fetchData();
     }, []);
-    // const imageSrc = item.imageStrain ? `data:image/jpeg;base64,${item.imageStrain}` : images.strainnull
+
+    const increaseCount = () => {
+        if (count < quantity) {
+            setCount(count + 1)
+
+        }
+        if (quantity === 0) {
+            toastWarning('Sản phẩm đã hết hàng!', 'top-center')
+        }
+    }
+
+    const decreaseCount = () => {
+        if (count > 1) {
+            setCount(count - 1)
+
+        }
+    }
+
+    const handleAddToCart = async () => {
+        try {
+            if (isLogin) {
+                {
+                    if (count > 0) {
+                        const listDetailCart = await getAllDetailCartApi(idCart)
+                        console.log('kis catr ne:', listDetailCart.data)
+                        console.log('id:', id)
+                        if (listDetailCart.data.length !== 0) {
+                            // Kiểm tra xem idStrain của sản phẩm đã tồn tại trong giỏ hàng hay chưa
+                            const curIndex = listDetailCart.data.findIndex(item => String(item.idStrain) === String(id));
+
+
+                            if (curIndex !== -1) {
+                                // Nếu idStrain đã tồn tại, cập nhật số lượng cho sản phẩm đó
+                                updateDetailCartApi(listDetailCart.data[curIndex].idCartDetail, {
+                                    idCart: idCart,
+                                    idStrain: id,
+                                    quantityOfStrain: listDetailCart.data[curIndex].quantityOfStrain + count,
+                                })
+
+                                toastSuccess(`Sản phẩm đã có trong giỏ hàng, + ${count} số lượng`, 'top-center')
+                            } else {
+                                addDetailCartApi(idCart, id, count)
+                                toastSuccess('Thêm vào giỏ hàng thành công', 'top-center')
+                            }
+                        }
+                        else {
+                            addDetailCartApi(idCart, id, 1)
+                            toastSuccess('Thêm vào giỏ hàng thành công', 'top-center')
+                        }
+                        //dù thêm bằng cách nào thì cũng tăng 1 và trừ kho
+                        updateInventoryByIdStrainApi(id, {
+                            idStrain: id,
+                            quantity: quantity - count,
+                            price: price,
+                            entryDate: entryDate
+                        })
+                        dispatch(setTotalAllProduct(totalAllProduct + count))
+                        setQuantity(quantity - count)
+                        setCount(0)
+                    }
+                    else {
+                        toastWarning('Vui lòng chọn số lượng', 'top-center')
+                    }
+                }
+            }
+            else {
+                navigate('/Login')
+            }
+
+
+        } catch (error) {
+            toastError('Thêm vào giỏ hàng thất bại, có lỗi xảy ra', 'top-center')
+        }
+    };
+
     return (
         <div className="ProductDetail">
             {product ? (
                 <div className="main">
                     <div className="wrap-row-1">
                         <div className="wrap-image">
-                            <img className="image-item" src="https://static.vecteezy.com/system/resources/thumbnails/025/067/762/small_2x/4k-beautiful-colorful-abstract-wallpaper-photo.jpg" alt="image-item" />
-                            {/* <img className="image-item" src={convertImageByte(product?.imageStrain)} /> */}
+                            {/* <img className="image-item" src="https://static.vecteezy.com/system/resources/thumbnails/025/067/762/small_2x/4k-beautiful-colorful-abstract-wallpaper-photo.jpg" alt="image-item" /> */}
+                            <img className="image-item" src={product?.imageStrain ? convertImageByte(product?.imageStrain) : "https://static.vecteezy.com/system/resources/thumbnails/025/067/762/small_2x/4k-beautiful-colorful-abstract-wallpaper-photo.jpg"} />
                             <div className="slide">
-
                             </div>
                         </div>
 
                         <div className="wrap-content">
                             <h2 className="title">{product?.scientificName} - {product?.strainNumber}</h2>
                             <div className="wrap-price">
-                                <p className="price1">{"199.000 VNĐ -"}</p>
-                                <p className="price2"> $250.000 VNĐ</p>
+                                <p className="price1">{formatCurrency(price)} {"VNĐ -"}</p>
+                                <p className="price2"> {formatCurrency(price)} {"VNĐ"}</p>
                             </div>
                             <div className="all-star">
                                 <FaStar className="star" />
@@ -89,12 +187,17 @@ function ProductDetail() {
                             </p>
                             <div className="wrap-all-btn">
                                 <div className="wrap-btn-amount">
-                                    <button className="btn-increase">-</button>
-                                    <input className="input-number" type="text" defaultValue={0} readOnly />
-                                    <button className="btn-decrease">+</button>
+                                    <button className="btn-decrease" onClick={decreaseCount}>-</button>
+                                    <input
+                                        className="input-number"
+                                        type="text"
+                                        value={count}
+                                        onChange={(event) => { setCount(event.target.value) }}
+                                    />
+                                    <button className="btn-increase" onClick={increaseCount} >+</button>
                                 </div>
 
-                                <button className="btn-add-cart">
+                                <button className="btn-add-cart" onClick={handleAddToCart}>
                                     <p>Thêm vào giỏ hàng</p>
                                 </button>
                             </div>
@@ -122,12 +225,9 @@ function ProductDetail() {
 
                     <div className="wrap-row-2">
                         <div className="navbar">
-                            {/* <button className="btn-nav" onClick={() => { setContentNav(dataNavbarChild[0]) }}>Mô tả</button>
-                            <button className="btn-nav" onClick={() => { setContentNav(dataNavbarChild[1]) }}>Thông tin chi tiết</button>
-                            <button className="btn-nav" onClick={() => { setContentNav(dataNavbarChild[2]) }}>Review</button> */}
                             {navbarTitle.map((item, index) => {
                                 return (
-                                    <button className="btn-nav" onClick={() => { setSelectedNav(item.id) }}>{item.title}</button>
+                                    <button key={index} className="btn-nav" onClick={() => { setSelectedNav(item.id) }}>{item.title}</button>
                                 )
                             })}
                         </div>
@@ -217,7 +317,7 @@ function ProductDetail() {
                                             </div>
 
                                             <div className="table-col-2">
-                                            <div className="cell">
+                                                <div className="cell">
                                                     <p>{condition?.medium} {condition?.temperature} {condition?.lightIntensity} {condition?.duration}   </p>
                                                 </div>
                                                 <div className="cell">
@@ -281,8 +381,6 @@ function ProductDetail() {
                                                 <div className="cell">
                                                     <p>{product?.remarks}</p>
                                                 </div>
-                                                
-
                                             </div>
                                         </div>
                                     </div>
@@ -301,20 +399,17 @@ function ProductDetail() {
                     <div className="wrap-row-3">
                         <h2 className="title">Có thể bạn sẽ thích</h2>
                         <div className="wrap-other-strain">
-                            <div className="item-strain">
-                                <img className="img-strain" src="https://img.freepik.com/free-photo/ingredients-grilled-wood-flame-plate-generative-ai_188544-8881.jpg" />
-                                <p className="name-strain">Buffterfly Idle</p>
-                            </div>
+                            {dataRandomStrain.map((item, index) => {
+                                const imgSrc = item?.imageStrain ? convertImageByte(item.imageStrain) : "https://img.freepik.com/free-photo/ingredients-grilled-wood-flame-plate-generative-ai_188544-8881.jpg"
+                                return (
+                                    <div key={index} className="item-strain">
+                                        <img className="img-strain" src={imgSrc} />
+                                        <p className="name-strain">{item.scientificName}</p>
+                                    </div>
 
-                            <div className="item-strain">
-                                <img className="img-strain" src="https://img.freepik.com/free-photo/ingredients-grilled-wood-flame-plate-generative-ai_188544-8881.jpg" />
-                                <p className="name-strain">Messastrum gracile </p>
-                            </div>
-
-                            <div className="item-strain">
-                                <img className="img-strain" src="https://img.freepik.com/free-photo/ingredients-grilled-wood-flame-plate-generative-ai_188544-8881.jpg" />
-                                <p className="name-strain">Sword Digitals</p>
-                            </div>
+                                )
+                            })}
+                            
                         </div>
                     </div>
                 </div>

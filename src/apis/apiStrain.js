@@ -9,6 +9,24 @@ const getAllStrainNoPagingApi = () => {
     return axios.get(`${domain}/api/Strain/NoPaging`);
 };
 
+const getRandomStrainApi = () => {
+    return axios.get(`${domain}/api/Strain/GetRandom`);
+};
+
+//follow TYPE
+const getAllStrainFollowPhylumApi = (namePhylum, search, sortBy, page) => {
+    return axios.get(`${domain}/api/Strain/FollowPhylum?namePhylum=${namePhylum}&search=${search}&sortBy=${sortBy}&page=${page}`)
+}
+const getAllStrainFollowClassApi = (nameClass, search, sortBy, page) => {
+    return axios.get(`${domain}/api/Strain/FollowClass?nameClass=${nameClass}&search=${search}&sortBy=${sortBy}&page=${page}`)
+}
+const getAllStrainFollowGenusApi = (nameGenus, search, sortBy, page) => {
+    return axios.get(`${domain}/api/Strain/FollowGenus?nameGenus=${nameGenus}&search=${search}&sortBy=${sortBy}&page=${page}`)
+}
+const getAllStrainFollowSpeciesApi = (nameSpecies, search, sortBy, page) => {
+    return axios.get(`${domain}/api/Strain/FollowSpecies?nameSpecies=${nameSpecies}&search=${search}&sortBy=${sortBy}&page=${page}`)
+}
+
 const getStrainByIdApi = (id) => {
     const response = axios.get(`${domain}/api/Strain/${id}`)
     return response
@@ -33,6 +51,7 @@ const getAllPhylumApi = () => {
     const response = axios.get(`${domain}/api/Phylum`)
     return response
 }
+
 //Species
 const getSpeciesByIdApi = (id) => {
     const response = axios.get(`${domain}/api/Species/${id}`)
@@ -70,4 +89,9 @@ export {
     getAllGenusApi,
     getAllPhylumApi,
     getAllSpeciesApi,
+    getAllStrainFollowPhylumApi,
+    getAllStrainFollowClassApi,
+    getAllStrainFollowGenusApi,
+    getAllStrainFollowSpeciesApi,
+    getRandomStrainApi,
 };

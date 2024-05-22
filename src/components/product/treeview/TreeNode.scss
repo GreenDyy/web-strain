@@ -1,0 +1,31 @@
+.tree-node {
+    margin-left: -20px;
+
+    .tree-node-label {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+
+        .icon {
+            display: flex;
+            align-self: center;
+            margin-right: 8px;
+            font-size: 18px;
+        }
+    }
+
+    .tree-node-label:hover {
+        color: green
+    }
+
+    .open {
+        color: #76453B;
+        text-decoration: underline;
+        text-underline-offset: 5px;
+    }
+
+    .tree-node-children {
+        display: flex;
+        flex-direction: column;
+    }
+}

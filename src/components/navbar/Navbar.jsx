@@ -52,7 +52,7 @@ const Navbar = () => {
     return (
         <div>
             <nav className='Navbar'>
-                <img src={icons.logo} alt='Logo' className='logo' />
+                <img src={icons.logo} alt='Logo' className='logo' onClick={() => navigate('/')} />
                 <ul >
                     {
                         listNavbarItem.map((item, index) => (
@@ -67,72 +67,58 @@ const Navbar = () => {
                     }
                 </ul>
 
-                {/* <div className='search-box'>
-                    <input type='text' placeholder='Nhập nội dung tìm kiếm...' />
-                    <img src={icons.searchicon} alt='Search Icon' />
-                </div> */}
-
                 <div className='col-3'>
-                    {
-                        (isLogin) ?
-                            <div className='dropwdown-wrap'
-                                onMouseEnter={() => { setIsHoveredDropdown(true) }}
-                                onMouseLeave={() => setIsHoveredDropdown(false)}>
-                                <div className='dropdown-trigger'>
-                                    <div className='user'>
-                                        <FaUserAstronaut className='user-icon' />
-                                        <p className='user-name'>{customerData?.fullName}</p>
-                                    </div>
+                    {/* <div className='search-box'>
+                        <input type='text' placeholder='Nhập nội dung tìm kiếm...' />
+                        <img src={icons.searchicon} alt='Search Icon' />
+                    </div> */}
+                    {isLogin ?
+                        <div className='dropwdown-wrap'
+                            onMouseEnter={() => { setIsHoveredDropdown(true) }}
+                            onMouseLeave={() => setIsHoveredDropdown(false)}>
+                            <div className='dropdown-trigger'>
+                                <div className='user'>
+                                    <FaUserAstronaut className='user-icon' />
+                                    <p className='user-name'>{customerData?.fullName}</p>
                                 </div>
-                                {
-                                    isHoveredDropdown &&
-                                    <div className='dropdown-content' style={{ position: 'absolute' }}>
-                                        <ul style={{ display: 'flex', flexDirection: 'column' }}>
-                                            <li>
-                                                <button className='btn-logout' onClick={handleLogout}>
-                                                    Thông tin cá nhân
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button className='btn-logout' onClick={handleLogout}>
-                                                    Đơn hàng của tôi
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button className='btn-logout' onClick={handleLogout}>
-                                                    Đăng xuất
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                }
-
-                            </div> :
-
-                            <div>
-                                <button className='btn-login' onClick={() => navigate('/Login')} >
-                                    Đăng nhập
-                                </button>
-
-                                <button className='btn-register' onClick={() => navigate('/Login')} >
-                                    Đăng ký
-                                </button>
                             </div>
+                            {isHoveredDropdown &&
+                                <div className='dropdown-content' style={{ position: 'absolute' }}>
+                                    <ul>
+                                        <li onClick={handleLogout}>
+                                            Thông tin cá nhân
+                                        </li>
+                                        <li onClick={handleLogout}>
+                                            Đơn hàng của tôi
+                                        </li>
+                                        <li onClick={handleLogout}>
+                                            Đăng xuất
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                        </div>
+                        :
+                        <div>
+                            <button className='btn-login' onClick={() => navigate('/Login')} >
+                                Đăng nhập
+                            </button>
 
-
+                            <button className='btn-register' onClick={() => navigate('/Register')} >
+                                Đăng ký
+                            </button>
+                        </div>
                     }
-                    {/* <img src={icons.cart} alt='cart' className='img-cart' onClick={() => navigate('/Cart')} /> */}
+
                     <div className='btn-cart'>
-                        <TfiShoppingCartFull style={{ color: '#00A551', marginLeft: 15, fontSize: 30, cursor: 'pointer' }} onClick={() => navigate('/Cart')} />
+                        {/* <TfiShoppingCartFull style={{ color: '#00A551', marginLeft: 15, fontSize: 30, cursor: 'pointer' }} onClick={() => navigate('/Cart')} /> */}
+                        <img src={icons.cart} alt='cart' className='img-cart' onClick={() => navigate('/Cart')} />
                         <div className='cover-quantity'>
                             <p>{totalAllProduct}</p>
                         </div>
                     </div>
                 </div>
             </nav>
-
-
         </div>
     )
 }

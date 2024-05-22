@@ -3,6 +3,7 @@ import bg from '../assets/images/bg.jpg'
 import doctor from '../assets/images/doctor.png'
 import bgmushroom from '../assets/images/bg-mushroom.jpg'
 import strainnull from '../assets/images/strainnull.png'
+import emptycart from '../assets/images/emptycart.png'
 const images = {
     mario,
     straintest: 'https://i.imgur.com/Uxq1RsS.jpg',
@@ -10,6 +11,7 @@ const images = {
     doctor,
     bgmushroom,
     strainnull,
+    emptycart,
 }
 
 export default images

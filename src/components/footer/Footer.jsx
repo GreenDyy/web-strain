@@ -11,7 +11,7 @@ function Footer() {
                 {/* cột 1 */}
                 <div style={{ display: 'flex', flexDirection: 'column', flex: 40, marginLeft: 10, marginRight: 10 }}>
                     <h2>Về chúng tôi</h2>
-                    <p>This powerful and all-around free Bootstrap footer works for all types of websites, online stores, and blogs.
+                    <p className="about-us">This powerful and all-around free Bootstrap footer works for all types of websites, online stores, and blogs.
 
                         However, it will work best for everyone looking to add Twitter and Instagram feeds into their footer area.
 
@@ -62,31 +62,6 @@ function Footer() {
                         <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/7/16/820047/Virus-Corona.jpg" alt="Image 1" />
                     </div>
                 </div>
-            </div>
-            {/* dòng 2 */}
-            <hr style={{ border: '1px solid black', width: '100%' }} />
-            <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                <ul style={{ display: 'flex', justifyContent: 'start' }}>
-                    <li>
-                        <Link className='Link' to='/' >Trang chủ</Link>
-                    </li>
-                    <li>
-                        <Link to='/Intro' className='Link'>Sản phẩm</Link>
-                    </li>
-                    <li>
-                        <Link to='/Intro' className='Link'>Đăng nhập</Link>
-                    </li>
-                    <li>
-                        <Link to='/Intro' className='Link'>Nghiên cứu</Link>
-                    </li>
-                    <li>
-                        <Link to='/Intro' className='Link'>Truyền thông</Link>
-                    </li>
-                    <li>
-                        <Link to='/Intro' className='Link'>Về chúng tôi</Link>
-                    </li>
-                </ul>
-                <img className="logo" src={icons.logo} />
             </div>
         </div>
     )

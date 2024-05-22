@@ -1,8 +1,7 @@
 .Footer {
-    /* background-color: #00A551; */
+    background-color: #00A551;
     /* background: rgba(46, 204, 113, 1); */
-    background: rgb(255, 255, 255);
-    background: linear-gradient(315deg, rgba(255, 255, 255, 1) 0%, rgba(0, 165, 81, 1) 61%);
+    /* background: linear-gradient(315deg, rgba(255, 255, 255, 1) 0%, rgba(0, 165, 81, 1) 61%); */
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -13,9 +12,7 @@
     color: white;
     justify-content: center;
     align-items: center;
-    /* position: absolute;
-    bottom: 0; */
-    /* width: 100%; */
+    font-weight: 500;
 }
 
 .Footer .icon {
@@ -53,7 +50,7 @@
 }
 
 .Footer .search-box button {
-    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
     color: white;
     border-radius: 50px;
     width: 25%;
@@ -78,4 +75,7 @@
 .Footer .Link:hover {
     color: black;
     transition: 0.5s;
+}
+
+.about-us {
 }

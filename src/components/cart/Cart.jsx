@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Cart.scss'
 
-import { icons } from '../../constants'
+import { icons, images } from '../../constants'
 import { useNavigate } from 'react-router-dom'
 import { getAllDetailCartApi, removeDetailCartApi, updateDetailCartApi } from '../../apis/apiCart'
 import { convertImageByte, formatCurrency } from '../../utils/Utils'
@@ -174,107 +174,108 @@ function Cart() {
 
     return (
         <div className='Cart'>
-            {
-                isLogin && listCartItem.length != 0 ?
-                    (
-                        <>
-                            <div className='col-1'>
-                                <h1>Giỏ hàng</h1>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Strain</th>
-                                            <th>Giá</th>
-                                            <th>Số lượng</th>
-                                            <th>Tổng tiền</th>
+            {isLogin && listCartItem.length != 0 ?
+                (
+                    <>
+                        <div className='col-1'>
+                            <h1>Giỏ hàng</h1>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Strain</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Tổng tiền</th>
 
-                                        </tr>
-                                    </thead>
+                                    </tr>
+                                </thead>
 
-                                    <tbody>
-                                        {
-                                            listCartItem.map((item, index) => (
-                                                <ItemCart
-                                                    key={index}
-                                                    item={item}
-                                                    onIncrease={increaseQuantity}
-                                                    onDecrease={decreaseQuantity}
-                                                    onRemove={removeDetailCart} />
-                                            ))
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                <tbody>
+                                    {
+                                        listCartItem.map((item, index) => (
+                                            <ItemCart
+                                                key={index}
+                                                item={item}
+                                                onIncrease={increaseQuantity}
+                                                onDecrease={decreaseQuantity}
+                                                onRemove={removeDetailCart} />
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
 
-                            <div className='col-2'>
-                                <h2>Tóm tắt đơn hàng</h2>
-                                <div style={{ borderBottom: '1px solid white', display: 'flex', justifyContent: 'space-between' }}>
-                                    <div>
-                                        <p>Tổng tiền</p>
-                                        <p>Thuế</p>
-                                        <p>Thành tiền</p>
-                                    </div>
-                                    <div>
-                                        {
-
-                                        }
-                                        <p>{tongTien}$</p>
-                                        <p>120$</p>
-                                        <p>{thanhTien}$</p>
-                                    </div>
-                                </div>
-
+                        <div className='col-2'>
+                            <h2>Tóm tắt đơn hàng</h2>
+                            <div style={{ borderBottom: '1px solid white', display: 'flex', justifyContent: 'space-between' }}>
                                 <div>
-                                    <p>Áp dụng voucher</p>
-                                    <div className='box-voucher'>
-                                        <input type='text' placeholder='Mã Voucher' />
-                                        <button>Áp dụng</button>
-                                    </div>
+                                    <p>Tổng tiền</p>
+                                    <p>Thuế</p>
+                                    <p>Thành tiền</p>
                                 </div>
-
-                                <p>Phương thức thanh toán</p>
-                                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                                    <label style={{ display: 'flex', alignItems: 'center' }}>
-                                        <input
-                                            type="radio"
-                                            value="khinhanhang"
-                                            onChange={(e) => setPaymentMethod(e.target.value)}
-                                            checked={paymentMethod === 'khinhanhang'}
-                                        />
-                                        Thanh toán khi nhận hàng
-                                    </label>
-                                    <div style={{ display: 'flex' }}>
-                                        <input
-                                            type="radio"
-                                            value="momo"
-                                            onChange={(e) => setPaymentMethod(e.target.value)}
-                                            checked={paymentMethod === 'momo'}
-                                        />
-                                        <img src={icons.momo} style={{ height: 40, width: 40 }} />
-                                    </div>
-
+                                <div>
+                                    <p>{tongTien}$</p>
+                                    <p>120$</p>
+                                    <p>{thanhTien}$</p>
                                 </div>
-
-
-                                <button className='btn-thanh-toan' onClick={() => { navigate('/Payment') }}>THANH TOÁN</button>
-
-                                <p style={{ textAlign: 'center' }}>Hoặc</p>
-
-                                <button className='btn-continue' onClick={() => { navigate('/Product') }}>TIẾP TỤC MUA SẮM</button>
                             </div>
-                        </>
-                    )
-                    :
-                    <div>
-                        {
-                            isLogin ?
-                                <h2>Không có gì trong giỏ</h2>
-                                :
-                                <button>Đăng nhập</button>
 
-                        }
+                            <div>
+                                <p>Áp dụng voucher</p>
+                                <div className='box-voucher'>
+                                    <input type='text' placeholder='Mã Voucher' />
+                                    <button>Áp dụng</button>
+                                </div>
+                            </div>
 
-                    </div>
+                            <p>Phương thức thanh toán</p>
+                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                <label style={{ display: 'flex', alignItems: 'center' }}>
+                                    <input
+                                        type="radio"
+                                        value="khinhanhang"
+                                        onChange={(e) => setPaymentMethod(e.target.value)}
+                                        checked={paymentMethod === 'khinhanhang'}
+                                    />
+                                    Thanh toán khi nhận hàng
+                                </label>
+                                <div style={{ display: 'flex' }}>
+                                    <input
+                                        type="radio"
+                                        value="momo"
+                                        onChange={(e) => setPaymentMethod(e.target.value)}
+                                        checked={paymentMethod === 'momo'}
+                                    />
+                                    <img src={icons.momo} style={{ height: 40, width: 40 }} />
+                                </div>
+
+                            </div>
+
+
+                            <button className='btn-thanh-toan' onClick={() => { navigate('/Payment') }}>THANH TOÁN</button>
+
+                            <p style={{ textAlign: 'center' }}>Hoặc</p>
+
+                            <button className='btn-continue' onClick={() => { navigate('/Product') }}>TIẾP TỤC MUA SẮM</button>
+                        </div>
+                    </>
+                )
+                :
+                <div>
+                    {isLogin ?
+                        <div className='non-login'>
+                            <img className='img-empty-cart' src={images.emptycart} />
+                            <h2 className='title'>Giỏ hàng của bạn không có sản phẩm nào</h2>
+                            <p className='content'>Có vẻ như bạn chưa thêm sản phẩm nào vào giỏ hàng cả, hãy đến trang chủ và khám phá các sản phẩm của chúng tôi</p>
+                            <button className='btn-login' onClick={()=>navigate('/')}>Đi tới trang chủ</button>
+                        </div>
+                        :
+                        <div className='non-login'>
+                            <h2 className='title'>Vui lòng đăng nhập để sử dụng chức năng này</h2>
+                            <button className='btn-login' onClick={()=>navigate('/Login')}>Đăng nhập</button>
+                        </div>
+                    }
+                </div>
             }
 
         </div >

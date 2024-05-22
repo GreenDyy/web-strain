@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'
 import { FaUser, FaLock } from "react-icons/fa";
 import { loginCustomerApi } from "../../apis/apiLogin";
@@ -76,13 +76,13 @@ function Login() {
                     <a href="#">Quên mật khẩu</a>
                 </div>
 
-                <button
+                <button className="btn-login"
                     type="button"
                     onClick={handleLogin}
                 >Đăng nhập</button>
 
                 <div className="register-link">
-                    <p>Chưa có tài khoản? <a href="#">Đăng ký ngay!</a></p>
+                    <p>Chưa có tài khoản? <Link to='/Register'>Đăng ký ngay!</Link></p>
                 </div>
             </form>
             {/* <button

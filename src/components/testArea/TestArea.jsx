@@ -1,28 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import Dropdown from "../dropdown/Dropdown";
-import { toast } from "react-toastify";
-import { getAllTotalQuantityApi } from "../../apis/apiCart";
+import React from "react";
+import Slider from "react-slick";
 
-function TestArea() {
-   const [quantity, setQuantity] = useState(0)
-   useEffect(() => {
-      const fetchData = async () => {
-         const totalQuantity = await getAllTotalQuantityApi(1)
-         setQuantity(totalQuantity.data)
-         console.log(totalQuantity.status)
-      }
-      fetchData()
-   })
-   const totalQuantity = useSelector(state => state.totalProduct);
-   console.log('test area:', totalQuantity)
-
-   return (
+export default function SimpleSlider() {
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
+    return (
+        <div>
+            <p>s</p>
+            <Slider {...settings}>
       <div>
-         <p>{totalQuantity}</p>
+        <h3>1</h3>
       </div>
-   )
+      <div>
+        <h3>2</h3>
+      </div>
+      <div>
+        <h3>3</h3>
+      </div>
+      <div>
+        <h3>4</h3>
+      </div>
+      <div>
+        <h3>5</h3>
+      </div>
+      <div>
+        <h3>6</h3>
+      </div>
+    </Slider>
+        </div>
+    );
 }
-
-export default TestArea

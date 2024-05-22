@@ -1,0 +1,17 @@
+.tree {
+    list-style-type: none;
+    padding-left: 1em;
+}
+
+.node {
+    cursor: pointer;
+    padding: 0.2em 0;
+}
+
+.children {
+    padding-left: 1em;
+}
+
+.children > li {
+    padding-left: 0;
+}
