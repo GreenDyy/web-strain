@@ -8,8 +8,8 @@ import { convertImageByte, formatCurrency } from '../../utils/Utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { toast } from 'react-toastify';
-import { getInventoryByIdStrainApi } from '../../apis/apiInventory'
-import { toastSuccess } from '../Toast/Toast'
+import { getInventoryByIdStrainApi, updateInventoryByIdStrainApi } from '../../apis/apiInventory'
+import { toastSuccess, toastWarning } from '../Toast/Toast'
 import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
 
 const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
@@ -101,18 +101,33 @@ function Cart() {
     const increaseQuantity = async (item) => {
         for (let i = 0; i < listCartItem.length; i++) {
             if (listCartItem[i].idCartDetail === item.idCartDetail) {
-                const newQuantity = listCartItem[i].quantityOfStrain + 1;
-                updateDetailCartApi(listCartItem[i].idCartDetail, { idStrain: listCartItem[i].idStrain, quantityOfStrain: newQuantity });
-                //cập nhật quantity
-                listCartItem[i].quantityOfStrain = newQuantity;
-                setListCartItem([...listCartItem]);
-                dispatch(setTotalAllProduct(totalAllProduct + 1))
-                return
+                //xử lý kho trước
+                const apiInventory = await getInventoryByIdStrainApi(item.idStrain)
+                if (apiInventory.data.quantity > 0) {
+                    updateInventoryByIdStrainApi(item.idStrain, {
+                        idStrain: item.idStrain,
+                        quantity: apiInventory.data.quantity - 1,
+                        price: apiInventory.data.price,
+                        entryDate: apiInventory.data.entryDate
+                    })
+                    const newQuantity = listCartItem[i].quantityOfStrain + 1;
+                    updateDetailCartApi(listCartItem[i].idCartDetail, { idStrain: listCartItem[i].idStrain, quantityOfStrain: newQuantity });
+                    //cập nhật quantity
+                    listCartItem[i].quantityOfStrain = newQuantity;
+                    setListCartItem([...listCartItem]);
+                    dispatch(setTotalAllProduct(totalAllProduct + 1))
+
+                    return
+                }
+                else {
+                    toastWarning('Kho đã hết hàng!', 'top-right')
+                    return
+                }
             }
         }
     }
 
-    const decreaseQuantity = (item) => {
+    const decreaseQuantity = async (item) => {
         for (let i = 0; i < listCartItem.length; i++) {
             if (listCartItem[i].idCartDetail === item.idCartDetail) {
                 if (listCartItem[i].quantityOfStrain > 1) {
@@ -122,10 +137,18 @@ function Cart() {
                     listCartItem[i].quantityOfStrain = newQuantity;
                     setListCartItem([...listCartItem]);
                     dispatch(setTotalAllProduct(totalAllProduct - 1))
+                    //tăng lại trong kho +1
+                    const apiInventory = await getInventoryByIdStrainApi(item.idStrain)
+                    updateInventoryByIdStrainApi(item.idStrain, {
+                        idStrain: item.idStrain,
+                        quantity: apiInventory.data.quantity + 1,
+                        price: apiInventory.data.price,
+                        entryDate: apiInventory.data.entryDate
+                    })
                     return
                 }
                 else {
-                    removeDetailCart(item)
+                    removeDetailCart(item) //có sử lý dispatch như trên rồi khỏi lo
                     return
                 }
             }
@@ -166,7 +189,14 @@ function Cart() {
         //remove xong update lại cái giỏ hàng
         const listDetailCart = await getAllDetailCartApi(idCart)
         setListCartItem(listDetailCart.data)
-
+        //tăng lại trong kho +1
+        const apiInventory = await getInventoryByIdStrainApi(item.idStrain)
+        updateInventoryByIdStrainApi(item.idStrain, {
+            idStrain: item.idStrain,
+            quantity: apiInventory.data.quantity + item.quantityOfStrain,
+            price: apiInventory.data.price,
+            entryDate: apiInventory.data.entryDate
+        })
         setReloadData(!reloadData);
         toast.dismiss()
         toastSuccess('Xoá thành công!', 'top-right')
@@ -267,12 +297,12 @@ function Cart() {
                             <img className='img-empty-cart' src={images.emptycart} />
                             <h2 className='title'>Giỏ hàng của bạn không có sản phẩm nào</h2>
                             <p className='content'>Có vẻ như bạn chưa thêm sản phẩm nào vào giỏ hàng cả, hãy đến trang chủ và khám phá các sản phẩm của chúng tôi</p>
-                            <button className='btn-login' onClick={()=>navigate('/')}>Đi tới trang chủ</button>
+                            <button className='btn-login' onClick={() => navigate('/')}>Đi tới trang chủ</button>
                         </div>
                         :
                         <div className='non-login'>
                             <h2 className='title'>Vui lòng đăng nhập để sử dụng chức năng này</h2>
-                            <button className='btn-login' onClick={()=>navigate('/Login')}>Đăng nhập</button>
+                            <button className='btn-login' onClick={() => navigate('/Login')}>Đăng nhập</button>
                         </div>
                     }
                 </div>

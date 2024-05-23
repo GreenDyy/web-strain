@@ -77,7 +77,7 @@ function ProductDetail() {
                 setDataRandomStrain(apiRandomStrain.data)
 
             } catch (error) {
-                console.error("Lỗi fetchdata trong productdetail:", error);
+                console.error("Lỗi fetch data trong productdetail:", error);
             }
         };
         fetchData();
@@ -89,7 +89,7 @@ function ProductDetail() {
 
         }
         if (quantity === 0) {
-            toastWarning('Sản phẩm đã hết hàng!', 'top-center')
+            toastWarning('Sản phẩm đã hết hàng!', 'top-right')
         }
     }
 
@@ -143,7 +143,7 @@ function ProductDetail() {
                         setCount(0)
                     }
                     else {
-                        toastWarning('Vui lòng chọn số lượng', 'top-center')
+                        toastWarning('Vui lòng chọn số lượng', 'top-right')
                     }
                 }
             }
