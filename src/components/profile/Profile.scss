@@ -1,0 +1,157 @@
+.Profile {
+    display: flex;
+    margin: 10vh 20vw;
+    background: white;
+
+    .col-1 {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid gray;
+        border-radius: 10px;
+        scale: 1.05;
+        background: white;
+        padding: 30px 0;
+
+        .card-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 999px;
+            background-color: orange;
+            overflow: hidden;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            cursor: pointer;
+
+            .avatar {
+                width: 100%;
+                height: 100%;
+
+                object-fit: cover;
+            }
+        }
+
+        .name {}
+
+        .card-feature {
+            display: flex;
+            flex-direction: column;
+
+            width: 100%;
+
+            .feature {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top: 1px solid black;
+                padding: 0 20px;
+                transition: 0.1s ease-in-out;
+                cursor: pointer;
+
+                p {
+                    font-weight: 500;
+                }
+
+                .icon {
+                    // font-size: 19px;
+                }
+            }
+
+            .feature:hover {
+                background-color: #00A551;
+                transition: 0.1s ease-in-out;
+            }
+        }
+    }
+
+    .col-2 {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 40px;
+        border: 1px solid gray;
+
+        .title {
+            margin-bottom: 5px;
+        }
+
+        .wrap-all-input {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+
+
+            .wrap-input {
+                display: flex;
+                flex-direction: column;
+                width: 47%;
+                margin: 0px 10px;
+
+                .input-box {
+                    display: flex;
+                    background-color: white;
+                    height: 35px;
+                    border-radius: 10px;
+                    padding: 0 10px;
+                    border: 1px solid black;
+
+                    input {
+
+                        background: transparent;
+                        outline: 0;
+                        border: 0;
+                        font-size: 16px;
+                        color: gray;
+                    }
+
+
+                }
+
+                .label {
+                    padding-left: 5px;
+                    font-weight: 500;
+                    margin-bottom: 5px;
+                }
+
+            }
+        }
+
+        .wrap-btn {
+            display: flex;
+            justify-content: flex-end;
+
+            .btn-cancel {
+                padding: 5px 30px;
+                background-color: #caad07c9;
+                border-radius: 20px;
+                color: white;
+                width: 20%;
+                margin-left: 10px;
+                margin-top: 30px;
+                margin-right: 0;
+            }
+
+            .btn-save {
+                padding: 5px 30px;
+                background-color: #00A551;
+                border-radius: 20px;
+                color: white;
+                width: 20%;
+                margin-left: 10px;
+                margin-top: 30px;
+                margin-right: 0;
+            }
+        }
+
+        .float-left {
+            justify-content: flex-start;
+        }
+
+    }
+}

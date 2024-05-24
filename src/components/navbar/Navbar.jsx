@@ -39,7 +39,7 @@ const Navbar = () => {
 
     //redux
     const dispatch = useDispatch()
-    const customerData = useSelector(state => state.customer.customerData?.data)
+    const customerData = useSelector(state => state.customer.customerData)
     const isLogin = useSelector(state => state.customer.isLogin)
     const totalAllProduct = useSelector(state => state.cart.totalAllProduct)
 
@@ -85,7 +85,7 @@ const Navbar = () => {
                             {isHoveredDropdown &&
                                 <div className='dropdown-content' style={{ position: 'absolute' }}>
                                     <ul>
-                                        <li onClick={handleLogout}>
+                                        <li onClick={()=>navigate('/Profile')}>
                                             Thông tin cá nhân
                                         </li>
                                         <li onClick={handleLogout}>

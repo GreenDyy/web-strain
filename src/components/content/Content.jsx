@@ -16,6 +16,7 @@ import ProductPhylum from '../product/typeShowProduct/ProductPhylum'
 import ProductClass from '../product/typeShowProduct/ProductClass'
 import ProductGenus from '../product/typeShowProduct/ProductGenus'
 import ProductSpecies from '../product/typeShowProduct/ProductSpecies'
+import Profile from '../profile/Profile'
 
 function Content() {
     const location = useLocation();
@@ -33,6 +34,7 @@ function Content() {
                 <Route path='/Project' element={<Project />} />
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Register' element={<Register />} />
+                <Route path='/Profile' element={<Profile />} />
                 <Route path='/Cart' element={<Cart />} />
                 <Route path='/TestArea' element={<TestArea />} />
                 <Route path='/ProductDetail/:id' element={<ProductDetail />} />

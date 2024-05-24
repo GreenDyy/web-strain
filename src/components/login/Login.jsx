@@ -31,8 +31,8 @@ function Login() {
             //     localStorage.setItem('token', response.token)
             // }
 
-            if (user.data.success) {
-                const cart = await getCartByIdCustomerApi(user.data.data.idCustomer)
+            if (user.data) {
+                const cart = await getCartByIdCustomerApi(user.data.idCustomer)
                 // const listDetailCart = await getAllDetailCartApi(cart.data.idCart)
                 const allTotalProductInCart = await getAllTotalQuantityApi(cart.data.idCart)
 

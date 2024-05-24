@@ -1,37 +1,24 @@
 import React from "react";
-import Slider from "react-slick";
+import './TestArea.scss'
+import { MdOutlineMail } from "react-icons/md";
+function TestArea() {
 
-export default function SimpleSlider() {
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-    };
-    return (
-        <div>
-            <p>s</p>
-            <Slider {...settings}>
-      <div>
-        <h3>1</h3>
-      </div>
-      <div>
-        <h3>2</h3>
-      </div>
-      <div>
-        <h3>3</h3>
-      </div>
-      <div>
-        <h3>4</h3>
-      </div>
-      <div>
-        <h3>5</h3>
-      </div>
-      <div>
-        <h3>6</h3>
-      </div>
-    </Slider>
+  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  return (
+    <div className="TestArea">
+      <div className="wrap-dropdown">
+        <div className="trigger-dropdown">
+          Chọn
+          <MdOutlineMail />
         </div>
-    );
+        <ul>
+        {days.map((item)=>
+          <li>{item}</li>
+        )}
+        </ul>
+      </div>
+    </div>
+  );
 }
+
+export default TestArea

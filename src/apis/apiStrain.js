@@ -1,80 +1,79 @@
 import axios from "axios";
 import domain from "./domain";
 
-const getAllStrainApi = (search, sortBy, page) => {
-    return axios.get(`${domain}/api/Strain?search=${search}&sortBy=${sortBy}&page=${page}`)
+const getAllStrainApi = async (search, sortBy, page) => {
+    return await axios.get(`${domain}/api/Strain?search=${search}&sortBy=${sortBy}&page=${page}`);
 };
 
-const getAllStrainNoPagingApi = () => {
-    return axios.get(`${domain}/api/Strain/NoPaging`);
+const getAllStrainNoPagingApi = async () => {
+    return await axios.get(`${domain}/api/Strain/NoPaging`);
 };
 
-const getRandomStrainApi = () => {
-    return axios.get(`${domain}/api/Strain/GetRandom`);
+const getRandomStrainApi = async () => {
+    return await axios.get(`${domain}/api/Strain/GetRandom`);
 };
 
-//follow TYPE
-const getAllStrainFollowPhylumApi = (namePhylum, search, sortBy, page) => {
-    return axios.get(`${domain}/api/Strain/FollowPhylum?namePhylum=${namePhylum}&search=${search}&sortBy=${sortBy}&page=${page}`)
-}
-const getAllStrainFollowClassApi = (nameClass, search, sortBy, page) => {
-    return axios.get(`${domain}/api/Strain/FollowClass?nameClass=${nameClass}&search=${search}&sortBy=${sortBy}&page=${page}`)
-}
-const getAllStrainFollowGenusApi = (nameGenus, search, sortBy, page) => {
-    return axios.get(`${domain}/api/Strain/FollowGenus?nameGenus=${nameGenus}&search=${search}&sortBy=${sortBy}&page=${page}`)
-}
-const getAllStrainFollowSpeciesApi = (nameSpecies, search, sortBy, page) => {
-    return axios.get(`${domain}/api/Strain/FollowSpecies?nameSpecies=${nameSpecies}&search=${search}&sortBy=${sortBy}&page=${page}`)
-}
+// Follow TYPE
+const getAllStrainFollowPhylumApi = async (namePhylum, search, sortBy, page) => {
+    return await axios.get(`${domain}/api/Strain/FollowPhylum?namePhylum=${namePhylum}&search=${search}&sortBy=${sortBy}&page=${page}`);
+};
 
-const getStrainByIdApi = (id) => {
-    const response = axios.get(`${domain}/api/Strain/${id}`)
-    return response
-}
-//Class
-const getClassByIdApi = (id) => {
-    const response = axios.get(`${domain}/api/Class/${id}`)
-    return response
-}
-const getAllClassApi = () => {
-    const response = axios.get(`${domain}/api/Class`)
-    return response
-}
+const getAllStrainFollowClassApi = async (nameClass, search, sortBy, page) => {
+    return await axios.get(`${domain}/api/Strain/FollowClass?nameClass=${nameClass}&search=${search}&sortBy=${sortBy}&page=${page}`);
+};
 
-//Phylum
-const getPhylumByIdApi = (id) => {
-    const response = axios.get(`${domain}/api/Phylum/${id}`)
+const getAllStrainFollowGenusApi = async (nameGenus, search, sortBy, page) => {
+    return await axios.get(`${domain}/api/Strain/FollowGenus?nameGenus=${nameGenus}&search=${search}&sortBy=${sortBy}&page=${page}`);
+};
 
-    return response
-}
-const getAllPhylumApi = () => {
-    const response = axios.get(`${domain}/api/Phylum`)
-    return response
-}
+const getAllStrainFollowSpeciesApi = async (nameSpecies, search, sortBy, page) => {
+    return await axios.get(`${domain}/api/Strain/FollowSpecies?nameSpecies=${nameSpecies}&search=${search}&sortBy=${sortBy}&page=${page}`);
+};
 
-//Species
-const getSpeciesByIdApi = (id) => {
-    const response = axios.get(`${domain}/api/Species/${id}`)
-    return response
-}
-const getAllSpeciesApi = () => {
-    const response = axios.get(`${domain}/api/Species`)
-    return response
-}
-//Genus
-const getGenusByIdApi = (id) => {
-    const response = axios.get(`${domain}/api/Genus/${id}`)
-    return response
-}
-const getAllGenusApi = () => {
-    const response = axios.get(`${domain}/api/Genus`)
-    return response
-}
-//Condition
-const getConditionByIdApi = (id) => {
-    const response = axios.get(`${domain}/api/ConditionalStrain/${id}`)
-    return response
-}
+const getStrainByIdApi = async (id) => {
+    return await axios.get(`${domain}/api/Strain/${id}`);
+};
+
+// Class
+const getClassByIdApi = async (id) => {
+    return await axios.get(`${domain}/api/Class/${id}`);
+};
+
+const getAllClassApi = async () => {
+    return await axios.get(`${domain}/api/Class`);
+};
+
+// Phylum
+const getPhylumByIdApi = async (id) => {
+    return await axios.get(`${domain}/api/Phylum/${id}`);
+};
+
+const getAllPhylumApi = async () => {
+    return await axios.get(`${domain}/api/Phylum`);
+};
+
+// Species
+const getSpeciesByIdApi = async (id) => {
+    return await axios.get(`${domain}/api/Species/${id}`);
+};
+
+const getAllSpeciesApi = async () => {
+    return await axios.get(`${domain}/api/Species`);
+};
+
+// Genus
+const getGenusByIdApi = async (id) => {
+    return await axios.get(`${domain}/api/Genus/${id}`);
+};
+
+const getAllGenusApi = async () => {
+    return await axios.get(`${domain}/api/Genus`);
+};
+
+// Condition
+const getConditionByIdApi = async (id) => {
+    return await axios.get(`${domain}/api/ConditionalStrain/${id}`);
+};
 
 export {
     getAllStrainApi,

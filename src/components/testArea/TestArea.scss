@@ -1,0 +1,37 @@
+.TestArea {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    .wrap-dropdown {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        background-color: aqua;
+        .trigger-dropdown {
+            display: flex;
+            justify-content: space-between;
+            background: green   ;
+        }
+
+        ul {
+            display: flex;
+            margin-top: 0px;
+            padding-top: 300px;
+            flex-direction: column;
+            background-color: aquamarine;
+            max-height: 10px;
+            overflow-y: auto;
+        }
+
+        li {
+            margin-left: -40px;
+            margin-right: 0px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            background-color: red   ;
+            border: 1px solid black;
+           
+        }
+    }
+}

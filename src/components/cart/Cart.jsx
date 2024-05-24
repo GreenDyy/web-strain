@@ -197,7 +197,7 @@ function Cart() {
             price: apiInventory.data.price,
             entryDate: apiInventory.data.entryDate
         })
-        setReloadData(!reloadData);
+        // setReloadData(!reloadData);
         toast.dismiss()
         toastSuccess('Xoá thành công!', 'top-right')
     }

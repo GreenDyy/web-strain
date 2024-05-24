@@ -18,9 +18,13 @@ const customerSlice = createSlice({
             state.isLogin = false
             state.customerData = null
             state.idCart = null
+        },
+
+        changeData: (state, action) => {
+            state.customerData = action.payload.customerData;
         }
     }
 
 })
-export const { login, logout } = customerSlice.actions;
+export const { login, logout, changeData } = customerSlice.actions;
 export default customerSlice.reducer

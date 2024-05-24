@@ -105,6 +105,7 @@ function ProductDetail() {
             if (isLogin) {
                 {
                     if (count > 0) {
+                        console.log('count', count)
                         const listDetailCart = await getAllDetailCartApi(idCart)
                         console.log('kis catr ne:', listDetailCart.data)
                         console.log('id:', id)
@@ -128,7 +129,7 @@ function ProductDetail() {
                             }
                         }
                         else {
-                            addDetailCartApi(idCart, id, 1)
+                            addDetailCartApi(idCart, id, count)
                             toastSuccess('Thêm vào giỏ hàng thành công', 'top-center')
                         }
                         //dù thêm bằng cách nào thì cũng tăng 1 và trừ kho
