@@ -51,7 +51,7 @@ function Login() {
         }
         catch (e) {
             console.log(e)
-            toastError("Lỗi đăng nhập, xem lại handleLogin")
+            toastError("Sai tên tài khoản hoặc mật khẩu")
         }
     }
 
@@ -72,7 +72,7 @@ function Login() {
 
                 <div className="remember-forgot">
                     <label> <input type="checkbox" />Nhớ mật khẩu</label>
-                    <a href="#">Quên mật khẩu</a>
+                    <Link to='/ForgetPass'>Quên mật khẩu</Link>
                 </div>
 
                 <button className="btn-login"

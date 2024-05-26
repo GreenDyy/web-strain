@@ -1,0 +1,207 @@
+.OrderDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    margin-bottom: 10vw;
+    margin-top: 1vw;
+    background: white;
+    border-radius: 10px;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    padding-top: 40px;
+    padding-right: 30px;
+    padding-left: 30px;
+
+    .row-1 {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        .id-order {}
+
+        .state-order {
+            color: rgb(233, 128, 0)
+        }
+    }
+
+    .row-2 {
+        display: flex;
+        width: 60%;
+        margin: 40px 0px;
+
+        .step-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 25%;
+
+            .number-step {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 40px;
+                width: 40px;
+                border-radius: 999px;
+                background: #C7C8CC;
+                color: white;
+                z-index: 10;
+            }
+
+            .title-step {
+                font-weight: 500;
+            }
+        }
+
+        .step-item:not(:first-child):before {
+            content: '';
+            background: #0ca814;
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            right: 60%;
+            top: 20%;
+        }
+
+        .active .number-step {
+            background-color: #00A551;
+        }
+
+        .active .title-step {
+            color: #00A551;
+        }
+    }
+
+    .row-3 {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        margin-bottom: 50px;
+
+        .wrap-profile {
+            display: flex;
+            flex-direction: column;
+            width: 48%;
+            border-right: 1px solid rgba(117, 115, 115, 0.769);
+
+            h2 {
+                margin: 20px 0;
+            }
+
+            .profile {
+                display: flex;
+                .title {
+                    p {
+                        margin: 3px 0;
+                        font-weight: 700;
+                        font-size: 14px;
+                    }
+                }
+
+                .content {
+                    margin-left: 10px;
+                    .name {
+                        font-weight: 500;
+                    }
+
+                    p {
+                        margin: 3px 0;
+                        font-size: 14px;
+                    }
+                }
+            }
+
+
+        }
+
+        .wrap-order-method {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            margin-left: 20px;
+
+            h2 {
+                margin: 20px 0;
+            }
+
+            p {
+                margin: 3px 0;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .row-4 {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .card-product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+            margin-top: 5px;
+            padding: 5px 20px;   
+            // border-bottom: 1px solid gray;
+            cursor: pointer;
+
+            .item-col-1 {
+                display: flex;
+                align-items: center;
+
+                .img-item {
+                    height: 80px;
+                    width: 80px;
+                    object-fit: cover;
+                    border-radius: 999px;
+                    margin-right: 10px;
+                }
+
+                .wrap-content {
+                    .name {
+                        font-weight: 700;
+                        margin-bottom: 0px;
+                    }
+
+                    .price {
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .item-col-2 {
+                p {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .row-5 {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        margin-right: 20px;
+
+        .icon-money {
+            color: #00A551;
+            font-size: 26px;
+        }
+
+        .title-money {
+            font-weight: 500;
+        }
+
+        .money {
+            color: #DC143C;
+            font-style: italic;
+            margin-left: 10px;
+        }
+    }
+}

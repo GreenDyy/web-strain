@@ -9,17 +9,18 @@
         width: 25%;
         justify-content: center;
         align-items: center;
-        border: 1px solid gray;
         border-radius: 10px;
         scale: 1.05;
         background: white;
         padding: 30px 0;
+           // border: 1px solid gray;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 
         .card-image {
             width: 120px;
             height: 120px;
             border-radius: 999px;
-            background-color: orange;
+            background-color: gray;
             overflow: hidden;
             box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
             cursor: pointer;
@@ -32,7 +33,9 @@
             }
         }
 
-        .name {}
+        .name {
+            color: #00A551;
+        }
 
         .card-feature {
             display: flex;
@@ -56,6 +59,7 @@
                 .icon {
                     // font-size: 19px;
                 }
+
             }
 
             .feature:hover {
@@ -76,6 +80,18 @@
         padding-bottom: 40px;
         border: 1px solid gray;
 
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .btn-delete {
+                color: red;
+                font-size: 25px;
+                cursor: pointer;
+            }
+        }
+
         .title {
             margin-bottom: 5px;
         }
@@ -84,8 +100,6 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-
-
 
             .wrap-input {
                 display: flex;
@@ -104,8 +118,9 @@
                     input {
 
                         background: transparent;
-                        outline: 0;
-                        border: 0;
+                        outline: none;
+                        border: none;
+                        width: 100%;
                         font-size: 16px;
                         color: gray;
                     }
@@ -120,6 +135,11 @@
                 }
 
             }
+
+            .full-width {
+                width: 100%;
+            }
+
         }
 
         .wrap-btn {
@@ -128,7 +148,7 @@
 
             .btn-cancel {
                 padding: 5px 30px;
-                background-color: #caad07c9;
+                background-color: #FFA62F;
                 border-radius: 20px;
                 color: white;
                 width: 20%;

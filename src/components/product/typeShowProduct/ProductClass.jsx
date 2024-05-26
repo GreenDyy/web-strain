@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './Product.css'
+import './Product.scss'
 import ReactPaginate from 'react-paginate';
 import {getAllPhylumApi, getAllStrainFollowClassApi} from '../../../apis/apiStrain'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -66,7 +66,6 @@ function ProductClass() {
     };
     return (
         <div className='Product'>
-
             <div className='row-category-item'>
                 {/* cột lọc */}
                 <div className='col-category'>

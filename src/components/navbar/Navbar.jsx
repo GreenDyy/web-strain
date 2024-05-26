@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
 import './Navbar.css'
-//assest
-import { icons } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../srcRedux/features/customerSlice'
+//assest
+import { icons, images } from '../../constants'
+
+//icons
 import { TfiShoppingCartFull } from "react-icons/tfi";
 import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
 import { FaUserAstronaut } from "react-icons/fa6";
+import { SlLogout } from "react-icons/sl";
+import { convertImageByte } from '../../utils/Utils'
 
 
 const listNavbarItem = [
@@ -26,11 +29,11 @@ const listNavbarItem = [
     },
     {
         title: 'Truyền thông',
-        to: '/Intro'
+        to: '/Project'
     },
     {
         title: 'Về chúng tôi',
-        to: '/Intro'
+        to: '/Project'
     },
 ]
 const Navbar = () => {
@@ -46,9 +49,10 @@ const Navbar = () => {
     const handleLogout = () => {
         dispatch(logout())
         dispatch(setTotalAllProduct(0))
+        navigate('/')
         alert('Đăng xuất thành công')
     };
-
+    const srcAvatar = customerData?.image ? convertImageByte(customerData.image) : images.avatarnull
     return (
         <div>
             <nav className='Navbar'>
@@ -78,25 +82,29 @@ const Navbar = () => {
                             onMouseLeave={() => setIsHoveredDropdown(false)}>
                             <div className='dropdown-trigger'>
                                 <div className='user'>
-                                    <FaUserAstronaut className='user-icon' />
+                                    {/* <FaUserAstronaut className='user-icon' /> */}
+                                    <img src={srcAvatar} />
                                     <p className='user-name'>{customerData?.fullName}</p>
                                 </div>
                             </div>
-                            {isHoveredDropdown &&
-                                <div className='dropdown-content' style={{ position: 'absolute' }}>
-                                    <ul>
-                                        <li onClick={()=>navigate('/Profile')}>
-                                            Thông tin cá nhân
-                                        </li>
-                                        <li onClick={handleLogout}>
-                                            Đơn hàng của tôi
-                                        </li>
-                                        <li onClick={handleLogout}>
-                                            Đăng xuất
-                                        </li>
-                                    </ul>
-                                </div>
-                            }
+
+                            <div className={`dropdown-content ${isHoveredDropdown ? 'show' : ''}`}>
+                                <ul>
+                                    <li onClick={() => navigate('/Profile')}>
+                                        <FaUserAstronaut className='icon' />
+                                        Thông tin cá nhân
+                                    </li>
+                                    <li onClick={() => navigate('/Order')}>
+                                        <TfiShoppingCartFull className='icon' />
+                                        Đơn hàng của tôi
+                                    </li>
+                                    <li onClick={handleLogout}>
+                                        <SlLogout className='icon' />
+                                        Đăng xuất
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
                         :
                         <div>

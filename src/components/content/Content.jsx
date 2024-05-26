@@ -17,16 +17,20 @@ import ProductClass from '../product/typeShowProduct/ProductClass'
 import ProductGenus from '../product/typeShowProduct/ProductGenus'
 import ProductSpecies from '../product/typeShowProduct/ProductSpecies'
 import Profile from '../profile/Profile'
+import ForgetPass from '../forgetPass/ForgetPass'
+import PaymentSuccess from '../paymentSuccess/PaymentSuccess'
+import Order from '../order/Order'
+import OrderDetail from '../order/orderDetail/OrderDetail'
 
 function Content() {
     const location = useLocation();
-    const [isLoginPage, setIsLoginPage] = useState(false);
+    const [showSpeciesBg, setShowSpeciesBg] = useState(false);
 
     useEffect(() => {
-        setIsLoginPage(location.pathname === '/Login' || location.pathname === '/Register');
+        setShowSpeciesBg(location.pathname === '/Login' || location.pathname === '/Register' || location.pathname === '/ForgetPass');
     }, [location]);
     return (
-        <div className={`container ${isLoginPage ? 'login-background' : ''}`}>
+        <div className={`container ${showSpeciesBg ? 'species-background' : ''}`}>
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/Home' element={<Home />} />
@@ -34,17 +38,20 @@ function Content() {
                 <Route path='/Project' element={<Project />} />
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Register' element={<Register />} />
+                <Route path='/ForgetPass' element={<ForgetPass />} />
                 <Route path='/Profile' element={<Profile />} />
                 <Route path='/Cart' element={<Cart />} />
                 <Route path='/TestArea' element={<TestArea />} />
                 <Route path='/ProductDetail/:id' element={<ProductDetail />} />
 
                 <Route path='/Payment' element={<Payment />} />
-
+                <Route path='/PaymentSuccess' element={<PaymentSuccess />} />
                 <Route path='/Product/Phylum/:namePhylum/:pageRouter' element={<ProductPhylum />} />
                 <Route path='/Product/Class/:nameClass/:pageRouter' element={<ProductClass />} />
                 <Route path='/Product/Genus/:nameGenus/:pageRouter' element={<ProductGenus />} />
                 <Route path='/Product/Species/:nameSpecies/:pageRouter' element={<ProductSpecies />} />
+                <Route path='/Order' element={<Order />} />
+                <Route path='/OrderDetail/:idOrder' element={<OrderDetail />} />
             </Routes>
         </div>
     )

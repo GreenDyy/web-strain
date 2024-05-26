@@ -1,10 +1,11 @@
 .card-item {
-    width: 30%;
-    border-radius: 8px;
+    width: 23%;
+    height: 500px;
+    border-radius: 10px;
     background-color: #FFFAFA;
     margin: 10px;
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     transition: 0.3s;
     display: flex;
     flex-direction: column;
@@ -13,8 +14,9 @@
     .card-image {
         display: flex;
         width: 100%;
-        height: 250px;
-      
+        // height: 250px;
+        height: 45%;
+        
         position: relative;
 
         .image-strain {
@@ -33,7 +35,9 @@
     }
 
     .card-text {
-        padding: 3% 8%;
+        display: flex;
+        flex-direction: column;
+        padding: 0 8%;
 
         .name {
             color: #00A551;
@@ -43,20 +47,20 @@
             font-weight: 500;
         }
         .price {
-            margin-top: -5px;  
+            margin-top: -10px;  
             font-size: 18px;
             font-weight: 500;
-            font-style: italic;
+        
             color: #00A551;
         }
         .des {
-            margin-top: -5px;  
+            margin-top: -10px;  
             font-size: 14px;
             font-weight: 500;
           
         }
         .status {
-            margin-top: -5px;  
+            margin-top: -10px;  
             font-size: 14px;
             font-weight: 500;
         }

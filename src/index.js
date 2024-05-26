@@ -5,7 +5,6 @@ import './index.css';
 import App from './App.jsx'
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-// import store from './srcRedux/store/store.js';
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './srcRedux/store/store.js';
 import { ToastContainer } from 'react-toastify';

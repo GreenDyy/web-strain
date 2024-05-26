@@ -1,0 +1,68 @@
+.Home {
+    display: flex;
+    flex-direction: column;
+
+    .banner {
+        border-radius: 0;
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .wrap-content {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 50px 200px;
+
+        .col-1 {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+
+            h1 {
+                font-family: "Coiny", system-ui;
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            p {
+                font-size: 18px;
+            }
+
+            button {
+                display: flex;
+                border-radius: 90px;
+                width: 400px;
+                margin-top: 40px;
+                border: 2px solid #00A551;
+                justify-content: center;
+                padding: 25px 20px;
+                font-size: 22px;
+                color: #00A551;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                margin-bottom: 20px;
+                transition: 0.3s ease-in-out;
+            }
+
+            button:hover {
+                background-color: #00A551;
+                color: white;
+                transition: 0.3s ease-in-out;
+            }
+        }
+
+        .col-2 {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+
+            img {
+                width: 500px;
+                height: 500px;
+                border-radius: 999px;
+                object-fit: cover;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+            }
+        }
+    }
+}

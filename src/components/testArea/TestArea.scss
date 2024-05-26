@@ -1,37 +1,42 @@
-.TestArea {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    .wrap-dropdown {
-        display: flex;
-        flex-direction: column;
-        width: 200px;
-        background-color: aqua;
-        .trigger-dropdown {
-            display: flex;
-            justify-content: space-between;
-            background: green   ;
-        }
+.custom-select {
+    position: relative;
+    display: inline-block;
+}
 
-        ul {
-            display: flex;
-            margin-top: 0px;
-            padding-top: 300px;
-            flex-direction: column;
-            background-color: aquamarine;
-            max-height: 10px;
-            overflow-y: auto;
-        }
+.custom-select select {
+    display: none;
+}
 
-        li {
-            margin-left: -40px;
-            margin-right: 0px;
-            margin-top: 0px;
-            margin-bottom: 0px;
-            background-color: red   ;
-            border: 1px solid black;
-           
-        }
-    }
+.select-arrow {
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 4px);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #000; /* Màu sắc của mũi tên */
+}
+
+/* Tùy chỉnh giao diện của dropdown */
+.custom-select select {
+    appearance: none; /* Loại bỏ giao diện mặc định của dropdown */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 8px 16px; /* Tùy chỉnh padding */
+    border: 1px solid #ccc; /* Tùy chỉnh border */
+    border-radius: 4px; /* Tùy chỉnh góc bo */
+    background-color: #fff; /* Tùy chỉnh màu nền */
+    cursor: pointer;
+}
+
+/* Khi dropdown được focus */
+.custom-select select:focus {
+    outline: none;
+    border-color: #000; /* Tùy chỉnh màu border khi focus */
+}
+
+/* Khi dropdown được hover */
+.custom-select select:hover {
+    background-color: #f9f9f9; /* Tùy chỉnh màu nền khi hover */
 }

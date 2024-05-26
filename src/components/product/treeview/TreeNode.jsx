@@ -19,7 +19,13 @@ const TreeNode = ({ node, parents = [], onSelectNode }) => {
         <li className="tree-node">
             <div className={`tree-node-label ${isOpen ? 'open' : ''}`}>
                 {hasChildren && <span onClick={handleClickShowMore}>{isOpen ? <AiOutlineCaretDown className='icon' /> : <AiOutlineCaretRight />}</span>}
-                <p onClick={handleNodeClick}>{node.namePhylum || node.nameClass || node.nameGenus || node.nameSpecies}</p>
+                <p onClick={handleNodeClick}>
+                    {node.namePhylum ? `Phylum: ${node.namePhylum}` :
+                        node.nameClass ? `Class: ${node.nameClass}` :
+                            node.nameGenus ? `Genus: ${node.nameGenus}` :
+                                node.nameSpecies ? `Species: ${node.nameSpecies}` :
+                                    ''}
+                </p>
             </div>
             {hasChildren && isOpen && (
                 <ul className="tree-node-children">

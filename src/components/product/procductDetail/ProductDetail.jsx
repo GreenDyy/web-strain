@@ -10,6 +10,7 @@ import { addDetailCartApi, getAllDetailCartApi, updateDetailCartApi } from "../.
 import { toastError, toastSuccess, toastWarning } from "../../Toast/Toast";
 import { setTotalAllProduct } from "../../../srcRedux/features/cartSlice";
 import Slider from "react-slick";
+import { images } from "../../../constants";
 
 const dataMota = 'Trong vi sinh vật học, "strain" thường được dịch là "dòng" hoặc "chủng", và nó đề cập đến một nhóm vi sinh vật có đặc điểm di truyền tương tự nhau. Các dòng vi sinh vật có thể khác nhau về các tính chất như khả năng gây bệnh, sức đề kháng kháng sinh, hoặc khả năng sản xuất các chất sinh học cụ thể.'
 const dataReview = 'Trong ngữ cảnh của vi sinh vật học, "strain" không chỉ đơn thuần là một khái niệm mà còn là nền tảng cho sự hiểu biết và ứng dụng trong nhiều lĩnh vực khác nhau. Sự đa dạng của các strain mở ra cơ hội cho việc nghiên cứu sâu rộng và phát triển các giải pháp đa dạng cho các thách thức y tế và công nghiệp hiện đại'
@@ -81,7 +82,7 @@ function ProductDetail() {
             }
         };
         fetchData();
-    }, []);
+    }, [id]);
 
     const increaseCount = () => {
         if (count < quantity) {
@@ -158,6 +159,14 @@ function ProductDetail() {
         }
     };
 
+    const handleGoToDetail = (idStrain) => {
+        navigate(`/ProductDetail/${idStrain}`);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
     return (
         <div className="ProductDetail">
             {product ? (
@@ -165,7 +174,7 @@ function ProductDetail() {
                     <div className="wrap-row-1">
                         <div className="wrap-image">
                             {/* <img className="image-item" src="https://static.vecteezy.com/system/resources/thumbnails/025/067/762/small_2x/4k-beautiful-colorful-abstract-wallpaper-photo.jpg" alt="image-item" /> */}
-                            <img className="image-item" src={product?.imageStrain ? convertImageByte(product?.imageStrain) : "https://static.vecteezy.com/system/resources/thumbnails/025/067/762/small_2x/4k-beautiful-colorful-abstract-wallpaper-photo.jpg"} />
+                            <img className="image-item" src={product?.imageStrain ? convertImageByte(product?.imageStrain) : images.strainnull} />
                             <div className="slide">
                             </div>
                         </div>
@@ -398,19 +407,19 @@ function ProductDetail() {
                     </div>
 
                     <div className="wrap-row-3">
-                        <h2 className="title">Có thể bạn sẽ thích</h2>
+                        <h2 className="title">Các sản phẩm liên quan</h2>
                         <div className="wrap-other-strain">
                             {dataRandomStrain.map((item, index) => {
-                                const imgSrc = item?.imageStrain ? convertImageByte(item.imageStrain) : "https://img.freepik.com/free-photo/ingredients-grilled-wood-flame-plate-generative-ai_188544-8881.jpg"
+                                const imgSrc = item?.imageStrain ? convertImageByte(item.imageStrain) : images.strainnull
                                 return (
-                                    <div key={index} className="item-strain">
+                                    <div key={index} className="item-strain" onClick={() => { handleGoToDetail(item.idStrain) }}>
                                         <img className="img-strain" src={imgSrc} />
                                         <p className="name-strain">{item.scientificName}</p>
                                     </div>
 
                                 )
                             })}
-                            
+
                         </div>
                     </div>
                 </div>

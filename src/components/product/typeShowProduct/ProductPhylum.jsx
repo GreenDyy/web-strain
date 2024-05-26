@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './Product.css'
+import './Product.scss'
 import ReactPaginate from 'react-paginate';
 import { getAllPhylumApi, getAllStrainFollowPhylumApi } from '../../../apis/apiStrain'
 import { useNavigate, useParams } from 'react-router-dom';

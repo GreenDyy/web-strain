@@ -3,7 +3,7 @@
     flex-direction: row;
     background: linear-gradient(90deg, #fdfbfb 0%, #ebedee 100%);
     justify-content: center;
-    padding: 5vh 5vw;
+    padding: 10vh 15vw;
 
     h2 {
         border-bottom: 4px solid #00A551;
@@ -114,6 +114,10 @@
         margin-left: 40px;
         box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
+        p {
+            font-weight: 500;
+        }
+
         .box-voucher {
             display: flex;
             position: relative;
@@ -143,27 +147,44 @@
                 border: none;
                 border-radius: 40px;
                 padding: 5px 30px;
-                height: 50px;
+                height: 100%;
                 color: white;
+                scale: 1.03;
+                transition: 0.3s ease-in-out;
+            }
+
+            button:hover {
+                background: #65B741;
+                transition: 0.3s ease-in-out;
             }
         }
 
         .btn-thanh-toan {
             background: #00A551;
             border-radius: 40px;
-            height: 70px;
+            padding: 12px 0px;
             color: white;
             font-size: 20px;
             margin-top: 20px;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-thanh-toan:hover {
+            background: #65B741;
+            transition: 0.3s ease-in-out;
         }
 
         .btn-continue {
             border: 1px solid white;
             background: transparent;
             border-radius: 40px;
-            height: 60px;
+            padding: 12px 0px;
             color: white;
             font-size: 18px;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-continue:hover {
+           scale: 1.03;
+            transition: 0.3s ease-in-out;
         }
     }
 }

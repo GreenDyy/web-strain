@@ -13,7 +13,7 @@ import { toastSuccess, toastWarning } from '../Toast/Toast'
 import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
 
 const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
-    const [tongTien, setTongTien] = useState(null)
+    const [tongTien, setTongTien] = useState(0)
     const [price, setPrice] = useState(0)
 
     useEffect(() => {
@@ -21,23 +21,24 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
             const response = await getInventoryByIdStrainApi(item.idStrain)
             const inventory = response.data;
             const totalPrice = inventory.price * item.quantityOfStrain
-            setPrice(formatCurrency(inventory.price))
-            setTongTien(formatCurrency(totalPrice))
+            setPrice(inventory.price)
+            setTongTien(totalPrice)
         };
-
         fetchInventory();
-    }, [item]);
+    }, [item.quantityOfStrain]);
+
+
     return (
         <tr style={{ alignItems: 'center', justifyContent: 'center' }}>
             <td className='card-product'>
-                <img src={convertImageByte(item.idStrainNavigation.imageStrain)} style={{}} />
+                <img src={convertImageByte(item.idStrainNavigation.imageStrain)} />
                 <div className='card-text'>
                     <p className='title'>{item.idStrainNavigation.scientificName}</p>
                     <p className='des'>Môi trường sống: {item.idStrainNavigation.isolationSource}</p>
                 </div>
             </td>
 
-            <td className='price'>{price} VNĐ</td>
+            <td className='price'>{formatCurrency(price)} VNĐ</td>
 
             <td >
                 <div className='card-quantity'>
@@ -48,7 +49,7 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
                 </div>
             </td>
 
-            <td className='price'>{tongTien} VNĐ</td>
+            <td className='price'>{formatCurrency(tongTien)} VNĐ</td>
 
             <td>
                 <RiDeleteBin5Fill className='icon-cart' onClick={() => onRemove(item)} />
@@ -58,11 +59,12 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
 }
 //--MAIN
 function Cart() {
-    const [paymentMethod, setPaymentMethod] = useState('')
     const navigate = useNavigate()
+    const [paymentMethod, setPaymentMethod] = useState('khinhanhang')
     const [listCartItem, setListCartItem] = useState([])
     const [tongTien, setTongTien] = useState(0)
     const [thanhTien, setThanhTien] = useState(0)
+    const [tongThue, setTongThue] = useState(0)
     const [reloadData, setReloadData] = useState(false);
 
     const dispatch = useDispatch()
@@ -86,14 +88,18 @@ function Cart() {
     //cập nhật tiền
     useEffect(() => {
         let totalPrice = 0
+        let totalTax = 0
         const updateTongTien = async () => {
             for (const item of listCartItem) {
                 const response = await getInventoryByIdStrainApi(item.idStrain)
                 const inventory = response.data
                 totalPrice += inventory.price * item.quantityOfStrain
+                totalTax += (inventory.price * 0.1) * item.quantityOfStrain //tax 10%
             }
             setTongTien(totalPrice)
-            setThanhTien(totalPrice + totalPrice * 0.1)
+            setTongThue(totalTax)
+            console.log('tax:', totalTax)
+            setThanhTien(totalPrice + totalTax)
         }
         updateTongTien()
     }, [listCartItem])
@@ -116,7 +122,6 @@ function Cart() {
                     listCartItem[i].quantityOfStrain = newQuantity;
                     setListCartItem([...listCartItem]);
                     dispatch(setTotalAllProduct(totalAllProduct + 1))
-
                     return
                 }
                 else {
@@ -201,6 +206,18 @@ function Cart() {
         toast.dismiss()
         toastSuccess('Xoá thành công!', 'top-right')
     }
+    //các loại payment: khinhanhang, momo, ...
+    const handlePaymentMethod = () => {
+        if (paymentMethod === 'khinhanhang') {
+            navigate('/Payment')
+        }
+        else if (paymentMethod === 'momo') {
+            navigate('/Payment')
+        }
+        else {
+            navigate('/Payment')
+        }
+    }
 
     return (
         <div className='Cart'>
@@ -244,9 +261,9 @@ function Cart() {
                                     <p>Thành tiền</p>
                                 </div>
                                 <div>
-                                    <p>{tongTien}$</p>
-                                    <p>120$</p>
-                                    <p>{thanhTien}$</p>
+                                    <p>{formatCurrency(tongTien)} VNĐ</p>
+                                    <p>{formatCurrency(tongThue)} VNĐ</p>
+                                    <p>{formatCurrency(thanhTien)} VNĐ</p>
                                 </div>
                             </div>
 
@@ -282,11 +299,11 @@ function Cart() {
                             </div>
 
 
-                            <button className='btn-thanh-toan' onClick={() => { navigate('/Payment') }}>THANH TOÁN</button>
+                            <button className='btn-thanh-toan' onClick={handlePaymentMethod}>THANH TOÁN</button>
 
                             <p style={{ textAlign: 'center' }}>Hoặc</p>
 
-                            <button className='btn-continue' onClick={() => { navigate('/Product') }}>TIẾP TỤC MUA SẮM</button>
+                            <button className='btn-continue' onClick={() => { navigate('/Product/1') }}>TIẾP TỤC MUA SẮM</button>
                         </div>
                     </>
                 )

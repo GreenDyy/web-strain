@@ -1,0 +1,109 @@
+.OrderItem {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 60px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    .row-1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #9DDE8B;
+        padding: 0px 20px;
+        .id-order {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .wrap-date-state {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .date {
+                border-right: 2px solid black;
+                padding: 0px 5px;
+                font-weight: 500;
+            }
+
+            .state-order { 
+                margin-left: 5px;
+            }
+        }
+    }
+
+    .row-2 {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid gainsboro;
+
+        .card-product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+            margin-top: 5px;
+            padding: 5px 20px;
+            cursor: pointer;
+
+            .item-col-1 {
+                display: flex;
+                align-items: center;
+
+                .img-item {
+                    height: 80px;
+                    width: 80px;
+                    object-fit: cover;
+                    border-radius: 999px;
+                    margin-right: 10px;
+                }
+
+                .wrap-content {
+                    .name {
+                        font-weight: 700;
+                        margin-bottom: 0px;
+                    }
+
+                    .price {
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .item-col-2 {
+                p {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+    .total-money {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 20px;
+        .icon-money {
+            color: #00A551;
+            font-size: 26px;
+        }
+        .title-money {
+            font-weight: 500;
+        }
+        .money {
+            color: #DC143C;
+            font-style: italic;
+            margin-left: 10px;
+        }
+    }
+    .btn-cancel {
+        align-self: flex-end;
+        padding: 5px 20px;
+        margin-right: 20px;
+        color: white;
+        border-radius: 20px;
+        background: #DC143C;
+        margin-bottom: 30px;
+    }
+}

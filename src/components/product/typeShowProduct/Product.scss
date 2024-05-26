@@ -1,0 +1,123 @@
+.Product {
+    display: flex;
+    margin-right: 5vw;
+    margin-left: 5vw;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    color: black;
+
+    a {
+        color: black;
+    }
+
+    .search-box {
+        display: flex;
+        justify-content: space-between;
+        border-radius: 70px;
+        align-items: center;
+        background: rgba(6, 3, 5, 0.67);
+
+        .input-search {
+            color: white;
+            border-radius: 70px;
+            outline: none;
+            border: none;
+            font-size: 16px;
+            height: 30px;
+            padding-left: 5px;
+            padding-right: 10px;
+
+            &::placeholder {
+                color: gray;
+                font-size: 16px;
+            }
+        }
+
+        .icon-search {
+            color: white;
+            font-size: 25px;
+        }
+    }
+
+    .row-category-item {
+        display: flex;
+        width: 100%;
+
+        .col-category {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            border-right: 1px solid black;
+        }
+
+        .col-all-item {
+            display: flex;
+            flex-direction: column;
+            flex: 88;
+            justify-content: center;
+            border-radius: 20px;
+            background: rgba(238, 238, 238, 0.13);
+            width: 80%;
+
+            .sort-by {
+                display: flex;
+                align-items: center;
+                margin-left: 25px;
+
+                .icon-sort {
+                    font-size: 20px;
+                    cursor: pointer;
+                    margin-left: 5px;
+                }
+            }
+
+            .wrap-item {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                padding-left: 20px;
+            }
+
+        }
+    }
+
+    .btn-page {
+        background-color: white;
+        border-radius: 3px;
+        padding: 5px 15px;
+        text-align: center;
+        border: 1px solid gray;
+
+        &-active {
+            background-color: #00A551;
+            color: white;
+        }
+
+        &-previous,
+        &-next {
+            background-color: white;
+        }
+    }
+
+    // Media Queries
+    @media only screen and (min-width: 46.1875em) {
+        .wrap-item {
+            flex-direction: column;
+        }
+    }
+
+    @media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+        .wrap-item {
+            flex-direction: column;
+        }
+
+        .card-item {
+            width: 100%;
+        }
+
+        .row-category-item {
+            flex-direction: column;
+        }
+    }
+}

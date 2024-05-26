@@ -1,4 +1,4 @@
-.Register {
+.ForgetPass {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -41,40 +41,6 @@
                 padding: 0px 45px 0px 20px;
             }
 
-            select {
-                display: flex;
-                flex: 1;
-
-                background: transparent;
-                outline: none;
-                border: 2px solid rgba(255, 255, 255, 0.5);
-                border-radius: 40px;
-                color: #fff;
-                font-size: 16px;
-                padding: 0px 45px 0px 20px;
-
-                option {
-                    background: transparent;
-                    backdrop-filter: blur(20px);
-                    color: black;
-                    padding: 10px 10px;
-
-                }
-
-            }
-
-            .day .month .year {
-                display: flex;
-                flex: 1;
-                background: transparent;
-                outline: none;
-                border: 2px solid rgba(255, 255, 255, 0.5);
-                border-radius: 40px;
-                color: #fff;
-                font-size: 16px;
-                size: 100px;
-            }
-
             input::placeholder {
                 color: #fff;
             }
@@ -82,25 +48,9 @@
             .icon {
                 position: absolute;
                 right: 20px;
-                top: 35%;
+                top: 40%;
                 font-size: 16px;
             }
-
-            .icon-name {
-                font-size: 18px;
-            }
-        }
-
-        .one-col-30 {
-            width: 38%;
-        }
-
-        .one-col-70 {
-            width: 60%;
-        }
-
-        .three-col {
-            width: 32%;
         }
     }
 

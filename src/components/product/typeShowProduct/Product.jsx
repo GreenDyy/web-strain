@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './Product.css'
+import './Product.scss'
 import ReactPaginate from 'react-paginate';
 import { getAllPhylumApi, getAllStrainApi } from '../../../apis/apiStrain'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -45,22 +45,18 @@ function Product() {
     const handleSelectNode = async (node) => {
         if (node.idPhylum) {
             if (node.idClass) {
-                console.log('TAO NE:', node.nameClass)
                 navigate(`/Product/Class/${node.nameClass}/1`);
             }
             else {
-                console.log('TAO NE:', node.namePhylum)
                 navigate(`/Product/Phylum/${node.namePhylum}/1`);
             }
         }
         else {
             if (node.idGenus) {
                 if (node.idSpecies) {
-                    console.log('TAO NE:', node.nameSpecies)
                     navigate(`/Product/Species/${node.nameSpecies}/1`);
                 }
                 else {
-                    console.log('TAO NE:', node.nameGenus)
                     navigate(`/Product/Genus/${node.nameGenus}/1`);
                 }
             }
