@@ -2,7 +2,7 @@
 import axios from "axios";
 import domain from "./domain";
 
-const createOrderApi = async (idCustomer, totalPrice, note) => {
+const createOrderApi = async (idCustomer, totalPrice, note, deliveryAddress) => {
     const currentDate = new Date().toISOString().slice(0, 10);  //2011-10-05T14:48:00.000Z dạng vậy
     const response = await axios.post(`${domain}/api/Order`, {
         "idCustomer": idCustomer,
@@ -10,7 +10,8 @@ const createOrderApi = async (idCustomer, totalPrice, note) => {
         "dateOrder": currentDate,
         "totalPrice": totalPrice, 
         "status": "Đang chờ xử lý",
-        "note": note
+        "note": note,
+        "deliveryAddress": deliveryAddress
     });
     return response;
 }

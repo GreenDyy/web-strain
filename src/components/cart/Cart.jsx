@@ -27,11 +27,11 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
         fetchInventory();
     }, [item.quantityOfStrain]);
 
-
+    const imageSrc = item.idStrainNavigation.imageStrain ? convertImageByte(item.idStrainNavigation.imageStrain) : images.strainnull
     return (
         <tr style={{ alignItems: 'center', justifyContent: 'center' }}>
             <td className='card-product'>
-                <img src={convertImageByte(item.idStrainNavigation.imageStrain)} />
+                <img src={imageSrc} />
                 <div className='card-text'>
                     <p className='title'>{item.idStrainNavigation.scientificName}</p>
                     <p className='des'>Môi trường sống: {item.idStrainNavigation.isolationSource}</p>

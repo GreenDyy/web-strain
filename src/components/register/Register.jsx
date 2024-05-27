@@ -86,7 +86,7 @@ function Register() {
 
         } catch (e) {
             console.log(e);
-            toastError("Lỗi đăng ký, xem lại handleRegister");
+            toastError("Tên đăng nhập đã tồn tại");
         }
         console.log(firstName, lastName, email, phoneNumber, username, password, gender, day, month, year)
     };

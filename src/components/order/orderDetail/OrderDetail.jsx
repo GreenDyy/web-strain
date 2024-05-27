@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 const ItemOrderDetail = ({ oderDetail }) => {
     const [price, setPrice] = useState(0)
     const [strain, setStrain] = useState(null)
-    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchInventory = async () => {
@@ -98,7 +97,7 @@ function OrderDetail() {
                             <p className="name">{customerData?.fullName}</p>
                             <p>{customerData?.phoneNumber}</p>
                             <p>{customerData?.email}</p>
-                            <p>{customerData?.address}</p>
+                            <p>{dataOrder?.deliveryAddress}</p>
                         </div>
                     </div>
 

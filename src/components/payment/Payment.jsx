@@ -5,11 +5,12 @@ import { FaEdit } from "react-icons/fa";
 import { convertImageByte, formatCurrency, setDataLocalStorage } from "../../utils/Utils";
 import { getInventoryByIdStrainApi } from "../../apis/apiInventory";
 import { getAllDetailCartApi, removeDetailCartApi } from "../../apis/apiCart";
-import {images} from '../../constants'
+import { images } from '../../constants'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { addOrderDetailApi, createOrderApi } from "../../apis/apiPayment";
 import { setTotalAllProduct } from "../../srcRedux/features/cartSlice";
+import { toastWarning } from "../Toast/Toast";
 
 const ItemProduct = ({ item }) => {
     const [price, setPrice] = useState(0)
@@ -53,6 +54,7 @@ function Payment() {
     const [tongTien, setTongTien] = useState(0)
     const [thanhTien, setThanhTien] = useState(0)
     const [tongThue, setTongThue] = useState(0)
+    const [agree, setAgree] = useState(false)
 
     useEffect(() => {
         const fetchDataDetailCart = async () => {
@@ -86,7 +88,7 @@ function Payment() {
         }
         calculateTotal()
     }, [dataListDetailCart])
-    console.log(dataListDetailCart)
+
     const changeInfor = () => {
         toast(
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
@@ -118,25 +120,34 @@ function Payment() {
         toast.dismiss()
         navigate('/Profile')
     }
-
     const handlePayOrder = async () => {
-        //tạo đơn
-        const newOrder = await createOrderApi(customerData.idCustomer, thanhTien, note)
-        //tạo các detail đơn
-        for (const detailCart of dataListDetailCart) {
-            const inventory = await getInventoryByIdStrainApi(detailCart.idStrain);
-            const totalPriceOneProduct = detailCart.quantityOfStrain * inventory.data.price;
-            await addOrderDetailApi(newOrder.data.idOrder, detailCart.idStrain, detailCart.quantityOfStrain, totalPriceOneProduct);
-        }
+        if (dataListDetailCart.length != 0) {
+            if (agree) {
+                //tạo đơn
+                const newOrder = await createOrderApi(customerData.idCustomer, thanhTien, note, address)
+                //tạo các detail đơn
+                for (const detailCart of dataListDetailCart) {
+                    const inventory = await getInventoryByIdStrainApi(detailCart.idStrain);
+                    const totalPriceOneProduct = detailCart.quantityOfStrain * inventory.data.price;
+                    await addOrderDetailApi(newOrder.data.idOrder, detailCart.idStrain, detailCart.quantityOfStrain, totalPriceOneProduct);
+                }
 
-        //tạo bill
-         //xoá cart
-        for (const detailCart of dataListDetailCart) {
-            await removeDetailCartApi(detailCart.idCartDetail)
+                //tạo bill
+                //xoá cart
+                for (const detailCart of dataListDetailCart) {
+                    await removeDetailCartApi(detailCart.idCartDetail)
+                }
+                dispatch(setTotalAllProduct(0))
+                setDataLocalStorage('lastIdOrder', newOrder.data.idOrder)
+                navigate('/PaymentSuccess')
+            }
+            else {
+                toastWarning('Bạn chưa đồng ý với các điều khoản thanh toán')
+            }
         }
-        dispatch(setTotalAllProduct(0))
-        setDataLocalStorage('lastIdOrder', newOrder.data.idOrder)
-        navigate('/PaymentSuccess')
+        else {
+            return
+        }
     }
 
     return (
@@ -171,7 +182,7 @@ function Payment() {
                         <div className="wrap-input">
                             <p className="label">Địa chỉ giao hàng</p>
                             <div className="input-box">
-                                <input type="text" value={address} onChange={(event) => { setAddress(event.target.value) }} disabled />
+                                <input type="text" value={address} onChange={(event) => { setAddress(event.target.value) }} />
                             </div>
                         </div>
 
@@ -205,7 +216,7 @@ function Payment() {
                 </div>
             </div>
             <div className="wrap-btn">
-                <label><input type="checkbox" /> Đồng ý với các điều khoản của chúng tôi <a>Điều khoản thanh toán</a></label>
+                <label><input type="checkbox" onClick={()=>setAgree(!agree)}/> Đồng ý với các điều khoản của chúng tôi <a>Điều khoản thanh toán</a></label>
                 <button className="btn-submit" onClick={handlePayOrder}>Xác nhận thanh toán</button>
             </div>
         </div>
