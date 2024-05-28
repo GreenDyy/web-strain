@@ -1,27 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'
 import { FaUser, FaLock } from "react-icons/fa";
 import { loginCustomerApi } from "../../apis/apiLogin";
-import { getAllDetailCartApi, getAllTotalQuantityApi, getCartByIdCustomerApi } from "../../apis/apiCart";
+import { getAllTotalQuantityApi, getCartByIdCustomerApi } from "../../apis/apiCart";
 import { toastError, toastWarning } from "../Toast/Toast";
 //redux
 import { useDispatch } from "react-redux";
 import { login } from "../../srcRedux/features/customerSlice";
-import { setAllDetailCart, setTotalAllProduct } from "../../srcRedux/features/cartSlice";
-
+import { setTotalAllProduct } from "../../srcRedux/features/cartSlice";
+import { HashLoader } from "react-spinners";
 
 function Login() {
     const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [spinner, setSpinner] = useState(false)
 
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        console.log(username, password)
+        setSpinner(true)
         if (!username || !password) {
             toastWarning('Vui lòng nhập đầy đủ thông tin')
+            setSpinner(false)
             return;
         }
         try {
@@ -33,11 +35,7 @@ function Login() {
 
             if (user.data) {
                 const cart = await getCartByIdCustomerApi(user.data.idCustomer)
-                // const listDetailCart = await getAllDetailCartApi(cart.data.idCart)
                 const allTotalProductInCart = await getAllTotalQuantityApi(cart.data.idCart)
-
-                console.log("total bên login từ API", allTotalProductInCart.data)
-
                 //lưu vào redux
                 dispatch(login({
                     customerData: user.data,
@@ -46,11 +44,14 @@ function Login() {
                 dispatch(setTotalAllProduct(allTotalProductInCart.data));
                 navigate('/Home')
             }
-            else
+            else {
+                setSpinner(false)
                 toastError("Sai tên tài khoản hoặc mật khẩu")
+            }
         }
         catch (e) {
             console.log(e)
+            setSpinner(false)
             toastError("Sai tên tài khoản hoặc mật khẩu")
         }
     }
@@ -76,9 +77,13 @@ function Login() {
                 </div>
 
                 <button className="btn-login"
-                    type="button"
-                    onClick={handleLogin}
-                >Đăng nhập</button>
+                    type="button" onClick={handleLogin}>Đăng nhập</button>
+                <HashLoader
+                    color="white"
+                    loading={spinner}
+                    size={20}
+                    cssOverride={{ position: 'absolute', right: 198, bottom: 100 }}
+                />
 
                 <div className="register-link">
                     <p>Chưa có tài khoản? <Link to='/Register'>Đăng ký ngay!</Link></p>

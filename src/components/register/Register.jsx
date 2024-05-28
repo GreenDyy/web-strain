@@ -7,12 +7,14 @@ import { TbUserSquareRounded } from "react-icons/tb";
 
 import { useDispatch } from "react-redux";
 import { toastError, toastSuccess, toastWarning } from "../Toast/Toast";
-import { loginCustomerApi, registerCustomerApi } from "../../apis/apiLogin";
+import { checkExistEmailApi, checkExistUserNameApi, loginCustomerApi, registerCustomerApi } from "../../apis/apiLogin";
 import { login } from "../../srcRedux/features/customerSlice";
 import { getAllTotalQuantityApi, getCartByIdCustomerApi } from "../../apis/apiCart";
 import { setTotalAllProduct } from "../../srcRedux/features/cartSlice";
 import { convertImageToVarBinary, validateEmail } from "../../utils/Utils";
 import images from "../../constants/images";
+import { HashLoader } from "react-spinners";
+
 
 const days = Array.from({ length: 31 }, (_, i) => i + 1);
 const months = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -32,22 +34,41 @@ function Register() {
     const [year, setYear] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [spinner, setSpinner] = useState(false)
 
     const navigate = useNavigate();
 
     const handleRegister = async () => {
+        setSpinner(true)
         if (!username || !password || !email || !phoneNumber || !day || !month || !year || !gender) {
+            setSpinner(false)
             toastWarning('Vui lòng nhập đầy đủ thông tin');
             return;
         }
         if (!validateEmail(email)) {
+            setSpinner(false)
             toastWarning('Email không hợp lệ');
             return;
         }
-        if(password.length < 6) {
+        if (password.length < 6) {
+            setSpinner(false)
             toastWarning('Mật khẩu phải từ 6 kí tự');
             return;
         }
+        const checkMail = await checkExistEmailApi(email)
+        if (checkMail.data.status === 1) {
+            setSpinner(false)
+            toastWarning('Email đã tồn tại');
+            return;
+        }
+
+        const checkUserName = await checkExistUserNameApi(username)
+        if(checkUserName.data.status === 1) {
+            setSpinner(false)
+            toastWarning('Tên người dùng đã tồn tại');
+            return;
+        }
+
         try {
             const formattedMonth = String(month).padStart(2, '0');
             const formattedDay = String(day).padStart(2, '0');
@@ -81,12 +102,12 @@ function Register() {
                 navigate('/Home')
             }
             else {
-                toastError("Tên đăng nhập đã tồn tại")
+                toastError("Lỗi đăng nhập, status 500")
             }
 
         } catch (e) {
             console.log(e);
-            toastError("Tên đăng nhập đã tồn tại");
+            toastError("Lỗi đăng ký status 500")
         }
         console.log(firstName, lastName, email, phoneNumber, username, password, gender, day, month, year)
     };
@@ -205,6 +226,12 @@ function Register() {
                     </div>
                 </div>
                 <button className="btn-register" type="button" onClick={handleRegister}>Đăng ký</button>
+                <HashLoader  
+                                color="white"
+                                loading = {spinner}
+                                size={20}
+                                cssOverride={{position:'absolute', right: 205, bottom: 102}}
+                            />
                 <div className="register-link">
                     <p>Đã có tài khoản? <Link to='/Login'>Đăng nhập ngay!</Link></p>
                 </div>

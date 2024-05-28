@@ -29,6 +29,16 @@ const resetPasswordCustomerApi = async (email, newPass) => {
     await axios.put(`${domain}/api/Customer/reset-pass?email=${email}&newPass=${newPass}`, )
 }
 
+const checkExistEmailApi = async (email) => {
+    const response = await axios.post(`${domain}/api/Customer/CheckExistEmail?email=${email}`)
+    return response
+}
+
+const checkExistUserNameApi = async (userName) => {
+    const response = await axios.post(`${domain}/api/Customer/CheckExistUsername?userName=${userName}`)
+    return response
+}
+
 export {
     loginCustomerApi,
     getAllCustomerApi,
@@ -36,4 +46,6 @@ export {
     getCustomerApi,
     updateCustomerApi,
     resetPasswordCustomerApi,
+    checkExistEmailApi,
+    checkExistUserNameApi,
 }   
