@@ -25,10 +25,15 @@ const updateCustomerApi = async (idCustomer, userModel) => {
     await axios.put(`${domain}/api/Customer/${idCustomer}`, userModel)
 }
 
+const resetPasswordCustomerApi = async (email, newPass) => {
+    await axios.put(`${domain}/api/Customer/reset-pass?email=${email}&newPass=${newPass}`, )
+}
+
 export {
     loginCustomerApi,
     getAllCustomerApi,
     registerCustomerApi,
     getCustomerApi,
     updateCustomerApi,
+    resetPasswordCustomerApi,
 }   

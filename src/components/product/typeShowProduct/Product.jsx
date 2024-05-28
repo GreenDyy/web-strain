@@ -8,6 +8,7 @@ import { BsSearchHeart } from "react-icons/bs";
 import TreeView from '../treeview/TreeView';
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
 import ItemProduct from '../ItemProduct/ItemProduct';
+import { HashLoader } from 'react-spinners';
 
 
 //MAIN-------
@@ -19,6 +20,7 @@ function Product() {
     const [totalPage, setTotalPage] = useState(0)
     const [treeData, setTreeData] = useState([]);
     const navigate = useNavigate()
+    const [networkConnected, setNetworkConnected] = useState(true)
 
     //get data strain
     useEffect(() => {
@@ -33,6 +35,7 @@ function Product() {
             catch (error) {
                 console.log('Lỗi fetching data: ', error)
                 toastError("Không thể kết nối Server, vui lòng kiểm tra kết nối internet", 'top-center')
+                setNetworkConnected(false)
             }
         }
         fetchData()
@@ -64,72 +67,79 @@ function Product() {
     };
     return (
         <div className='Product'>
+            {dataStrain.length !== 0 ?
+                <div className='row-category-item'>
+                    {/* cột lọc */}
+                    <div className='col-category'>
+                        <div className='search-box'>
+                            <input className='input-search'
+                                type='text'
+                                placeholder='Search...'
+                                value={search}
+                                onChange={(e) => {
+                                    setSearch(e.target.value)
+                                }}
+                            />
+                            <BsSearchHeart className='icon-search' />
+                        </div>
 
-            <div className='row-category-item'>
-                {/* cột lọc */}
-                <div className='col-category'>
-                    <div className='search-box'>
-                        <input className='input-search'
-                            type='text'
-                            placeholder='Search...'
-                            value={search}
-                            onChange={(e) => {
-                                setSearch(e.target.value)
+                        <TreeView data={treeData} onSelectNode={handleSelectNode} />
+
+                    </div>
+                    {/* cột ds strain */}
+                    <div className='col-all-item'>
+                        <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
+
+                        <div className='sort-by'>
+                            <p>Sắp xếp theo tên: </p>
+                            {sortBy === 'Scientific_Name_Asc'
+                                ? <FaSortAlphaUp className='icon-sort' onClick={() => { setSortBy('Scientific_Name_Desc') }} />
+                                : <FaSortAlphaDown className='icon-sort' onClick={() => { setSortBy('Scientific_Name_Asc') }} />}
+                        </div>
+
+                        <div className='wrap-item'>
+                            {dataStrain?.map((item, index) => (
+                                <ItemProduct
+                                    key={index}
+                                    item={item}
+                                    onClickToDetail={handleGoToDetail}
+                                />
+                            ))}
+                        </div>
+
+                        {/* số trang */}
+
+                        <ReactPaginate
+                            breakLabel="..."
+                            nextLabel=">"
+                            onPageChange={(event) => {
+                                const selectedPage = event.selected;
+                                navigate(`/Product/${selectedPage + 1}`);
                             }}
+                            pageRangeDisplayed={5}
+                            pageCount={totalPage}
+                            previousLabel="<"
+                            renderOnZeroPageCount={null}
+                            pageLinkClassName='btn-page'
+                            activeLinkClassName='btn-page-active'
+                            previousLinkClassName='btn-previous'
+                            nextLinkClassName='btn-next'
                         />
-                        <BsSearchHeart className='icon-search' />
                     </div>
-
-                    <TreeView data={treeData} onSelectNode={handleSelectNode} />
 
                 </div>
-                {/* cột ds strain */}
-                <div className='col-all-item'>
-                    <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
-
-                    <div className='sort-by'>
-                        <p>Sắp xếp theo tên: </p>
-                        {sortBy === 'Scientific_Name_Asc'
-                            ? <FaSortAlphaUp className='icon-sort' onClick={() => { setSortBy('Scientific_Name_Desc') }} />
-                            : <FaSortAlphaDown className='icon-sort' onClick={() => { setSortBy('Scientific_Name_Asc') }} />}
-                    </div>
-
-                    <div className='wrap-item'>
-                        {
-                            dataStrain.length !== 0 ?
-                                dataStrain.map((item, index) => (
-                                    <ItemProduct
-                                        key={index}
-                                        item={item}
-                                        onClickToDetail={handleGoToDetail}
-                                      />
-                                ))
-                                :
-                                <p>Đang load...</p>
-                        }
-                    </div>
-
-                    {/* số trang */}
-
-                    <ReactPaginate
-                        breakLabel="..."
-                        nextLabel=">"
-                        onPageChange={(event) => {
-                            const selectedPage = event.selected;
-                            navigate(`/Product/${selectedPage + 1}`);
-                        }}
-                        pageRangeDisplayed={5}
-                        pageCount={totalPage}
-                        previousLabel="<"
-                        renderOnZeroPageCount={null}
-                        pageLinkClassName='btn-page'
-                        activeLinkClassName='btn-page-active'
-                        previousLinkClassName='btn-previous'
-                        nextLinkClassName='btn-next'
-                    />
+                :
+                <div className='no-internet'>
+                    {networkConnected ?
+                        <HashLoader
+                            className='spinner'
+                            color="#00A551"
+                            size={100}
+                        />
+                        :
+                        <h2 className='text-no-internet '>Vui lòng kiểm tra lại kết nối Internet</h2>}
                 </div>
-
-            </div>
+            }
 
         </div>
 

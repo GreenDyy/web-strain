@@ -39,6 +39,7 @@ const listNavbarItem = [
 const Navbar = () => {
     const navigate = useNavigate()
     const [isHoveredDropdown, setIsHoveredDropdown] = useState(false)
+    const [isSelected, setIsSelected] = useState(1)
 
     //redux
     const dispatch = useDispatch()
@@ -62,9 +63,11 @@ const Navbar = () => {
                         listNavbarItem.map((item, index) => (
                             <li key={index}>
                                 <Link
-                                    className='Link'
-                                    to={item.to}>
+                                    className={`Link ${isSelected === index+1 ? 'selected' : ''}`}
+                                    to={item.to}
+                                    onClick={()=>setIsSelected(index+1)}>
                                     {item.title}
+                                    
                                 </Link>
                             </li>
                         ))

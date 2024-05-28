@@ -5,8 +5,7 @@
     padding: 5px 3%;
     background: white;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-    transition: 0.5s;
-
+    transition: 0.3s;
 }
 
 .Navbar .logo {
@@ -47,7 +46,7 @@ ul li .icon {
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .Navbar .user img {
@@ -70,7 +69,7 @@ ul li .icon {
 
 .Navbar .user:hover {
     scale: 1.05;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .Navbar .dropwdown-wrap {
@@ -174,26 +173,25 @@ ul li .icon {
     border-radius: 10px;
     padding: 5px 30px;
     color: white;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .Navbar .btn-login:hover {
     padding: 5px 50px;
     color: white;
-    transition: 0.5s;
+    transition: 0.3s;
     color: black;
     background: none;
     border: 1px solid black;
-    transition: 0.5s;
+    transition: 0.3s;
 }
-
 .Navbar .btn-register {
     margin-left: 10px;
     background: none;
     border: 1px solid black;
     border-radius: 10px;
     padding: 5px 30px;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .Navbar .btn-register:hover {
@@ -201,20 +199,25 @@ ul li .icon {
     padding: 5px 50px;
     color: white;
     background: #76B947;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .Link {
     color: black;
     font-size: 16px;
-    transition: 0.5s;
+    transition: 0.3s ease-in-out;
+}
+
+.selected {
+    color: #76B947;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    transition: 0.3s ease-in-out;
 }
 
 .Link:hover {
     color: #76B947;
-    border-bottom: 2px solid rgb(156, 111, 6);
-    border-top: 2px solid rgb(156, 111, 6);
-    transition: 0.5s;
+    transition: 0.3s ease-in-out;
 }
 
 .img-cart {
@@ -223,7 +226,6 @@ ul li .icon {
     cursor: pointer;
     margin-left: 20px;
 }
-
 
 .Navbar .col-3 {
     display: flex;

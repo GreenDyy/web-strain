@@ -17,6 +17,7 @@
 
     .wrap-all-input {
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-between;
         margin-bottom: 20px;
@@ -86,6 +87,27 @@
         p a:hover {
             text-decoration: underline;
         }
+    }
+
+    .btn-otp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14.5px;
+        text-align: center;
+        margin: 20px 0 15px;
+        cursor: pointer;
+
+        .icon-reload {
+            font-size: 18px;
+            margin-right: 3px;
+        }
+
+        p {
+            color: #fff;
+            font-weight: 600;
+        }
+
     }
 
 }
