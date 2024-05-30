@@ -13,6 +13,7 @@ import { FaUserAstronaut } from "react-icons/fa6";
 import { IoSearchCircle } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
 import { convertImageByte } from '../../utils/Utils'
+import { getAllStrainByNumberAndNameApi } from '../../apis/apiStrain'
 
 
 const listNavbarItem = [
@@ -39,10 +40,16 @@ const listNavbarItem = [
 ]
 
 const ItemDropdown = ({ item }) => {
+    const imageSrc = item?.imageStrain ? convertImageByte(item?.imageStrain) : images.strainnull
     return (
         <div className='item-dropdown'>
-            <img className='img-item' />
-            <p>Pheriosxe CH009H</p>
+            <div className='img-item'>
+                <img src={imageSrc} alt='img-strain' />
+            </div>
+            <div className='wrap-text'>
+                <p className='title-item'>{item?.scientificName}</p>
+                <p className='number-item'>{item?.strainNumber}</p>
+            </div>
         </div>
     )
 }
@@ -53,6 +60,7 @@ const Navbar = () => {
     const [isSelected, setIsSelected] = useState(1)
     const [search, setSearch] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
+    const [dataSearch, setDataSearch] = useState([])
 
     const dropdownRef = useRef(null);
 
@@ -67,6 +75,18 @@ const Navbar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+    useEffect(() => {
+        const timerId = setTimeout(async () => {
+            const dataSearch = await getAllStrainByNumberAndNameApi(search);
+            setDataSearch(dataSearch.data);
+        }, 1000);
+
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, [search])
+
     //redux
     const dispatch = useDispatch()
     const customerData = useSelector(state => state.customer.customerData)
@@ -80,14 +100,6 @@ const Navbar = () => {
         alert('Đăng xuất thành công')
     };
     const srcAvatar = customerData?.image ? convertImageByte(customerData.image) : images.avatarnull
-
-    const handleChangeText = (event) => {
-        setSearch(event.target.value)
-        console.log(search)
-        //xử lý show data drop tại đây
-    }
-
-
 
     return (
         <div>
@@ -110,42 +122,28 @@ const Navbar = () => {
 
 
                 <div className='col-user'>
-                    <div className='wrap-search-content'>
+                    <div className='wrap-search-content' ref={dropdownRef}>
                         <div className='search-box-nav'>
                             <input
-                                ref={dropdownRef}
                                 className='input-search-nav'
                                 type='text'
-                                placeholder='Nhập chủng cần tìm'
+                                placeholder='Nhập chủng cần tìm...'
                                 value={search}
                                 onFocus={() => setShowDropdown(true)}
-                                onChange={handleChangeText} />
+                                onChange={(event) => setSearch(event.target.value)} />
                             <IoSearchCircle className='icon-search-nav' />
                         </div>
-                        {showDropdown &&
+                        {showDropdown && search !== '' && dataSearch.length !== 0 &&
                             <div className='dropdown-content'>
-                                <div className='item-dropdown'>
-                                    <div className='img-item'>
-                                        <img src='https://images.ctfassets.net/qpn1gztbusu2/2sEq4wHQk4Vbj4pJP7Dlo9/9fb20ca821203b0a35847998c1a41cff/chinese-style-fantasy-scene.jpg' alt='img-strain' />
-                                    </div>
-                                    <div className='wrap-text'>
-                                        <p className='title-item'>PheriosxeHexio</p>
-                                        <p className='number-item'>CH009H</p>
-                                    </div>
-                                </div>
-
-                                <div className='item-dropdown'>
-                                    <div className='img-item'>
-                                        <img src='https://images.ctfassets.net/qpn1gztbusu2/2sEq4wHQk4Vbj4pJP7Dlo9/9fb20ca821203b0a35847998c1a41cff/chinese-style-fantasy-scene.jpg' alt='img-strain' />
-                                    </div>
-                                    <div className='wrap-text'>
-                                        <p className='title-item'>PheriosxeHexio</p>
-                                        <p className='number-item'>CH009H</p>
-                                    </div>
-                                </div>
+                                {dataSearch?.length !== 0 &&
+                                    dataSearch?.map((item, index) => {
+                                        return (
+                                            <ItemDropdown key={index} item={item} />
+                                        )
+                                    })
+                                }
                             </div>
                         }
-
                     </div>
                     {isLogin ?
                         <div className='dropwdown-wrap'

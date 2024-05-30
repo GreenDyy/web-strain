@@ -121,10 +121,11 @@ function Product() {
                             pageCount={totalPage}
                             previousLabel="<"
                             renderOnZeroPageCount={null}
-                            pageLinkClassName='btn-page'
-                            activeLinkClassName='btn-page-active'
-                            previousLinkClassName='btn-previous'
-                            nextLinkClassName='btn-next'
+                            containerClassName="pagination"
+                            pageLinkClassName="btn-page"
+                            activeLinkClassName="btn-page-active"
+                            previousLinkClassName="btn-previous"
+                            nextLinkClassName="btn-next"
                         />
                     </div>
                 }

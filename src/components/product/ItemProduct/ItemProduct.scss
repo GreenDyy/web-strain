@@ -1,6 +1,6 @@
 .card-item {
     width: 23%;
-    height: 500px;
+    height: 450px;
     border-radius: 10px;
     background-color: #FFFAFA;
     margin: 10px;
@@ -41,6 +41,9 @@
 
         .name {
             color: #00A551;
+            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
         }
         .number {
             margin-top: -20px;

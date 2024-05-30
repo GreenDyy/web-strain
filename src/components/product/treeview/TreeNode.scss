@@ -1,10 +1,15 @@
 .tree-node {
     margin-left: -20px;
+    list-style: none;
+    cursor: pointer;
 
     .tree-node-label {
         display: flex;
         align-items: center;
         font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         .icon {
             display: flex;

@@ -13,6 +13,10 @@ const getRandomStrainApi = async () => {
     return await axios.get(`${domain}/api/Strain/GetRandom`);
 };
 
+const getAllStrainByNumberAndNameApi = async (search) => {
+    return await axios.get(`${domain}/api/Strain/GetAllByStraiNumberAndScientificName?search=${search}`);
+};
+
 // Follow TYPE
 const getAllStrainFollowPhylumApi = async (namePhylum, search, sortBy, page) => {
     return await axios.get(`${domain}/api/Strain/FollowPhylum?namePhylum=${namePhylum}&search=${search}&sortBy=${sortBy}&page=${page}`);
@@ -93,4 +97,5 @@ export {
     getAllStrainFollowGenusApi,
     getAllStrainFollowSpeciesApi,
     getRandomStrainApi,
+    getAllStrainByNumberAndNameApi,
 };
