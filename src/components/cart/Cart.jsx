@@ -15,6 +15,7 @@ import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
 const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
     const [tongTien, setTongTien] = useState(0)
     const [price, setPrice] = useState(0)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchInventory = async () => {
@@ -31,9 +32,10 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
     return (
         <tr style={{ alignItems: 'center', justifyContent: 'center' }}>
             <td className='card-product'>
-                <img src={imageSrc} />
+                <img src={imageSrc} onClick={() => navigate(`/ProductDetail/${item.idStrain}`)}/>
                 <div className='card-text'>
-                    <p className='title'>{item.idStrainNavigation.scientificName}</p>
+                    <p className='title' onClick={() => navigate(`/ProductDetail/${item.idStrain}`)}>{item.idStrainNavigation.scientificName}</p>
+                    <p className='des'>Strain number: {item.idStrainNavigation.strainNumber}</p>
                     <p className='des'>Môi trường sống: {item.idStrainNavigation.isolationSource}</p>
                 </div>
             </td>
@@ -161,7 +163,7 @@ function Cart() {
     }
 
     const removeDetailCart = (item) => {
-        toast.warning(
+        toast.dark(
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
                 <p style={{ color: 'black' }}>Bạn có muốn xoá <strong>{item.idStrainNavigation.scientificName}</strong> khỏi giỏ hàng không?</p>
 

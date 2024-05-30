@@ -38,6 +38,7 @@
                 width: 150px;
                 height: 150px;
                 object-fit: cover;
+                cursor: pointer;
             }
 
             .card-text {
@@ -45,11 +46,13 @@
 
                 .title {
                     font-weight: bold;
+                    cursor: pointer;
                 }
 
                 .des {
                     font-size: 14px;
                     color: #333;
+                    font-weight: 500;
                 }
             }
         }

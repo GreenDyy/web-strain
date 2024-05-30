@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import './Product.scss'
 import ReactPaginate from 'react-paginate';
-import {getAllPhylumApi, getAllStrainFollowClassApi} from '../../../apis/apiStrain'
+import { getAllPhylumApi, getAllStrainFollowClassApi } from '../../../apis/apiStrain'
 import { useNavigate, useParams } from 'react-router-dom';
 import { BsSearchHeart } from "react-icons/bs";
 import TreeView from '../treeview/TreeView';
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
 import ItemProduct from '../ItemProduct/ItemProduct';
+import Loading from '../../loading/Loading';
+import { toastError } from '../../Toast/Toast';
+import { images } from '../../../constants';
 
 
 //MAIN-------
@@ -31,6 +34,7 @@ function ProductClass() {
             }
             catch (error) {
                 console.log('Lỗi fetching data: ', error)
+                toastError("Không thể kết nối Server, vui lòng kiểm tra kết nối internet", 'top-center')
             }
         }
         fetchData()
@@ -43,22 +47,18 @@ function ProductClass() {
     const handleSelectNode = async (node) => {
         if (node.idPhylum) {
             if (node.idClass) {
-                console.log('TAO NE:', node.nameClass)
                 navigate(`/Product/Class/${node.nameClass}/1`);
             }
             else {
-                console.log('TAO NE:', node.namePhylum)
                 navigate(`/Product/Phylum/${node.namePhylum}/1`);
             }
         }
         else {
             if (node.idGenus) {
                 if (node.idSpecies) {
-                    console.log('TAO NE:', node.nameSpecies)
                     navigate(`/Product/Species/${node.nameSpecies}/1`);
                 }
                 else {
-                    console.log('TAO NE:', node.nameGenus)
                     navigate(`/Product/Genus/${node.nameGenus}/1`);
                 }
             }
@@ -80,58 +80,69 @@ function ProductClass() {
                         />
                         <BsSearchHeart className='icon-search' />
                     </div>
+
                     <TreeView data={treeData} onSelectNode={handleSelectNode} />
+
                 </div>
                 {/* cột ds strain */}
-                <div className='col-all-item'>
-                    <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
+                {dataStrain.length !== 0 &&
+                    <div className='col-all-item'>
 
-                    <div className='sort-by'>
-                        <p>Sắp xếp theo tên: </p>
-                        {sortBy === 'Scientific_Name_Asc'
-                            ? <FaSortAlphaUp className='icon-sort' onClick={() => { setSortBy('Scientific_Name_Desc') }} />
-                            : <FaSortAlphaDown className='icon-sort' onClick={() => { setSortBy('Scientific_Name_Asc') }} />}
+
+                        <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
+
+                        <div className='sort-by'>
+                            <p>Sắp xếp theo tên: </p>
+                            {sortBy === 'Scientific_Name_Asc'
+                                ? <FaSortAlphaUp className='icon-sort' onClick={() => { setSortBy('Scientific_Name_Desc') }} />
+                                : <FaSortAlphaDown className='icon-sort' onClick={() => { setSortBy('Scientific_Name_Asc') }} />}
+                        </div>
+
+                        <div className='wrap-item'>
+                            {dataStrain?.map((item, index) => (
+                                <ItemProduct
+                                    key={index}
+                                    item={item}
+                                    onClickToDetail={handleGoToDetail}
+                                />
+                            ))}
+                        </div>
+
+                        {/* số trang */}
+
+                        <ReactPaginate
+                            breakLabel="..."
+                            nextLabel=">"
+                            onPageChange={(event) => {
+                                const selectedPage = event.selected;
+                                navigate(`/Product/Class/${nameClass}/${selectedPage + 1}`);
+                            }}
+                            pageRangeDisplayed={5}
+                            pageCount={totalPage}
+                            previousLabel="<"
+                            renderOnZeroPageCount={null}
+                            pageLinkClassName='btn-page'
+                            activeLinkClassName='btn-page-active'
+                            previousLinkClassName='btn-previous'
+                            nextLinkClassName='btn-next'
+                        />
                     </div>
+                }
 
-                    <div className='wrap-item'>
-                        {
-                            dataStrain.length !== 0 ?
-                                dataStrain.map((item, index) => (
-                                    <ItemProduct
-                                        key={index}
-                                        item={item}
-                                        onClickToDetail={handleGoToDetail} />
-                                ))
-                                :
-                                <p>Đang load...</p>
-                        }
+                {dataStrain.length === 0 && search !== '' &&
+                    <div className='notification'>
+                        <img className='img-empty' src={images.emptysearch} />
+                        <h2 >Không tìm thấy mẫu này</h2>
                     </div>
+                }
 
-                    {/* số trang */}
-
-                    <ReactPaginate
-                        breakLabel="..."
-                        nextLabel=">"
-                        onPageChange={(event) => {
-                            const selectedPage = event.selected;
-                            navigate(`/Product/Class/${nameClass}/${selectedPage + 1}`);
-
-                        }}
-                        pageRangeDisplayed={5}
-                        pageCount={totalPage}
-                        previousLabel="<"
-                        renderOnZeroPageCount={null}
-                        pageLinkClassName='btn-page'
-                        activeLinkClassName='btn-page-active'
-                        previousLinkClassName='btn-previous'
-                        nextLinkClassName='btn-next'
-                    />
-                </div>
-
+                {dataStrain.length === 0 && search === '' &&
+                    <div className="loading">
+                        <Loading />
+                    </div>
+                }
             </div>
-
         </div>
-
     )
 }
 

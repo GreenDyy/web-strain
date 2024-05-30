@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 const ItemOrderDetail = ({ oderDetail }) => {
     const [price, setPrice] = useState(0)
     const [strain, setStrain] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchInventory = async () => {
@@ -25,9 +26,9 @@ const ItemOrderDetail = ({ oderDetail }) => {
         fetchInventory();
     }, [oderDetail.idStrain]);
     const imgSrc = strain?.imageStrain ? convertImageByte(strain?.imageStrain) : images.strainnull
-    console.log('ItemOrderDetail', oderDetail)
+
     return (
-        <div className="card-product">
+        <div className="card-product" onClick={()=>navigate(`/ProductDetail/${strain?.idStrain}`)}>
             <div className="item-col-1">
                 <img className="img-item" src={imgSrc} />
                 <div className="wrap-content">
@@ -92,12 +93,14 @@ function OrderDetail() {
                             <p>Số điện thoại:</p>
                             <p>Email:</p>
                             <p>Địa chỉ giao hàng:</p>
+                            <p>Ghi chú:</p>
                         </div>
                         <div className="content">
                             <p className="name">{customerData?.fullName}</p>
                             <p>{customerData?.phoneNumber}</p>
                             <p>{customerData?.email}</p>
                             <p>{dataOrder?.deliveryAddress}</p>
+                            <p>{dataOrder?.note}</p>
                         </div>
                     </div>
 

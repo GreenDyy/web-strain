@@ -79,40 +79,46 @@
                 padding-left: 20px;
             }
 
+            .btn-page {
+                background-color: white;
+                border-radius: 3px;
+                padding: 5px 15px;
+                text-align: center;
+                border: 1px solid gray;
+        
+                &-active {
+                    background-color: #00A551;
+                    color: white;
+                }
+        
+                &-previous,
+                &-next {
+                    background-color: white;
+                }
+            }
+
+        }
+
+        .notification {
+            width: 100%;
+            text-align: center;
+
+            .img-empty {
+                width: 200px;
+            }
+        }
+
+        .loading {
+            display: flex;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
         }
     }
 
-    .no-internet {
-        display: flex;
-        width: 100%;
-        padding: 100px 0;
-        justify-content: center;
-        align-items: center;
 
-        .spinner {
-        }
-        .text-no-internet {
-            color: red;
-        }
-    }
-
-    .btn-page {
-        background-color: white;
-        border-radius: 3px;
-        padding: 5px 15px;
-        text-align: center;
-        border: 1px solid gray;
-
-        &-active {
-            background-color: #00A551;
-            color: white;
-        }
-
-        &-previous,
-        &-next {
-            background-color: white;
-        }
-    }
 
     // Media Queries
     @media only screen and (min-width: 46.1875em) {

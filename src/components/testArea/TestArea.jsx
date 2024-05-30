@@ -18,15 +18,7 @@ function TestArea() {
     }, []);
     return (
         <div>
-        {dataLoaded ? (
-            <p>Data loaded successfully!</p>
-        ) : (
-            <p>Loading data...</p>
-        )}
-
-        {!networkConnected && (
-            <p>Không có mạng</p>
-        )}
+        
     </div>
     );
 }

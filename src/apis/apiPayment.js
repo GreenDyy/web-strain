@@ -41,10 +41,16 @@ const getOrderByIdOrderApi = async (idOrder) => {
     return response
 }
 
+const sendMailOrderApi = async (idOrder) => {
+    const response = await axios.post(`${domain}/api/Order/SendMailOrder?idOrder=${idOrder}`)
+    return response
+}
+
 export {
     createOrderApi,
     addOrderDetailApi,
     getAllOrderByIdCustomerApi,
     getAllOrderDetailByIdOrderApi,
     getOrderByIdOrderApi,
+    sendMailOrderApi,
 };

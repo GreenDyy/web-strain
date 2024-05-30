@@ -208,5 +208,10 @@
             transition: 0.3s ease-in-out;
         }
     }
-
+    .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+    }
 }

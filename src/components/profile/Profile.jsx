@@ -196,10 +196,10 @@ function Profile() {
     };
 
     const handlePickImage = () => {
-        if(tab === 1) {
+        if (tab === 1) {
             inputImgRef.current.click();
         }
-        
+
     }
 
     const handleImageChange = (event) => {
@@ -244,6 +244,10 @@ function Profile() {
                                 <p>Địa chỉ giao hàng</p>
                                 <FaMapLocationDot className="icon" />
                             </div>
+                            <div className="feature" onClick={() => toastSuccess('Tính năng đang phát triển')}>
+                                <p>Xóa tài khoản</p>
+                                <TiDelete className="icon" style={{fontSize: 20}}/>
+                            </div>
                         </div>
                     </div>
 
@@ -252,7 +256,6 @@ function Profile() {
                             <>
                                 <div className="header">
                                     <h3 className="title">Thông tin cá nhân</h3>
-                                    <TiDelete className="btn-delete" onClick={() => toastWarning('Tính năng đang phát triển')} />
                                 </div>
 
 
@@ -357,7 +360,7 @@ function Profile() {
                                 </div>
 
                                 <div className="wrap-btn float-left">
-                                {showCancel && <button className="btn-cancel" onClick={handleResetData}>Hủy thay đổi</button>}
+                                    {showCancel && <button className="btn-cancel" onClick={handleResetData}>Hủy thay đổi</button>}
                                     <button className="btn-save" onClick={handleSaveChangeAddress} disabled={!showCancel}>Lưu</button>
                                 </div>
                             </>

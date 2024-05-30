@@ -8,7 +8,8 @@ import { BsSearchHeart } from "react-icons/bs";
 import TreeView from '../treeview/TreeView';
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
 import ItemProduct from '../ItemProduct/ItemProduct';
-import { HashLoader } from 'react-spinners';
+import Loading from '../../loading/Loading';
+import { images } from '../../../constants';
 
 
 //MAIN-------
@@ -20,7 +21,6 @@ function Product() {
     const [totalPage, setTotalPage] = useState(0)
     const [treeData, setTreeData] = useState([]);
     const navigate = useNavigate()
-    const [networkConnected, setNetworkConnected] = useState(true)
 
     //get data strain
     useEffect(() => {
@@ -35,7 +35,6 @@ function Product() {
             catch (error) {
                 console.log('Lỗi fetching data: ', error)
                 toastError("Không thể kết nối Server, vui lòng kiểm tra kết nối internet", 'top-center')
-                setNetworkConnected(false)
             }
         }
         fetchData()
@@ -67,27 +66,29 @@ function Product() {
     };
     return (
         <div className='Product'>
-            {dataStrain.length !== 0 ?
-                <div className='row-category-item'>
-                    {/* cột lọc */}
-                    <div className='col-category'>
-                        <div className='search-box'>
-                            <input className='input-search'
-                                type='text'
-                                placeholder='Search...'
-                                value={search}
-                                onChange={(e) => {
-                                    setSearch(e.target.value)
-                                }}
-                            />
-                            <BsSearchHeart className='icon-search' />
-                        </div>
-
-                        <TreeView data={treeData} onSelectNode={handleSelectNode} />
-
+            <div className='row-category-item'>
+                {/* cột lọc */}
+                <div className='col-category'>
+                    <div className='search-box'>
+                        <input className='input-search'
+                            type='text'
+                            placeholder='Search...'
+                            value={search}
+                            onChange={(e) => {
+                                setSearch(e.target.value)
+                            }}
+                        />
+                        <BsSearchHeart className='icon-search' />
                     </div>
-                    {/* cột ds strain */}
+
+                    <TreeView data={treeData} onSelectNode={handleSelectNode} />
+
+                </div>
+                {/* cột ds strain */}
+                {dataStrain.length !== 0 &&
                     <div className='col-all-item'>
+
+
                         <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
 
                         <div className='sort-by'>
@@ -126,23 +127,22 @@ function Product() {
                             nextLinkClassName='btn-next'
                         />
                     </div>
+                }
 
-                </div>
-                :
-                <div className='no-internet'>
-                    {networkConnected ?
-                        <HashLoader
-                            className='spinner'
-                            color="#00A551"
-                            size={100}
-                        />
-                        :
-                        <h2 className='text-no-internet '>Vui lòng kiểm tra lại kết nối Internet</h2>}
-                </div>
-            }
+                {dataStrain.length === 0 && search !== '' &&
+                    <div className='notification'>
+                        <img className='img-empty' src={images.emptysearch} />
+                        <h2 >Không tìm thấy mẫu này</h2>
+                    </div>
+                }
 
+                {dataStrain.length === 0 && search === '' &&
+                    <div className="loading">
+                        <Loading />
+                    </div>
+                }
+            </div>
         </div>
-
     )
 }
 

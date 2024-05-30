@@ -21,6 +21,7 @@ import ForgetPass from '../forgetPass/ForgetPass'
 import PaymentSuccess from '../paymentSuccess/PaymentSuccess'
 import Order from '../order/Order'
 import OrderDetail from '../order/orderDetail/OrderDetail'
+import NewsPaper from '../newspaper/NewsPaper'
 
 function Content() {
     const location = useLocation();
@@ -36,6 +37,7 @@ function Content() {
                 <Route path='/Home' element={<Home />} />
                 <Route path='/Product/:pageRouter' element={<Product />} />
                 <Route path='/Project' element={<Project />} />
+                <Route path='/NewsPaper' element={<NewsPaper />} />
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Register' element={<Register />} />
                 <Route path='/ForgetPass' element={<ForgetPass />} />

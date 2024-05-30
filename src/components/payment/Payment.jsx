@@ -8,9 +8,10 @@ import { getAllDetailCartApi, removeDetailCartApi } from "../../apis/apiCart";
 import { images } from '../../constants'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { addOrderDetailApi, createOrderApi } from "../../apis/apiPayment";
+import { addOrderDetailApi, createOrderApi, sendMailOrderApi } from "../../apis/apiPayment";
 import { setTotalAllProduct } from "../../srcRedux/features/cartSlice";
 import { toastWarning } from "../Toast/Toast";
+import Loading from "../loading/Loading";
 
 const ItemProduct = ({ item }) => {
     const [price, setPrice] = useState(0)
@@ -55,6 +56,7 @@ function Payment() {
     const [thanhTien, setThanhTien] = useState(0)
     const [tongThue, setTongThue] = useState(0)
     const [agree, setAgree] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const fetchDataDetailCart = async () => {
@@ -122,7 +124,9 @@ function Payment() {
     }
     const handlePayOrder = async () => {
         if (dataListDetailCart.length != 0) {
+            setLoading(true)
             if (agree) {
+
                 //tạo đơn
                 const newOrder = await createOrderApi(customerData.idCustomer, thanhTien, note, address)
                 //tạo các detail đơn
@@ -137,15 +141,20 @@ function Payment() {
                 for (const detailCart of dataListDetailCart) {
                     await removeDetailCartApi(detailCart.idCartDetail)
                 }
+                //gửi mail 
+                await sendMailOrderApi(newOrder.data.idOrder)
                 dispatch(setTotalAllProduct(0))
                 setDataLocalStorage('lastIdOrder', newOrder.data.idOrder)
                 navigate('/PaymentSuccess')
+                setLoading(false)
             }
             else {
+                setLoading(false)
                 toastWarning('Bạn chưa đồng ý với các điều khoản thanh toán')
             }
         }
         else {
+            setLoading(false)
             return
         }
     }
@@ -216,9 +225,10 @@ function Payment() {
                 </div>
             </div>
             <div className="wrap-btn">
-                <label><input type="checkbox" onClick={()=>setAgree(!agree)}/> Đồng ý với các điều khoản của chúng tôi <a>Điều khoản thanh toán</a></label>
-                <button className="btn-submit" onClick={handlePayOrder}>Xác nhận thanh toán</button>
+                <label><input type="checkbox" onClick={() => setAgree(!agree)} /> Đồng ý với các điều khoản của chúng tôi <a>Điều khoản thanh toán</a></label>
+                <button className="btn-submit" onClick={handlePayOrder} disabled={loading}>Xác nhận thanh toán</button>
             </div>
+            {loading && <Loading className='loading' />}
         </div>
     )
 }

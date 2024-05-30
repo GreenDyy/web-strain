@@ -11,13 +11,7 @@ function Footer() {
                 {/* cột 1 */}
                 <div style={{ display: 'flex', flexDirection: 'column', flex: 40, marginLeft: 10, marginRight: 10 }}>
                     <h2>Về chúng tôi</h2>
-                    <p className="about-us">This powerful and all-around free Bootstrap footer works for all types of websites, online stores, and blogs.
-
-                        However, it will work best for everyone looking to add Twitter and Instagram feeds into their footer area.
-
-                        That is something this free snippet sorts out, but you still need to work on the back-end to make it functional—additional widgets for About Us, contact number, email, and newsletter subscription.
-
-                        At the bottom is also a footer menu for site navigation.
+                    <p className="about-us">DAQStrain là bộ sưu tập dịch vụ lớn nhất và đa dạng nhất của Châu Âu dành cho các chủng sinh vật sống từ môi trường biển, nước ngọt và trên cạn cũng như bộ sưu tập tảo cát vùng cực ngày càng tăng
                     </p>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img className="icon" src={icons.phone} />
@@ -25,7 +19,7 @@ function Footer() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img className="icon" src={icons.mail} />
-                        <strong style={{ fontSize: 18 }}>daqstrain@company.com.vn</strong>
+                        <strong style={{ fontSize: 18 }}>daqstrain@gmail.com</strong>
                     </div>
                     {/* searchbox */}
                     <div style={{ display: 'flex' }}>
@@ -41,7 +35,7 @@ function Footer() {
                     <h2>Các dự án nghiên cứu gần đây</h2>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <img className="icon" src={icons.social} />
-                        <p>Dự án nghiên cứu Katoratka của tập đoàn Cimocka</p>
+                        <p >Nghiên cứu đa dạng di truyền, thiết lập bộ sưu tập và chọn lọc các chủng Vi tảo có tiềm năng dinh dưỡng từ khu dự trữ sinh quyển rừng ngập mặn Cần Giờ</p>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <img className="icon" src={icons.social} />
@@ -49,7 +43,7 @@ function Footer() {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <img className="icon" src={icons.social} />
-                        <p>Dự án nghiên cứu Katoratka của tập đoàn Cimocka</p>
+                        <p>Dự án nghiên cứu sinh học và phát triển MAUI</p>
                     </div>
                 </div>
                 {/* cột 3 */}
