@@ -7,7 +7,7 @@ import { toastError, toastSuccess, toastWarning } from "../Toast/Toast";
 import { sendOtpApi, verifyOtpApi } from "../../apis/apiAuth";
 import { validateEmail } from "../../utils/Utils";
 import { IoReload } from "react-icons/io5";
-import { resetPasswordCustomerApi } from "../../apis/apiLogin";
+import { checkExistEmailApi, resetPasswordCustomerApi } from "../../apis/apiLogin";
 import { HashLoader } from 'react-spinners';
 
 
@@ -54,9 +54,16 @@ function ForgetPass() {
         const response = await verifyOtpApi(email, otp)
         if (response.data.status === -1) {
             toastError('OTP của bạn đã hết hạn, vui lòng ấn gửi lại OTP')
+            return
         }
         if (response.data.status === 0) {
             toastError('OTP bạn nhập không chính xác, vui lòng kiểm tra lại')
+            return
+        }   
+        const checkMail = await checkExistEmailApi(email)
+        if (checkMail.data.status === 0) {
+            toastError('Không có tài khoản nào sử dụng Email này');
+            return; 
         }
         if (response.data.status === 1) {
             await resetPasswordCustomerApi(email, reNewPass)
