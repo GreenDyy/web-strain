@@ -1,0 +1,38 @@
+.Drawer {
+    display: flex;
+    flex-direction: column;
+    width: 13vw;
+    height: 100vh;
+    padding-top: 20px;
+    background: #1E1E2C;
+    align-items: center;
+    color: white;
+
+    .header {
+        display: flex;
+        margin-bottom: 40px;
+
+        .logo {
+            height: 100px;
+            width: 100px;
+            border-radius: 999px;
+        }
+    }
+
+    .wrap-all-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        button {
+            background: none;
+            color: #9D9DA5;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            color: white;
+        }
+    }
+
+
+}

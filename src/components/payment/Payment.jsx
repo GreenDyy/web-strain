@@ -125,6 +125,11 @@ function Payment() {
     const handlePayOrder = async () => {
         if (dataListDetailCart.length != 0) {
             setLoading(true)
+            if (address === null) {
+                toastWarning('Bạn chưa nhập địa chỉ giao hàng')
+                setLoading(false)
+                return
+            }
             if (agree) {
 
                 //tạo đơn

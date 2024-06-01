@@ -1,9 +1,10 @@
 import React from "react";
 import './Footer.css'
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { icons } from '../../constants'
 
 function Footer() {
+    const navigate = useNavigate()
     return (
         <div className="Footer">
             {/* dòng 1 */}
@@ -19,7 +20,7 @@ function Footer() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img className="icon" src={icons.mail} />
-                        <strong style={{ fontSize: 18 }}>daqstrain@gmail.com</strong>
+                        <strong style={{ fontSize: 18 }} onClick={ ()=>navigate('/Employee')}>daqstrain@gmail.com</strong>
                     </div>
                     {/* searchbox */}
                     <div style={{ display: 'flex' }}>

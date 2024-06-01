@@ -5,7 +5,6 @@ import './Content.css'
 //all pages
 import Home from '../home/Home'
 import Product from '../product/typeShowProduct/Product'
-import Project from '../project/Project'
 import Login from '../login/Login'
 import Register from '../register/Register'
 import Cart from '../cart/Cart'
@@ -36,7 +35,6 @@ function Content() {
                 <Route path='/' element={<Home />} />
                 <Route path='/Home' element={<Home />} />
                 <Route path='/Product/:pageRouter' element={<Product />} />
-                <Route path='/Project' element={<Project />} />
                 <Route path='/NewsPaper' element={<NewsPaper />} />
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Register' element={<Register />} />

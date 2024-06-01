@@ -1,0 +1,22 @@
+.NavbarEmployee {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    background: white;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0; /* Đặt vị trí khi navbar bắt đầu dính */
+    .notification {
+        font-size: 25px;
+        margin-right: 20px;
+        color: #5CB14F;
+        cursor: pointer;
+    }
+    .avatar {
+        height: 45px;
+        width: 45px;
+        border-radius: 999px;
+        cursor: pointer;
+    }
+}
