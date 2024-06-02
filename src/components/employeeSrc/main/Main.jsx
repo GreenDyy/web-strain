@@ -4,6 +4,7 @@ import NewsPaper from "../../newspaper/NewsPaper";
 import Project from "../project/Project";
 import ContentWork from "../contentWork/ContentWork";
 import ProjectContent from "../projectContent/ProjectContent";
+import StrainManament from "../strainManament/StrainManament";
 
 function Main({ nameScreen = 'contentWork' }) {
     return (
@@ -12,6 +13,7 @@ function Main({ nameScreen = 'contentWork' }) {
             {nameScreen === 'newPaper' && <NewsPaper />}
             {nameScreen === 'project' && <Project />}
             {nameScreen === 'projectContent' && <ProjectContent />}
+            {nameScreen === 'strainManament' && <StrainManament />}
         </div>
     )
 }

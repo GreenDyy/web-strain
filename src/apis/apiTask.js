@@ -10,6 +10,16 @@ const getContentWorkApi = async (idContentWork) => {
     return response
 }
 
+const getProjectContentApi = async (idProjectContent) => {
+    const response = await axios.get(`${domain}/api/ProjectContent/${idProjectContent}`)
+    return response
+}
+
+const getProjecttApi = async (idProject) => {
+    const response = await axios.get(`${domain}/api/Project/${idProject}`)
+    return response
+}
+
 const updateContentWorkApi = async (idContentWork, contentWork) => {
     await axios.put(`${domain}/api/ContentWork/${idContentWork}`, {
         "idProjectContent": contentWork.idProjectContent,
@@ -31,9 +41,6 @@ const updateContentWorkApi = async (idContentWork, contentWork) => {
     })
 }
 
-
-
 export {
-    getAllContentWorkApi, updateContentWorkApi, getContentWorkApi,
-
+    getAllContentWorkApi, updateContentWorkApi, getContentWorkApi, getProjectContentApi, getProjecttApi
 }

@@ -21,8 +21,8 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-    const handleChangeStatusWork = async (status) => {
-        const newWork = { ...work, status: status };
+    const handleChangeStatusWork = async (status, endDateActual) => {
+        const newWork = { ...work, status: status, endDateActual: endDateActual };
         await updateContentWorkApi(work.idContentWork, newWork)
         updateWorkStatus(work.idContentWork, status);
         setShowDropdown(false)
@@ -47,16 +47,16 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
                 ref={dropdownRef}
                 style={{ width: '10%', cursor: 'pointer', position: 'relative' }}
                 className={`${work?.status === 'Chưa hoàn thành' ? 'not-complete' : 'complete'}`}
-                onClick={() => setShowDropdown(true)}>
+                onClick={() => setShowDropdown(!showDropdown)}>
                 {work?.status}
                 {showDropdown &&
                     <div className='wrap-dropdown'>
-                        <div className='wrap-item-drop' onClick={() => { handleChangeStatusWork("Chưa hoàn thành") }}>
+                        <div className='wrap-item-drop' onClick={() => { handleChangeStatusWork("Chưa hoàn thành", null) }}>
                             <FaCircleDot className='icon-drop' />
                             <p className='text-drop'>Chưa hoàn thành</p>
                         </div>
 
-                        <div className='wrap-item-drop' onClick={() => { handleChangeStatusWork("Đã hoàn thành") }}>
+                        <div className='wrap-item-drop' onClick={() => { handleChangeStatusWork("Đã hoàn thành", moment().format('YYYY-MM-DD')) }}>
                             <FaCircleDot className='icon-drop-2' />
                             <p className='text-drop-2'>Đã hoàn thành</p>
                         </div>
@@ -109,7 +109,7 @@ function ContentWork() {
         setDataModal(response.data)
         setShowModal(true)
     }
-    console.log(dataModal)
+
     return (
         <div className="ContentWork">
             <div className="row-statistical">
@@ -178,11 +178,13 @@ function ContentWork() {
                 <div className="row-table">
                     <table className='task-table'>
                         <thead>
-                            <th>Nội dung công việc</th>
-                            <th>Ngày BĐ</th>
-                            <th>Ngày KT</th>
-                            <th>Mức độ ưu tiên</th>
-                            <th>Trạng thái</th>
+                            <tr>
+                                <th>Nội dung công việc</th>
+                                <th>Ngày BĐ</th>
+                                <th>Ngày KT</th>
+                                <th>Mức độ ưu tiên</th>
+                                <th>Trạng thái</th>
+                            </tr>
                         </thead>
 
                         <tbody>
@@ -215,7 +217,7 @@ function ContentWork() {
                         </tbody>
                     </table>
                     {showModal && (
-                        <DetailWork item={dataModal} handleCloseModal={()=>{setShowModal(false)}} />
+                        <DetailWork item={dataModal} handleCloseModal={() => { setShowModal(false) }} updateWorkStatus={updateWorkStatus} />
                     )}
                 </div>
             </div>

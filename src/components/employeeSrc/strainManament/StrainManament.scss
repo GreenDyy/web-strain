@@ -1,0 +1,203 @@
+.StrainManament {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .row-statistical {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+
+        .text-header {
+            font-weight: 500;
+        }
+
+        .wrap-all-statistical {
+            display: flex;
+            justify-content: flex-start;
+
+            .o-box {
+                display: flex;
+                flex-direction: column;
+                height: 100px;
+                width: 20%;
+                border-radius: 20px;
+                padding: 10px 20px;
+                margin: 0 5px;
+                cursor: pointer;
+
+                .title {
+                    margin: 0;
+                    font-weight: 700;
+                    font-size: 14px;
+                }
+
+                .wrap-quantity {
+                    display: flex;
+                    padding: 20px 10px;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .quantity,
+                    .icon-work {
+                        margin: 0;
+                        font-size: 40px;
+                        font-weight: 700;
+                    }
+                }
+            }
+
+            .o-1 {
+                background: #DFF0FE;
+
+                .title,
+                .quantity,
+                .icon-work {
+                    color: #2694F5;
+                }
+            }
+
+            .o-2 {
+                background: #BFF6C3;
+
+                .title,
+                .quantity,
+                .icon-work {
+                    color: #0A6847;
+                }
+            }
+
+            .o-3 {
+                background: #FFEEA9;
+
+                .title,
+                .quantity,
+                .icon-work {
+                    color: #FF7D29;
+                }
+            }
+
+        }
+
+
+    }
+
+    .row-2 {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+
+        .text-header {
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        .wrap-all-item {
+            display: flex;
+            flex-wrap: wrap;
+
+            .wrap-item {
+                display: flex;
+                flex-direction: column;
+                width: 16%;
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 10px 5px;
+                background-color: #FFFAFA;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+                cursor: pointer;
+                transition: 0.3s;
+    
+                .card-img {
+                    width: 100%;
+                    height: 200px;
+    
+                    .img-strain {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+    
+                .card-text {
+                    padding: 0 10px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    position: relative;
+    
+                    .name {
+                        font-weight: 700;
+                        margin: 2;
+                        color: #5CB14F;
+                    }
+    
+                    .number {
+                        margin: 2;
+                        color: #5CB14F;
+                    }
+    
+                    .da-duyet {
+                        display: flex;
+                        justify-content: center;
+                        width: 100%;
+                        align-items: center;
+                        border-radius: 90px;
+                        background: none;
+                        border: 2px solid #00A551;
+                        color: #00A551;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        margin-bottom: 20px;
+                        font-weight: 700;
+                        transition: 0.3s ease-in-out;
+                    }
+    
+                    .chua-duyet {
+                        display: flex;
+                        justify-content: center;
+                        width: 100%;
+                        align-items: center;
+                        border-radius: 90px;
+                        background: none;
+                        border: 2px solid #FF7D29;
+                        color: #FF7D29;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        margin-bottom: 20px;
+                        font-weight: 700;
+                        transition: 0.3s ease-in-out;
+                    }
+                }
+            }
+    
+            .wrap-item:hover {
+                scale: 1.02;
+            }
+        }
+    }
+    .float-btn {
+        position: sticky;
+        bottom: 40px;
+        margin-left: 82vw;
+        color: #00A551;
+        font-size: 50px;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+    }
+    .float-btn:hover {
+        scale: 1.05;
+        color: #5CB14F;
+        transition: 0.3s ease-in-out;
+    }
+}
