@@ -82,6 +82,18 @@
                     color: #FF7D29;
                 }
             }
+            .add-top {
+                color: #00A551;
+                font-size: 80px;
+                align-self: center;
+                cursor: pointer;
+                margin-left: 50px;
+            }
+            .add-top:hover {
+                scale: 1.05;
+                color: #5CB14F;
+                transition: 0.3s ease-in-out;
+            }
 
         }
 
@@ -93,7 +105,6 @@
         flex-direction: column;
         background-color: white;
         border-radius: 20px;
-        margin-top: 20px;
         margin-bottom: 20px;
         padding-left: 20px;
         padding-right: 20px;
@@ -101,11 +112,15 @@
 
         .text-header {
             font-weight: 500;
-            margin-bottom: 0;
+            margin-bottom: 10px;
         }
+
         .wrap-all-item {
             display: flex;
             flex-wrap: wrap;
+            max-height: 60vh;
+            overflow: auto;
+
 
             .wrap-item {
                 display: flex;
@@ -118,35 +133,35 @@
                 box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
                 cursor: pointer;
                 transition: 0.3s;
-    
+
                 .card-img {
                     width: 100%;
                     height: 200px;
-    
+
                     .img-strain {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
                     }
                 }
-    
+
                 .card-text {
                     padding: 0 10px;
                     font-size: 14px;
                     font-weight: 500;
                     position: relative;
-    
+
                     .name {
                         font-weight: 700;
                         margin: 2;
                         color: #5CB14F;
                     }
-    
+
                     .number {
                         margin: 2;
                         color: #5CB14F;
                     }
-    
+
                     .da-duyet {
                         display: flex;
                         justify-content: center;
@@ -162,7 +177,7 @@
                         font-weight: 700;
                         transition: 0.3s ease-in-out;
                     }
-    
+
                     .chua-duyet {
                         display: flex;
                         justify-content: center;
@@ -180,21 +195,23 @@
                     }
                 }
             }
-    
+
             .wrap-item:hover {
                 scale: 1.02;
             }
         }
     }
+
     .float-btn {
-        position: sticky;
+        position: fixed;
         bottom: 40px;
-        margin-left: 82vw;
-        color: #00A551;
+        margin-left: -120px;
+        color: white;
         font-size: 50px;
         cursor: pointer;
         transition: 0.3s ease-in-out;
     }
+
     .float-btn:hover {
         scale: 1.05;
         color: #5CB14F;

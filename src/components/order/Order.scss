@@ -3,16 +3,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    // margin-left: 15vw;
-    // margin-right: 15vw;
-    // margin-bottom: 10vw;
-    // margin-top: 1vw;
     background: white;
     border-radius: 10px;
-    // box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     padding-top: 40px;
     padding-right: 15vw;
     padding-left: 15vw;
+    padding-bottom: 10vw;
 
     .wrap-state {
         display: flex;
@@ -34,6 +30,7 @@
             color: #00A551;
             transition: 0.3s ease-in-out;
         }
+
         .active {
             color: #00A551;
         }
@@ -43,5 +40,40 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+    }
+
+}
+
+.empty-order {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .img-empty-order {
+        height: 400px;
+        width: 400px;
+    }
+    .content {
+        width: 80%;
+        text-align: center;
+    }
+
+    .btn-login {
+        background: #76B947;
+        border-radius: 10px;
+        padding: 10px 80px;
+        color: white;
+        transition: 0.5s;
+        font-size: 20px;
+    }
+
+    .btn-login:hover {
+        padding: 10px 120px;
+        color: white;
+        transition: 0.5s;
+        color: black;
+        background: none;
+        border: 1px solid black;
+        transition: 0.5s;
     }
 }

@@ -1,5 +1,5 @@
 :root {
-  font-family:  system-ui, Helvetica, Arial, sans-serif;
+  font-family: system-ui, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-size: 16px;
@@ -10,8 +10,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-image: url(./assets/images/bg.jpg); */
-  
+
 }
 
 a {
@@ -49,4 +48,19 @@ button {
   /* font-optical-sizing: auto; */
   font-weight: 700;
   font-style: normal;
+}
+
+/* css cho scroll */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #0cd36c, #663399);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00A551
 }

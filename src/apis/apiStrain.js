@@ -82,6 +82,54 @@ const getAllGenusApi = async () => {
 const getConditionByIdApi = async (id) => {
     return await axios.get(`${domain}/api/ConditionalStrain/${id}`);
 };
+const getAllConditionApi = async () => {
+    return await axios.get(`${domain}/api/ConditionalStrain`);
+};
+
+const addIsolatorStrainApi = async (isolatorModel) => {
+    await axios.post(`${domain}/api/IsolatorStrain`, {
+        "iD_Employee": isolatorModel.iD_Employee,
+        "iD_Strain": isolatorModel.iD_Strain,
+        "yearOfIsolator": isolatorModel.yearOfIsolator
+    })
+}
+
+const addStrainApi = async (strainModel) => {
+    return await axios.post(`${domain}/api/Strain`, {
+        "strainNumber": strainModel.strainNumber,
+        "idSpecies": strainModel.idSpecies,
+        "idCondition": strainModel.idCondition,
+        "imageStrain": strainModel.imageStrain,
+        "scientificName": strainModel.scientificName,
+        "synonymStrain": strainModel.synonymStrain,
+        "formerName": strainModel.formerName,
+        "commonName": strainModel.commonName,
+        "cellSize": strainModel.cellSize,
+        "organization": strainModel.organization,
+        "characteristics": strainModel.characteristics,
+        "collectionSite": strainModel.collectionSite,
+        "continent": strainModel.continent,
+        "country": strainModel.country,
+        "isolationSource": strainModel.isolationSource,
+        "toxinProducer": strainModel.toxinProducer,
+        "stateOfStrain": strainModel.stateOfStrain,
+        "agitationResistance": strainModel.agitationResistance,
+        "remarks": strainModel.remarks,
+        "geneInformation": strainModel.geneInformation,
+        "publications": strainModel.publications,
+        "recommendedForTeaching": strainModel.recommendedForTeaching,
+        "dateAdd": strainModel.dateAdd
+    })
+}
+
+const addStrainApprovalHistoryApi = async (idStrain) => {
+    await axios.post(`${domain}/api/StrainApprovalHistory`, {
+        "idStrain": idStrain,
+        "status": 'Đang chờ xét duyệt',
+        "dateApproval": null,
+        "reason": null,
+    })
+}
 
 export {
     getAllStrainApi,
@@ -103,4 +151,8 @@ export {
     getRandomStrainApi,
     getAllStrainByNumberAndNameApi,
     getAllStrainByTheEmployee,
+    addIsolatorStrainApi,
+    addStrainApi,
+    getAllConditionApi,
+    addStrainApprovalHistoryApi,
 };

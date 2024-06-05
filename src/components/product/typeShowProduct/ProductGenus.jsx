@@ -85,9 +85,9 @@ function ProductGenus() {
                 {/* cột ds strain */}
                 {dataStrain.length !== 0 &&
                     <div className='col-all-item'>
-
-
-                        <h1 style={{ textAlign: 'center', color: 'black' }}>Danh sách Strain</h1>
+                        <div className='wrap-row-header'>
+                            <h1 className='header'>Danh sách Strain</h1>
+                        </div>
 
                         <div className='sort-by'>
                             <p>Sắp xếp theo tên: </p>
@@ -119,10 +119,11 @@ function ProductGenus() {
                             pageCount={totalPage}
                             previousLabel="<"
                             renderOnZeroPageCount={null}
-                            pageLinkClassName='btn-page'
-                            activeLinkClassName='btn-page-active'
-                            previousLinkClassName='btn-previous'
-                            nextLinkClassName='btn-next'
+                            containerClassName="pagination"
+                            pageLinkClassName="btn-page"
+                            activeLinkClassName="btn-page-active"
+                            previousLinkClassName="btn-previous"
+                            nextLinkClassName="btn-next"
                         />
                     </div>
                 }

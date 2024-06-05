@@ -4,7 +4,7 @@ import { MdDeliveryDining, MdOutlinePendingActions } from "react-icons/md";
 import { AiOutlineCodeSandbox, AiFillCheckCircle } from "react-icons/ai";
 
 const DangChoXuLy = () => (
-    <p style={{ display: 'flex', alignItems: 'center', textAlign: 'center', borderRadius: 90, padding: '3px 10px', background: '#C7C8CC', color: 'white' }}>
+    <p style={{ display: 'flex', alignItems: 'center', textAlign: 'center', borderRadius: 90, padding: '3px 10px', background: '#FF7D29', color: 'white' }}>
         <MdOutlinePendingActions style={{ fontSize: 25, marginRight: 5 }} />Đang chờ xử lý
     </p>
 )

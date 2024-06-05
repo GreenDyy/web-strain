@@ -1,22 +1,16 @@
-import mario from '../assets/images/mario.png'
-import bg from '../assets/images/bg.jpg'
-import doctor from '../assets/images/doctor.png'
-import bgmushroom from '../assets/images/bg-mushroom.jpg'
 import strainnull from '../assets/images/strainnull.png'
 import emptycart from '../assets/images/emptycart.png'
 import avatarnull from '../assets/images/avatarnull.png'
 import success from '../assets/images/success.png'
 import emptysearch from '../assets/images/emptysearch.png'
+import emptyorder from '../assets/images/emptyorder.png'
 const images = {
-    mario,
-    bg,
-    doctor,
-    bgmushroom,
     strainnull,
     emptycart,
     avatarnull,
     success,
     emptysearch,
+    emptyorder,
 }
 
 export default images

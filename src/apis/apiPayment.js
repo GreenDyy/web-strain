@@ -8,7 +8,7 @@ const createOrderApi = async (idCustomer, totalPrice, note, deliveryAddress) => 
         "idCustomer": idCustomer,
         "idEmployee": null,
         "dateOrder": currentDate,
-        "totalPrice": totalPrice, 
+        "totalPrice": totalPrice,
         "status": "Đang chờ xử lý",
         "note": note,
         "deliveryAddress": deliveryAddress
@@ -46,6 +46,14 @@ const sendMailOrderApi = async (idOrder) => {
     return response
 }
 
+const deleteOrderDetail = async (idOrderDetail) => {
+    await axios.delete(`${domain}/api/OrderDetail/${idOrderDetail}`)
+}
+
+const deleteOrder = async (idOrder) => {
+    await axios.delete(`${domain}/api/Order/${idOrder}`)
+}
+
 export {
     createOrderApi,
     addOrderDetailApi,
@@ -53,4 +61,6 @@ export {
     getAllOrderDetailByIdOrderApi,
     getOrderByIdOrderApi,
     sendMailOrderApi,
+    deleteOrderDetail,
+    deleteOrder,
 };

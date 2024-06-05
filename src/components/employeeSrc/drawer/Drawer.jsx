@@ -1,32 +1,36 @@
 import React from "react";
 import './Drawer.scss'
 import { icons } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { FaViruses } from "react-icons/fa6";
+import { setDataLocalStorage } from "../../../utils/Utils";
 
 const features = [
     {
         id: 1,
-        name: 'Quản lý dự án',
-        screenName: 'project'
+        name: 'Quản lý công việc',
+        screenName: 'contentWork',
+        icon: icons.work
     },
     {
         id: 2,
-        name: 'Quản lý công việc',
-        screenName: 'projectContent'
+        name: 'Quản lý Strain',
+        screenName: 'strainManament',
+        icon: icons.strain
     },
-    {
-        id: 3,
-        name: 'Task',
-        screenName: 'contentWork'
-    },
-    {
-        id: 4,
-        name: 'Strain của tôi',
-        screenName: 'strainManament'
-    },
+    // {
+    //     id: 3,
+    //     name: 'Task',
+    //     screenName: 'contentWork'
+    // },
+    // {
+    //     id: 4,
+    //     name: 'Strain của tôi',
+    //     screenName: 'strainManament'
+    // },
 ]
 const Drawer = ({ setScreenName }) => {
     const handleButtonClick = (screenName) => {
+        setDataLocalStorage('screenNameOfDrawer', screenName)
         setScreenName(screenName);
     };
     return (
@@ -38,7 +42,8 @@ const Drawer = ({ setScreenName }) => {
                 {features.map((item) => {
                     return (
                         <button key={item.id} onClick={() => handleButtonClick(item.screenName)}>
-                            {item.name}
+                            <img src={item.icon} className="icon" />
+                            <p> {item.name} </p>
                         </button>)
                 })}
             </div>

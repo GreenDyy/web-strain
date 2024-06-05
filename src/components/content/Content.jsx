@@ -34,7 +34,10 @@ function Content() {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/Home' element={<Home />} />
-                <Route path='/Product/:pageRouter' element={<Product />} />
+                <Route path="/Product/:category/:page" element={<Product />} />
+                {/* <Route path='/Product/:pageRouter' element={<Product />} /> */}
+                <Route path="/Product/:category/:pageRouter" element={<Product />} />
+
                 <Route path='/NewsPaper' element={<NewsPaper />} />
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Register' element={<Register />} />

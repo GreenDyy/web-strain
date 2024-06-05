@@ -110,7 +110,8 @@ const Navbar = () => {
                         listNavbarItem.map((item, index) => (
                             <li key={index}>
                                 <Link
-                                    className={`Link ${isSelected === index + 1 ? 'selected' : ''}`}
+                                    // className={`Link ${isSelected === index + 1 ? 'selected' : ''}`}
+                                    className="Link"
                                     to={item.to}
                                     onClick={() => setIsSelected(index + 1)}>
                                     {item.title}

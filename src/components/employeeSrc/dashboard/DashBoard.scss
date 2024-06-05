@@ -1,7 +1,9 @@
 .DashBoard {
     display: flex;
     flex: 1;
-    
+    position: fixed;
+    width: 100%;
+    top: 0;
 
     .col-2 {
         display: flex;

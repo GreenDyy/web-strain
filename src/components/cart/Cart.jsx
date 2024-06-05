@@ -32,7 +32,7 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
     return (
         <tr style={{ alignItems: 'center', justifyContent: 'center' }}>
             <td className='card-product'>
-                <img src={imageSrc} onClick={() => navigate(`/ProductDetail/${item.idStrain}`)}/>
+                <img src={imageSrc} onClick={() => navigate(`/ProductDetail/${item.idStrain}`)} />
                 <div className='card-text'>
                     <p className='title' onClick={() => navigate(`/ProductDetail/${item.idStrain}`)}>{item.idStrainNavigation.scientificName}</p>
                     <p className='des'>Strain number: {item.idStrainNavigation.strainNumber}</p>

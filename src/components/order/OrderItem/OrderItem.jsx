@@ -40,7 +40,7 @@ const ItemOrderDetail = ({ oderDetail }) => {
     )
 }
 
-function OrderItem({ order, onClick }) {
+function OrderItem({ order, onClick, onHandleDestroyOrder }) {
     const [listOrderDetail, setListOrderDetail] = useState([])
 
     useEffect(() => {
@@ -80,7 +80,7 @@ function OrderItem({ order, onClick }) {
 
             {order?.status === 'Đang chờ xử lý'
                 &&
-                <button className="btn-cancel" onClick={() => toastWarning('Đang phát triển')}>Huỷ đơn hàng</button>
+                <button className="btn-cancel" onClick={() => onHandleDestroyOrder(order.idOrder)}>Huỷ đơn hàng</button>
             }
 
         </div>

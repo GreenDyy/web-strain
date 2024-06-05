@@ -3,9 +3,10 @@ import './DashBoard.scss'
 import Drawer from "../drawer/Drawer";
 import NavbarEmployee from "../navbarEmployee/NavbarEmployee";
 import Main from "../main/Main";
+import { getDataLocalStorage } from "../../../utils/Utils";
 
 function DashBoard() {
-    const [screenName, setScreenName] = useState('contentWork'); 
+    const [screenName, setScreenName] = useState(getDataLocalStorage('screenNameOfDrawer') || 'contentWork'); 
     return (
         <div className="DashBoard">
              <Drawer setScreenName={setScreenName} />

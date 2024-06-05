@@ -7,6 +7,8 @@ import social from '../assets/icons/social.png'
 import previous from '../assets/icons/previous.png'
 import cart from '../assets/icons/cart.png'
 import momo from '../assets/icons/momo.png'
+import strain from '../assets/icons/strain.png'
+import work from '../assets/icons/work.png'
 
 const icons = {
     searchicon,
@@ -18,6 +20,8 @@ const icons = {
     previous,
     cart,
     momo,
+    strain,
+    work
 }
 
 export default icons

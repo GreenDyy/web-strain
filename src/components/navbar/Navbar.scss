@@ -1,7 +1,7 @@
 .Navbar {
     display: flex;
     position: sticky;
-    top: 0px;
+    top: 0;
     justify-content: space-between;
     align-items: center;
     padding: 5px 3%;
@@ -108,8 +108,7 @@
                 background: white;
                 color: black;
                 padding-left: 10px;
-                padding-right: 5px;
-              
+                padding-right: 5px;    
                 border-radius: 8px;
                 align-items: center;
                 box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
