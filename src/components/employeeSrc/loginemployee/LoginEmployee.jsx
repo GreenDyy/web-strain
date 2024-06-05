@@ -41,7 +41,8 @@ function LoginEmployee() {
             //     setSpinner(false)
             //     toastError("Sai tên tài khoản hoặc mật khẩu")
             // }
-            navigate('/Employee/DashBoard')
+     
+            navigate('/Employee/DashBoard', {replace: true})
         }
         catch (e) {
             console.log(e)

@@ -42,7 +42,7 @@ function Login() {
                     idCart: cart.data.idCart
                 }))
                 dispatch(setTotalAllProduct(allTotalProductInCart.data));
-                navigate('/Home')
+                navigate('/Home', {replace: true})
             }
             else {
                 setSpinner(false)

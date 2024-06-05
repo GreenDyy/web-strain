@@ -12,7 +12,7 @@ import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
 import { FaUserAstronaut } from "react-icons/fa6";
 import { IoSearchCircle } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
-import { convertImageByte } from '../../utils/Utils'
+import { convertImageByte, removeDataLocalStorage } from '../../utils/Utils'
 import { getAllStrainByNumberAndNameApi } from '../../apis/apiStrain'
 
 
@@ -113,7 +113,10 @@ const Navbar = () => {
                                     // className={`Link ${isSelected === index + 1 ? 'selected' : ''}`}
                                     className="Link"
                                     to={item.to}
-                                    onClick={() => setIsSelected(index + 1)}>
+                                    onClick={() => {
+                                        setIsSelected(index + 1)
+                                        removeDataLocalStorage('node')
+                                    }}>
                                     {item.title}
                                 </Link>
                             </li>

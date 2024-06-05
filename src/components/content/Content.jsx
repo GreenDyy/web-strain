@@ -11,10 +11,10 @@ import Cart from '../cart/Cart'
 import TestArea from '../testArea/TestArea'
 import ProductDetail from '../product/procductDetail/ProductDetail'
 import Payment from '../payment/Payment'
-import ProductPhylum from '../product/typeShowProduct/ProductPhylum'
-import ProductClass from '../product/typeShowProduct/ProductClass'
-import ProductGenus from '../product/typeShowProduct/ProductGenus'
-import ProductSpecies from '../product/typeShowProduct/ProductSpecies'
+// import ProductPhylum from '../product/typeShowProduct/ProductPhylum'
+// import ProductClass from '../product/typeShowProduct/ProductClass'
+// import ProductGenus from '../product/typeShowProduct/ProductGenus'
+// import ProductSpecies from '../product/typeShowProduct/ProductSpecies'
 import Profile from '../profile/Profile'
 import ForgetPass from '../forgetPass/ForgetPass'
 import PaymentSuccess from '../paymentSuccess/PaymentSuccess'
@@ -34,9 +34,10 @@ function Content() {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/Home' element={<Home />} />
-                <Route path="/Product/:category/:page" element={<Product />} />
+                {/* <Route path="/Product/:category/:page" element={<Product />} /> */}
                 {/* <Route path='/Product/:pageRouter' element={<Product />} /> */}
-                <Route path="/Product/:category/:pageRouter" element={<Product />} />
+                <Route path="/Product/:category/:typeName/:pageRouter" element={<Product />} />
+                <Route path="/Product/:pageRouter" element={<Product />} />
 
                 <Route path='/NewsPaper' element={<NewsPaper />} />
                 <Route path='/Login' element={<Login />} />
@@ -49,10 +50,10 @@ function Content() {
 
                 <Route path='/Payment' element={<Payment />} />
                 <Route path='/PaymentSuccess' element={<PaymentSuccess />} />
-                <Route path='/Product/Phylum/:namePhylum/:pageRouter' element={<ProductPhylum />} />
+                {/* <Route path='/Product/Phylum/:namePhylum/:pageRouter' element={<ProductPhylum />} />
                 <Route path='/Product/Class/:nameClass/:pageRouter' element={<ProductClass />} />
                 <Route path='/Product/Genus/:nameGenus/:pageRouter' element={<ProductGenus />} />
-                <Route path='/Product/Species/:nameSpecies/:pageRouter' element={<ProductSpecies />} />
+                <Route path='/Product/Species/:nameSpecies/:pageRouter' element={<ProductSpecies />} /> */}
                 <Route path='/Order' element={<Order />} />
                 <Route path='/OrderDetail/:idOrder' element={<OrderDetail />} />
             </Routes>

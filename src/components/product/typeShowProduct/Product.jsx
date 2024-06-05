@@ -17,6 +17,7 @@ import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
 import ItemProduct from '../ItemProduct/ItemProduct';
 import Loading from '../../loading/Loading';
 import { images } from '../../../constants';
+import { getDataLocalStorage, setDataLocalStorage } from '../../../utils/Utils';
 
 function Product() {
     const { pageRouter } = useParams();
@@ -26,43 +27,53 @@ function Product() {
     const [totalPage, setTotalPage] = useState(0);
     const [treeData, setTreeData] = useState([]);
     const [node, setNode] = useState({
-        idClass: null,
-        nameClass: null,
-        idGenus: null,
-        nameGenus: null,
-        idPhylum: null,
-        namePhylum: null,
-        idSpecies: null,
-        nameSpecies: null
+        idClass: getDataLocalStorage('node')?.idClass || null,
+        nameClass: getDataLocalStorage('node')?.nameClass || null,
+        idGenus: getDataLocalStorage('node')?.idGenus || null,
+        nameGenus: getDataLocalStorage('node')?.nameGenus || null,
+        idPhylum: getDataLocalStorage('node')?.idPhylum || null,
+        namePhylum: getDataLocalStorage('node')?.namePhylum || null,
+        idSpecies: getDataLocalStorage('node')?.idSpecies || null,
+        nameSpecies: getDataLocalStorage('node')?.nameSpecies || null,
     });
     const navigate = useNavigate();
-
+    //lấy data cây 1 lần thôi
+    useEffect(() => {
+        const fetchData = async () => {
+            const dataTree = await getAllPhylumApi();
+            setTreeData(dataTree.data);
+        }
+        fetchData()
+    }, [])
+    //data strain nè
     useEffect(() => {
         const fetchData = async () => {
             try {
                 console.log('bạn đã click vào node', node);
-
-                const dataTree = await getAllPhylumApi();
                 let dataStrain = '';
-
                 if (!node.idClass && !node.idGenus && !node.idPhylum && !node.idSpecies) {
                     dataStrain = await getAllStrainApi(search, sortBy, pageRouter);
-                    navigate(`/Product/All/${pageRouter}`, { replace: true });
+                    console.log('đang lấy all');
+                    navigate(`/Product/${pageRouter}`);
                 } else if (node.idClass) {
                     dataStrain = await getAllStrainFollowClassApi(node.nameClass, search, sortBy, pageRouter);
-                    navigate(`/Product/Class/${pageRouter}`, { replace: true });
+                    console.log('đang lấy class');
+                    navigate(`/Product/Class/${node.nameClass}/${pageRouter}`); //render cái content
                 } else if (node.idPhylum) {
                     dataStrain = await getAllStrainFollowPhylumApi(node.namePhylum, search, sortBy, pageRouter);
-                    navigate(`/Product/Phylum/${pageRouter}`, { replace: true });
+                    console.log('đang lấy phylum');
+                    navigate(`/Product/Phylum/${node.namePhylum}/${pageRouter}`);
                 } else if (node.idSpecies) {
                     dataStrain = await getAllStrainFollowSpeciesApi(node.nameSpecies, search, sortBy, pageRouter);
-                    navigate(`/Product/Species/${pageRouter}`, { replace: true });
+                    console.log('đang lấy species');
+                    navigate(`/Product/Species/${node.nameSpecies}/${pageRouter}`);
                 } else if (node.idGenus) {
                     dataStrain = await getAllStrainFollowGenusApi(node.nameGenus, search, sortBy, pageRouter);
-                    navigate(`/Product/Genus/${pageRouter}`, { replace: true });
+                    console.log('đang lấy genus');
+                    navigate(`/Product/Genus/${node.nameGenus}/${pageRouter}`);
                 }
 
-                setTreeData(dataTree.data);
+
                 setDataStrain(dataStrain.data);
                 setTotalPage(dataStrain.data[0]?.totalPage || 0);
             } catch (error) {
@@ -71,24 +82,69 @@ function Product() {
             }
         };
         fetchData();
-    }, [search, sortBy, pageRouter, node, navigate])
+    }, [search, sortBy, pageRouter, node])
 
     const handleGoToDetail = (idStrain) => {
         navigate(`/ProductDetail/${idStrain}`);
     };
 
-    const handleSelectNode = (selectedNode) => {
-        setNode(prevNode => ({
-            idClass: selectedNode.idClass || prevNode.idClass,
-            nameClass: selectedNode.nameClass || prevNode.nameClass,
-            idGenus: selectedNode.idGenus || prevNode.idGenus,
-            nameGenus: selectedNode.nameGenus || prevNode.nameGenus,
-            idPhylum: selectedNode.idPhylum || prevNode.idPhylum,
-            namePhylum: selectedNode.namePhylum || prevNode.namePhylum,
-            idSpecies: selectedNode.idSpecies || prevNode.idSpecies,
-            nameSpecies: selectedNode.nameSpecies || prevNode.nameSpecies
-        }));
-    };
+    const handleSelectNode = async (node) => {
+        if (node.idPhylum) {
+            if (node.idClass) {
+                setNode({
+                    idClass: node.idClass,
+                    nameClass: node.nameClass,
+                    idGenus: null,
+                    nameGenus: null,
+                    idPhylum: null,
+                    namePhylum: null,
+                    idSpecies: null,
+                    nameSpecies: null
+                })
+            }
+            else {
+                setNode({
+                    idClass: null,
+                    nameClass: null,
+                    idGenus: null,
+                    nameGenus: null,
+                    idPhylum: node.idPhylum,
+                    namePhylum: node.namePhylum,
+                    idSpecies: null,
+                    nameSpecies: null
+                })
+            }
+        }
+        else {
+            if (node.idGenus) {
+                if (node.idSpecies) {
+                    setNode({
+                        idClass: null,
+                        nameClass: null,
+                        idGenus: null,
+                        nameGenus: null,
+                        idPhylum: null,
+                        namePhylum: null,
+                        idSpecies: node.idSpecies,
+                        nameSpecies: node.nameSpecies
+                    })
+                }
+                else {
+                    setNode({
+                        idClass: null,
+                        nameClass: null,
+                        idGenus: node.idGenus,
+                        nameGenus: node.nameGenus,
+                        idPhylum: null,
+                        namePhylum: null,
+                        idSpecies: null,
+                        nameSpecies: null
+                    })
+                }
+            }
+        }
+        setDataLocalStorage('node', node)
+    }
 
     return (
         <div className='Product'>
@@ -111,47 +167,50 @@ function Product() {
 
                 {dataStrain.length !== 0 ? (
                     <div className='col-all-item'>
-                        <div className='wrap-row-header'>
-                            <h1 className='header'>Danh sách Strain</h1>
+                        <div className='wrap-all-item'>
+                            <div className='wrap-row-header'>
+                                <h1 className='header'>Danh sách Strain</h1>
+                            </div>
+
+                            <div className='sort-by'>
+                                <p>Sắp xếp theo tên: </p>
+                                {sortBy === 'Scientific_Name_Asc'
+                                    ? <FaSortAlphaUp className='icon-sort' onClick={() => setSortBy('Scientific_Name_Desc')} />
+                                    : <FaSortAlphaDown className='icon-sort' onClick={() => setSortBy('Scientific_Name_Asc')} />}
+                            </div>
+
+                            <div className='wrap-item'>
+                                {dataStrain.map((item, index) => (
+                                    <ItemProduct
+                                        key={index}
+                                        item={item}
+                                        onClickToDetail={handleGoToDetail}
+                                    />
+                                ))}
+                            </div>
                         </div>
 
-                        <div className='sort-by'>
-                            <p>Sắp xếp theo tên: </p>
-                            {sortBy === 'Scientific_Name_Asc'
-                                ? <FaSortAlphaUp className='icon-sort' onClick={() => setSortBy('Scientific_Name_Desc')} />
-                                : <FaSortAlphaDown className='icon-sort' onClick={() => setSortBy('Scientific_Name_Asc')} />}
-                        </div>
-
-                        <div className='wrap-item'>
-                            {dataStrain.map((item, index) => (
-                                <ItemProduct
-                                    key={index}
-                                    item={item}
-                                    onClickToDetail={handleGoToDetail}
-                                />
-                            ))}
-                        </div>
 
                         <ReactPaginate
                             breakLabel="..."
                             nextLabel=">"
                             onPageChange={(event) => {
                                 const selectedPage = event.selected;
-                                let categoryRoute = '';
-
                                 if (node.idClass) {
-                                    categoryRoute = 'Class';
+                                    navigate(`/Product/Class/${node.nameClass}/${selectedPage + 1}`)
+                                    window.scrollTo({ top: 0 })
                                 } else if (node.idPhylum) {
-                                    categoryRoute = 'Phylum';
+                                    navigate(`/Product/Phylum/${node.namePhylum}/${selectedPage + 1}`)
+                                    window.scrollTo({ top: 0 })
                                 } else if (node.idSpecies) {
-                                    categoryRoute = 'Species';
+                                    navigate(`/Product/Species/${node.nameSpecies}/${selectedPage + 1}`)
+                                    window.scrollTo({ top: 0 })
                                 } else if (node.idGenus) {
-                                    categoryRoute = 'Genus';
+                                    navigate(`/Product/Genus/${node.nameGenus}/${selectedPage + 1}`)
+                                    window.scrollTo({ top: 0 })
                                 } else {
-                                    categoryRoute = '';
+                                    navigate(`/Product/${selectedPage + 1}`);
                                 }
-
-                                navigate(`/Product/${categoryRoute}/${selectedPage + 1}`);
                             }}
                             pageRangeDisplayed={5}
                             pageCount={totalPage}

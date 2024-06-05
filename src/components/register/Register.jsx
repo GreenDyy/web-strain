@@ -99,7 +99,7 @@ function Register() {
                     idCart: cart.data.idCart
                 }))
                 dispatch(setTotalAllProduct(allTotalProductInCart.data));
-                navigate('/Home')
+                navigate('/Home', {replace: true})
             }
             else {
                 toastError("Lỗi đăng nhập, status 500")

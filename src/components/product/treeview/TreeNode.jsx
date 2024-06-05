@@ -3,7 +3,9 @@ import './TreeNode.scss';
 import { AiOutlineCaretRight, AiOutlineCaretDown } from "react-icons/ai";
 
 const TreeNode = ({ node, parents = [], onSelectNode }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
+    const [selectedNode, setSelectedNode] = useState(null);
+
 
     const hasChildren = node.classes || node.genus || node.species;
 
