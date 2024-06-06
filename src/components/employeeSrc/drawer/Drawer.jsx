@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './Drawer.scss'
 import { icons } from "../../../constants";
 import { FaViruses } from "react-icons/fa6";
@@ -29,7 +29,10 @@ const features = [
     // },
 ]
 const Drawer = ({ setScreenName }) => {
-    const handleButtonClick = (screenName) => {
+    const [btnSelect, setBtnSelected] = useState(null)
+
+    const handleButtonClick = (id, screenName) => {
+        setBtnSelected(id)
         setDataLocalStorage('screenNameOfDrawer', screenName)
         setScreenName(screenName);
     };
@@ -41,7 +44,7 @@ const Drawer = ({ setScreenName }) => {
             <div className="wrap-all-btn">
                 {features.map((item) => {
                     return (
-                        <button key={item.id} onClick={() => handleButtonClick(item.screenName)}>
+                        <button className={`btn-drawer ${item.id === btnSelect ? 'btn-selected' : ''}`} key={item.id} onClick={() => handleButtonClick(item.id, item.screenName)}>
                             <img src={item.icon} className="icon" />
                             <p> {item.name} </p>
                         </button>)

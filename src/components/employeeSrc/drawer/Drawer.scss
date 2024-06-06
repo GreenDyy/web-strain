@@ -23,13 +23,20 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        button {
+
+        .btn-drawer {
+            width: 100%;
             display: flex;
             align-items: center;
             background: none;
             color: #9D9DA5;
+            margin: -10px -10;
+            padding: -10px 40px;
             margin-bottom: 20px;
             font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s ease-in-out;
+
             .icon {
                 width: 40px;
                 height: 40px;
@@ -40,6 +47,14 @@
 
         button:hover {
             color: white;
+            background: #2D2C34;
+            border-radius: 20px;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-selected {
+            color: #00A557;
+            background: #2D2C34;
+            border-radius: 20px;
         }
     }
 

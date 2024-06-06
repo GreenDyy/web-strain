@@ -11,6 +11,7 @@ import { toastError, toastSuccess, toastWarning } from "../../Toast/Toast";
 import { setTotalAllProduct } from "../../../srcRedux/features/cartSlice";
 import Slider from "react-slick";
 import { images } from "../../../constants";
+import Loading from "../../loading/Loading";
 
 const dataMota = 'Trong vi sinh vật học, "strain" thường được dịch là "dòng" hoặc "chủng", và nó đề cập đến một nhóm vi sinh vật có đặc điểm di truyền tương tự nhau. Các dòng vi sinh vật có thể khác nhau về các tính chất như khả năng gây bệnh, sức đề kháng kháng sinh, hoặc khả năng sản xuất các chất sinh học cụ thể.'
 const dataReview = 'Trong ngữ cảnh của vi sinh vật học, "strain" không chỉ đơn thuần là một khái niệm mà còn là nền tảng cho sự hiểu biết và ứng dụng trong nhiều lĩnh vực khác nhau. Sự đa dạng của các strain mở ra cơ hội cho việc nghiên cứu sâu rộng và phát triển các giải pháp đa dạng cho các thách thức y tế và công nghiệp hiện đại'
@@ -42,6 +43,7 @@ function ProductDetail() {
     const [count, setCount] = useState(0)
     const [entryDate, setEntryDate] = useState('')
     const [dataRandomStrain, setDataRandomStrain] = useState([])
+    const [loading, setLoading] = useState(false)
 
     //cho navbar con
     const [selectedNav, setSelectedNav] = useState(1)
@@ -424,7 +426,10 @@ function ProductDetail() {
                     </div>
                 </div>
             ) : (
-                <p>Đang load</p>
+                <div className="wrap-loading">
+                    <Loading />
+                </div>
+
             )}
         </div>
     );

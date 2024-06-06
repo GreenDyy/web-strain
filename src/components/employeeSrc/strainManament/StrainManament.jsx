@@ -36,7 +36,7 @@ const ItemStrain = ({ item, onHandleDetail }) => {
 
 
 
-function StrainManament() {
+function StrainManament({ employee }) {
     const [strains, setStrains] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [daDuyet, setDaDuyet] = useState(0)
@@ -44,13 +44,14 @@ function StrainManament() {
     const [dataType, setDataType] = useState(1)
     const [strain, setStrain] = useState(null)
 
+    const fetchStrains = async () => {
+        const response = await getAllStrainByTheEmployee(employee?.idEmployee);
+        setStrains(response.data);
+    }
+
     useEffect(() => {
-        const fetchData = async () => {
-            const strains = await getAllStrainByTheEmployee('NV002')
-            setStrains(strains.data)
-        }
-        fetchData()
-    }, [])
+        fetchStrains();
+    }, []);
 
     useEffect(() => {
         setDaDuyet(strains.filter(s => s.strainNumber !== null).length)
@@ -68,6 +69,10 @@ function StrainManament() {
         setShowModal(true)
         setStrain(null)
         window.scrollTo({ top: 0 })
+    }
+
+    const handleDataUpdated = () => {
+        fetchStrains();
     }
 
     return (
@@ -142,7 +147,7 @@ function StrainManament() {
 
             <IoMdAddCircle className="float-btn" onClick={handleOpenModalStrain} />
             {showModal && (
-                <StrainModal handleCloseModal={() => setShowModal(false)} strain={strain} />
+                <StrainModal handleCloseModal={() => setShowModal(false)} strain={strain} employee={employee} onUpdateData={handleDataUpdated} />
             )}
         </div>
     )

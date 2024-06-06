@@ -68,7 +68,7 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
 
 const prioritys = ['Tất cả', 'Cao', 'Thấp']
 
-function ContentWork() {
+function ContentWork({employee}) {
     const [dataContentWork, setDataContentWork] = useState([])
     const [chuaLam, setChuaLam] = useState(0)
     const [hoanThanh, setHoanThanh] = useState(0)
@@ -96,7 +96,7 @@ function ContentWork() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const dataCW = await getAllContentWorkApi("NV002")
+            const dataCW = await getAllContentWorkApi(employee.idEmployee)
             setDataContentWork(dataCW.data)
         }
         fetchData()

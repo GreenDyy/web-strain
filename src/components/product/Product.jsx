@@ -18,7 +18,7 @@ import ItemProduct from './ItemProduct/ItemProduct';
 import Loading from '../loading/Loading';
 import { images } from '../../constants';
 import { getDataLocalStorage, setDataLocalStorage } from '../../utils/Utils';
-import { GoChevronDown, GoChevronLeft, GoChevronRight } from "react-icons/go";
+import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 
 function Product() {
     const { pageRouter } = useParams();

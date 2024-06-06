@@ -4,9 +4,9 @@ import './Register.scss';
 import { FaUser, FaLock, FaPhone } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
 import { TbUserSquareRounded } from "react-icons/tb";
-
+import { IoLocationOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { toastError, toastSuccess, toastWarning } from "../Toast/Toast";
+import { toastError, toastWarning } from "../Toast/Toast";
 import { checkExistEmailApi, checkExistUserNameApi, loginCustomerApi, registerCustomerApi } from "../../apis/apiLogin";
 import { login } from "../../srcRedux/features/customerSlice";
 import { getAllTotalQuantityApi, getCartByIdCustomerApi } from "../../apis/apiCart";
@@ -29,6 +29,7 @@ function Register() {
     const [gender, setGender] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('')
     const [day, setDay] = useState('');
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
@@ -40,7 +41,7 @@ function Register() {
 
     const handleRegister = async () => {
         setSpinner(true)
-        if (!username || !password || !email || !phoneNumber || !day || !month || !year || !gender) {
+        if (!username || !password || !email || !phoneNumber || !day || !month || !year || !gender || !address) {
             setSpinner(false)
             toastWarning('Vui lòng nhập đầy đủ thông tin');
             return;
@@ -58,14 +59,14 @@ function Register() {
         const checkMail = await checkExistEmailApi(email)
         if (checkMail.data.status === 1) {
             setSpinner(false)
-            toastWarning('Email đã tồn tại');
+            toastWarning('Email đã được sử dụng');
             return;
         }
 
         const checkUserName = await checkExistUserNameApi(username)
-        if(checkUserName.data.status === 1) {
+        if (checkUserName.data.status === 1) {
             setSpinner(false)
-            toastWarning('Tên người dùng đã tồn tại');
+            toastWarning('Tên người dùng đã được sử dụng');
             return;
         }
 
@@ -82,7 +83,7 @@ function Register() {
                 gender: gender,
                 email: email,
                 phoneNumber: phoneNumber,
-                address: null,
+                address: address,
                 image: imageBinary,
                 username: username,
                 password: password,
@@ -99,7 +100,7 @@ function Register() {
                     idCart: cart.data.idCart
                 }))
                 dispatch(setTotalAllProduct(allTotalProductInCart.data));
-                navigate('/Home', {replace: true})
+                navigate('/Home', { replace: true })
             }
             else {
                 toastError("Lỗi đăng nhập, status 500")
@@ -109,7 +110,6 @@ function Register() {
             console.log(e);
             toastError("Lỗi đăng ký status 500")
         }
-        console.log(firstName, lastName, email, phoneNumber, username, password, gender, day, month, year)
     };
 
     const validatePhoneNumber = (event) => {
@@ -207,6 +207,16 @@ function Register() {
                     <div className="input-box">
                         <input
                             type="text"
+                            placeholder="Địa chỉ"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            required
+                        />
+                        < IoLocationOutline className="icon" style={{fontSize: 20}}/>
+                    </div>
+                    <div className="input-box">
+                        <input
+                            type="text"
                             placeholder="Tên đăng nhập"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -226,12 +236,12 @@ function Register() {
                     </div>
                 </div>
                 <button className="btn-register" type="button" onClick={handleRegister}>Đăng ký</button>
-                <HashLoader  
-                                color="white"
-                                loading = {spinner}
-                                size={20}
-                                cssOverride={{position:'absolute', right: 205, bottom: 102}}
-                            />
+                <HashLoader
+                    color="white"
+                    loading={spinner}
+                    size={20}
+                    cssOverride={{ position: 'absolute', right: 205, bottom: 102 }}
+                />
                 <div className="register-link">
                     <p>Đã có tài khoản? <Link to='/Login'>Đăng nhập ngay!</Link></p>
                 </div>
