@@ -1,8 +1,10 @@
 .LoginEmployee {
     display: flex;
+    position: fixed;
+    top: 0;
     background: white;
     padding-bottom: 100px;
-    height: 100vh;
+    height: 100vh;  
 
     .col-1 {
         display: flex;

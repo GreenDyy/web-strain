@@ -93,6 +93,7 @@
                     color: #FF7D29;
                 }
             }
+
             .o-5 {
                 background: #DFF0FE;
 
@@ -134,6 +135,46 @@
                 font-weight: 400;
                 width: 200px;
             }
+
+            .wrap-dropdown-item {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+
+                .wrap-dropdown {
+                    position: absolute;
+                    top: 40px;
+                    width: 100%;
+                    background: white;
+                    border-radius: 10px;
+                    color: black;
+                    z-index: 999;
+                    scale: 1.05;
+                    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+                    .wrap-item-drop {
+                        display: flex;
+                        align-items: center;
+                        padding-left: 10px;
+                        cursor: pointer;
+
+                        .icon-drop {
+                            color: gray;
+                            margin-right: 5px;
+                        }
+
+                        .text-drop {
+                            color: gray;
+                        }
+                    }
+
+                    .wrap-item-drop:hover {
+                        background-color: #F3F6F9;
+                    }
+                }
+            }
+
+
         }
 
         .wrap-title-table {
@@ -223,6 +264,7 @@
                                         color: #5CB14F;
                                     }
                                 }
+
                                 .wrap-item-drop:hover {
                                     background-color: #F3F6F9;
                                 }
@@ -244,6 +286,7 @@
                                 margin-right: 10px;
                                 color: #5CB14F;
                             }
+
                             p:hover {
                                 color: #5CB14F;
                                 cursor: pointer;

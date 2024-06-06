@@ -66,6 +66,8 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
     )
 }
 
+const prioritys = ['Tất cả', 'Cao', 'Thấp']
+
 function ContentWork() {
     const [dataContentWork, setDataContentWork] = useState([])
     const [chuaLam, setChuaLam] = useState(0)
@@ -76,6 +78,21 @@ function ContentWork() {
     const [dataType, setDataType] = useState(1)
     const [dataModal, setDataModal] = useState(null)
     const [showModal, setShowModal] = useState(false)
+    const [showDropdownPriority, setShowDropdownPriority] = useState(false)
+    const [priority, setPriority] = useState('Tất cả')
+    const dropdownPriorityRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownPriorityRef.current && !dropdownPriorityRef.current.contains(event.target)) {
+                setShowDropdownPriority(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -108,6 +125,11 @@ function ContentWork() {
         const response = await getContentWorkApi(idContentWork)
         setDataModal(response.data)
         setShowModal(true)
+    }
+
+    const handleSetPriority = (priority) => {
+        setPriority(priority)
+        setShowDropdownPriority(false)
     }
 
     return (
@@ -164,17 +186,22 @@ function ContentWork() {
                 <div className="row-filter">
                     <p className="text-header">Công việc của tôi - Tên dự án</p>
                     {/* //loc trong cai 1 trong 4 the minh ấn thoi, 4 the khac nhau */}
-                    <button className="btn-filter">Độ ưu tiên: Tất cả</button>
-                    <button className="btn-filter">Tiến độ: Tới hạn</button>
+                    <div className="wrap-dropdown-item" ref={dropdownPriorityRef}>
+                        <button className="btn-filter" onClick={() => setShowDropdownPriority(!showDropdownPriority)}>Độ ưu tiên: {priority}</button>
+                        {showDropdownPriority &&
+                            <div className='wrap-dropdown'>
+                                {prioritys.map((item, index) => {
+                                    return (
+                                        <div keu={index} className='wrap-item-drop' onClick={() => { handleSetPriority(item) }}>
+                                            <FaCircleDot className='icon-drop' />
+                                            <p className='text-drop'>{item}</p>
+                                        </div>
+                                    )
+                                })}
+                            </div>}
+                    </div>
                 </div>
 
-                {/* <div className="wrap-title-table">
-                    <p style={{width:'50%'}}>Nội dung công việc</p>
-                    <p>Ngày BĐ</p>
-                    <p>Ngày KT</p>
-                    <p>Mức độ ưu tiên</p>
-                    <p>Trạng thái</p>
-                </div> */}
                 <div className="row-table">
                     <table className='task-table'>
                         <thead>
@@ -189,32 +216,41 @@ function ContentWork() {
 
                         <tbody>
                             {dataType === 1 &&
-                                dataContentWork?.map((item, index) =>
-                                    <ItemWork key={index} work={item} updateWorkStatus={updateWorkStatus} onClick={handleSetDataMoDal} />
-                                )}
+                                dataContentWork
+                                    ?.filter(cw => (priority === "Tất cả" || cw.priority === priority))
+                                    .map((item, index) => (
+                                        <ItemWork key={index} work={item} updateWorkStatus={updateWorkStatus} onClick={handleSetDataMoDal} />
+                                    ))}
                             {dataType === 2 &&
-                                dataContentWork?.filter(cw => cw.status === "Chưa hoàn thành").map((item, index) =>
-                                    <ItemWork key={index} work={item} updateWorkStatus={updateWorkStatus} onClick={handleSetDataMoDal} />
-                                )}
+                                dataContentWork
+                                    ?.filter(cw => cw.status === "Chưa hoàn thành" && (priority === "Tất cả" || cw.priority === priority))
+                                    .map((item, index) => (
+                                        <ItemWork key={index} work={item} updateWorkStatus={updateWorkStatus} onClick={handleSetDataMoDal} />
+                                    ))}
                             {dataType === 3 &&
-                                dataContentWork?.filter(cw => cw.status === "Đã hoàn thành").map((item, index) =>
-                                    <ItemWork key={index} work={item} updateWorkStatus={updateWorkStatus} onClick={handleSetDataMoDal} />
-                                )}
+                                dataContentWork
+                                    ?.filter(cw => cw.status === "Đã hoàn thành" && (priority === "Tất cả" || cw.priority === priority))
+                                    .map((item, index) => (
+                                        <ItemWork key={index} work={item} updateWorkStatus={updateWorkStatus} onClick={handleSetDataMoDal} />
+                                    ))}
                             {dataType === 4 &&
-                                dataContentWork?.filter(cw => new Date(cw.endDate) > new Date(cw.startDate) && new Date(cw.endDate) > new Date() && cw.status !== "Đã hoàn thành")
-                                    .map((item, index) =>
+                                dataContentWork
+                                    ?.filter(cw => new Date(cw.endDate) > new Date(cw.startDate) && new Date(cw.endDate) > new Date() && cw.status !== "Đã hoàn thành" && (priority === "Tất cả" || cw.priority === priority))
+                                    .map((item, index) => (
                                         <ItemWork key={index} work={item} updateWorkStatus={updateWorkStatus} onClick={handleSetDataMoDal} />
-                                    )}
+                                    ))}
                             {dataType === 5 &&
-                                dataContentWork?.filter(cw => {
-                                    const endDate = moment(cw.endDate);
-                                    const differenceInDays = endDate.diff(moment(), 'days');
-                                    return differenceInDays > 0 && differenceInDays <= 1 && differenceInDays <= 1 && cw.status !== 'Đã hoàn thành'
-                                })
-                                    .map((item, index) =>
+                                dataContentWork
+                                    ?.filter(cw => {
+                                        const endDate = moment(cw.endDate);
+                                        const differenceInDays = endDate.diff(moment(), 'days');
+                                        return differenceInDays > 0 && differenceInDays <= 1 && cw.status !== 'Đã hoàn thành' && (priority === "Tất cả" || cw.priority === priority);
+                                    })
+                                    .map((item, index) => (
                                         <ItemWork key={index} work={item} updateWorkStatus={updateWorkStatus} onClick={handleSetDataMoDal} />
-                                    )}
+                                    ))}
                         </tbody>
+
                     </table>
                     {showModal && (
                         <DetailWork item={dataModal} handleCloseModal={() => { setShowModal(false) }} updateWorkStatus={updateWorkStatus} />

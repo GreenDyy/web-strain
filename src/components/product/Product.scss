@@ -17,7 +17,7 @@
             flex-direction: column;
             width: 18%;
             padding-top: 50px;
-            border-right: 1px solid black;
+            border-right: 1px solid #CCCCCC;
             // background-color: #1E1E2C;
             background: white;
 
@@ -131,13 +131,17 @@
         .btn-page,
         .btn-previous,
         .btn-next {
-            display: inline-block;
-            padding: 4px 12px;
+            display: flex;
+          
             text-decoration: none;
             color: #000;
             background-color: #f1f1f1;
             border: 1px solid #ccc;
             border-radius: 4px;
+            height: 35px;
+            width: 40px;
+            justify-content: center;
+            align-items: center;
             transition: background-color 0.3s ease;
         }
 

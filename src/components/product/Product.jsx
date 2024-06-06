@@ -8,16 +8,17 @@ import {
     getAllStrainFollowGenusApi,
     getAllStrainFollowPhylumApi,
     getAllStrainFollowSpeciesApi
-} from '../../../apis/apiStrain';
+} from '../../apis/apiStrain';
 import { useNavigate, useParams } from 'react-router-dom';
-import { toastError } from '../../Toast/Toast';
+import { toastError } from '../Toast/Toast';
 import { BsSearchHeart } from "react-icons/bs";
-import TreeView from '../treeview/TreeView';
+import TreeView from './treeview/TreeView';
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
-import ItemProduct from '../ItemProduct/ItemProduct';
-import Loading from '../../loading/Loading';
-import { images } from '../../../constants';
-import { getDataLocalStorage, setDataLocalStorage } from '../../../utils/Utils';
+import ItemProduct from './ItemProduct/ItemProduct';
+import Loading from '../loading/Loading';
+import { images } from '../../constants';
+import { getDataLocalStorage, setDataLocalStorage } from '../../utils/Utils';
+import { GoChevronDown, GoChevronLeft, GoChevronRight } from "react-icons/go";
 
 function Product() {
     const { pageRouter } = useParams();
@@ -193,7 +194,8 @@ function Product() {
 
                         <ReactPaginate
                             breakLabel="..."
-                            nextLabel=">"
+                            nextLabel={<GoChevronRight />}
+                            previousLabel={<GoChevronLeft />}
                             onPageChange={(event) => {
                                 const selectedPage = event.selected;
                                 if (node.idClass) {
@@ -214,7 +216,7 @@ function Product() {
                             }}
                             pageRangeDisplayed={5}
                             pageCount={totalPage}
-                            previousLabel="<"
+
                             renderOnZeroPageCount={null}
                             containerClassName="pagination"
                             pageLinkClassName="btn-page"

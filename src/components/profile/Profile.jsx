@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import './Profile.scss'
-import { getCustomerApi, updateCustomerApi } from "../../apis/apiLogin";
+import { checkExistEmailApi, checkExistEmailWithoutSelfApi, getCustomerApi, updateCustomerApi } from "../../apis/apiLogin";
 import { useSelector } from "react-redux";
 import bcrypt from 'bcryptjs';
 //icon
@@ -86,6 +86,12 @@ function Profile() {
 
     //cho tab 1
     const handleSaveChangeData = async () => {
+        const checkMail = await checkExistEmailWithoutSelfApi(customerData.idCustomer, email)
+        console.log(changeData.data )
+        if (checkMail.data.status === 1) {
+            toastWarning('Email đã được sử dụng bởi 1 tài khoản khác');
+            return;
+        }
         try {
             await updateCustomerApi(customerData.idCustomer, {
                 firstName: firstName,
@@ -246,7 +252,7 @@ function Profile() {
                             </div>
                             <div className="feature" onClick={() => toastSuccess('Tính năng đang phát triển')}>
                                 <p>Xóa tài khoản</p>
-                                <TiDelete className="icon" style={{fontSize: 20}}/>
+                                <TiDelete className="icon" style={{ fontSize: 20 }} />
                             </div>
                         </div>
                     </div>

@@ -39,6 +39,11 @@ const checkExistUserNameApi = async (userName) => {
     return response
 }
 
+const checkExistEmailWithoutSelfApi = async (idCustomer, email) => {
+    const response = await axios.post(`${domain}/api/Customer/CheckExistEmailWithoutSelf?email=${email}&idCustomer=${idCustomer}`)
+    return response
+}
+
 export {
     loginCustomerApi,
     getAllCustomerApi,
@@ -48,4 +53,5 @@ export {
     resetPasswordCustomerApi,
     checkExistEmailApi,
     checkExistUserNameApi,
+    checkExistEmailWithoutSelfApi,
 }   
