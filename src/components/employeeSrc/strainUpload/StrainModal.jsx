@@ -442,9 +442,17 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) 
 
                         </div>
                         {strain ?
-                            <button className="btn-update" onClick={handleUpdateStrain}>Cập nhật</button>
+                            <>
+                                <p className="strain-chua-duyet">ĐANG CHỜ XÉT DUYỆT</p>
+                                <button className="btn-update" onClick={handleUpdateStrain}>Cập nhật</button>
+                            </>
+
                             :
-                            <button className={`btn-add ${processing ? 'disable' : ''}`} onClick={handleAddStrain} disabled={processing}>Thêm chủng mới</button>
+                            <>
+                                <p className="strain-da-duyet">ĐÃ DUYỆT</p>
+                                <button className={`btn-add ${processing ? 'disable' : ''}`} onClick={handleAddStrain} disabled={processing}>Thêm chủng mới</button>
+                            </>
+
                         }
                     </div>
                 </div>

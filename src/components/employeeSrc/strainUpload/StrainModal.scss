@@ -109,7 +109,8 @@
                             max-height: 200px;
                             overflow: hidden;
                             overflow-y: auto;
-                            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;                            z-index: 999;
+                            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+                            z-index: 999;
 
                             .wrap-text {
                                 display: flex;
@@ -127,6 +128,7 @@
 
                                 }
                             }
+
                             .wrap-text:hover {
                                 background-color: #C7C8CC;
                             }
@@ -225,11 +227,23 @@
                     align-self: center;
                     transition: 0.3s ease-in-out;
                 }
+
                 .disable {
                     background: #C7B3BE;
                     color: white;
                     cursor: default;
                     transition: 0.3s ease-in-out;
+                }
+
+                .strain-chua-duyet {
+                    color: red;
+                    font-weight: 700;
+                    text-align: center;
+                }
+                .strain-da-duyet {
+                    color: #00A551;
+                    font-weight: 700;
+                    text-align: center;
                 }
             }
         }

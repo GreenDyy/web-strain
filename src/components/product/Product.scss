@@ -132,7 +132,7 @@
         .btn-previous,
         .btn-next {
             display: flex;
-          
+
             text-decoration: none;
             color: #000;
             background-color: #f1f1f1;
@@ -161,11 +161,15 @@
             display: flex;
             flex: 1;
             flex-direction: column;
-            text-align: center;
+            align-items: center;
 
             .img-empty {
                 align-self: center;
-                width: 200px;
+                width: 400px;
+            }
+
+            h2 {
+                margin-top: -50px;
             }
         }
 

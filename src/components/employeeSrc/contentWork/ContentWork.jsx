@@ -96,7 +96,7 @@ function ContentWork({employee}) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const dataCW = await getAllContentWorkApi(employee.idEmployee)
+            const dataCW = await getAllContentWorkApi(employee?.idEmployee)
             setDataContentWork(dataCW.data)
         }
         fetchData()

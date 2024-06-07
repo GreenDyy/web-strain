@@ -80,8 +80,9 @@
 
     .col-2 {
         display: flex;
-        width: 50%;
+        flex: 1;
         background-color: #5CB14F;
+        overflow: hidden;
 
         .img-bg {
             object-fit: cover;

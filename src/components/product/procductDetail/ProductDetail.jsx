@@ -43,7 +43,6 @@ function ProductDetail() {
     const [count, setCount] = useState(0)
     const [entryDate, setEntryDate] = useState('')
     const [dataRandomStrain, setDataRandomStrain] = useState([])
-    const [loading, setLoading] = useState(false)
 
     //cho navbar con
     const [selectedNav, setSelectedNav] = useState(1)
@@ -116,7 +115,6 @@ function ProductDetail() {
                             // Kiểm tra xem idStrain của sản phẩm đã tồn tại trong giỏ hàng hay chưa
                             const curIndex = listDetailCart.data.findIndex(item => String(item.idStrain) === String(id));
 
-
                             if (curIndex !== -1) {
                                 // Nếu idStrain đã tồn tại, cập nhật số lượng cho sản phẩm đó
                                 updateDetailCartApi(listDetailCart.data[curIndex].idCartDetail, {
@@ -175,7 +173,6 @@ function ProductDetail() {
                 <div className="main">
                     <div className="wrap-row-1">
                         <div className="wrap-image">
-                            {/* <img className="image-item" src="https://static.vecteezy.com/system/resources/thumbnails/025/067/762/small_2x/4k-beautiful-colorful-abstract-wallpaper-photo.jpg" alt="image-item" /> */}
                             <img className="image-item" src={product?.imageStrain ? convertImageByte(product?.imageStrain) : images.strainnull} />
                             <div className="slide">
                             </div>
@@ -195,8 +192,7 @@ function ProductDetail() {
                                 <FaStar className="star" />
                             </div>
                             <p className="des">
-                                Blue Dream is known for its well-rounded effects that combine the best of both indica and sativa. Users often report an initial cerebral rush, characterized by euphoria and increased focus, thanks to its Haze genetics. This is followed by a relaxing body high that helps ease tension without causing heavy sedation. This balance makes Blue Dream suitable for daytime use and a favorite among those looking for relief without heavy drowsiness.
-                            </p>
+                            Strain này có một số gen mã hóa cho các yếu tố độc lực, bao gồm gen stx mã hóa độc tố Shiga (Shiga toxin). Gen stx nằm trên các prophage, có khả năng truyền ngang giữa các vi khuẩn. Ngoài ra, strain này còn mang gen eae mã hóa protein intimin, giúp vi khuẩn bám dính vào niêm mạc ruột của vật chủ.                            </p>
                             <div className="wrap-all-btn">
                                 <div className="wrap-btn-amount">
                                     <button className="btn-decrease" onClick={decreaseCount}>-</button>

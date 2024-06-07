@@ -81,7 +81,7 @@ function LoginEmployee() {
             </div>
 
             <div className="col-2">
-                <img className="img-bg" src="https://img.freepik.com/free-vector/people-using-online-apps-set_74855-4457.jpg?w=1380&t=st=1717217496~exp=1717218096~hmac=4d139e03f00707762d2fa047b6d27412cd8d80eec9ac283fe025ec1d08a0c24a" />
+                <img className="img-bg" src={images.bgloginemployee} />
             </div>
         </div>
     )

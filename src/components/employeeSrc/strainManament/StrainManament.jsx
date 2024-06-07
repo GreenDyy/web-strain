@@ -131,7 +131,7 @@ function StrainManament({ employee }) {
                                 />
                             )
                         })
-                    }
+                    }           
                     {dataType === 3 &&
                         strains?.filter(s => s.strainNumber === null).map((item, index) => {
                             return (
