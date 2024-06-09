@@ -6,7 +6,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 999;
+    z-index: 10;
     background: rgba(0, 0, 0, 0.2);
 
     .modal {
@@ -91,7 +91,7 @@
                         width: 30%;
                         background: white;
                         border-radius: 10px;
-                        z-index: 999;
+                        z-index: 11;
                         box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 
                         .wrap-item-drop {

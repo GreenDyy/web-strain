@@ -1,0 +1,24 @@
+.DrawerRight {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    // background: purple;
+    background: rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+    z-index: 99999;
+
+    .col-right {
+        display: flex;
+        flex-direction: column;
+        width: 14vw;
+        height: 100vh;
+        padding-top: 80px;
+        background: #1E1E2C;
+
+    }
+}

@@ -4,12 +4,13 @@ import { images, icons } from '../../../constants'
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { HashLoader } from "react-spinners";
-import { FaLock, FaUser } from "react-icons/fa";
+import { login } from "../../../srcRedux/features/employeeSlice";
 import { toastError, toastWarning } from "../../Toast/Toast";
+import { loginEmployeeApi } from "../../../apis/apiLoginEmployee";
 
 function LoginEmployee() {
     const dispatch = useDispatch()
-    const [username, setUsername] = useState('')
+    const [employeename, setemployeename] = useState('')
     const [password, setPassword] = useState('')
     const [spinner, setSpinner] = useState(false)
 
@@ -17,32 +18,24 @@ function LoginEmployee() {
 
     const handleLogin = async () => {
         setSpinner(true)
-        if (!username || !password) {
+        if (!employeename || !password) {
             toastWarning('Vui lòng nhập đầy đủ thông tin')
             setSpinner(false)
             return;
         }
         try {
-            // const user = await loginCustomerApi(username, password)
+            const employee = await loginEmployeeApi(employeename, password)
+            if (employee.data) {
+                //lưu vào redux
+                dispatch(login({ employeeData: employee.data }))
+                navigate('/Home')
+            }
+            else {
+                setSpinner(false)
+                toastError("Sai tên tài khoản hoặc mật khẩu")
+            }
 
-            // if (response?.token) {
-            //     localStorage.setItem('token', response.token)
-            // }
-
-            // if (user.data) {
-            //     //lưu vào redux
-            //     // dispatch(login({
-            //     //     customerData: user.data,
-            //     //     idCart: cart.data.idCart
-            //     // }))
-            //     navigate('/Home')
-            // }
-            // else {
-            //     setSpinner(false)
-            //     toastError("Sai tên tài khoản hoặc mật khẩu")
-            // }
-     
-            navigate('/Employee/DashBoard', {replace: true})
+            navigate('/Employee/DashBoard', { replace: true })
         }
         catch (e) {
             console.log(e)
@@ -62,7 +55,7 @@ function LoginEmployee() {
                     <h2>ĐĂNG NHẬP</h2>
                     <div>
                         <div className="input-box">
-                            <input className="input-text" type="text" placeholder="Tên đăng nhập" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                            <input className="input-text" type="text" placeholder="Tên đăng nhập" value={employeename} onChange={(e) => setemployeename(e.target.value)} required />
                         </div>
                         <div className="input-box">
                             <input className="input-text" type="password" placeholder="Mật khẩu" value={password} onChange={(e) => setPassword(e.target.value)} required />

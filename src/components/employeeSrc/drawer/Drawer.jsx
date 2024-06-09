@@ -1,27 +1,27 @@
 import React, { useState } from "react";
 import './Drawer.scss'
 import { icons } from "../../../constants";
-import { FaViruses } from "react-icons/fa6";
 import { setDataLocalStorage } from "../../../utils/Utils";
 
 const features = [
     {
         id: 1,
-        name: 'Quản lý công việc',
+        name: 'Công việc của tôi',
         screenName: 'contentWork',
         icon: icons.work
     },
     {
         id: 2,
-        name: 'Quản lý Strain',
+        name: 'Quản lý chủng',
         screenName: 'strainManament',
         icon: icons.strain
     },
-    // {
-    //     id: 3,
-    //     name: 'Task',
-    //     screenName: 'contentWork'
-    // },
+    {
+        id: 3,
+        name: 'Tìm chủng',
+        screenName: 'allStrain',
+        icon: icons.strain
+    },
     // {
     //     id: 4,
     //     name: 'Strain của tôi',

@@ -4,24 +4,20 @@ import Drawer from "../drawer/Drawer";
 import NavbarEmployee from "../navbarEmployee/NavbarEmployee";
 import Main from "../main/Main";
 import { getDataLocalStorage } from "../../../utils/Utils";
+import { useSelector } from "react-redux";
 
 function DashBoard() {
-    const dataEmployee = {
-        idEmployee: 'NV002',
-        nameEmployee: 'Huỳnh Khánh Duy'
-    }
-    const [employee, setEmployee] = useState(null)
-    useEffect(()=>{
-        setEmployee(dataEmployee)
-    }, [])
+    const dataEmployee = useSelector(state => state.employee.employeeData)
+    const isLogin = useSelector(state => state.employee.isLogin)
     const [screenName, setScreenName] = useState(getDataLocalStorage('screenNameOfDrawer') || 'contentWork'); 
+    
     return (
         <div className="DashBoard">
              <Drawer setScreenName={setScreenName} />
 
             <div className="col-2">
-                <NavbarEmployee employee={employee}/>
-                <Main nameScreen={screenName} employee={employee}/>
+                <NavbarEmployee employee={dataEmployee}/>
+                <Main nameScreen={screenName} employee={dataEmployee}/>
             </div>
         </div>
     )
