@@ -53,6 +53,9 @@
 
         .wrap-all-item-as {
             display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            margin-top: 20px;
 
         }
     }

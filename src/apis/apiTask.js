@@ -35,7 +35,7 @@ const updateContentWorkApi = async (idContentWork, contentWork) => {
         "notificattion": contentWork.notificattion,
         "title": contentWork.title,
         "subTitle": contentWork.subTitle,
-        "fileSaved": contentWork.fileName,
+        "fileSaved": contentWork.fileSaved,
         "fileName": contentWork.fileName,
         "histories": contentWork.histories
     })

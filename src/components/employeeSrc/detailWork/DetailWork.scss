@@ -31,6 +31,7 @@
             h2 {
                 margin-top: 0;
             }
+
             .btn-back {
                 border-radius: 4px;
                 font-weight: 500;
@@ -74,7 +75,8 @@
                         padding: 5px 20px;
                         color: white;
                         background-color: #5CB14F;
-                        color: white;
+                        font-weight: 400;
+                        font-size: 14px;
                     }
 
                     .not-complete {
@@ -82,13 +84,14 @@
                         padding: 5px 20px;
                         color: white;
                         background-color: #FD4B63;
-                        color: white;
+                        font-weight: 400;
+                        font-size: 14px;
                     }
 
                     .wrap-dropdown {
                         position: absolute;
                         top: 45px;
-                        width: 30%;
+                        width: 20%;
                         background: white;
                         border-radius: 10px;
                         z-index: 11;
@@ -98,6 +101,8 @@
                             display: flex;
                             align-items: center;
                             padding-left: 10px;
+                            font-weight: 400;
+                            font-size: 14px;
                             cursor: pointer;
 
                             .icon-drop {
@@ -146,6 +151,10 @@
                             flex-direction: column;
                             align-items: center;
                             margin: 0 10px;
+
+                            p {
+                                font-size: 14px;
+                            }
                         }
 
                         .wrap-end-date {
@@ -153,6 +162,10 @@
                             flex-direction: column;
                             align-items: center;
                             margin: 0 10px;
+
+                            p {
+                                font-size: 14px;
+                            }
                         }
 
                         .wrap-actual-end-date {
@@ -160,6 +173,10 @@
                             flex-direction: column;
                             align-items: center;
                             margin: 0 10px;
+
+                            p {
+                                font-size: 14px;
+                            }
                         }
                     }
                 }
@@ -197,14 +214,59 @@
                     }
                 }
 
-              
+
             }
+
             .col-2 {
                 display: flex;
                 flex: 1;
                 flex-direction: column;
-                background-color: #5CB14F;
+                background: #FBFBFB;
                 padding: 5px 10px;
+
+                .wrap-attach {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    p {
+                        color: #5CB14F;
+                        font-weight: 500;
+                    }
+
+                    .btn-attach {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        cursor: pointer;
+
+                        .icon-attach {
+                            color: #969696;
+                            margin-right: 5px;
+                            font-size: 15px;
+                        }
+
+                        p {
+                            font-weight: 400;
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                .area-attach {
+                    display: flex;
+
+                    .no-attach-file {
+                        font-weight: 400;
+                        font-size: 14px;
+                        color: #969696;
+                    }
+                    .file-info {
+                        font-weight: 400;
+                        font-size: 14px;
+                        color: #969696;
+                    }
+                }
             }
 
         }

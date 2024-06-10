@@ -5,6 +5,8 @@ import { FaCircleDot } from "react-icons/fa6";
 import moment from "moment";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { IoDocumentAttachOutline } from "react-icons/io5";
+import { toastSuccess } from "../../Toast/Toast";
 
 const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
     const [dataWork, setDataWork] = useState(null)
@@ -12,6 +14,9 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
     const [projectContent, setProjectContent] = useState(null)
     const [showDropdown, setShowDropdown] = useState(false)
     const [notification, setNotification] = useState('')
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [fileUrl, setFileUrl] = useState(null);
+
     useEffect(() => {
         const fetchData = async () => {
             if (item) {
@@ -38,6 +43,34 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
         };
     }, []);
 
+    const inputFileRef = useRef(null)
+
+    const handleOpenFile = () => {
+        inputFileRef.current.click();
+    }
+
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+        setFileUrl(URL.createObjectURL(file));
+
+        const reader = new FileReader();
+        reader.onloadend = async () => {
+            // Lưu file vào csdl sau khi đã đọc và chuyển đổi xong
+            const fileSaved = reader.result.split(',')[1]
+            const newWork = { ...dataWork, fileSaved: fileSaved, fileName: file.name };
+            await updateContentWorkApi(dataWork.idContentWork, newWork);
+            setDataWork(newWork);
+
+            toastSuccess('Tải file lên thành công');
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
+
+
     const handleChangeStatusWork = async (status, endDateActual) => {
         const newWork = { ...dataWork, status: status, endDateActual: endDateActual };
         await updateContentWorkApi(dataWork.idContentWork, newWork);
@@ -45,7 +78,13 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
         setDataWork(newWork);
         setShowDropdown(false);
     }
-    console.log(notification)
+
+    // const handleUpdateFileSaved = async () => {
+    //     const newWork = { ...dataWork, fileSaved: fileSaved, fileName: fileName };
+    //     await updateContentWorkApi(dataWork.idContentWork, newWork);
+    //     setDataWork(newWork);
+    // }
+
     return (
         <div className="DetailWork">
             <div className="modal">
@@ -89,7 +128,7 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
                                     <small>{dataWork?.endDate}</small>
                                 </div>
                                 {dataWork?.endDateActual && (
-                                    <div div className="wrap-actual-end-date">
+                                    <div className="wrap-actual-end-date">
                                         <p>NGÀY HOÀN THÀNH</p>
                                         <small>{dataWork?.endDateActual}</small>
                                     </div>
@@ -99,8 +138,8 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
 
                         <div className="wrap-2">
                             <div className="title-and-save">
-                                <h3 className="title-notification">NOTIFICATION</h3>
-                                <button className="btn-save">Lưu mô tả</button>
+                                <h3 className="title-notification">MÔ TẢ CÔNG VIỆC</h3>
+                                <button className="btn-save">Lưu mô tả công việc</button>
                             </div>
 
                             <ReactQuill theme="snow"
@@ -113,7 +152,27 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
                     </div>
 
                     <div className="col-2">
-                        <p>tài liệu here</p>
+                        <div className="wrap-attach">
+                            <p>TÀI LIỆU ĐÍNH KÈM</p>
+                            <div className="btn-attach" onClick={handleOpenFile}>
+                                <IoDocumentAttachOutline className="icon-attach" />
+                                <p className="title-btn-attach">Thêm tài liệu</p>
+                            </div>
+                        </div>
+                        <div className="area-attach">
+                            {selectedFile ? (
+                                <div className="file-info">
+                                    <a href={fileUrl} download={selectedFile?.name}>
+                                        <p href={fileUrl} download={selectedFile?.name}>Tên tệp: {selectedFile.name}</p>
+
+                                    </a>
+                                    <p>Kích thước: {(selectedFile?.size / 1024).toFixed(2)} KB</p>
+                                </div>
+                            ) : (
+                                <p className="no-attach-file">Không có tài liệu đính kèm</p>
+                            )}
+                            <input ref={inputFileRef} type="file" onChange={handleFileChange} hidden />
+                        </div>
                     </div>
                 </div>
 
