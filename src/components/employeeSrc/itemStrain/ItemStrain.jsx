@@ -6,7 +6,7 @@ import { images } from "../../../constants";
 const ItemStrain = ({ item, onHandleDetail }) => {
     const imageSrc = item?.imageStrain ? convertImageByte(item?.imageStrain) : images.strainnull
     return (
-        <div className="wrap-item" onClick={() => onHandleDetail(item?.idStrain)}>
+        <div className="wrap-strain" onClick={() => onHandleDetail(item?.idStrain)}>
             <div className="card-img">
                 <img src={imageSrc} className="img-strain" />
             </div>

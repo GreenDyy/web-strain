@@ -1,3 +1,68 @@
 .Project {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+
+    .text-header {
+        font-weight: 500;
+    }
+
+    .wrap-all-item {
+        display: flex;
+        flex-wrap: wrap;
+
+        .item-project {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 30px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            width: 20%;
+            border-radius: 5px;
+            margin: 0 10px;
+
+            .row-1 {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .col-1 {
+                    display: flex;
+                    align-items: center;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                    .name-project {
+                        margin: 0;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .icon-project {
+                       width: 25px;
+                       margin-right: 5px;
+                       object-fit: contain;
+                    }
+                }
+
+                .icon {
+                    width: 15px;
+                    cursor: pointer;
+                }
+            }
+
+            .row-2 {
+                font-size: 12px;
+                font-style: italic;
+                padding-bottom: 40px;
+            }
+        }
+    }
 }

@@ -40,18 +40,67 @@ const updateContentWorkApi = async (idContentWork, contentWork) => {
         "histories": contentWork.histories
     })
 }
+const getAllContentWorkByIdProjectContentApi = async (idProjectContent) => {
+    const response = await axios.get(`${domain}/api/ContentWork/GetAllByIdProjectContent?idProjectContent=${idProjectContent}`)
+    return response
+}
+const getAllProjectContentByIdProjectApi = async (idProject) => {
+    const response = await axios.get(`${domain}/api/ProjectContent/GetAllByIdProject?idProject=${idProject}`)
+    return response
+}
+const getProjectContentByIdProjectContentApi = async (idProjectContent) => {
+    const response = await axios.get(`${domain}/api/ProjectContent/${idProjectContent}`)
+    return response
+}
+const getProjectByIdProjectApi = async (idProject) => {
+    const response = await axios.get(`${domain}/api/Project/${idProject}`)
+    return response
+}
+//Lấy các project có nv đó tham gia api/Project/GetAllProjectByIdEmployee?idEmployee=nv010
+const getAllProjectEmployeeApi = async (idEmployee) => {
+    const response = await axios.get(`${domain}/api/Project/GetAllProjectByIdEmployee?idEmployee=${idEmployee}`)
+    return response
+}
 //cập nhật status projectContent
-const updateStatusProjectContentApi = async (idProjectContent, status) => {
-    await axios.patch(`${domain}/api/ContentWork/${idProjectContent}/status`, {status})
+const updateProjectContentApi = async (idProjectContent, projectContent) => {
+    await axios.put(`${domain}/api/ProjectContent/${idProjectContent}`, {
+        "idProject": projectContent.idProject,
+        "nameContent": projectContent.nameContent,
+        "results": projectContent.results,
+        "startDate": projectContent.startDate,
+        "endDate": projectContent.endDate,
+        "contractNo": projectContent.contractNo,
+        "status": projectContent.status,
+        "priority": projectContent.priority,
+        "title": 0
+    })
 }
 //cập nhật status Project
-const updateStatusProjectApi = async (idProject, status) => {
-    await axios.patch(`${domain}/api/ProjectContent/${idProject}/status`, {status})
+const updateProjectApi = async (idProject, project) => {
+    await axios.put(`${domain}/api/Project/${idProject}`, {
+        "idEmployee": project.idEmployee,
+        "idPartner": project.idPartner,
+        "projectName": project.projectName,
+        "results": project.results,
+        "startDateProject": project.startDateProject,
+        "endDateProject": project.endDateProject,
+        "contractNo": project.contractNo,
+        "description": project.description,
+        "fileProject": project.fileProject,
+        "fileName": project.fileName,
+        "status": project.status
+    })
 }
-
 
 export {
     getAllContentWorkApi, updateContentWorkApi, getContentWorkApi, getProjectContentApi, getProjecttApi,
-    updateStatusProjectContentApi,
-    updateStatusProjectApi,
+    getAllProjectEmployeeApi,
+
+    getAllContentWorkByIdProjectContentApi,
+    getAllProjectContentByIdProjectApi,
+    getProjectContentByIdProjectContentApi,
+    getProjectByIdProjectApi,
+
+    updateProjectContentApi,
+    updateProjectApi,
 }

@@ -154,7 +154,7 @@ function Product() {
                     <div className='search-box'>
                         <input className='input-search'
                             type='text'
-                            placeholder='Search...'
+                            placeholder='Nhập mã hoặc tên chủng cần tìm...'
                             value={search}
                             onChange={(e) => {
                                 setSearch(e.target.value);

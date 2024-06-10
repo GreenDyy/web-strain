@@ -9,14 +9,14 @@
     transition: 0.3s;
     display: flex;
     flex-direction: column;
-    
+
 
     .card-image {
         display: flex;
         width: 100%;
         // height: 250px;
         height: 45%;
-        
+
         position: relative;
 
         .image-strain {
@@ -42,33 +42,38 @@
         .name {
             color: #00A551;
             white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
+
         .number {
             margin-top: -20px;
             font-weight: 500;
         }
+
         .price {
-            margin-top: -10px;  
+            margin-top: -10px;
             font-size: 18px;
             font-weight: 500;
-        
+
             color: #00A551;
         }
+
         .des {
-            margin-top: -10px;  
+            margin-top: -10px;
             font-size: 14px;
             font-weight: 500;
-          
+
         }
+
         .status {
-            margin-top: -10px;  
+            margin-top: -10px;
             font-size: 14px;
             font-weight: 500;
         }
+
         .btn-buy {
-            display: flex;  
+            display: flex;
             justify-content: center;
             width: 100%;
             align-items: center;

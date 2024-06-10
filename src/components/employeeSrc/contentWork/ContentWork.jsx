@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import './ContentWork.scss'
 import { MdOutlineWorkHistory, MdOutlineWorkspacePremium, MdOutlineWorkOff } from "react-icons/md";
 import { FaFirefoxBrowser } from "react-icons/fa";
-import { getAllContentWorkApi, getContentWorkApi, updateContentWorkApi } from '../../../apis/apiTask'
+import { getAllContentWorkApi, getAllContentWorkByIdProjectContentApi, getAllProjectContentByIdProjectApi, getContentWorkApi, getProjectByIdProjectApi, getProjectContentByIdProjectContentApi, updateContentWorkApi, updateProjectApi, updateProjectContentApi, updateStatusProjectApi, updateStatusProjectContentApi } from '../../../apis/apiTask'
 import { FaCircleDot, FaFlag } from "react-icons/fa6";
 import moment from "moment/moment";
 import DetailWork from "../detailWork/DetailWork";
@@ -21,15 +21,44 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
     const handleChangeStatusWork = async (status, endDateActual) => {
+        const tempProjectContent = await getProjectContentByIdProjectContentApi(work?.idProjectContent)
         const newWork = { ...work, status: status, endDateActual: endDateActual };
         await updateContentWorkApi(work.idContentWork, newWork)
         updateWorkStatus(work.idContentWork, status);
-        //check list cong viec trong content work done het thi chuyen ProjectContent thành đã hoàn thành, tương tự với Project
-        //b1: show all list workContent(idProjectContent)
-        //b2: check xme co cai nao status la chua hoan thanh
-        if(work.idProjectContent)
-        setShowDropdown(false)
+
+        //check list cong viec trong content work done het thi chuyen ProjectContent thành đã hoàn thành
+        //chuyển status của ProjectContent
+        const listWorkFromIdProjectContent = await getAllContentWorkByIdProjectContentApi(work?.idProjectContent)
+        for (const work of listWorkFromIdProjectContent.data) {
+            if (work?.status === 'Chưa hoàn thành') {
+                await updateProjectContentApi(work?.idProjectContent, { ...tempProjectContent.data, status: 'Chưa hoàn thành' })
+                break;
+            }
+            else {
+                await updateProjectContentApi(work?.idProjectContent, { ...tempProjectContent.data, status: 'Đã hoàn thành' })
+            }
+        }
+
+        //check list ProjectContent done het thi chuyen Project thành đã hoàn thành, tương tự với Project
+        const idCurProject = tempProjectContent.data.idProject
+        const curProject = await getProjectByIdProjectApi(idCurProject)
+        const listProjectContentFormProjectIdProject = await getAllProjectContentByIdProjectApi(idCurProject)
+       
+        for (const projectContent of listProjectContentFormProjectIdProject.data) {
+            console.log(listProjectContentFormProjectIdProject.data)
+            if (projectContent?.status === 'Chưa hoàn thành') {
+                await updateProjectApi(idCurProject, { ...curProject.data, status: 'Chưa hoàn thành' })
+                break;
+            }
+            else {
+                //chuyển status của Project
+                await updateProjectApi(idCurProject, { ...curProject.data, status: 'Đã hoàn thành' })
+            }
+        }
+        if (work?.idProjectContent)
+            setShowDropdown(false)
     }
     return (
         <tr>
@@ -47,14 +76,14 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
                     {work?.priority}
                 </div>
             </td>
-            <td
+            <td 
                 ref={dropdownRef}
-                style={{ width: '10%', cursor: 'pointer', position: 'relative' }}
+                style={{ width: '10%', cursor: 'pointer', position: 'relative'}}
                 className={`${work?.status === 'Chưa hoàn thành' ? 'not-complete' : 'complete'}`}
                 onClick={() => setShowDropdown(!showDropdown)}>
                 {work?.status}
                 {showDropdown &&
-                    <div className='wrap-dropdown'>
+                    <div className='wrap-dropdown-work' >
                         <div className='wrap-item-drop' onClick={() => { handleChangeStatusWork("Chưa hoàn thành", null) }}>
                             <FaCircleDot className='icon-drop' />
                             <p className='text-drop'>Chưa hoàn thành</p>
@@ -72,7 +101,7 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
 
 const prioritys = ['Tất cả', 'Cao', 'Thấp']
 
-function ContentWork({employee}) {
+function ContentWork({ employee }) {
     const [dataContentWork, setDataContentWork] = useState([])
     const [chuaLam, setChuaLam] = useState(0)
     const [hoanThanh, setHoanThanh] = useState(0)
@@ -190,13 +219,13 @@ function ContentWork({employee}) {
                 <div className="row-filter">
                     <p className="text-header">Công việc của tôi - Tên dự án</p>
                     {/* //loc trong cai 1 trong 4 the minh ấn thoi, 4 the khac nhau */}
-                    <div className="wrap-dropdown-item" ref={dropdownPriorityRef}>
-                        <button className="btn-filter" onClick={() => setShowDropdownPriority(!showDropdownPriority)}>Độ ưu tiên: {priority}</button>
+                    <div className="wrap-dropdown-item-cw" ref={dropdownPriorityRef}>
+                        <button className="btn-filter-cw" onClick={() => setShowDropdownPriority(!showDropdownPriority)}>Độ ưu tiên: {priority}</button>
                         {showDropdownPriority &&
-                            <div className='wrap-dropdown'>
+                            <div className='wrap-dropdown-cw'>
                                 {prioritys.map((item, index) => {
                                     return (
-                                        <div keu={index} className='wrap-item-drop' onClick={() => { handleSetPriority(item) }}>
+                                        <div key={index} className='wrap-item-drop-cw' onClick={() => { handleSetPriority(item) }}>
                                             <FaCircleDot className='icon-drop' />
                                             <p className='text-drop'>{item}</p>
                                         </div>

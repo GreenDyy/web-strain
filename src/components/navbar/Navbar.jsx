@@ -131,7 +131,7 @@ const Navbar = () => {
                             <input
                                 className='input-search-nav'
                                 type='text'
-                                placeholder='Nhập chủng cần tìm...'
+                                placeholder='Nhập mã hoặc tên chủng cần tìm...'
                                 value={search}
                                 onFocus={() => setShowDropdown(true)}
                                 onChange={(event) => setSearch(event.target.value)} />

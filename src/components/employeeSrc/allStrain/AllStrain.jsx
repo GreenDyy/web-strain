@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './AllStrain.scss'
 import { getAllStrainApi, getAllStrainByTheEmployee } from "../../../apis/apiStrain";
 import ItemStrain from "../itemStrain/ItemStrain";
+import { BsSearchHeart } from "react-icons/bs";
 
 function AllStrain() {
     const [strains, setStrains] = useState([])
@@ -20,16 +21,25 @@ function AllStrain() {
     }, []);
     return (
         <div className="AllStrain">
-            <p>allsstrain</p>
-            <div className="row-2">
-                <p className="text-header">Danh sách các chủng</p>
-                <div className="wrap-all-item">
+            <div className="row-2-as">
+                <p className="text-header-as">Danh sách các chủng</p>
+                <div className='search-box-as'>
+                    <input className='input-search'
+                        type='text'
+                        placeholder='Nhập tên hoặc mã chủng...'
+                        
+                        value={search}
+                        onChange={(e) => {
+                            setSearch(e.target.value);
+                        }}
+                    />
+                    <BsSearchHeart className='icon-search' />
+                </div>
+                <div className="wrap-all-item-as">
                     {
                         strains?.map((item, index) => {
                             return (
-                                <ItemStrain key={index} item={item}
-
-                                />
+                                <ItemStrain key={index} item={item} />
                             )
                         })
                     }

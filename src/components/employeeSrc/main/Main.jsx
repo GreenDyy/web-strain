@@ -12,8 +12,8 @@ function Main({ nameScreen = 'contentWork', employee }) {
         <div className="Main">
             {nameScreen === 'contentWork' && <ContentWork employee={employee} />}
             {nameScreen === 'newPaper' && <NewsPaper />}
-            {/* {nameScreen === 'project' && <Project />}
-            {nameScreen === 'projectContent' && <ProjectContent />} */}
+            {nameScreen === 'project' && <Project employee={employee} />}
+            {nameScreen === 'projectContent' && <ProjectContent />}
             {nameScreen === 'strainManament' && <StrainManament employee={employee} />}
             {nameScreen === 'allStrain' && <AllStrain />}
         </div>

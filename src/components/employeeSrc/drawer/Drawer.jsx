@@ -6,27 +6,29 @@ import { setDataLocalStorage } from "../../../utils/Utils";
 const features = [
     {
         id: 1,
+        name: 'Các dự án tham gia',
+        screenName: 'project',
+        icon: icons.project
+    },
+    {
+        id: 2,
         name: 'Công việc của tôi',
         screenName: 'contentWork',
         icon: icons.work
     },
     {
-        id: 2,
+        id: 3,
         name: 'Quản lý chủng',
         screenName: 'strainManament',
         icon: icons.strain
     },
     {
-        id: 3,
+        id: 4,
         name: 'Tìm chủng',
         screenName: 'allStrain',
         icon: icons.strain
     },
-    // {
-    //     id: 4,
-    //     name: 'Strain của tôi',
-    //     screenName: 'strainManament'
-    // },
+  
 ]
 const Drawer = ({ setScreenName }) => {
     const [btnSelect, setBtnSelected] = useState(null)

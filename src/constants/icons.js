@@ -9,6 +9,8 @@ import cart from '../assets/icons/cart.png'
 import momo from '../assets/icons/momo.png'
 import strain from '../assets/icons/strain.png'
 import work from '../assets/icons/work.png'
+import more from '../assets/icons/more.png'
+import project from '../assets/icons/project.png'
 
 const icons = {
     searchicon,
@@ -21,7 +23,9 @@ const icons = {
     cart,
     momo,
     strain,
-    work
+    work,
+    more,
+    project
 }
 
 export default icons
