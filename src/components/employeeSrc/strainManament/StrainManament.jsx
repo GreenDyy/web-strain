@@ -115,7 +115,9 @@ function StrainManament({ employee }) {
 
             </div>
 
-            <IoMdAddCircle className="float-btn" onClick={handleOpenModalStrain} />
+            {/* float button */}
+            {/* <IoMdAddCircle className="float-btn" onClick={handleOpenModalStrain} /> */}
+
             {showModal && (
                 <StrainModal handleCloseModal={() => setShowModal(false)} strain={strain} employee={employee} onUpdateData={handleDataUpdated} />
             )}

@@ -26,7 +26,10 @@ function LoginEmployee() {
         try {
             const employee = await loginEmployeeApi(employeename, password)
             if (employee.data) {
-                //lưu vào redux
+                if(employee.data.idRole !== 3) {
+                    toastWarning('Bạn không có quyền đăng nhập vào trang này')
+                    return
+                }
                 dispatch(login({ employeeData: employee.data }))
                 navigate('/Home')
             }

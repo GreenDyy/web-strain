@@ -165,7 +165,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) 
             reader.readAsDataURL(file);
         }
     }
-
+    
     return (
         <div className="StrainModal">
             <div className="modal">
@@ -443,13 +443,17 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) 
                         </div>
                         {strain ?
                             <>
-                                <p className="strain-chua-duyet">ĐANG CHỜ XÉT DUYỆT</p>
-                                <button className="btn-update" onClick={handleUpdateStrain}>Cập nhật</button>
+
+                                {strain?.strainNumber ?
+                                    <p className="strain-da-duyet">ĐÃ DUYỆT</p>
+                                    :
+                                    <button className="btn-update" onClick={handleUpdateStrain}>Cập nhật</button>
+                                }
+
                             </>
 
                             :
                             <>
-                                <p className="strain-da-duyet">ĐÃ DUYỆT</p>
                                 <button className={`btn-add ${processing ? 'disable' : ''}`} onClick={handleAddStrain} disabled={processing}>Thêm chủng mới</button>
                             </>
 

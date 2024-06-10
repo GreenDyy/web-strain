@@ -25,6 +25,10 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
         const newWork = { ...work, status: status, endDateActual: endDateActual };
         await updateContentWorkApi(work.idContentWork, newWork)
         updateWorkStatus(work.idContentWork, status);
+        //check list cong viec trong content work done het thi chuyen ProjectContent thành đã hoàn thành, tương tự với Project
+        //b1: show all list workContent(idProjectContent)
+        //b2: check xme co cai nao status la chua hoan thanh
+        if(work.idProjectContent)
         setShowDropdown(false)
     }
     return (

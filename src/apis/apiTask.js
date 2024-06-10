@@ -40,7 +40,18 @@ const updateContentWorkApi = async (idContentWork, contentWork) => {
         "histories": contentWork.histories
     })
 }
+//cập nhật status projectContent
+const updateStatusProjectContentApi = async (idProjectContent, status) => {
+    await axios.patch(`${domain}/api/ContentWork/${idProjectContent}/status`, {status})
+}
+//cập nhật status Project
+const updateStatusProjectApi = async (idProject, status) => {
+    await axios.patch(`${domain}/api/ProjectContent/${idProject}/status`, {status})
+}
+
 
 export {
-    getAllContentWorkApi, updateContentWorkApi, getContentWorkApi, getProjectContentApi, getProjecttApi
+    getAllContentWorkApi, updateContentWorkApi, getContentWorkApi, getProjectContentApi, getProjecttApi,
+    updateStatusProjectContentApi,
+    updateStatusProjectApi,
 }
