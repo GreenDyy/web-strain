@@ -45,7 +45,6 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
             <td >
                 <div className='card-quantity'>
                     <button className='btn-decrease' onClick={() => { onDecrease(item) }}>-</button>
-                    {/* <input className='quantity' type='text' value={item.quantityOfStrain}/> */}
                     <p className='quantity'>{item.quantityOfStrain}</p>
                     <button className='btn-increase' onClick={() => { onIncrease(item) }}>+</button>
                 </div>
@@ -221,6 +220,11 @@ function Cart() {
         }
     }
 
+    const handleSelectPaymentMethod = (event) => {
+        setPaymentMethod(event.target.value)
+        toast(`Bạn chọn thanh toán ${event.target.value}`)
+    }
+
     return (
         <div className='Cart'>
             {isLogin && listCartItem.length != 0 ?
@@ -283,7 +287,7 @@ function Cart() {
                                     <input
                                         type="radio"
                                         value="khinhanhang"
-                                        onChange={(e) => setPaymentMethod(e.target.value)}
+                                        onChange={handleSelectPaymentMethod}
                                         checked={paymentMethod === 'khinhanhang'}
                                     />
                                     Thanh toán khi nhận hàng
@@ -292,7 +296,7 @@ function Cart() {
                                     <input
                                         type="radio"
                                         value="momo"
-                                        onChange={(e) => setPaymentMethod(e.target.value)}
+                                        onChange={handleSelectPaymentMethod}
                                         checked={paymentMethod === 'momo'}
                                     />
                                     <img src={icons.momo} style={{ height: 40, width: 40 }} />

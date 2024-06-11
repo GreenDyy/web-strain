@@ -1,164 +1,110 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './ProfileEmployee.scss'
 import { convertImageByte } from "../../../utils/Utils";
+import { MdOutlinePublishedWithChanges } from "react-icons/md";
+import ChangePass from "../changePass/ChangePass";
 
-function ProfileEmployee() {
-    const [tab, setTab] = useState(1)
-    const handleChangeTab = (tab) => {
-        // handleResetData()
-        setTab(tab)
+function ProfileEmployee({ employee }) {
+    const [dataEmployee, setDataEmployee] = useState({
+        idEmployee: "NV010",
+        idRole: 3,
+        firstName: "",
+        lastName: "",
+        fullName: "",
+        idCard: "",
+        dateOfBirth: null,
+        gender: "",
+        email: "",
+        phoneNumber: "",
+        degree: "",
+        address: "",
+        joinDate: null,
+        imageEmployee: null,
+        nameWard: null,
+        nameDistrict: null,
+        nameProvince: null,
+        username: "",
+        password: "",
+        status: "Đang hoạt động"
+    })
+
+    const [showModalChangePass, setShowModalChangePass] = useState(false)
+
+    const inputImgRef = useRef(null)
+
+    useEffect(() => {
+        setDataEmployee(employee)
+    }, [])
+
+    const handleOnChance = (key, value) => {
+        let temp = { ...dataEmployee }
+        temp[key] = value
+        setDataEmployee(temp)
+    }
+
+    const handlePickImage = () => {
+        inputImgRef.current.click();
+    }
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setDataEmployee({ ...dataEmployee, imageEmployee: reader.result.split(',')[1] }); //lưu base 64
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        }
     }
     return (
         <div className="ProfileEmployee">
-            <p>a</p>
-            {/* <div className="col-1">
-
-                <div className="card-image" onClick={handlePickImage}>
-                    <img className="avatar" src={convertImageByte(image)} />
+            <div className="row-profile ">
+                <p className="text-header">Thông tin cá nhân</p>
+                <div className="wrap-avatar-name">
+                    <img src={convertImageByte(dataEmployee?.imageEmployee)} onClick={handlePickImage} />
                     <input
                         type="file"
                         accept="image/*"
                         ref={inputImgRef}
                         onChange={handleImageChange}
+                        hidden
                     />
+                    <div className="wrap-name">
+                        <p className="name">{employee?.fullName}</p>
+                        <p className="role">Nghiên cứu viên</p>
+                    </div>
                 </div>
+                <div className="card-profile">
+                    <div className="col-header">
+                        <p>Email:</p>
+                        <p>Số điện thoại:</p>
+                        <p>Tên đăng nhập:</p>
+                        <p>Mật khẩu:</p>
+                    </div>
+                    <div className="col-content">
+                        <div className="input-box">
+                            <input className="input-text" type="text" value={dataEmployee.email} onChange={(event) => handleOnChance("phoneNumber", event.target.value)} disabled />
+                        </div>
+                        <div className="input-box">
+                            <input className="input-text" type="text" value={dataEmployee.phoneNumber} onChange={(event) => handleOnChance("phoneNumber", event.target.value)} disabled />
+                        </div>
+                        <div className="input-box">
+                            <input className="input-text" type="text" value={dataEmployee.username} onChange={(event) => handleOnChance("username", event.target.value)} disabled />
+                        </div>
+                        <div className="input-box">
+                            <input className="input-text" type="password" value="********" onChange={(event) => handleOnChance("password", event.target.value)} disabled />
+                        </div>
 
-                <h3 className="name">{customerData?.fullName}</h3>
-                <div className="card-feature">
-                    <div className="feature" onClick={() => handleChangeTab(1)}>
-                        <p>Thông tin cá nhân</p>
-                        <FaUserAstronaut className="icon" />
-                    </div>
-                    <div className="feature" onClick={() => handleChangeTab(2)}>
-                        <p>Đổi mật khẩu</p>
-                        <IoMdLock className="icon" />
-                    </div>
-                    <div className="feature" onClick={() => handleChangeTab(3)}>
-                        <p>Địa chỉ giao hàng</p>
-                        <FaMapLocationDot className="icon" />
-                    </div>
-                    <div className="feature" onClick={() => toastSuccess('Tính năng đang phát triển')}>
-                        <p>Xóa tài khoản</p>
-                        <TiDelete className="icon" style={{ fontSize: 20 }} />
+                        <div className="btn-change-pass" onClick={() => setShowModalChangePass(true)}>
+                            <MdOutlinePublishedWithChanges className="icon-change-pass" />
+                            <p>Đổi mật khẩu</p>
+                        </div>
+
+                        {showModalChangePass && <ChangePass employee={employee} handleCloseModal={() => setShowModalChangePass(false)} />}
                     </div>
                 </div>
             </div>
-
-            <div className="col-2">
-                {tab === 1 &&
-                    <>
-                        <div className="header">
-                            <h3 className="title">Thông tin cá nhân</h3>
-                        </div>
-
-
-                        <div className="wrap-all-input">
-                            <div className="wrap-input">
-                                <p className="label">Họ</p>
-                                <div className="input-box">
-                                    <input type="text" value={lastName ? lastName : ''} onChange={(event) => { setLastName(event.target.value) }} />
-                                </div>
-                            </div>
-
-                            <div className="wrap-input">
-                                <p className="label">Tên</p>
-                                <div className="input-box">
-                                    <input type="text" value={firstName ? firstName : ''} onChange={(event) => { setFirstName(event.target.value) }} />
-                                </div>
-                            </div>
-
-                            <div className="wrap-input">
-                                <p className="label">Email</p>
-                                <div className="input-box">
-                                    <input type="text" value={email ? email : ''} onChange={(event) => { setEmail(event.target.value) }} />
-                                </div>
-                            </div>
-
-                            <div className="wrap-input">
-                                <p className="label">Số điện thoại</p>
-                                <div className="input-box">
-                                    <input type="text" value={phoneNumber ? phoneNumber : ''} onChange={(event) => { setPhoneNumber(event.target.value) }} />
-                                </div>
-                            </div>
-
-                            <div className="wrap-input">
-                                <p className="label">Tài khoản</p>
-                                <div className="input-box">
-                                    <input type="text" value={username ? username : ''} disabled />
-                                </div>
-                            </div>
-
-                            <div className="wrap-input">
-                                <p className="label">Mật khẩu</p>
-                                <div className="input-box">
-                                    <input type="password" value={'*********'} disabled />
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className="wrap-btn">
-                            {showCancel && <button className="btn-cancel" onClick={handleResetData}>Hủy thay đổi</button>}
-
-                            <button className="btn-save" onClick={handleSaveChangeData} disabled={!showCancel}>Lưu</button>
-                        </div>
-                    </>
-                }
-
-                {tab === 2 &&
-                    <>
-                        <h3 className="title">Đổi mật khẩu</h3>
-
-                        <div className="wrap-all-input">
-                            <div className="wrap-input full-width">
-                                <p className="label">Mật khẩu cũ</p>
-                                <div className="input-box">
-                                    <input type="password" value={password} onChange={(event) => { setPassword(event.target.value) }} />
-                                </div>
-                            </div>
-
-                            <div className="wrap-input full-width">
-                                <p className="label">Mật khẩu mới</p>
-                                <div className="input-box">
-                                    <input type="password" value={newPass} onChange={(event) => { setNewPass(event.target.value) }} />
-                                </div>
-                            </div>
-
-                            <div className="wrap-input full-width">
-                                <p className="label">Xác nhận mật khẩu mới</p>
-                                <div className="input-box">
-                                    <input type="password" value={reNewPass} onChange={(event) => { setReNewPass(event.target.value) }} />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="wrap-btn">
-                            <button className="btn-save" onClick={handleChangePass}>Lưu</button>
-                        </div>
-                    </>
-                }
-
-                {tab === 3 &&
-                    <>
-                        <h3 className="title">Địa chỉ giao hàng</h3>
-
-                        <div className="wrap-all-input">
-                            <div className="wrap-input">
-                                <p className="label">Địa chỉ của bạn</p>
-                                <div className="input-box">
-                                    <input type="text" value={address} onChange={(event) => { setAddress(event.target.value) }} />
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div className="wrap-btn float-left">
-                            {showCancel && <button className="btn-cancel" onClick={handleResetData}>Hủy thay đổi</button>}
-                            <button className="btn-save" onClick={handleSaveChangeAddress} disabled={!showCancel}>Lưu</button>
-                        </div>
-                    </>
-                }
-            </div> */}
         </div >
     )
 }

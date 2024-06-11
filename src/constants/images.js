@@ -5,6 +5,7 @@ import success from '../assets/images/success.png'
 import emptysearch from '../assets/images/emptysearch.png'
 import emptyorder from '../assets/images/emptyorder.png'
 import bgloginemployee from '../assets/images/bgloginemployee.png'
+
 const images = {
     strainnull,
     emptycart,
@@ -12,7 +13,7 @@ const images = {
     success,
     emptysearch,
     emptyorder,
-    bgloginemployee
+    bgloginemployee,
 }
 
 export default images

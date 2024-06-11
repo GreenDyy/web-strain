@@ -11,6 +11,7 @@ import strain from '../assets/icons/strain.png'
 import work from '../assets/icons/work.png'
 import more from '../assets/icons/more.png'
 import project from '../assets/icons/project.png'
+import searchstrain from '../assets/icons/searchstrain.png'
 
 const icons = {
     searchicon,
@@ -25,7 +26,9 @@ const icons = {
     strain,
     work,
     more,
-    project
+    project,
+    searchstrain,
+    
 }
 
 export default icons

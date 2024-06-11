@@ -4,7 +4,7 @@ import { images } from "../../../constants";
 import { RxDropdownMenu } from "react-icons/rx";
 import { toastError, toastSuccess, toastWarning } from '../../Toast/Toast';
 import { convertImageByte } from "../../../utils/Utils";
-import { addIsolatorStrainApi, addStrainApi, addStrainApprovalHistoryApi, getAllConditionApi, getAllSpeciesApi } from "../../../apis/apiStrain";
+import { addIsolatorStrainApi, addStrainApi, addStrainApprovalHistoryApi, getAllConditionApi, getAllSpeciesApi, updateStrainApi } from "../../../apis/apiStrain";
 
 const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) => {
     const [dataSpeices, setDataSpecies] = useState([])
@@ -81,10 +81,15 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) 
         setDataStrain(temp)
     }
     const validateStrainInput = () => {
+        // const requiredFields = [
+        //     'idCondition', 'idSpecies', 'scientificName', 'synonymStrain', 'formerName', 'commonName', 'cellSize', 'organization',
+        //     'collectionSite', 'continent', 'country', 'isolationSource', 'toxinProducer',
+        //     'stateOfStrain', 'agitationResistance', 'remarks', 'geneInformation', 'publications', 'recommendedForTeaching'
+        // ];
         const requiredFields = [
             'idCondition', 'idSpecies', 'scientificName', 'synonymStrain', 'formerName', 'commonName', 'cellSize', 'organization',
-            'characteristics', 'collectionSite', 'continent', 'country', 'isolationSource', 'toxinProducer',
-            'stateOfStrain', 'agitationResistance', 'remarks', 'geneInformation', 'publications', 'recommendedForTeaching'
+            'collectionSite', 'continent',
+            'remarks', 'recommendedForTeaching'
         ];
 
         for (const field of requiredFields) {
@@ -100,6 +105,17 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) 
             toastWarning('Vui lòng điền đầy đủ thông tin')
             return
         }
+        //call api update Strains
+        try {
+            let newStrain = { ...dataStrain }
+            console.log('strain update nè', newStrain)
+            await updateStrainApi(strain?.idStrain, newStrain)
+            toastSuccess('Cập nhật thành công')
+            onUpdateData()
+        }
+        catch (e) {
+            toastError(`Lỗi ${e}`)
+        }
 
     }
 
@@ -112,7 +128,6 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) 
             setProcessing(true)
             const newStrain = { ...dataStrain, dateAdd: new Date().toJSON().slice(0, 10) }
             const response = await addStrainApi(newStrain) //lấy id cuối ra để thêm cho bảng đưới
-            console.log('response', response.data)
             await addIsolatorStrainApi({
                 iD_Employee: employee?.idEmployee,
                 iD_Strain: response.data?.idStrain,
@@ -165,7 +180,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) 
             reader.readAsDataURL(file);
         }
     }
-    
+
     return (
         <div className="StrainModal">
             <div className="modal">

@@ -87,7 +87,7 @@ function Profile() {
     //cho tab 1
     const handleSaveChangeData = async () => {
         const checkMail = await checkExistEmailWithoutSelfApi(customerData.idCustomer, email)
-        console.log(changeData.data )
+        console.log(changeData.data)
         if (checkMail.data.status === 1) {
             toastWarning('Email đã được sử dụng bởi 1 tài khoản khác');
             return;
@@ -168,7 +168,6 @@ function Profile() {
             setReNewPass('');
             setTab(1);
         } catch (e) {
-            console.error('Error:', e);
             toastError(`Lỗi: ${e.message}`, 'top-center');
         }
     };
@@ -205,7 +204,6 @@ function Profile() {
         if (tab === 1) {
             inputImgRef.current.click();
         }
-
     }
 
     const handleImageChange = (event) => {

@@ -5,7 +5,7 @@ import { logout } from "../../../srcRedux/features/employeeSlice";
 import { useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 
-const DrawerRight = ({ handleCloseDrawerRight, setScreenName }) => {
+const DrawerRight = ({ handleCloseDrawerRight, setScreenName, employee }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -31,7 +31,7 @@ const DrawerRight = ({ handleCloseDrawerRight, setScreenName }) => {
                     <div className="wrap-avatar-name">
                         <img src="https://i.pinimg.com/564x/40/96/8c/40968c12dce5289c3341131eaf03db19.jpg" />
                         <div className="wrap-name">
-                            <p className="name">Huỳnh Khánh Duy</p>
+                            <p className="name">{employee?.fullName}</p>
                             <p className="role">Nghiên cứu viên</p>
                         </div>
                     </div>

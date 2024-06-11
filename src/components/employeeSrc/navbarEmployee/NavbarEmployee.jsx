@@ -14,7 +14,7 @@ function NavbarEmployee({ employee, setScreenName }) {
             />
 
             {showDrawerRight &&
-                <DrawerRight handleCloseDrawerRight={()=>setShowDrawerRight(false)} setScreenName={setScreenName}/>}
+                <DrawerRight handleCloseDrawerRight={()=>setShowDrawerRight(false)} setScreenName={setScreenName} employee={employee}/>}
         </div>
     )
 }

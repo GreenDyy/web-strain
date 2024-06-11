@@ -26,7 +26,7 @@ const features = [
         id: 4,
         name: 'Tìm chủng',
         screenName: 'allStrain',
-        icon: icons.strain
+        icon: icons.searchstrain
     },
   
 ]

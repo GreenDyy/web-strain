@@ -131,6 +131,36 @@ const addStrainApprovalHistoryApi = async (idStrain) => {
     })
 }
 
+const updateStrainApi = async (idStrain, strain) => {
+    await axios.put(`${domain}/api/Strain/${idStrain}`, {
+
+        "strainNumber": strain.strainNumber,
+        "idSpecies": strain.idSpecies,
+        "idCondition": strain.idCondition,
+        "imageStrain": strain.imageStrain,
+        "scientificName": strain.scientificName,
+        "synonymStrain": strain.synonymStrain,
+        "formerName": strain.formerName,
+        "commonName": strain.commonName,
+        "cellSize": strain.cellSize,
+        "organization": strain.organization,
+        "characteristics": strain.characteristics,
+        "collectionSite": strain.collectionSite,
+        "continent": strain.continent,
+        "country": strain.country,
+        "isolationSource": strain.isolationSource,
+        "toxinProducer": strain.toxinProducer,
+        "stateOfStrain": strain.stateOfStrain,
+        "agitationResistance": strain.agitationResistance,
+        "remarks": strain.remarks,
+        "geneInformation": strain.geneInformation,
+        "publications": strain.publications,
+        "recommendedForTeaching": strain.recommendedForTeaching,
+        "dateAdd": strain.dateAdd
+
+    })
+}
+
 export {
     getAllStrainApi,
     getAllStrainNoPagingApi,
@@ -155,4 +185,5 @@ export {
     addStrainApi,
     getAllConditionApi,
     addStrainApprovalHistoryApi,
+    updateStrainApi,
 };

@@ -17,7 +17,7 @@ function Main({ nameScreen = 'contentWork', employee }) {
             {nameScreen === 'projectContent' && <ProjectContent />}
             {nameScreen === 'strainManament' && <StrainManament employee={employee} />}
             {nameScreen === 'allStrain' && <AllStrain />}
-            {nameScreen === 'profile' && <ProfileEmployee />}
+            {nameScreen === 'profile' && <ProfileEmployee employee={employee}/>}
         </div>
     )
 }
