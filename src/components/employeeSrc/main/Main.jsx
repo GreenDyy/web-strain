@@ -6,6 +6,7 @@ import ContentWork from "../contentWork/ContentWork";
 import ProjectContent from "../projectContent/ProjectContent";
 import StrainManament from "../strainManament/StrainManament";
 import AllStrain from "../allStrain/AllStrain";
+import ProfileEmployee from "../Proflie/ProfileEmployee";
 
 function Main({ nameScreen = 'contentWork', employee }) {
     return (
@@ -16,6 +17,7 @@ function Main({ nameScreen = 'contentWork', employee }) {
             {nameScreen === 'projectContent' && <ProjectContent />}
             {nameScreen === 'strainManament' && <StrainManament employee={employee} />}
             {nameScreen === 'allStrain' && <AllStrain />}
+            {nameScreen === 'profile' && <ProfileEmployee />}
         </div>
     )
 }

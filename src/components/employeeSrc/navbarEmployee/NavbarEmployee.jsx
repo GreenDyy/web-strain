@@ -3,7 +3,7 @@ import './NavbarEmployee.scss'
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import DrawerRight from "../drawerRight/DrawerRight";
 
-function NavbarEmployee({ employee }) {
+function NavbarEmployee({ employee, setScreenName }) {
     const [showDrawerRight, setShowDrawerRight] = useState(false)
     return (
         <div className="NavbarEmployee">
@@ -14,7 +14,7 @@ function NavbarEmployee({ employee }) {
             />
 
             {showDrawerRight &&
-                <DrawerRight handleCloseDrawerRight={()=>setShowDrawerRight(false)}/>}
+                <DrawerRight handleCloseDrawerRight={()=>setShowDrawerRight(false)} setScreenName={setScreenName}/>}
         </div>
     )
 }

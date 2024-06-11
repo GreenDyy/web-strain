@@ -9,15 +9,93 @@
     background: rgba(0, 0, 0, 0.2);
     align-items: center;
     justify-content: flex-end;
-    color: white;
- 
+    color: #636C97;
+
 
     .col-right {
         display: flex;
         flex-direction: column;
-        width: 14vw;
+        width: 16vw;
         height: 100vh;
-        padding-top: 80px;
-        background: #1E1E2C;
+        padding: 0 40px;
+        padding-top: 40px;
+        background: white;
+
+        .row-1 {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #D1D1D1;
+
+            .wrap-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                p {
+                    font-size: 20px;
+                    font-weight: 700;
+                }
+
+                .icon-close {
+                    font-size: 18px;
+                    color: green;
+                    cursor: pointer;
+                }
+            }
+
+            .wrap-avatar-name {
+                display: flex;
+                align-items: center;
+
+                img {
+                    height: 60px;
+                    width: 60px;
+                    object-fit: cover;
+                    border-radius: 999px;
+                }
+
+                .wrap-name {
+                    margin-left: 10px;
+
+                    .name {
+                        font-weight: 700;
+                    }
+
+                    .role {
+                        margin-top: -15px;
+                        color: gray;
+                        font-size: 14px;
+                    }
+                }
+            }
+            .wrap-btn-feature {
+                display: flex;
+                width: 100%;
+                justify-content: flex-end;
+
+                .btn-account {
+                    border-radius: 5px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: white;
+                    background: #66BF78;
+                    padding: 5px 20px;
+                    margin: 0 5px;
+                    cursor: pointer;
+                }
+                .btn-logout {
+                    border-radius: 5px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: white;
+                    background: #FD4C63;
+                    padding: 5px 20px;
+                    margin: 0 5px;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }

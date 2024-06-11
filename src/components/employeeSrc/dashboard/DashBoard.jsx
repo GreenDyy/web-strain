@@ -16,7 +16,7 @@ function DashBoard() {
              <Drawer setScreenName={setScreenName} />
 
             <div className="col-2">
-                <NavbarEmployee employee={dataEmployee}/>
+                <NavbarEmployee employee={dataEmployee} setScreenName={setScreenName} />
                 <Main nameScreen={screenName} employee={dataEmployee}/>
             </div>
         </div>

@@ -7,6 +7,7 @@
     padding: 10px 20px;
     position: sticky;
     top: 0; /* Đặt vị trí khi navbar bắt đầu dính */
+    z-index: 20;
     .notification {
         font-size: 25px;
         margin-right: 20px;

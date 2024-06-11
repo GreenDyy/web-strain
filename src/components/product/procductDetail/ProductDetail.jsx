@@ -166,7 +166,7 @@ function ProductDetail() {
             behavior: 'smooth'
         });
     }
-
+    console.log(product)
     return (
         <div className="ProductDetail">
             {product ? (
@@ -192,7 +192,7 @@ function ProductDetail() {
                                 <FaStar className="star" />
                             </div>
                             <p className="des">
-                            Strain này có một số gen mã hóa cho các yếu tố độc lực, bao gồm gen stx mã hóa độc tố Shiga (Shiga toxin). Gen stx nằm trên các prophage, có khả năng truyền ngang giữa các vi khuẩn. Ngoài ra, strain này còn mang gen eae mã hóa protein intimin, giúp vi khuẩn bám dính vào niêm mạc ruột của vật chủ.                            </p>
+                                Strain này có một số gen mã hóa cho các yếu tố độc lực, bao gồm gen stx mã hóa độc tố Shiga (Shiga toxin). Gen stx nằm trên các prophage, có khả năng truyền ngang giữa các vi khuẩn. Ngoài ra, strain này còn mang gen eae mã hóa protein intimin, giúp vi khuẩn bám dính vào niêm mạc ruột của vật chủ.                            </p>
                             <div className="wrap-all-btn">
                                 <div className="wrap-btn-amount">
                                     <button className="btn-decrease" onClick={decreaseCount}>-</button>
@@ -381,10 +381,10 @@ function ProductDetail() {
                                                     <p>{product?.toxinProducer}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.stateOfStrain}</p>
+                                                    <p>{product?.stateOfStrain || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.agitationResistance}</p>
+                                                    <p>{product?.agitationResistance || "-"}</p>
                                                 </div>
                                                 <div className="cell">
                                                     <p>{product?.remarks}</p>
