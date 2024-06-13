@@ -5,7 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import { convertImageByte, formatCurrency, setDataLocalStorage } from "../../utils/Utils";
 import { getInventoryByIdStrainApi } from "../../apis/apiInventory";
 import { getAllDetailCartApi, removeDetailCartApi } from "../../apis/apiCart";
-import { images } from '../../constants'
+import { icons, images } from '../../constants'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { addOrderDetailApi, createOrderApi, createPaymentUrlVNpayApi, sendMailOrderApi } from "../../apis/apiPayment";
@@ -137,9 +137,15 @@ function Payment() {
             }
             if (agree) {
                 //thanh toán khi nhận hàng
+                // const textPaymentMethod = paymentMethod === 'cod' ? 'COD'
+                //     : (paymentMethod === 'vnpay' ? 'VNPAY'
+                //         : (paymentMethod === 'momo' ? 'MOMO' : 'ZALOPAY'))
+                const statusOrder = paymentMethod === 'cod' ? 'Chưa thanh toán' : 'Đã thanh toán'
+
                 if (paymentMethod === 'cod') {
                     //tạo đơn
-                    const newOrder = await createOrderApi(customerData.idCustomer, thanhTien, note, address)
+
+                    const newOrder = await createOrderApi(customerData.idCustomer, thanhTien, note, address, paymentMethod, statusOrder)
                     //tạo các detail đơn
                     for (const detailCart of dataListDetailCart) {
                         const inventory = await getInventoryByIdStrainApi(detailCart.idStrain);
@@ -156,7 +162,7 @@ function Payment() {
                     await sendMailOrderApi(newOrder.data.idOrder)
                     dispatch(setTotalAllProduct(0))
                     setDataLocalStorage('lastIdOrder', newOrder.data.idOrder)
-                    navigate('/PaymentSuccess')
+                    navigate('/PaymentSuccess', { replace: true })
                     setLoading(false)
                 }
                 else if (paymentMethod === 'vnpay') {
@@ -168,13 +174,16 @@ function Payment() {
                         orderId: (Math.floor(Math.random() * 9000) + 1000).toString()
                     }
                     const paymentUrl = await createPaymentUrlVNpayApi(requestModel)
-                    window.location.href = paymentUrl.data;
+                    window.location.href = paymentUrl.data
+
                     //gói các thông tin cần lưu vào local để tí dùng lại
                     setDataLocalStorage('dataOrder', {
                         idCustomer: customerData?.idCustomer,
                         thanhTien: thanhTien,
                         note: note,
-                        address: address
+                        address: address,
+                        paymentMethod: paymentMethod,
+                        statusOrder: statusOrder
                     })
                     setDataLocalStorage('dataListDetailCart', dataListDetailCart)
                     setLoading(false)
@@ -246,6 +255,29 @@ function Payment() {
                         {dataListDetailCart.map((item, index) =>
                             <ItemProduct key={index} item={item} />
                         )}
+                    </div>
+                    <div className="row-total-money tax">
+                        <h4>Phương thức thanh toán</h4>
+                        {paymentMethod === 'cod' &&
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <img src={icons.cod} style={{ objectFit: 'contain', width: 30, height: 30, borderRadius: 5, marginRight: 5 }} />
+                                <h4>Thanh toán khi nhận hàng(COD)</h4>
+                            </div>}
+                        {paymentMethod === 'vnpay' &&
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <img src={icons.vnpay} style={{ objectFit: 'contain', width: 30, height: 30, borderRadius: 5, marginRight: 5 }} />
+                                <h4>Cổng thanh toán VnPay</h4>
+                            </div>}
+                        {paymentMethod === 'momo' &&
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <img src={icons.momo} style={{ objectFit: 'contain', width: 30, height: 30, borderRadius: 5, marginRight: 5 }} />
+                                <h4>Ví điện tử MoMo</h4>
+                            </div>}
+                        {paymentMethod === 'zalopay' &&
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <img src={icons.zalopay} style={{ objectFit: 'contain', width: 30, height: 30, borderRadius: 5, marginRight: 5 }} />
+                                <h4>Ví điện tử ZaloPay</h4>
+                            </div>}
                     </div>
                     <div className="row-total-money tax">
                         <h4>Tổng tiền</h4>

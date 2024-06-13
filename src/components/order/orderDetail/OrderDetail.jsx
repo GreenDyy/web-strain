@@ -5,9 +5,9 @@ import { getAllOrderDetailByIdOrderApi, getOrderByIdOrderApi } from "../../../ap
 import { getInventoryByIdStrainApi } from "../../../apis/apiInventory";
 import { getStrainByIdApi } from "../../../apis/apiStrain";
 import { convertImageByte, formatCurrency } from "../../../utils/Utils";
-import { images } from "../../../constants";
+import { icons, images } from "../../../constants";
 import { FaCheck } from "react-icons/fa";
-import { GiTakeMyMoney } from "react-icons/gi";
+import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { DaHoanThanh, DangChoXuLy, DangDuocXuLy, DangVanChuyen } from "../../statusOrder/StatusOrder";
 import { useSelector } from "react-redux";
 
@@ -28,7 +28,7 @@ const ItemOrderDetail = ({ oderDetail }) => {
     const imgSrc = strain?.imageStrain ? convertImageByte(strain?.imageStrain) : images.strainnull
 
     return (
-        <div className="card-product" onClick={()=>navigate(`/ProductDetail/${strain?.idStrain}`)}>
+        <div className="card-product" onClick={() => navigate(`/ProductDetail/${strain?.idStrain}`)}>
             <div className="item-col-1">
                 <img className="img-item" src={imgSrc} />
                 <div className="wrap-content">
@@ -108,7 +108,31 @@ function OrderDetail() {
 
                 <div className="wrap-order-method">
                     <h2>Phương thức thanh toán</h2>
-                    <p>Thanh toán khi nhận hàng</p>
+                    {dataOrder?.paymentMethod === 'cod' &&
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src={icons.cod} style={{ objectFit: 'contain', width: 30, height: 30, borderRadius: 5, marginRight: 5 }} />
+                            <p>Thanh toán khi nhận hàng(COD)</p>
+                        </div>
+                    }
+                    {dataOrder?.paymentMethod === 'vnpay' &&
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src={icons.vnpay} style={{ objectFit: 'contain', width: 30, height: 30, borderRadius: 5, marginRight: 5 }} />
+                            <p>Cổng thanh toán VnPay</p>
+                        </div>
+                    }
+                    {dataOrder?.paymentMethod === 'zalopay' &&
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src={icons.zalopay} style={{ objectFit: 'contain', width: 30, height: 30, borderRadius: 5, marginRight: 5 }} />
+                            <p>Ví điện tử ZaloPay</p>
+                        </div>
+                    }
+                    {dataOrder?.paymentMethod === 'momo' &&
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src={icons.momo} style={{ objectFit: 'contain', width: 30, height: 30, borderRadius: 5, marginRight: 5 }} />
+                            <h4>Ví điện tử MoMo</h4>
+                        </div>
+                    }
+
                 </div>
             </div>
 
@@ -119,7 +143,7 @@ function OrderDetail() {
                 )}
             </div>
             <div className="row-5">
-                <GiTakeMyMoney className="icon-money" />
+                <FaMoneyCheckDollar className="icon-money" />
                 <p className="title-money">Thành tiền: </p>
                 <h3 className="money">{formatCurrency(dataOrder?.totalPrice)} VNĐ</h3>
             </div>

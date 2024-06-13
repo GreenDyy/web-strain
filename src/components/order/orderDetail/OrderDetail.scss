@@ -94,6 +94,7 @@
 
             .profile {
                 display: flex;
+
                 .title {
                     p {
                         margin: 3px 0;
@@ -104,6 +105,7 @@
 
                 .content {
                     margin-left: 10px;
+
                     .name {
                         font-weight: 500;
                     }
@@ -121,7 +123,7 @@
         .wrap-order-method {
             display: flex;
             flex-direction: column;
-            width: 50%;
+            flex: 1;
             margin-left: 20px;
 
             h2 {
@@ -131,6 +133,7 @@
             p {
                 margin: 3px 0;
                 font-size: 16px;
+                font-weight: 500;
             }
         }
     }
@@ -146,7 +149,7 @@
             align-items: center;
             box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
             margin-top: 5px;
-            padding: 5px 20px;   
+            padding: 5px 20px;
             // border-bottom: 1px solid gray;
             cursor: pointer;
 
@@ -191,7 +194,8 @@
 
         .icon-money {
             color: #00A551;
-            font-size: 26px;
+            font-size: 22px;
+            margin-right: 5px;
         }
 
         .title-money {

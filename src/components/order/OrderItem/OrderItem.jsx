@@ -4,9 +4,8 @@ import { convertImageByte, formatCurrency } from "../../../utils/Utils";
 import { getInventoryByIdStrainApi } from "../../../apis/apiInventory";
 import { getAllOrderDetailByIdOrderApi } from "../../../apis/apiPayment";
 import { getStrainByIdApi } from "../../../apis/apiStrain";
-import { GiTakeMyMoney } from "react-icons/gi";
+import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { images } from "../../../constants";
-import { toastWarning } from "../../Toast/Toast";
 import { DaHoanThanh, DangChoXuLy, DangDuocXuLy, DangVanChuyen } from "../../statusOrder/StatusOrder";
 
 const ItemOrderDetail = ({ oderDetail }) => {
@@ -73,7 +72,7 @@ function OrderItem({ order, onClick, onHandleDestroyOrder }) {
             </div>
 
             <div className="total-money">
-                <GiTakeMyMoney className="icon-money" />
+                <FaMoneyCheckDollar className="icon-money" />
                 <p className="title-money">Thành tiền: </p>
                 <h3 className="money">{formatCurrency(order?.totalPrice)} VNĐ</h3>
             </div>

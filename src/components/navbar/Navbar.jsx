@@ -39,10 +39,10 @@ const listNavbarItem = [
     },
 ]
 
-const ItemDropdown = ({ item }) => {
+const ItemDropdown = ({ item, onClick }) => {
     const imageSrc = item?.imageStrain ? convertImageByte(item?.imageStrain) : images.strainnull
     return (
-        <div className='item-dropdown'>
+        <div className='item-dropdown' onClick={onClick}>
             <div className='img-item'>
                 <img src={imageSrc} alt='img-strain' />
             </div>
@@ -142,7 +142,7 @@ const Navbar = () => {
                                 {dataSearch?.length !== 0 &&
                                     dataSearch?.map((item, index) => {
                                         return (
-                                            <ItemDropdown key={index} item={item} />
+                                            <ItemDropdown key={index} item={item} onClick={() => { navigate(`/ProductDetail/${item?.idStrain}`) }} />
                                         )
                                     })
                                 }

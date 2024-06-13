@@ -6,6 +6,7 @@ import emptysearch from '../assets/images/emptysearch.png'
 import emptyorder from '../assets/images/emptyorder.png'
 import bgloginemployee from '../assets/images/bgloginemployee.png'
 import paymentfail from '../assets/images/paymentfail.png'
+import paymentsuccess from '../assets/images/paymentsuccess.jpg'
 
 const images = {
     strainnull,
@@ -16,6 +17,7 @@ const images = {
     emptyorder,
     bgloginemployee,
     paymentfail,
+    paymentsuccess,
 }
 
 export default images

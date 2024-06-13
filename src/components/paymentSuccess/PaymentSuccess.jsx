@@ -50,10 +50,12 @@ function PaymentSuccess() {
         //lấy data request từ bên Payment nảy gửi lên stogare ấy 
         const dataOrder = getDataLocalStorage('dataOrder')
         const dataListDetailCart = getDataLocalStorage('dataListDetailCart')
+        
         //tạo đơn
         if (vnpParams) {
             
-            const newOrder = await createOrderApi(dataOrder?.idCustomer, vnpParams?.vnp_Amount, dataOrder?.note, dataOrder?.address)
+            const newOrder = await createOrderApi(dataOrder?.idCustomer, vnpParams?.vnp_Amount, dataOrder?.note, 
+                dataOrder?.address, dataOrder?.paymentMethod, dataOrder?.statusOrder)
             //tạo các detail đơn
             for (const detailCart of dataListDetailCart) {
                 const inventory = await getInventoryByIdStrainApi(detailCart.idStrain);
@@ -70,9 +72,6 @@ function PaymentSuccess() {
             }
             //gửi mail 
             await sendMailOrderApi(newOrder.data.idOrder)
-          
-            console.log('Đã lưu lastIdOrder khi VNPAY')
-            // navigate('/PaymentSuccess')
         }
         else {
             toastError('Tạo đơn khi thanh toán online không thành công')
@@ -110,7 +109,7 @@ function PaymentSuccess() {
                         </div>
 
                         <div className="col-2">
-                            <img className="img-col-2" src="https://img.freepik.com/free-vector/flat-creativity-concept-illustration_52683-64279.jpg" />
+                            <img className="img-col-2" src={images.paymentsuccess} />
                         </div>
                     </div>
                 </div >
