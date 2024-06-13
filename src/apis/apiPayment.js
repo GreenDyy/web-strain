@@ -1,4 +1,4 @@
-// https://localhost:7168/api/Inventory/GetByIdStrain/1
+
 import axios from "axios";
 import domain from "./domain";
 
@@ -53,6 +53,21 @@ const deleteOrderDetail = async (idOrderDetail) => {
 const deleteOrder = async (idOrder) => {
     await axios.delete(`${domain}/api/Order/${idOrder}`)
 }
+//VnPay
+const createPaymentUrlVNpayApi = async (vnPayRequest) => {
+    const response = await axios.post(`${domain}/api/VNPay/CreatePaymentUrl`, {
+        "fullName": vnPayRequest.fullName,
+        "description": vnPayRequest.description,
+        "amount": vnPayRequest.amount,
+        "orderId": vnPayRequest.orderId
+      })
+    return response
+}
+
+const paymenExcuteVNpayApi = async (requestQuery) => {
+    const response = await axios.post(`${domain}/api/VNPay/PaymentExcute`, requestQuery)
+    return response
+}
 
 export {
     createOrderApi,
@@ -63,4 +78,6 @@ export {
     sendMailOrderApi,
     deleteOrderDetail,
     deleteOrder,
+    createPaymentUrlVNpayApi,
+    paymenExcuteVNpayApi,
 };

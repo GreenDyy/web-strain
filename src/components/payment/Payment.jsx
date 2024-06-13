@@ -8,10 +8,12 @@ import { getAllDetailCartApi, removeDetailCartApi } from "../../apis/apiCart";
 import { images } from '../../constants'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { addOrderDetailApi, createOrderApi, sendMailOrderApi } from "../../apis/apiPayment";
+import { addOrderDetailApi, createOrderApi, createPaymentUrlVNpayApi, sendMailOrderApi } from "../../apis/apiPayment";
 import { setTotalAllProduct } from "../../srcRedux/features/cartSlice";
 import { toastWarning } from "../Toast/Toast";
 import Loading from "../loading/Loading";
+import { useLocation } from 'react-router-dom';
+
 
 const ItemProduct = ({ item }) => {
     const [price, setPrice] = useState(0)
@@ -58,10 +60,13 @@ function Payment() {
     const [agree, setAgree] = useState(false)
     const [loading, setLoading] = useState(false)
 
+    const location = useLocation();
+    const paymentMethod = location.state?.paymentMethod || 'cod';
+
     useEffect(() => {
         const fetchDataDetailCart = async () => {
-            const data = await getAllDetailCartApi(idCart)
-            setDataListDetailCart(data.data)
+            const detailCarts = await getAllDetailCartApi(idCart)
+            setDataListDetailCart(detailCarts.data)
 
         }
         fetchDataDetailCart()
@@ -131,31 +136,58 @@ function Payment() {
                 return
             }
             if (agree) {
+                //thanh toán khi nhận hàng
+                if (paymentMethod === 'cod') {
+                    //tạo đơn
+                    const newOrder = await createOrderApi(customerData.idCustomer, thanhTien, note, address)
+                    //tạo các detail đơn
+                    for (const detailCart of dataListDetailCart) {
+                        const inventory = await getInventoryByIdStrainApi(detailCart.idStrain);
+                        const totalPriceOneProduct = detailCart.quantityOfStrain * inventory.data.price;
+                        await addOrderDetailApi(newOrder.data.idOrder, detailCart.idStrain, detailCart.quantityOfStrain, totalPriceOneProduct);
+                    }
 
-                //tạo đơn
-                const newOrder = await createOrderApi(customerData.idCustomer, thanhTien, note, address)
-                //tạo các detail đơn
-                for (const detailCart of dataListDetailCart) {
-                    const inventory = await getInventoryByIdStrainApi(detailCart.idStrain);
-                    const totalPriceOneProduct = detailCart.quantityOfStrain * inventory.data.price;
-                    await addOrderDetailApi(newOrder.data.idOrder, detailCart.idStrain, detailCart.quantityOfStrain, totalPriceOneProduct);
+                    //tạo bill
+                    //xoá cart
+                    for (const detailCart of dataListDetailCart) {
+                        await removeDetailCartApi(detailCart.idCartDetail)
+                    }
+                    //gửi mail 
+                    await sendMailOrderApi(newOrder.data.idOrder)
+                    dispatch(setTotalAllProduct(0))
+                    setDataLocalStorage('lastIdOrder', newOrder.data.idOrder)
+                    navigate('/PaymentSuccess')
+                    setLoading(false)
+                }
+                else if (paymentMethod === 'vnpay') {
+                    //chuyển hướng tới VNPay
+                    const requestModel = {
+                        fullName: customerData?.fullName,
+                        description: note,
+                        amount: thanhTien,
+                        orderId: (Math.floor(Math.random() * 9000) + 1000).toString()
+                    }
+                    const paymentUrl = await createPaymentUrlVNpayApi(requestModel)
+                    window.location.href = paymentUrl.data;
+                    //gói các thông tin cần lưu vào local để tí dùng lại
+                    setDataLocalStorage('dataOrder', {
+                        idCustomer: customerData?.idCustomer,
+                        thanhTien: thanhTien,
+                        note: note,
+                        address: address
+                    })
+                    setDataLocalStorage('dataListDetailCart', dataListDetailCart)
+                    setLoading(false)
                 }
 
-                //tạo bill
-                //xoá cart
-                for (const detailCart of dataListDetailCart) {
-                    await removeDetailCartApi(detailCart.idCartDetail)
+                else {
+                    toastWarning("Đang phát triển thêm tính năng")
                 }
-                //gửi mail 
-                await sendMailOrderApi(newOrder.data.idOrder)
-                dispatch(setTotalAllProduct(0))
-                setDataLocalStorage('lastIdOrder', newOrder.data.idOrder)
-                navigate('/PaymentSuccess')
-                setLoading(false)
+
             }
             else {
                 setLoading(false)
-                toastWarning('Bạn chưa đồng ý với các điều khoản thanh toán')
+                toastWarning('Vui lòng đồng ý với các điều khoản thanh toán')
             }
         }
         else {
@@ -231,7 +263,10 @@ function Payment() {
             </div>
             <div className="wrap-btn">
                 <label><input type="checkbox" onClick={() => setAgree(!agree)} /> Đồng ý với các điều khoản của chúng tôi <a>Điều khoản thanh toán</a></label>
-                <button className="btn-submit" onClick={handlePayOrder} disabled={loading}>Xác nhận thanh toán</button>
+                {paymentMethod === 'cod' && <button className="btn-submit" onClick={handlePayOrder} disabled={loading}>Thanh toán khi nhận hàng</button>}
+                {paymentMethod === 'vnpay' && <button className="btn-submit" onClick={handlePayOrder} disabled={loading}>Thanh toán bằng VNPay</button>}
+                {paymentMethod === 'momo' && <button className="btn-submit" onClick={handlePayOrder} disabled={loading}>Thanh toán bằng MoMo</button>}
+                {paymentMethod === 'zalopay' && <button className="btn-submit" onClick={handlePayOrder} disabled={loading}>Thanh toán bằng ZaloPay</button>}
             </div>
             {loading && <Loading className='loading' />}
         </div>

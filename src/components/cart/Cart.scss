@@ -121,6 +121,37 @@
             font-weight: 500;
         }
 
+        .wrap-payment-method {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+
+            label {
+                display: flex;
+                align-items: center;
+            }
+
+            .payment-method {
+                display: flex;
+                align-items: center;
+
+                input {
+                    margin-right: 10px;
+                }
+
+                img {
+                    height: 40px;
+                    width: 40px;
+                    margin-right: 5px;
+                    border-radius: 4px;
+                }
+
+                p {
+                    font-weight: 400;
+                }
+            }
+        }
+
         .box-voucher {
             display: flex;
             position: relative;
@@ -171,6 +202,7 @@
             margin-top: 20px;
             transition: 0.3s ease-in-out;
         }
+
         .btn-thanh-toan:hover {
             background: #65B741;
             transition: 0.3s ease-in-out;
@@ -185,8 +217,9 @@
             font-size: 18px;
             transition: 0.3s ease-in-out;
         }
+
         .btn-continue:hover {
-           scale: 1.03;
+            scale: 1.03;
             transition: 0.3s ease-in-out;
         }
     }

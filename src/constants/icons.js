@@ -12,6 +12,9 @@ import work from '../assets/icons/work.png'
 import more from '../assets/icons/more.png'
 import project from '../assets/icons/project.png'
 import searchstrain from '../assets/icons/searchstrain.png'
+import vnpay from '../assets/icons/vnpay.png'
+import zalopay from '../assets/icons/zalopay.png'
+import cod from '../assets/icons/cod.png'
 
 const icons = {
     searchicon,
@@ -28,6 +31,9 @@ const icons = {
     more,
     project,
     searchstrain,
+    vnpay,
+    zalopay,
+    cod,
     
 }
 

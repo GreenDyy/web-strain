@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { toast } from 'react-toastify';
 import { getInventoryByIdStrainApi, updateInventoryByIdStrainApi } from '../../apis/apiInventory'
-import { toastSuccess, toastWarning } from '../Toast/Toast'
+import { toastError, toastSuccess, toastWarning } from '../Toast/Toast'
 import { setTotalAllProduct } from '../../srcRedux/features/cartSlice'
 
 const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
@@ -61,7 +61,8 @@ const ItemCart = ({ item, onIncrease, onDecrease, onRemove }) => {
 //--MAIN
 function Cart() {
     const navigate = useNavigate()
-    const [paymentMethod, setPaymentMethod] = useState('khinhanhang')
+    const customerData = useSelector(state => state.customer.customerData)
+    const [paymentMethod, setPaymentMethod] = useState('cod')
     const [listCartItem, setListCartItem] = useState([])
     const [tongTien, setTongTien] = useState(0)
     const [thanhTien, setThanhTien] = useState(0)
@@ -99,7 +100,6 @@ function Cart() {
             }
             setTongTien(totalPrice)
             setTongThue(totalTax)
-            console.log('tax:', totalTax)
             setThanhTien(totalPrice + totalTax)
         }
         updateTongTien()
@@ -208,21 +208,28 @@ function Cart() {
         toastSuccess('Xoá thành công!', 'top-right')
     }
     //các loại payment: khinhanhang, momo, ...
-    const handlePaymentMethod = () => {
-        if (paymentMethod === 'khinhanhang') {
-            navigate('/Payment')
-        }
-        else if (paymentMethod === 'momo') {
-            navigate('/Payment')
-        }
-        else {
-            navigate('/Payment')
+    const handlePayment = async () => {
+        switch (paymentMethod) {
+            case "cod":
+                navigate('/Payment', { state: { paymentMethod: 'cod' } });
+                break
+            case "vnpay":
+                navigate('/Payment', { state: { paymentMethod: 'vnpay' } });
+                break
+
+            case "momo":
+                toastWarning('Đang phát triển')
+                break
+            case "zalopay":
+                toastWarning('Đang phát triển')
+                break
+            default:
+                break
         }
     }
 
     const handleSelectPaymentMethod = (event) => {
         setPaymentMethod(event.target.value)
-        toast(`Bạn chọn thanh toán ${event.target.value}`)
     }
 
     return (
@@ -277,35 +284,57 @@ function Cart() {
                                 <p>Áp dụng voucher</p>
                                 <div className='box-voucher'>
                                     <input type='text' placeholder='Mã Voucher' />
-                                    <button>Áp dụng</button>
+                                    <button onClick={()=>{toastWarning('Tính năng đang phát triển')}}>Áp dụng</button>
                                 </div>
                             </div>
 
                             <p>Phương thức thanh toán</p>
-                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                                <label style={{ display: 'flex', alignItems: 'center' }}>
+                            <div className='wrap-payment-method'>
+                                <div className='payment-method'>
                                     <input
                                         type="radio"
-                                        value="khinhanhang"
+                                        value="cod"
                                         onChange={handleSelectPaymentMethod}
-                                        checked={paymentMethod === 'khinhanhang'}
+                                        checked={paymentMethod === 'cod'}
                                     />
-                                    Thanh toán khi nhận hàng
-                                </label>
-                                <div style={{ display: 'flex' }}>
+                                    <img src={icons.cod} />
+                                    <p>Thanh toán khi nhận hàng</p>
+                                </div>
+                                <div className='payment-method'>
+                                    <input
+                                        type="radio"
+                                        value="vnpay"
+                                        onChange={handleSelectPaymentMethod}
+                                        checked={paymentMethod === 'vnpay'}
+                                    />
+                                    <img src={icons.vnpay} />
+                                    <p>Thanh toán với VNPay</p>
+                                </div>
+                                <div className='payment-method'>
                                     <input
                                         type="radio"
                                         value="momo"
                                         onChange={handleSelectPaymentMethod}
                                         checked={paymentMethod === 'momo'}
                                     />
-                                    <img src={icons.momo} style={{ height: 40, width: 40 }} />
+                                    <img src={icons.momo} />
+                                    <p>Thanh toán với MoMo</p>
+                                </div>
+                                <div className='payment-method'>
+                                    <input
+                                        type="radio"
+                                        value="zalopay"
+                                        onChange={handleSelectPaymentMethod}
+                                        checked={paymentMethod === 'zalopay'}
+                                    />
+                                    <img src={icons.zalopay} />
+                                    <p>Thanh toán với ZaloPay</p>
                                 </div>
 
                             </div>
 
 
-                            <button className='btn-thanh-toan' onClick={handlePaymentMethod}>THANH TOÁN</button>
+                            <button className='btn-thanh-toan' onClick={handlePayment}>THANH TOÁN</button>
 
                             <p style={{ textAlign: 'center' }}>Hoặc</p>
 
