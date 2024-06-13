@@ -3,10 +3,13 @@ import './ProfileEmployee.scss'
 import { convertImageByte } from "../../../utils/Utils";
 import { MdOutlinePublishedWithChanges } from "react-icons/md";
 import ChangePass from "../changePass/ChangePass";
+import { updateEmployeeApi } from "../../../apis/apiLoginEmployee";
+import { toastError, toastSuccess } from "../../Toast/Toast";
+import { images } from '../../../constants'
 
 function ProfileEmployee({ employee }) {
     const [dataEmployee, setDataEmployee] = useState({
-        idEmployee: "NV010",
+        idEmployee: "",
         idRole: 3,
         firstName: "",
         lastName: "",
@@ -34,7 +37,7 @@ function ProfileEmployee({ employee }) {
 
     useEffect(() => {
         setDataEmployee(employee)
-    }, [])
+    }, [employee])
 
     const handleOnChance = (key, value) => {
         let temp = { ...dataEmployee }
@@ -46,12 +49,23 @@ function ProfileEmployee({ employee }) {
         inputImgRef.current.click();
     }
 
-    const handleImageChange = (event) => {
+    const handleImageChange = async (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
 
-        reader.onloadend = () => {
+        reader.onloadend = async () => {
             setDataEmployee({ ...dataEmployee, imageEmployee: reader.result.split(',')[1] }); //lưu base 64
+            const newEmployee = { ...dataEmployee, imageEmployee: reader.result.split(',')[1] }
+            //call api update ltai day lun
+            try {
+
+                await updateEmployeeApi(dataEmployee?.idEmployee, newEmployee)
+                toastSuccess('Cập nhật ảnh đại diện thành công')
+                console.log(newEmployee)
+            }
+            catch (e) {
+                toastError(`Lỗi khi cập nhật avatar: ${e}`)
+            }
         }
         if (file) {
             reader.readAsDataURL(file);
@@ -62,7 +76,7 @@ function ProfileEmployee({ employee }) {
             <div className="row-profile ">
                 <p className="text-header">Thông tin cá nhân</p>
                 <div className="wrap-avatar-name">
-                    <img src={convertImageByte(dataEmployee?.imageEmployee)} onClick={handlePickImage} />
+                    <img src={dataEmployee?.imageEmployee ? convertImageByte(dataEmployee?.imageEmployee) : images.avatarnull} onClick={handlePickImage} />
                     <input
                         type="file"
                         accept="image/*"

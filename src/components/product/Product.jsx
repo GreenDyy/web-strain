@@ -229,7 +229,7 @@ function Product() {
                     search !== '' ? (
                         <div className='notification'>
                             <img className='img-empty' src={images.emptysearch} />
-                            <h2>Không tìm thấy mẫu này</h2>
+                            <h2>Không tìm thấy chủng này</h2>
                         </div>
                     ) : (
                         <div className="loading">

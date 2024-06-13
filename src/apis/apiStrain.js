@@ -21,6 +21,10 @@ const getAllStrainByTheEmployee = async (idEmployy) => {
     return await axios.get(`${domain}/api/Strain/GetAllStrainByTheEmployee?idEmployee=${idEmployy}`);
 }
 
+const getAllStrainForEmployeeApi = async (search, page) => {
+    return await axios.get(`${domain}/api/Strain/GetAllStrainForEmployee?search=${search}&page=${page}`);
+};
+
 // Follow TYPE
 const getAllStrainFollowPhylumApi = async (namePhylum, search, sortBy, page) => {
     return await axios.get(`${domain}/api/Strain/FollowPhylum?namePhylum=${namePhylum}&search=${search}&sortBy=${sortBy}&page=${page}`);
@@ -186,4 +190,5 @@ export {
     getAllConditionApi,
     addStrainApprovalHistoryApi,
     updateStrainApi,
+    getAllStrainForEmployeeApi,
 };

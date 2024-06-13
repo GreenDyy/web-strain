@@ -6,7 +6,7 @@ import { toastError, toastSuccess, toastWarning } from '../../Toast/Toast';
 import { convertImageByte } from "../../../utils/Utils";
 import { addIsolatorStrainApi, addStrainApi, addStrainApprovalHistoryApi, getAllConditionApi, getAllSpeciesApi, updateStrainApi } from "../../../apis/apiStrain";
 
-const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) => {
+const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, isGlobal = false }) => {
     const [dataSpeices, setDataSpecies] = useState([])
     const [dataCondition, setDataCondition] = useState([])
     const [showDropdownSpecies, setShowDropdownSpecies] = useState(false)
@@ -460,9 +460,12 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData }) 
                             <>
 
                                 {strain?.strainNumber ?
-                                    <p className="strain-da-duyet">ĐÃ DUYỆT</p>
-                                    :
-                                    <button className="btn-update" onClick={handleUpdateStrain}>Cập nhật</button>
+                                    // <p className="strain-da-duyet">ĐÃ DUYỆT</p>
+                                    <img className='img-approved' src={images.approved} />
+                                    : (!isGlobal ? <button className="btn-update" onClick={handleUpdateStrain}>Cập nhật</button>
+                                        : <img className='img-approved' src={images.notapproved} />
+                                    )
+
                                 }
 
                             </>

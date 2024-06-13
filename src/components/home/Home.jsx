@@ -2,12 +2,13 @@ import React from "react";
 import './Home.scss'
 import { useNavigate } from "react-router-dom";
 import { removeDataLocalStorage } from "../../utils/Utils";
+import { images } from "../../constants";
 
 function Home() {
     const navigate = useNavigate()
     return (
         <div className="Home">
-            {/* <img className="banner" src="https://img.timviecthietke.com/2021/06/kich-thuoc-banner-website-1.png" /> */}
+            <img className="banner" src={images.bannerstrain} />
             <div className="wrap-content">
                 <div className="col-1">
                     <h1>STRAIN IS YOUR LIFE.</h1>

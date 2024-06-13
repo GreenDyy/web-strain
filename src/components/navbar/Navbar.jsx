@@ -30,12 +30,12 @@ const listNavbarItem = [
         to: '/Newspaper'
     },
     {
-        title: 'Dự án',
-        to: '/Project'
+        title: 'Về chúng tôi',
+        to: '/AboutUs'
     },
     {
-        title: 'Về chúng tôi',
-        to: '/Project'
+        title: 'Liên hệ',
+        to: '/AboutUs'
     },
 ]
 

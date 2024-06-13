@@ -7,6 +7,18 @@ import emptyorder from '../assets/images/emptyorder.png'
 import bgloginemployee from '../assets/images/bgloginemployee.png'
 import paymentfail from '../assets/images/paymentfail.png'
 import paymentsuccess from '../assets/images/paymentsuccess.jpg'
+import illustration1 from '../assets/images/illustration1.jpg'
+import illustration2 from '../assets/images/illustration2.jpg'
+import illustration3 from '../assets/images/illustration3.jpg'
+import illustration4 from '../assets/images/illustration4.jpg'
+import illustration5 from '../assets/images/illustration5.jpg'
+import illustration6 from '../assets/images/illustration1.jpg'
+import illustration7 from '../assets/images/illustration7.jpg'
+import illustration8 from '../assets/images/illustration8.jpg'
+import bannerstrain from '../assets/images/bannerstrain.png'
+import bannerintro from '../assets/images/bannerintro.png'
+import approved from '../assets/images/approved.png'
+import notapproved from '../assets/images/notapproved.png'
 
 const images = {
     strainnull,
@@ -18,6 +30,11 @@ const images = {
     bgloginemployee,
     paymentfail,
     paymentsuccess,
+    illustration1, illustration2, illustration3, illustration4, illustration5, illustration6, illustration7, illustration8,
+    bannerstrain,
+    bannerintro,
+    approved,
+    notapproved,
 }
 
 export default images

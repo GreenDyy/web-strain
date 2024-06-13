@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../../srcRedux/features/employeeSlice";
 import { useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
+import { convertImageByte } from "../../../utils/Utils";
+import { images } from "../../../constants";
 
 const DrawerRight = ({ handleCloseDrawerRight, setScreenName, employee }) => {
     const dispatch = useDispatch()
@@ -29,7 +31,7 @@ const DrawerRight = ({ handleCloseDrawerRight, setScreenName, employee }) => {
                     </div>
 
                     <div className="wrap-avatar-name">
-                        <img src="https://i.pinimg.com/564x/40/96/8c/40968c12dce5289c3341131eaf03db19.jpg" />
+                        <img src={employee?.imageEmployee ? convertImageByte(employee?.imageEmployee) : images.avatarnull} />
                         <div className="wrap-name">
                             <p className="name">{employee?.fullName}</p>
                             <p className="role">Nghiên cứu viên</p>
