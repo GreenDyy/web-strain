@@ -85,7 +85,27 @@
     transition: 0.3s ease-in-out;
 }
 
-.Login .btn-login:hover {
+.Login .btn-google {
+    width: 90%;
+    display: flex;
+    padding: 0 10px;
+    border-radius: 40px;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid white;
+    height: 45px;
+    cursor: pointer;
+}
+
+.Login .btn-google img {
+    width: 35px;
+    height: 35px;
+    border-radius: 999px;
+    object-fit: cover;
+    margin-right: 5px;
+}
+
+b .Login .btn-login:hover {
     scale: 1.05;
     transition: 0.3s ease-in-out;
 }

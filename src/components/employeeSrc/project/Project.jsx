@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import './Project.scss'
-import { IoMdMore } from "react-icons/io"
-import { FaProjectDiagram } from "react-icons/fa"
 import { getAllProjectEmployeeApi } from "../../../apis/apiTask";
 import { getEmployeeByIdApi } from "../../../apis/apiLoginEmployee";
-import { icons, images } from "../../../constants";
+import { icons } from "../../../constants";
+import { format } from 'date-fns'
 
 const ItemProject = ({ item }) => {
     const [owner, setOwner] = useState(null)
@@ -25,7 +24,7 @@ const ItemProject = ({ item }) => {
 
                 <img src={icons.more} className="icon" />
             </div>
-            <p className="row-2">Tạo bởi {owner?.fullName} vào ngày {item.startDateProject}</p>
+            <p className="row-2">Tạo bởi {owner?.fullName} vào ngày {format(item.startDateProject, 'dd-MM-yyyy')}</p>
         </div>
     )
 }

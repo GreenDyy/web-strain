@@ -6,6 +6,7 @@ import { getAllContentWorkApi, getAllContentWorkByIdProjectContentApi, getAllPro
 import { FaCircleDot, FaFlag } from "react-icons/fa6";
 import moment from "moment/moment";
 import DetailWork from "../detailWork/DetailWork";
+import { format } from "date-fns";
 
 const ItemWork = ({ work, updateWorkStatus, onClick }) => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -45,7 +46,7 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
         const idCurProject = tempProjectContent.data.idProject
         const curProject = await getProjectByIdProjectApi(idCurProject)
         const listProjectContentFormProjectIdProject = await getAllProjectContentByIdProjectApi(idCurProject)
-       
+
         for (const projectContent of listProjectContentFormProjectIdProject.data) {
             console.log(listProjectContentFormProjectIdProject.data)
             if (projectContent?.status === 'Chưa hoàn thành') {
@@ -68,17 +69,17 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
                     <p style={{ paddingRight: 10 }} onClick={() => { onClick(work.idContentWork) }}>{work?.nameContent}</p>
                 </div>
             </td>
-            <td style={{ width: '10%' }}>{work?.startDate} </td>
-            <td style={{ width: '10%' }}>{work?.endDate} </td>
+            <td style={{ width: '10%' }}>{format(work?.startDate, 'dd-MM-yyyy')} </td>
+            <td style={{ width: '10%' }}>{format(work?.endDate, 'dd-MM-yyyy')} </td>
             <td style={{ width: '10%', textAlign: 'center' }}>
                 <div className={`wrap-flag ${work?.priority === 'Cao' ? 'high' : 'low'}`}>
                     <FaFlag className='icon-flag' />
                     {work?.priority}
                 </div>
             </td>
-            <td 
+            <td
                 ref={dropdownRef}
-                style={{ width: '10%', cursor: 'pointer', position: 'relative'}}
+                style={{ width: '10%', cursor: 'pointer', position: 'relative' }}
                 className={`${work?.status === 'Chưa hoàn thành' ? 'not-complete' : 'complete'}`}
                 onClick={() => setShowDropdown(!showDropdown)}>
                 {work?.status}

@@ -86,8 +86,12 @@ function Product() {
     }, [search, sortBy, pageRouter, node])
 
     const handleGoToDetail = (idStrain) => {
-        navigate(`/ProductDetail/${idStrain}`);
-    };
+        navigate(`/ProductDetail/${idStrain}`)
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
 
     const handleSelectNode = async (node) => {
         if (node.idPhylum) {

@@ -1,24 +1,73 @@
 .NavbarEmployee {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     background: white;
     padding: 10px 20px;
     position: sticky;
-    top: 0; /* Đặt vị trí khi navbar bắt đầu dính */
+    top: 0;
+    /* Đặt vị trí khi navbar bắt đầu dính */
     z-index: 20;
+
     .notification {
         font-size: 25px;
         margin-right: 20px;
         color: #5CB14F;
         cursor: pointer;
     }
-    .avatar {
-        height: 45px;
-        width: 45px;
-        border-radius: 999px;
-        object-fit: cover;
-        cursor: pointer;
+
+    .clock {
+        display: flex;
+        flex-direction: column;
+        border-radius: 20px;
+        margin: 0;
+        padding: 0;
+        // background-color: rgba(22,51,53,0.5);
+
+        .time {
+            font-size: 25px;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .day {
+            margin: 0;
+            padding: 0;
+            color: #757575 ;
+            font-size: 14px;
+        }
+    }
+
+    .wrap-avatar-name {
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .wrap-name-nav {
+            display: flex;
+            flex-direction: column;
+            margin-right: 10px;
+            align-items: flex-end;
+
+            .name {
+                font-weight: 700;
+            }
+
+            .role {
+                margin-top: -15px;
+                color: gray;
+                font-size: 14px;
+            }
+        }
     }
 }

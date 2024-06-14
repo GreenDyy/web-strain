@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import './Profile.scss'
-import { checkExistEmailApi, checkExistEmailWithoutSelfApi, getCustomerApi, updateCustomerApi } from "../../apis/apiLogin";
+import { changePassCustomerApi, checkExistEmailWithoutSelfApi, getCustomerApi, updateCustomerNoPassApi } from "../../apis/apiLogin";
 import { useSelector } from "react-redux";
 import bcrypt from 'bcryptjs';
 //icon
@@ -93,7 +93,7 @@ function Profile() {
             return;
         }
         try {
-            await updateCustomerApi(customerData.idCustomer, {
+            await updateCustomerNoPassApi(customerData.idCustomer, {
                 firstName: firstName,
                 lastName: lastName,
                 fullName: `${firstName} ${lastName}`,
@@ -142,7 +142,7 @@ function Profile() {
         }
 
         try {
-            await updateCustomerApi(customerData.idCustomer, {
+            await changePassCustomerApi(customerData.idCustomer, {
                 firstName: customerData.firstName,
                 lastName: customerData.lastName,
                 fullName: customerData.fullName,
@@ -174,7 +174,7 @@ function Profile() {
     //cho tab 3
     const handleSaveChangeAddress = async () => {
         try {
-            await updateCustomerApi(customerData.idCustomer, {
+            await updateCustomerNoPassApi(customerData.idCustomer, {
                 firstName: customerData.firstName,
                 lastName: customerData.lastName,
                 fullName: customerData.fullName,
