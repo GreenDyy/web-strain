@@ -15,6 +15,8 @@ import searchstrain from '../assets/icons/searchstrain.png'
 import vnpay from '../assets/icons/vnpay.png'
 import zalopay from '../assets/icons/zalopay.png'
 import cod from '../assets/icons/cod.png'
+import google from '../assets/icons/google.png'
+
 
 const icons = {
     searchicon,
@@ -34,6 +36,7 @@ const icons = {
     vnpay,
     zalopay,
     cod,
+    google,
     
 }
 

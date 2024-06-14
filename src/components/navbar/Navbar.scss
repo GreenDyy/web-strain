@@ -259,6 +259,9 @@
                         border-radius: 5px;
                         padding: 5px 10px;
                         transition: 2 ease-in-out;
+                        .icon {
+                            margin-right: 5px;
+                        }
                     }
 
                     li:hover {

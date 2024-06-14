@@ -5,6 +5,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { loginCustomerApi } from "../../apis/apiLogin";
 import { getAllTotalQuantityApi, getCartByIdCustomerApi } from "../../apis/apiCart";
 import { toastError, toastWarning } from "../Toast/Toast";
+import { icons } from '../../constants'
 //redux
 import { useDispatch } from "react-redux";
 import { login } from "../../srcRedux/features/customerSlice";
@@ -42,7 +43,7 @@ function Login() {
                     idCart: cart.data.idCart
                 }))
                 dispatch(setTotalAllProduct(allTotalProductInCart.data));
-                navigate('/Home', {replace: true})
+                navigate('/Home', { replace: true })
             }
             else {
                 setSpinner(false)
@@ -84,6 +85,11 @@ function Login() {
                     size={20}
                     cssOverride={{ position: 'absolute', right: 198, bottom: 100 }}
                 />
+                <p className="register-link">Hoặc đăng nhập với</p>
+                <div className="btn-google" >
+                    <img src={icons.google} />
+                    <p>Đăng nhập với Google</p>
+                </div>
 
                 <div className="register-link">
                     <p>Chưa có tài khoản? <Link to='/Register'>Đăng ký ngay!</Link></p>

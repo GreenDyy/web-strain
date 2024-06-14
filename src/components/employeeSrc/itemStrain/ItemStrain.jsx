@@ -14,7 +14,7 @@ const ItemStrain = ({ item, onHandleDetail }) => {
                 <p className="name">{item?.scientificName}</p>
                 <p className="number">
                     <strong style={{ color: 'black' }}>
-                        Number:
+                        Mã:
                     </strong> {item?.strainNumber ? item.strainNumber : "Chưa có mã"}
                 </p>
                 <p className="number">

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './ChangePass.scss'
 import { toastError, toastSuccess, toastWarning } from "../../Toast/Toast";
 import bcrypt from 'bcryptjs';
-import { updateEmployeeApi } from "../../../apis/apiLoginEmployee";
+import { changePassEmployeeApi, updateEmployeeApi } from "../../../apis/apiLoginEmployee";
 import { useDispatch } from "react-redux";
 import { changeData } from "../../../srcRedux/features/employeeSlice";
 
@@ -35,7 +35,7 @@ function ChangePass({ employee, handleCloseModal }) {
         }
         try {
             const dataAfterChange = { ...employee, password: reNewPass }
-            await updateEmployeeApi(employee?.idEmployee, dataAfterChange)
+            await changePassEmployeeApi(employee?.idEmployee, dataAfterChange)
             dispatch(changeData({
                 employeeData: dataAfterChange
             }));

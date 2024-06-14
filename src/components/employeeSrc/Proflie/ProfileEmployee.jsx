@@ -3,11 +3,14 @@ import './ProfileEmployee.scss'
 import { convertImageByte } from "../../../utils/Utils";
 import { MdOutlinePublishedWithChanges } from "react-icons/md";
 import ChangePass from "../changePass/ChangePass";
-import { updateEmployeeApi } from "../../../apis/apiLoginEmployee";
+import { updateEmployeeApi, updateEmployeeNoPassApi } from "../../../apis/apiLoginEmployee";
 import { toastError, toastSuccess } from "../../Toast/Toast";
 import { images } from '../../../constants'
+import { useDispatch } from "react-redux";
+import { changeData } from "../../../srcRedux/features/employeeSlice";
 
 function ProfileEmployee({ employee }) {
+    const dispatch = useDispatch()
     const [dataEmployee, setDataEmployee] = useState({
         idEmployee: "",
         idRole: 3,
@@ -54,14 +57,16 @@ function ProfileEmployee({ employee }) {
         const reader = new FileReader();
 
         reader.onloadend = async () => {
-            setDataEmployee({ ...dataEmployee, imageEmployee: reader.result.split(',')[1] }); //lưu base 64
+            // setDataEmployee({ ...dataEmployee, imageEmployee: reader.result.split(',')[1] }); //lưu base 64
             const newEmployee = { ...dataEmployee, imageEmployee: reader.result.split(',')[1] }
             //call api update ltai day lun
             try {
-
-                await updateEmployeeApi(dataEmployee?.idEmployee, newEmployee)
+                await updateEmployeeNoPassApi(dataEmployee?.idEmployee, newEmployee)
+                dispatch(changeData({
+                    employeeData: newEmployee
+                }));
                 toastSuccess('Cập nhật ảnh đại diện thành công')
-                console.log(newEmployee)
+
             }
             catch (e) {
                 toastError(`Lỗi khi cập nhật avatar: ${e}`)
