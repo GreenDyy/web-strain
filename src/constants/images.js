@@ -15,10 +15,12 @@ import illustration5 from '../assets/images/illustration5.jpg'
 import illustration6 from '../assets/images/illustration1.jpg'
 import illustration7 from '../assets/images/illustration7.jpg'
 import illustration8 from '../assets/images/illustration8.jpg'
-import bannerstrain from '../assets/images/bannerstrain.png'
-import bannerintro from '../assets/images/bannerintro.png'
+
 import approved from '../assets/images/approved.png'
 import notapproved from '../assets/images/notapproved.png'
+import bannerstrain from '../assets/images/bannerstrain.png'
+import bannerintro from '../assets/images/bannerintro.png'
+import bannercontact from '../assets/images/bannercontact.png'
 
 const images = {
     strainnull,
@@ -35,6 +37,7 @@ const images = {
     bannerintro,
     approved,
     notapproved,
+    bannercontact,
 }
 
 export default images

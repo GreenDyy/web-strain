@@ -9,7 +9,7 @@ function Contact() {
     return (
         <div className='Contact'>
             <div className="row-banner">
-                <img className="banner" src={images.bannerintro} />
+                <img className="banner" src={images.bannercontact} />
             </div>
 
             <h1 className='title-contact-main'>LIÊN HỆ CHÚNG TÔI</h1>
