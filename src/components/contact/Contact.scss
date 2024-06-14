@@ -1,0 +1,64 @@
+.Contact {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    // margin: 100px 0;
+    margin-bottom: 100px;
+
+    .row-banner {
+        margin-bottom: 50px;
+
+        .banner {
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+
+    .title-contact-main {
+        color: #579742;
+    }
+
+    .wrap-all-contact {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+
+        .wrap-item-contact {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: center;
+
+            .card-img {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #579742;
+                border-radius: 999px;
+                width: 50px;
+                height: 50px;
+                padding: 25px 25px;
+
+                .icon-contact {
+                    color: white;
+                    font-size: 45px;
+                }
+            }
+
+            .title-contact {
+                color: #579742;
+                margin: 5px 0;
+                font-family: "Baloo Tamma 2", system-ui;
+
+               
+            }
+            p {
+                font-weight: 500;
+            }
+        }
+    }
+}

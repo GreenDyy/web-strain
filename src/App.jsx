@@ -5,6 +5,7 @@ import Footer from './components/footer/Footer';
 import Content from './components/content/Content';
 import ContentEmployee from './components/employeeSrc/contentemployee/ContentEmployee';
 import { Route, Routes } from 'react-router-dom';
+import FooterV2 from './components/footer/FooterV2';
 
 const CustomerLayout = () => {
     return (
@@ -14,7 +15,8 @@ const CustomerLayout = () => {
             {/* body */}
             <Content />
             {/* footer */}
-            <Footer />
+            {/* <Footer /> */}
+            <FooterV2/>
         </div>
     );
 }

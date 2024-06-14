@@ -21,7 +21,7 @@ function Order() {
             setListOrder(dataOrder.data)
         }
         fetchDataOrder()
-    }, [listOrder])
+    }, [])
 
     const handleDestroyOrder = (idOrder) => {
         toast.dark(

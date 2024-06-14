@@ -4,11 +4,10 @@
     width: 100%;
     background-color: white;
     .row-banner {
-       
         .banner {
             width: 100%;
-            background-size: cover; /* Phù hợp kích thước hình ảnh để phủ toàn bộ phần tử */
-            background-position: center; /* Căn chỉnh hình ảnh vào giữa */
+            background-size: cover; 
+            background-position: center;
             background-repeat: no-repeat;
         }
     }

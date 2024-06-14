@@ -35,7 +35,7 @@ const listNavbarItem = [
     },
     {
         title: 'Liên hệ',
-        to: '/AboutUs'
+        to: '/Contact'
     },
 ]
 

@@ -1,7 +1,7 @@
 import React from "react";
 import './Footer.css'
 import { useNavigate } from "react-router-dom";
-import { icons } from '../../constants'
+import { icons, images } from '../../constants'
 
 function Footer() {
     const navigate = useNavigate()
@@ -51,10 +51,10 @@ function Footer() {
                 <div style={{ display: 'flex', flexDirection: 'column', flex: 30, marginLeft: 10, marginRight: 10 }}>
                     <h2>Mạng xã hội</h2>
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src="https://w.forfun.com/fetch/bd/bd86eeadaa4bdbac4fb86200aa8a4f8f.jpeg" alt="Image 1" />
-                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src="https://wallpaper.forfun.com/fetch/52/5242f0ad13f69e78c5cc49211d2a6832.jpeg?w=1470&r=0.5625" alt="Image 1" />
-                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src="https://thanhnien.mediacdn.vn/uploaded/duyphuc/2020_02_12/corana_LOJR.jpg?width=689" alt="Image 1" />
-                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/7/16/820047/Virus-Corona.jpg" alt="Image 1" />
+                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src={images.illustration7} alt="Image 1" />
+                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src={images.illustration6} alt="Image 1" />
+                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src={images.illustration3} alt="Image 1" />
+                        <img style={{ height: 200, width: '45%', margin: 5, borderRadius: 20, objectFit: 'cover' }} src={images.illustration2} alt="Image 1" />
                     </div>
                 </div>
             </div>
