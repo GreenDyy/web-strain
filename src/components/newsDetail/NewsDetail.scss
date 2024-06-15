@@ -1,0 +1,118 @@
+.NewsDetail {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    background: white;
+    padding: 20px 15%;
+
+    .col-1-news {
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        padding: 30px 30px;
+
+        .title-news {
+            color: #5A7085;
+            margin-bottom: 10px;
+        }
+
+        .post-date {
+            font-size: 12px;
+            width: 100%;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #5A7085;
+        }
+
+        .content-news {
+            font-size: 15px;
+            text-align: justify;
+        }
+
+        img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .author {
+            text-align: end;
+            font-weight: 700;
+        }
+
+        .title-lien-quan {
+            color: #5A7085;
+        }
+
+        .wrap-news {
+            display: flex;
+            // align-items: center;
+            width: 100%;
+            margin-top: 0;
+            margin-bottom: 20px;
+
+            .thumbnail {
+                height: 80px;
+                width: 150px;
+                object-fit: cover;
+                margin-right: 8px;
+                border-radius: 5px;
+            }
+        }
+
+        p {
+            flex: 1;
+            font-size: 14px;
+            margin-top: 0;
+        }
+    }
+
+
+    .col-2-news {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        height: 100%;
+        background: #F3F3F3;
+        padding: 30px 30px;
+        margin-top: 50px;
+        border-radius: 20px;
+
+        h3 {
+            margin: 0;
+            font-weight: 1000;
+            color: #5A7085;
+        }
+
+        .wrap-all-news {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #5A7085;
+
+            .wrap-news {
+                display: flex;
+                // align-items: center;
+                width: 100%;
+                margin-top: 0;
+                margin-bottom: 20px;
+
+                .thumbnail {
+                    height: 80px;
+                    width: 150px;
+                    object-fit: cover;
+                    margin-right: 8px;
+                    border-radius: 5px;
+                }
+
+                p {
+                    flex: 1;
+                    font-size: 14px;
+                    margin-top: 0;
+                }
+            }
+        }
+
+    }
+}

@@ -126,10 +126,10 @@ function Register() {
             <form>
                 <h1>Đăng ký</h1>
                 <div className="wrap-all-input">
-                    <div className="input-box one-col-30">
+                    <div className="input-box one-col-70">
                         <input
                             type="text"
-                            placeholder="Họ"
+                            placeholder="Họ và tên đệm"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                             required
@@ -137,7 +137,7 @@ function Register() {
                         <TbUserSquareRounded className="icon icon-name" />
                     </div>
 
-                    <div className="input-box one-col-70">
+                    <div className="input-box one-col-30">
                         <input
                             type="text"
                             placeholder="Tên"
@@ -151,8 +151,8 @@ function Register() {
                     <div className="input-box">
                         <select value={gender} onChange={(event) => setGender(event.target.value)}>
                             <option value="">Chọn giới tính của bạn</option>
-                            <option value="male">Nam</option>
-                            <option value="female">Nữ</option>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
 
                         </select>
                     </div>

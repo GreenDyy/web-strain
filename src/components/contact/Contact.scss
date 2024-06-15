@@ -8,18 +8,17 @@
     margin-bottom: 100px;
 
     .row-banner {
-        margin-bottom: 50px;
         width: 100%;
-
         .banner {
             width: 100%;
-            background-size: cover;
-            background-position: center;
             background-repeat: no-repeat;
+            background-position: center;
+            object-fit: fill;
         }
     }
 
     .title-contact-main {
+        margin-top: 50px;
         color: #579742;
     }
 
@@ -55,8 +54,9 @@
                 margin: 5px 0;
                 font-family: "Baloo Tamma 2", system-ui;
 
-               
+
             }
+
             p {
                 font-weight: 500;
             }

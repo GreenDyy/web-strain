@@ -48,7 +48,6 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
         const listProjectContentFormProjectIdProject = await getAllProjectContentByIdProjectApi(idCurProject)
 
         for (const projectContent of listProjectContentFormProjectIdProject.data) {
-            console.log(listProjectContentFormProjectIdProject.data)
             if (projectContent?.status === 'Chưa hoàn thành') {
                 await updateProjectApi(idCurProject, { ...curProject.data, status: 'Chưa hoàn thành' })
                 break;
@@ -65,7 +64,8 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
         <tr>
             <td style={{ width: '50%', padding: '0px 5px' }}>
                 <div className='wrap-name-content'>
-                    <FaCircleDot className={`${work?.status === 'Chưa hoàn thành' ? 'icon-status-not' : 'icon-status-yes'}`} />
+                    {/* <FaCircleDot className={`${work?.status === 'Chưa hoàn thành' ? 'icon-status-not' : 'icon-status-yes'}`} /> */}
+                    <div className={`${work?.status === 'Chưa hoàn thành' ? 'icon-status-not' : 'icon-status-yes'}`}></div>
                     <p style={{ paddingRight: 10 }} onClick={() => { onClick(work.idContentWork) }}>{work?.nameContent}</p>
                 </div>
             </td>

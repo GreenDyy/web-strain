@@ -74,24 +74,13 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: start;
+                
+                .header {
+                    margin: 0 25px;
+                    margin-top: 20px;
+                    color: #0A6847;
 
-                .wrap-row-header {
-                    display: flex;
-                    background-color: #BFF6C3;
-                    border-radius: 20px;
-                    margin: 20px 5%;
-                    justify-content: center;
-                    align-items: center;
-                    color: white;
-                    padding: 10px;
-
-                    .header {
-                        margin: 0;
-                        color: #0A6847;
-
-                        align-self: flex-start;
-                    }
-
+                    align-self: flex-start;
                 }
 
                 .sort-by {

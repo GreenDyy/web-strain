@@ -3,7 +3,7 @@ import './ProfileEmployee.scss'
 import { convertImageByte } from "../../../utils/Utils";
 import { MdOutlinePublishedWithChanges } from "react-icons/md";
 import ChangePass from "../changePass/ChangePass";
-import { updateEmployeeApi, updateEmployeeNoPassApi } from "../../../apis/apiLoginEmployee";
+import { updateEmployeeNoPassApi } from "../../../apis/apiLoginEmployee";
 import { toastError, toastSuccess } from "../../Toast/Toast";
 import { images } from '../../../constants'
 import { useDispatch } from "react-redux";
@@ -65,7 +65,7 @@ function ProfileEmployee({ employee }) {
                 dispatch(changeData({
                     employeeData: newEmployee
                 }));
-                toastSuccess('Cập nhật ảnh đại diện thành công')
+                toastSuccess('Đã cập nhật ảnh đại diện')
 
             }
             catch (e) {

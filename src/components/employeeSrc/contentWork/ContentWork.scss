@@ -276,15 +276,20 @@
                             align-items: center;
 
                             .icon-status-not {
-                                font-size: 18px;
+                                width: 10px;
+                                height: 10px;
+                                object-fit: contain;
+                                background: #FD4B63;
+                                border-radius: 999px;
                                 margin-right: 10px;
-                                color: #FD4B63;
                             }
 
                             .icon-status-yes {
-                                font-size: 18px;
+                                width: 10px;
+                                height: 10px;
+                                background: #5CB14F;
+                                border-radius: 999px;
                                 margin-right: 10px;
-                                color: #5CB14F;
                             }
 
                             p:hover {

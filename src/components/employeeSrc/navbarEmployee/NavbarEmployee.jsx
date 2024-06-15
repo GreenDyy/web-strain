@@ -26,8 +26,8 @@ function NavbarEmployee({ employee, setScreenName }) {
             const month = dateObject.getMonth() + 1;
             const year = dateObject.getFullYear();
 
-            const currentTime = `${hour}:${minute}  `
-            const currentDay = `${dayOfMonth}.${month}.${year}`
+            const currentTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}  `
+            const currentDay = `${dayOfMonth.toString().padStart(2, '0')}.${month.toString().padStart(2, '0')}.${year}`
 
             setTime(currentTime)
             setDay(currentDay)

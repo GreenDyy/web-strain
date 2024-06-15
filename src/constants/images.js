@@ -21,6 +21,8 @@ import notapproved from '../assets/images/notapproved.png'
 import bannerstrain from '../assets/images/bannerstrain.png'
 import bannerintro from '../assets/images/bannerintro.png'
 import bannercontact from '../assets/images/bannercontact.png'
+import bannernewspaper from '../assets/images/bannernewspaper.png'
+
 
 const images = {
     strainnull,
@@ -38,6 +40,7 @@ const images = {
     approved,
     notapproved,
     bannercontact,
+    bannernewspaper,
 }
 
 export default images

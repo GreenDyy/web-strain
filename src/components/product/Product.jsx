@@ -87,10 +87,7 @@ function Product() {
 
     const handleGoToDetail = (idStrain) => {
         navigate(`/ProductDetail/${idStrain}`)
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
+        window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
     const handleSelectNode = async (node) => {
@@ -173,9 +170,8 @@ function Product() {
                 {dataStrain.length !== 0 ? (
                     <div className='col-all-item'>
                         <div className='wrap-all-item'>
-                            <div className='wrap-row-header'>
-                                <h1 className='header'>Danh sách Strain</h1>
-                            </div>
+
+                            <h2 className='header'>Danh sách chủng</h2>
 
                             <div className='sort-by'>
                                 <p>Sắp xếp theo tên: </p>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'
 import { FaUser, FaLock } from "react-icons/fa";
@@ -11,12 +11,25 @@ import { useDispatch } from "react-redux";
 import { login } from "../../srcRedux/features/customerSlice";
 import { setTotalAllProduct } from "../../srcRedux/features/cartSlice";
 import { HashLoader } from "react-spinners";
+import { getDataLocalStorage, removeDataLocalStorage, setDataLocalStorage } from "../../utils/Utils";
 
 function Login() {
     const dispatch = useDispatch()
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState(getDataLocalStorage('rememberUserName') || '')
+    const [password, setPassword] = useState(getDataLocalStorage('rememberPassword') || '')
     const [spinner, setSpinner] = useState(false)
+    const [rememberPass, setRememberPass] = useState(getDataLocalStorage('rememberPassword') ? true : false)
+
+    useEffect(() => {
+        if (rememberPass) {
+            setDataLocalStorage('rememberUserName', username)
+            setDataLocalStorage('rememberPassword', password)
+        }
+        else {
+            removeDataLocalStorage('rememberUserName')
+            removeDataLocalStorage('rememberPassword')
+        }
+    }, [rememberPass])
 
     const navigate = useNavigate();
 
@@ -51,12 +64,11 @@ function Login() {
             }
         }
         catch (e) {
-            console.log(e)
             setSpinner(false)
             toastError("Sai tên tài khoản hoặc mật khẩu")
         }
     }
-
+    console.log(rememberPass)
     return (
         <div className="Login">
             <form>
@@ -73,7 +85,7 @@ function Login() {
                 </div>
 
                 <div className="remember-forgot">
-                    <label> <input type="checkbox" />Nhớ mật khẩu</label>
+                    <label> <input type="checkbox" value={rememberPass} onChange={() => setRememberPass(!rememberPass)} checked={rememberPass} />Nhớ mật khẩu</label>
                     <Link to='/ForgetPass'>Quên mật khẩu</Link>
                 </div>
 
@@ -95,10 +107,6 @@ function Login() {
                     <p>Chưa có tài khoản? <Link to='/Register'>Đăng ký ngay!</Link></p>
                 </div>
             </form>
-            {/* <button
-                type="submit"
-                onClick={handleLogin}
-            >Test</button> */}
         </div>
     )
 }

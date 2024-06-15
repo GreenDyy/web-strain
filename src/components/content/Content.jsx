@@ -19,6 +19,7 @@ import OrderDetail from '../order/orderDetail/OrderDetail'
 import NewsPaper from '../newspaper/NewsPaper'
 import AboutUs from '../aboutUs/AboutUs'
 import Contact from '../contact/Contact'
+import NewsDetail from '../newsDetail/NewsDetail'
 
 function Content() {
     const location = useLocation();
@@ -49,6 +50,7 @@ function Content() {
                 <Route path='/OrderDetail/:idOrder' element={<OrderDetail />} />
                 <Route path='/AboutUs' element={<AboutUs />} />
                 <Route path="/Contact" element={<Contact />} />
+                <Route path='/NewsDetail/:idNewspaper' element={<NewsDetail />} />
 
             </Routes>
         </div>

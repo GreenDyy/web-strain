@@ -21,7 +21,7 @@ function FooterV2() {
         <div className="FooterV2">
             <div className="row-1-footer">
                 <h2 className="title-row-1">DAQStrain</h2>
-                <p>DAQStrain Solutions hướng đến trở thành một đơn vị hàng đầu trong lĩnh vực Công nghệ Thông tin và nghiên cứu strain, cung cấp các giải pháp quản trị vận hành và nghiên cứu chuyên sâu, tiên tiến nhất cho doanh nghiệp trên toàn cầu.</p>
+                <p>DAQStrain hướng tới mục tiêu trở thành đơn vị hàng đầu trong lĩnh vực nghiên cứu các chủng vi sinh. Chúng tôi cung cấp các giải pháp quản trị vận hành và nghiên cứu chuyên sâu, tiên tiến nhất cho doanh nghiệp trên toàn cầu.</p>
                 <div className="wrap-all-icon">
                     <FaFacebook className="icon" />
                     <FaInstagram className="icon" />
@@ -32,7 +32,7 @@ function FooterV2() {
                 <div className="wrap-all-feature">
                     <p className="feature" onClick={() => handleToLink('/AboutUs')}>Về chúng tôi</p>
                     <p className="feature" onClick={() => handleToLink('/Contact')}>Liên hệ</p>
-                    <p className="feature" onClick={() => handleToLink('/Newspape')}>Báo khoa học</p>
+                    <p className="feature" onClick={() => handleToLink('/Newspaper')}>Báo khoa học</p>
                     <p className="feature last" onClick={() => handleToLink('/Product/1')}>Sản phẩm</p>
                 </div>
             </div>

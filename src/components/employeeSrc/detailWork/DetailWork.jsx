@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import './DetailWork.scss'
-import { getProjectContentApi, getProjecttApi, updateContentWorkApi } from "../../../apis/apiTask";
+import { getProjectContentApi, getProjecttApi, updateContentWorkApi, updateFileSavedApi } from "../../../apis/apiTask";
 import { FaCircleDot } from "react-icons/fa6";
 import moment from "moment";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { IoDocumentAttachOutline } from "react-icons/io5";
-import { toastSuccess } from "../../Toast/Toast";
+import { toastError, toastSuccess } from "../../Toast/Toast";
+import { base64ToBlob } from "../../../utils/Utils";
 
 const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
     const [dataWork, setDataWork] = useState(null)
@@ -14,8 +15,6 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
     const [projectContent, setProjectContent] = useState(null)
     const [showDropdown, setShowDropdown] = useState(false)
     const [notification, setNotification] = useState('')
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [fileUrl, setFileUrl] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,6 +24,7 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
                 const project = await getProjecttApi(projectContent.data.idProject);
                 setProjectContent(projectContent.data);
                 setProject(project.data);
+                setNotification(item?.notificattion)
             }
         };
         fetchData();
@@ -51,25 +51,33 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
 
     const handleFileChange = async (event) => {
         const file = event.target.files[0];
-        setSelectedFile(file);
-        setFileUrl(URL.createObjectURL(file));
-
         const reader = new FileReader();
         reader.onloadend = async () => {
-            // Lưu file vào csdl sau khi đã đọc và chuyển đổi xong
             const fileSaved = reader.result.split(',')[1]
-            const newWork = { ...dataWork, fileSaved: fileSaved, fileName: file.name };
-            await updateContentWorkApi(dataWork.idContentWork, newWork);
-            setDataWork(newWork);
+            try {
+                // Lưu file vào csdl sau khi đã đọc và chuyển đổi xong
+                const newWork = { ...dataWork, fileSaved: fileSaved, fileName: file.name };
+                // const file = { fileSaved: fileSaved, fileName: fileName };
+                await updateFileSavedApi(dataWork.idContentWork, { fileSave: fileSaved, fileName: file.name });
+                setDataWork(newWork);
+                toastSuccess('Tải file lên thành công');
+            }
+            catch {
+                toastError('Tải file thất bại')
+            }
 
-            toastSuccess('Tải file lên thành công');
-        };
+        }
 
         if (file) {
             reader.readAsDataURL(file);
         }
-    };
-
+    }
+    const handleDeleteFile = async () => {
+        const newWork = { ...dataWork, fileSaved: null, fileName: null };
+        const file = { fileSave: null, fileName: null };
+        await updateFileSavedApi(dataWork.idContentWork, file);
+        setDataWork(newWork);
+    }
 
     const handleChangeStatusWork = async (status, endDateActual) => {
         const newWork = { ...dataWork, status: status, endDateActual: endDateActual };
@@ -79,11 +87,17 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
         setShowDropdown(false);
     }
 
-    // const handleUpdateFileSaved = async () => {
-    //     const newWork = { ...dataWork, fileSaved: fileSaved, fileName: fileName };
-    //     await updateContentWorkApi(dataWork.idContentWork, newWork);
-    //     setDataWork(newWork);
-    // }
+    const handleSaveDes = async () => {
+        try {
+            const newWork = { ...dataWork, notificattion: notification };
+            await updateContentWorkApi(dataWork.idContentWork, newWork);
+            setDataWork(newWork);
+            toastSuccess('Đã lưu mô tả')
+        }
+        catch {
+            toastError('Cập nhật mô tả thất bại')
+        }
+    }
 
     return (
         <div className="DetailWork">
@@ -139,7 +153,7 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
                         <div className="wrap-2">
                             <div className="title-and-save">
                                 <h3 className="title-notification">MÔ TẢ CÔNG VIỆC</h3>
-                                <button className="btn-save">Lưu mô tả công việc</button>
+                                <button className="btn-save" onClick={handleSaveDes}>Lưu mô tả công việc</button>
                             </div>
 
                             <ReactQuill theme="snow"
@@ -160,14 +174,20 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
                             </div>
                         </div>
                         <div className="area-attach">
-                            {selectedFile ? (
+                            {dataWork?.fileName ? (
                                 <div className="file-info">
-                                    <a href={fileUrl} download={selectedFile?.name}>
-                                        <p href={fileUrl} download={selectedFile?.name}>Tên tệp: {selectedFile.name}</p>
-
-                                    </a>
-                                    <p>Kích thước: {(selectedFile?.size / 1024).toFixed(2)} KB</p>
+                                    <p>
+                                        Tên tệp:
+                                        {dataWork?.fileSaved && (
+                                            <a href={URL.createObjectURL(base64ToBlob(dataWork?.fileSaved, 'application/octet-stream'))} download={dataWork.fileName}>
+                                                {dataWork.fileName}
+                                            </a>
+                                        )}
+                                    </p>
+                                    <p>Kích thước: {(base64ToBlob(dataWork?.fileSaved, 'application/octet-stream')?.size / 1024).toFixed(2)} KB</p>
+                                    {/* <button className="btn-delete-file" onClick={handleDeleteFile}>Xoá tài liệu</button> */}
                                 </div>
+
                             ) : (
                                 <p className="no-attach-file">Không có tài liệu đính kèm</p>
                             )}

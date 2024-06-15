@@ -14,9 +14,10 @@ function Home() {
                     <h1>STRAIN IS YOUR LIFE.</h1>
                     <h1 style={{ marginTop: -10 }}>Với hơn 3000 chủng tảo và động vật nguyên sinh.</h1>
                     <p>
-                        <strong>DAQStrain</strong> là bộ sưu tập dịch vụ lớn nhất và đa dạng nhất của Châu Âu dành cho các chủng sinh vật sống từ môi trường biển, nước ngọt và trên cạn cũng như bộ sưu tập tảo cát vùng cực ngày càng tăng
+                        <strong>DAQStrain </strong>
+                        là một công ty tiên phong trong lĩnh vực nghiên cứu các chủng vi sinh, chuyên cung cấp các giải pháp quản trị vận hành và nghiên cứu chuyên sâu cho doanh nghiệp trên toàn cầu. Với sứ mệnh trở thành đơn vị hàng đầu trong ngành, DAQStrain không ngừng phát triển và ứng dụng những công nghệ tiên tiến nhất để đáp ứng nhu cầu của khách hàng.
                     </p>
-                    
+
                     <button onClick={() => {
                         removeDataLocalStorage('node')
                         navigate('/Product/1')

@@ -40,6 +40,13 @@ const updateContentWorkApi = async (idContentWork, contentWork) => {
         "histories": contentWork.histories
     })
 }
+const updateFileSavedApi = async (idContentWork, file) => {
+    await axios.patch(`${domain}/api/ContentWork/${idContentWork}/file`, {
+        "fileSave": file.fileSave,
+        "fileName": file.fileName,
+    })
+}
+
 const getAllContentWorkByIdProjectContentApi = async (idProjectContent) => {
     const response = await axios.get(`${domain}/api/ContentWork/GetAllByIdProjectContent?idProjectContent=${idProjectContent}`)
     return response
@@ -103,4 +110,5 @@ export {
 
     updateProjectContentApi,
     updateProjectApi,
+    updateFileSavedApi,
 }
