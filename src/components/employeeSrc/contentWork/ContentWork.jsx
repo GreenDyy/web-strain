@@ -6,7 +6,7 @@ import { getAllContentWorkApi, getAllContentWorkByIdProjectContentApi, getAllPro
 import { FaCircleDot, FaFlag } from "react-icons/fa6";
 import moment from "moment/moment";
 import DetailWork from "../detailWork/DetailWork";
-import { format } from "date-fns";
+import { formatDate } from "../../../utils/Utils";
 
 const ItemWork = ({ work, updateWorkStatus, onClick }) => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -69,8 +69,8 @@ const ItemWork = ({ work, updateWorkStatus, onClick }) => {
                     <p style={{ paddingRight: 10 }} onClick={() => { onClick(work.idContentWork) }}>{work?.nameContent}</p>
                 </div>
             </td>
-            <td style={{ width: '10%' }}>{format(work?.startDate, 'dd-MM-yyyy')} </td>
-            <td style={{ width: '10%' }}>{format(work?.endDate, 'dd-MM-yyyy')} </td>
+            <td style={{ width: '10%' }}>{formatDate(work?.startDate)} </td>
+            <td style={{ width: '10%' }}>{formatDate(work?.endDate)} </td>
             <td style={{ width: '10%', textAlign: 'center' }}>
                 <div className={`wrap-flag ${work?.priority === 'Cao' ? 'high' : 'low'}`}>
                     <FaFlag className='icon-flag' />
@@ -218,7 +218,7 @@ function ContentWork({ employee }) {
 
             <div className="row-work">
                 <div className="row-filter">
-                    <p className="text-header">Công việc của tôi - Tên dự án</p>
+                    <p className="text-header">Danh sách công việc</p>
                     {/* //loc trong cai 1 trong 4 the minh ấn thoi, 4 the khac nhau */}
                     <div className="wrap-dropdown-item-cw" ref={dropdownPriorityRef}>
                         <button className="btn-filter-cw" onClick={() => setShowDropdownPriority(!showDropdownPriority)}>Độ ưu tiên: {priority}</button>

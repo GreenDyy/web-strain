@@ -7,7 +7,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { IoDocumentAttachOutline } from "react-icons/io5";
 import { toastError, toastSuccess } from "../../Toast/Toast";
-import { base64ToBlob } from "../../../utils/Utils";
+import { base64ToBlob, formatDate } from "../../../utils/Utils";
 
 const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
     const [dataWork, setDataWork] = useState(null)
@@ -135,16 +135,16 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
                             <div className="wrap-all-date">
                                 <div className="wrap-start-date">
                                     <p>NGÀY BẮT ĐẦU</p>
-                                    <small>{dataWork?.startDate}</small>
+                                    <small>{formatDate(dataWork?.startDate)}</small>
                                 </div>
                                 <div className="wrap-end-date">
                                     <p>HẠN CHÓT</p>
-                                    <small>{dataWork?.endDate}</small>
+                                    <small>{formatDate(dataWork?.endDate)}</small>
                                 </div>
                                 {dataWork?.endDateActual && (
                                     <div className="wrap-actual-end-date">
                                         <p>NGÀY HOÀN THÀNH</p>
-                                        <small>{dataWork?.endDateActual}</small>
+                                        <small>{formatDate(dataWork?.endDateActual)}</small>
                                     </div>
                                 )}
                             </div>

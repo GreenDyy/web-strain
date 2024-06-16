@@ -3,7 +3,7 @@ import './Project.scss'
 import { getAllProjectEmployeeApi } from "../../../apis/apiTask";
 import { getEmployeeByIdApi } from "../../../apis/apiLoginEmployee";
 import { icons } from "../../../constants";
-import { format } from 'date-fns'
+import { formatDate } from "../../../utils/Utils";
 
 const ItemProject = ({ item }) => {
     const [owner, setOwner] = useState(null)
@@ -24,7 +24,7 @@ const ItemProject = ({ item }) => {
 
                 <img src={icons.more} className="icon" />
             </div>
-            <p className="row-2">Tạo bởi {owner?.fullName} vào ngày {format(item.startDateProject, 'dd-MM-yyyy')}</p>
+            <p className="row-2">Tạo bởi {owner?.fullName} vào ngày {formatDate(item.startDateProject)}</p>
         </div>
     )
 }

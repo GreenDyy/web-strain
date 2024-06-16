@@ -40,6 +40,18 @@ const convertImageToVarBinary = (imageUrl) => {
     });
 };
 
+const formatDate = (date) => {
+    const parsedDate = new Date(date);
+    if (isNaN(parsedDate)) {
+        return 'Invalid date';
+    }
+    const day = String(parsedDate.getDate()).padStart(2, '0');
+    const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
+    const year = parsedDate.getFullYear();
+
+    return `${day}-${month}-${year}`;
+};
+
 const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
@@ -62,4 +74,5 @@ export {
     validateEmail,
     convertImageToVarBinary,
     base64ToBlob,
+    formatDate,
 }

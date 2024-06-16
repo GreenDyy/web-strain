@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './OrderItem.scss'
-import { convertImageByte, formatCurrency } from "../../../utils/Utils";
+import { convertImageByte, formatCurrency, formatDate } from "../../../utils/Utils";
 import { getInventoryByIdStrainApi } from "../../../apis/apiInventory";
 import { getAllOrderDetailByIdOrderApi } from "../../../apis/apiPayment";
 import { getStrainByIdApi } from "../../../apis/apiStrain";
@@ -55,7 +55,7 @@ function OrderItem({ order, onClick, onHandleDestroyOrder }) {
             <div className="row-1">
                 <p className="id-order">Mã đơn hàng: #DH{order?.idOrder}</p>
                 <div className="wrap-date-state">
-                    <p className="date">{order?.dateOrder}</p>
+                    <p className="date">Ngày đặt :{formatDate(order?.dateOrder)}</p>
                     <div className="state-order">
                         {order?.status === 'Đang chờ xử lý' && <DangChoXuLy />}
                         {order?.status === 'Đang được xử lý' && <DangDuocXuLy />}

@@ -6,6 +6,11 @@ const loginCustomerApi = async (username, password) => {
     return response
 }
 
+const loginCustomerWithGoogleApi = async (email) => {
+    const response = await axios.post(`${domain}/api/Customer/LoginWithGoogle?email=${email}`)
+    return response
+}
+
 const getAllCustomerApi = async () => {
     const response = await axios.get(`${domain}/api/Customer`)
     return response
@@ -34,7 +39,7 @@ const changePassCustomerApi = async (idCustomer, userModel) => {
 }
 
 const resetPasswordCustomerApi = async (email, newPass) => {
-    await axios.put(`${domain}/api/Customer/reset-pass?email=${email}&newPass=${newPass}`, )
+    await axios.put(`${domain}/api/Customer/reset-pass?email=${email}&newPass=${newPass}`,)
 }
 
 const checkExistEmailApi = async (email) => {
@@ -64,4 +69,5 @@ export {
     checkExistEmailWithoutSelfApi,
     updateCustomerNoPassApi,
     changePassCustomerApi,
+    loginCustomerWithGoogleApi,
 }   

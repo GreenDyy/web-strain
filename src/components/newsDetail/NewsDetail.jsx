@@ -3,7 +3,7 @@ import './NewsDetail.scss'
 import { useParams } from 'react-router-dom'
 import { getGetRandomNewsPaperApi, getNewsPaperByIdApi } from '../../apis/apiNewspaper'
 import { getEmployeeByIdApi } from '../../apis/apiLoginEmployee'
-import { format } from "date-fns";
+import { formatDate } from '../../utils/Utils'
 
 function NewsDetail() {
     const { idNewspaper } = useParams()
@@ -28,7 +28,7 @@ function NewsDetail() {
         <div className='NewsDetail'>
             <div className='col-1-news'>
                 <h1 className='title-news'>{newspaper?.title}</h1>
-                <p className='post-date'>Ngày đăng: {format(newspaper?.postDate, 'dd-MM-yyyy')}</p>
+                <p className='post-date'>Ngày đăng: {formatDate(newspaper?.postDate)}</p>
                 <p className='content-news'>{newspaper?.content}</p>
                 <img src='https://cafefcdn.com/2019/10/1/photo-1-15698951675771107256207.jpg' />
                 <p className='content-news' style={{ marginTop: 15 }}>{newspaper?.content2}</p>

@@ -13,6 +13,7 @@
     padding-top: 40px;
     padding-right: 30px;
     padding-left: 30px;
+    
 
     .row-1 {
         display: flex;
@@ -22,9 +23,21 @@
 
         .id-order {}
 
-        .state-order {
-            color: rgb(233, 128, 0)
+        .wrap-date-state {
+            display: flex;
+            align-items: center;
+
+            .date {
+                margin-right: 10px;
+                font-weight: 500;
+                font-size: 14px;
+            }
+
+            .state-order {
+                color: rgb(233, 128, 0)
+            }
         }
+
     }
 
     .row-2 {

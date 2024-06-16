@@ -79,6 +79,14 @@ function Profile() {
         setImage(customerData.image)
     }
 
+    const validatePhoneNumber = (event) => {
+        const value = event.target.value;
+        const newValue = value.replace(/\D/, ''); // Loại bỏ các ký tự không phải số
+        if (value.length <= 10) {
+            setPhoneNumber(newValue)
+        }
+
+    }
     const handleChangeTab = (tab) => {
         handleResetData()
         setTab(tab)
@@ -248,10 +256,10 @@ function Profile() {
                                 <p>Địa chỉ giao hàng</p>
                                 <FaMapLocationDot className="icon" />
                             </div>
-                            <div className="feature" onClick={() => toastSuccess('Tính năng đang phát triển')}>
+                            {/* <div className="feature" onClick={() => toastSuccess('Tính năng đang phát triển')}>
                                 <p>Xóa tài khoản</p>
                                 <TiDelete className="icon" style={{ fontSize: 20 }} />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 
@@ -288,7 +296,7 @@ function Profile() {
                                     <div className="wrap-input">
                                         <p className="label">Số điện thoại</p>
                                         <div className="input-box">
-                                            <input type="text" value={phoneNumber ? phoneNumber : ''} onChange={(event) => { setPhoneNumber(event.target.value) }} />
+                                            <input type="text" value={phoneNumber ? phoneNumber : ''} onChange={validatePhoneNumber} />
                                         </div>
                                     </div>
 

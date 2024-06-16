@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getAllOrderDetailByIdOrderApi, getOrderByIdOrderApi } from "../../../apis/apiPayment";
 import { getInventoryByIdStrainApi } from "../../../apis/apiInventory";
 import { getStrainByIdApi } from "../../../apis/apiStrain";
-import { convertImageByte, formatCurrency } from "../../../utils/Utils";
+import { convertImageByte, formatCurrency, formatDate } from "../../../utils/Utils";
 import { icons, images } from "../../../constants";
 import { FaCheck } from "react-icons/fa";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
@@ -68,12 +68,16 @@ function OrderDetail() {
         <div className="OrderDetail">
             <div className="row-1">
                 <p className="id-order">MÃ ĐƠN HÀNG: <strong>#DH{dataOrder?.idOrder}</strong></p>
-                <div className="state-order">
-                    {dataOrder?.status === 'Đang chờ xử lý' && <DangChoXuLy />}
-                    {dataOrder?.status === 'Đang được xử lý' && <DangDuocXuLy />}
-                    {dataOrder?.status === 'Đang vận chuyển' && <DangVanChuyen />}
-                    {dataOrder?.status === 'Đã hoàn thành' && <DaHoanThanh />}
+                <div className="wrap-date-state">
+                    <p className="date">Ngày đặt: {formatDate(dataOrder?.dateOrder)}</p>
+                    <div className="state-order">
+                        {dataOrder?.status === 'Đang chờ xử lý' && <DangChoXuLy />}
+                        {dataOrder?.status === 'Đang được xử lý' && <DangDuocXuLy />}
+                        {dataOrder?.status === 'Đang vận chuyển' && <DangVanChuyen />}
+                        {dataOrder?.status === 'Đã hoàn thành' && <DaHoanThanh />}
+                    </div>
                 </div>
+
 
             </div>
             <div className="row-2">

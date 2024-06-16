@@ -1,6 +1,6 @@
 import React from "react";
 import './ItemStrain.scss'
-import { convertImageByte } from "../../../utils/Utils";
+import { convertImageByte, formatDate } from "../../../utils/Utils";
 import { images } from "../../../constants";
 
 const ItemStrain = ({ item, onHandleDetail }) => {
@@ -20,7 +20,7 @@ const ItemStrain = ({ item, onHandleDetail }) => {
                 <p className="number">
                     <strong style={{ color: 'black' }}>
                         Ngày thêm:
-                    </strong> {item?.dateAdd}
+                    </strong> {formatDate(item?.dateAdd)}
                 </p>
                 <div className={`${item?.strainApprovalHistories[0]?.status === 'Đã được duyệt' ? 'da-duyet' : 'chua-duyet'}`}>
                     {item?.strainApprovalHistories[0]?.status}

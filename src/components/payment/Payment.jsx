@@ -131,10 +131,23 @@ function Payment() {
         if (dataListDetailCart.length != 0) {
             setLoading(true)
             if (address === null) {
-                toastWarning('Bạn chưa nhập địa chỉ giao hàng')
+                toastWarning('Vui lòng cập nhật địa chỉ giao hàng')
                 setLoading(false)
                 return
             }
+
+            if (phoneNumber === null) {
+                toastWarning('Vui lòng cập nhật số điện thoại')
+                setLoading(false)
+                return
+            }
+
+            if (email === null) {
+                toastWarning('Vui lòng cập nhật email')
+                setLoading(false)
+                return
+            }
+
             if (agree) {
                 //thanh toán khi nhận hàng
                 // const textPaymentMethod = paymentMethod === 'cod' ? 'COD'

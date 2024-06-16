@@ -89,7 +89,7 @@ function PaymentSuccess() {
                         <div className="col-1">
                             <div className="wrap-title">
                                 <h3>Thanh toán thành công!</h3>
-                                <img className="img-success" src={images.success} />
+                                <img className="img-success" src={images.illustration6} />
                             </div>
                             <p>Đơn hàng đang được xử lý, chúng tôi sẽ sớm liên lạc với bạn</p>
                             <div className="process-bar">
