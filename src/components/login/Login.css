@@ -90,9 +90,9 @@
     display: flex;
     padding: 0 10px;
     border-radius: 40px;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    border: 2px solid white;
+   
     height: 45px;
     cursor: pointer;
 }

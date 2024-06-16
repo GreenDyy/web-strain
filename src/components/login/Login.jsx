@@ -200,12 +200,15 @@ function Login() {
                     <img src={icons.google} />
                     <p>Đăng nhập với Google</p>
                 </div> */}
+                <div className="btn-google">
+                    <GoogleLogin
+                        onSuccess={handleGoogleLoginSuccess}
+                        onError={handleGoogleLoginError}
+                        shape="pill"
+                        size="medium"
+                    />
+                </div>
 
-                <GoogleLogin
-                    onSuccess={handleGoogleLoginSuccess}
-                    onError={handleGoogleLoginError}
-
-                />
 
                 <div className="register-link">
                     <p>Chưa có tài khoản? <Link to='/Register'>Đăng ký ngay!</Link></p>
