@@ -83,13 +83,13 @@ function PaymentSuccess() {
             {vnpParams?.vnp_ResponseCode === "00" || !vnpParams?.vnp_ResponseCode ?
                 <div className="PaymentSuccess">
                     <img className="img-success" src={images.success} />
-                    <h1 className="title-success">Thanh toán thành công!</h1>
+                    <h1 className="title-success">Đặt hàng thành công!</h1>
                     <p>Cảm ơn bạn đã mua sản phẩm của chúng tôi!</p>
                     <div className="row">
                         <div className="col-1">
                             <div className="wrap-title">
-                                <h3>Thanh toán thành công!</h3>
-                                <img className="img-success" src={images.illustration6} />
+                                <h3>Đặt hàng thành công!</h3>
+                                <img className="img-success" src={images.success} />
                             </div>
                             <p>Đơn hàng đang được xử lý, chúng tôi sẽ sớm liên lạc với bạn</p>
                             <div className="process-bar">
@@ -109,7 +109,7 @@ function PaymentSuccess() {
                         </div>
 
                         <div className="col-2">
-                            <img className="img-col-2" src={images.paymentsuccess} />
+                            <img className="img-col-2" src={images.illustration8} />
                         </div>
                     </div>
                 </div >

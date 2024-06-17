@@ -58,12 +58,12 @@
                 margin-right: 8px;
                 border-radius: 5px;
             }
-        }
 
-        p {
-            flex: 1;
-            font-size: 14px;
-            margin-top: 0;
+            p {
+                font-size: 14px;
+                margin-top: 0;
+                cursor: pointer;
+            }
         }
     }
 
@@ -110,6 +110,7 @@
                     flex: 1;
                     font-size: 14px;
                     margin-top: 0;
+                    cursor: pointer;
                 }
             }
         }

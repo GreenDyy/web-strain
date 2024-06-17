@@ -16,49 +16,47 @@
         border-radius: 999px;
         object-fit: contain;
         cursor: pointer;
-        /* filter: invert(100%); */
         transition: 0.2s ease-in-out;
 
     }
 
-    @media (prefers-reduced-motion: no-preference) {
-        .logo {
-            animation-name: rotate-windows;
-            animation-iteration-count: infinite;
-            animation-duration: 3s;
-            animation-fill-mode: forwards;
-        }
-    }
+    // @media (prefers-reduced-motion: no-preference) {
+    //     .logo {
+    //         animation-name: rotate-windows;
+    //         animation-iteration-count: infinite;
+    //         animation-duration: 3s;
+    //         animation-fill-mode: forwards;
+    //     }
+    // }
 
-    @keyframes rotate-windows {
-        0% {
-            transform: perspective(500px) rotateY(-42deg);
-            -webkit-transform: perspective(500px) rotateY(-42deg);
-            -moz-transform: perspective(500px) rotateY(-42deg);
-            -ms-transform: perspective(500px) rotateY(-42deg);
-            -o-transform: perspective(500px) rotateY(-42deg);
-        }
+    // @keyframes rotate-windows {
+    //     0% {
+    //         transform: perspective(500px) rotateY(-42deg);
+    //         -webkit-transform: perspective(500px) rotateY(-42deg);
+    //         -moz-transform: perspective(500px) rotateY(-42deg);
+    //         -ms-transform: perspective(500px) rotateY(-42deg);
+    //         -o-transform: perspective(500px) rotateY(-42deg);
+    //     }
 
-        50% {
-            transform: perspective(500px) rotateY(0deg);
-            -webkit-transform: perspective(500px) rotateY(0deg);
-            -moz-transform: perspective(500px) rotateY(0deg);
-            -ms-transform: perspective(500px) rotateY(0deg);
-            -o-transform: perspective(500px) rotateY(0deg);
-        }
+    //     50% {
+    //         transform: perspective(500px) rotateY(0deg);
+    //         -webkit-transform: perspective(500px) rotateY(0deg);
+    //         -moz-transform: perspective(500px) rotateY(0deg);
+    //         -ms-transform: perspective(500px) rotateY(0deg);
+    //         -o-transform: perspective(500px) rotateY(0deg);
+    //     }
 
-        100% {
-            transform: perspective(500px) rotateY(-42deg);
-            -webkit-transform: perspective(500px) rotateY(-42deg);
-            -moz-transform: perspective(500px) rotateY(-42deg);
-            -ms-transform: perspective(500px) rotateY(-42deg);
-            -o-transform: perspective(500px) rotateY(-42deg);
-        }
-    }
+    //     100% {
+    //         transform: perspective(500px) rotateY(-42deg);
+    //         -webkit-transform: perspective(500px) rotateY(-42deg);
+    //         -moz-transform: perspective(500px) rotateY(-42deg);
+    //         -ms-transform: perspective(500px) rotateY(-42deg);
+    //         -o-transform: perspective(500px) rotateY(-42deg);
+    //     }
+    // }
 
     .logo:hover {
-        scale: 1.2;
-        transition: 0.2s ease-in-out;
+        scale: 1.07;
     }
 
     ul {
@@ -298,17 +296,15 @@
             border-radius: 10px;
             padding: 5px 30px;
             color: white;
-            transition: 0.3s;
+            transition: 0.3s ease-in-out;
         }
 
         .btn-login:hover {
-            padding: 5px 50px;
             color: white;
             transition: 0.3s;
             color: #76B947;
             background: none;
             border: 1px solid #76B947;
-            transition: 0.3s;
         }
 
         .btn-register {
@@ -323,10 +319,8 @@
 
         .btn-register:hover {
             border: none;
-            padding: 5px 50px;
             color: white;
             background: #76B947;
-            transition: 0.3s;
         }
 
         .btn-cart {

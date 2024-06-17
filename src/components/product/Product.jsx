@@ -87,7 +87,7 @@ function Product() {
 
     const handleGoToDetail = (idStrain) => {
         navigate(`/ProductDetail/${idStrain}`)
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo({ top: 0 })
     }
 
     const handleSelectNode = async (node) => {

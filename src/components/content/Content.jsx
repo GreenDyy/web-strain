@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import './Content.css'
+import './Content.scss'
 
 //all pages
 import Home from '../home/Home'
@@ -29,7 +29,7 @@ function Content() {
         setShowSpeciesBg(location.pathname === '/Login' || location.pathname === '/Register' || location.pathname === '/ForgetPass');
     }, [location]);
     return (
-        <div className={`container ${showSpeciesBg ? 'species-background' : ''}`}>
+        <div className={`Content ${showSpeciesBg ? 'species-background' : ''}`}>
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/Home' element={<Home />} />

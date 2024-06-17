@@ -193,13 +193,10 @@ function Login() {
                     color="white"
                     loading={spinner}
                     size={20}
-                    cssOverride={{ position: 'absolute', right: 198, bottom: 100 }}
+                    cssOverride={{ position: 'absolute', right: 198, top: 310 }}
                 />
                 <p className="register-link">Hoặc đăng nhập với</p>
-                {/* <div className="btn-google" onClick={handleCustomGoogleLogin}>
-                    <img src={icons.google} />
-                    <p>Đăng nhập với Google</p>
-                </div> */}
+
                 <div className="btn-google">
                     <GoogleLogin
                         onSuccess={handleGoogleLoginSuccess}

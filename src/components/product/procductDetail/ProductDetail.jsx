@@ -24,10 +24,6 @@ const navbarTitle = [
         id: 2,
         title: 'Thông tin chi tiết',
     },
-    {
-        id: 1,
-        title: 'Đánh giá',
-    },
 ]
 
 function ProductDetail() {
@@ -160,13 +156,10 @@ function ProductDetail() {
     };
 
     const handleGoToDetail = (idStrain) => {
-        navigate(`/ProductDetail/${idStrain}`);
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        navigate(`/ProductDetail/${idStrain}`)
+        window.scrollTo({ top: 0 })
     }
-    console.log(product)
+
     return (
         <div className="ProductDetail">
             {product ? (
@@ -395,17 +388,12 @@ function ProductDetail() {
                                 )
 
                             }
-                            {
-                                selectedNav === 3 && (
-                                    dataReview
-                                )
-
-                            }
+    
                         </div>
                     </div>
 
                     <div className="wrap-row-3">
-                        <h2 className="title">Các sản phẩm liên quan</h2>
+                        <h2 className="title">Các chủng liên quan</h2>
                         <div className="wrap-other-strain">
                             {dataRandomStrain.map((item, index) => {
                                 const imgSrc = item?.imageStrain ? convertImageByte(item.imageStrain) : images.strainnull

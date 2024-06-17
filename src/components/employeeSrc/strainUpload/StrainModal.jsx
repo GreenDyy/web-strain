@@ -185,7 +185,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
         <div className="StrainModal">
             <div className="modal">
                 <div className="header-title">
-                    <h2 className="title-work">{strain ? 'Cập nhật thông tin chủng' : 'Thêm chủng mới'}</h2>
+                    <h2 className="title-work">{strain ? 'Thông tin chủng' : 'Thêm chủng mới'}</h2>
                     <button className="btn-back" onClick={handleCloseModal}>Quay lại</button>
                 </div>
 

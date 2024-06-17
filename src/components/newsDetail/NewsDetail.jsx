@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './NewsDetail.scss'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getGetRandomNewsPaperApi, getNewsPaperByIdApi } from '../../apis/apiNewspaper'
 import { getEmployeeByIdApi } from '../../apis/apiLoginEmployee'
 import { formatDate } from '../../utils/Utils'
@@ -11,6 +11,7 @@ function NewsDetail() {
     const [author, setAuthor] = useState('')
     const [newsNoiBats, setNewsNoiBats] = useState([])
     const [newsLienQuans, setNewsLienQuans] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,7 +24,12 @@ function NewsDetail() {
             setNewsLienQuans(randomNews.data.slice(0, 3))
         }
         fetchData()
-    }, [])
+    }, [idNewspaper])
+
+    const handleGoToDetail = (idNewspaper) => {
+        navigate(`/NewsDetail/${idNewspaper}`)
+        window.scrollTo({ top: 0 })
+    }
     return (
         <div className='NewsDetail'>
             <div className='col-1-news'>
@@ -36,10 +42,11 @@ function NewsDetail() {
 
                 <h2 className='title-lien-quan'>BÀI BÁO LIÊN QUAN</h2>
                 {newsLienQuans?.map((item, index) => {
+                    console.log(item)
                     return (
                         <div key={index} className='wrap-news'>
                             <img className='thumbnail' src='https://cafefcdn.com/2019/10/1/photo-1-15698951675771107256207.jpg' />
-                            <p>{item?.title}</p>
+                            <p onClick={() => handleGoToDetail(item?.idNewspaper)}>{item?.title}</p>
                         </div>
                     )
                 })}
@@ -54,7 +61,7 @@ function NewsDetail() {
                         return (
                             <div key={index} className='wrap-news'>
                                 <img className='thumbnail' src='https://cafefcdn.com/2019/10/1/photo-1-15698951675771107256207.jpg' />
-                                <p>{item?.title}</p>
+                                <p style={{cursor:'pointer'}} onClick={() => handleGoToDetail(item?.idNewspaper)}>{item?.title}</p>
                             </div>
                         )
                     })}
