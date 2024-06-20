@@ -3,7 +3,7 @@ import './NewsDetail.scss'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getGetRandomNewsPaperApi, getNewsPaperByIdApi } from '../../apis/apiNewspaper'
 import { getEmployeeByIdApi } from '../../apis/apiLoginEmployee'
-import { formatDate } from '../../utils/Utils'
+import { convertImageByte, formatDate } from '../../utils/Utils'
 
 function NewsDetail() {
     const { idNewspaper } = useParams()
@@ -36,7 +36,7 @@ function NewsDetail() {
                 <h1 className='title-news'>{newspaper?.title}</h1>
                 <p className='post-date'>Ngày đăng: {formatDate(newspaper?.postDate)}</p>
                 <p className='content-news'>{newspaper?.content}</p>
-                <img src='https://cafefcdn.com/2019/10/1/photo-1-15698951675771107256207.jpg' />
+                <img src={newspaper?.image ? convertImageByte(newspaper?.image) : 'https://e.khoahoc.tv/photos/image/2016/11/08/vi-khuan-t-103.jpg'} />
                 <p className='content-news' style={{ marginTop: 15 }}>{newspaper?.content2}</p>
                 <p className='author'>Tác giả: {author && author}</p>
 
@@ -45,7 +45,7 @@ function NewsDetail() {
                     console.log(item)
                     return (
                         <div key={index} className='wrap-news'>
-                            <img className='thumbnail' src='https://cafefcdn.com/2019/10/1/photo-1-15698951675771107256207.jpg' />
+                            <img className='thumbnail' src={item?.image ? convertImageByte(item?.image) : 'https://e.khoahoc.tv/photos/image/2016/11/08/vi-khuan-t-103.jpg'} />
                             <p onClick={() => handleGoToDetail(item?.idNewspaper)}>{item?.title}</p>
                         </div>
                     )
@@ -60,8 +60,8 @@ function NewsDetail() {
                     {newsNoiBats?.map((item, index) => {
                         return (
                             <div key={index} className='wrap-news'>
-                                <img className='thumbnail' src='https://cafefcdn.com/2019/10/1/photo-1-15698951675771107256207.jpg' />
-                                <p style={{cursor:'pointer'}} onClick={() => handleGoToDetail(item?.idNewspaper)}>{item?.title}</p>
+                                <img className='thumbnail' src={item?.image ? convertImageByte(item?.image) : 'https://e.khoahoc.tv/photos/image/2016/11/08/vi-khuan-t-103.jpg'} />
+                                <p style={{ cursor: 'pointer' }} onClick={() => handleGoToDetail(item?.idNewspaper)}>{item?.title}</p>
                             </div>
                         )
                     })}

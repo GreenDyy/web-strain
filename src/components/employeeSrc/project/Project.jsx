@@ -25,6 +25,7 @@ const ItemProject = ({ item }) => {
                 <img src={icons.more} className="icon" />
             </div>
             <p className="row-2">Tạo bởi {owner?.fullName} vào ngày {formatDate(item.startDateProject)}</p>
+            <p className={`${item?.status === 'Chưa hoàn thành' ? 'status-notcomplete' : 'status-complete'}`}>{item?.status}</p>
         </div>
     )
 }

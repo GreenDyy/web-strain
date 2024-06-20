@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import './DetailWork.scss'
-import { getProjectContentApi, getProjecttApi, updateContentWorkApi, updateFileSavedApi } from "../../../apis/apiTask";
+import { getAllContentWorkByIdProjectContentApi, getAllProjectContentByIdProjectApi, getProjectByIdProjectApi, getProjectContentApi, getProjectContentByIdProjectContentApi, getProjecttApi, updateContentWorkApi, updateFileSavedApi, updateProjectApi, updateProjectContentApi } from "../../../apis/apiTask";
 import { FaCircleDot } from "react-icons/fa6";
 import moment from "moment";
 import ReactQuill from 'react-quill';
@@ -72,19 +72,50 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
             reader.readAsDataURL(file);
         }
     }
-    const handleDeleteFile = async () => {
-        const newWork = { ...dataWork, fileSaved: null, fileName: null };
-        const file = { fileSave: null, fileName: null };
-        await updateFileSavedApi(dataWork.idContentWork, file);
-        setDataWork(newWork);
-    }
 
+    // const handleChangeStatusWork = async (status, endDateActual) => {
+    //     const newWork = { ...dataWork, status: status, endDateActual: endDateActual };
+    //     await updateContentWorkApi(dataWork.idContentWork, newWork);
+    //     updateWorkStatus(dataWork.idContentWork, status);
+    //     setDataWork(newWork);
+    //     setShowDropdown(false);
+    // }
     const handleChangeStatusWork = async (status, endDateActual) => {
-        const newWork = { ...dataWork, status: status, endDateActual: endDateActual };
-        await updateContentWorkApi(dataWork.idContentWork, newWork);
-        updateWorkStatus(dataWork.idContentWork, status);
-        setDataWork(newWork);
-        setShowDropdown(false);
+        const tempProjectContent = await getProjectContentByIdProjectContentApi(item?.idProjectContent)
+        const newWork = { ...item, status: status, endDateActual: endDateActual };
+        await updateContentWorkApi(item.idContentWork, newWork)
+        updateWorkStatus(item.idContentWork, status);
+
+        //check list cong viec trong content work done het thi chuyen ProjectContent thành đã hoàn thành
+        //chuyển status của ProjectContent
+        const listWorkFromIdProjectContent = await getAllContentWorkByIdProjectContentApi(item?.idProjectContent)
+        for (const work of listWorkFromIdProjectContent.data) {
+            if (work?.status === 'Chưa hoàn thành') {
+                await updateProjectContentApi(work?.idProjectContent, { ...tempProjectContent.data, status: 'Chưa hoàn thành' })
+                break;
+            }
+            else {
+                await updateProjectContentApi(work?.idProjectContent, { ...tempProjectContent.data, status: 'Đã hoàn thành' })
+            }
+        }
+
+        //check list ProjectContent done het thi chuyen Project thành đã hoàn thành, tương tự với Project
+        const idCurProject = tempProjectContent.data.idProject
+        const curProject = await getProjectByIdProjectApi(idCurProject)
+        const listProjectContentFormProjectIdProject = await getAllProjectContentByIdProjectApi(idCurProject)
+
+        for (const projectContent of listProjectContentFormProjectIdProject.data) {
+            if (projectContent?.status === 'Chưa hoàn thành') {
+                await updateProjectApi(idCurProject, { ...curProject.data, status: 'Chưa hoàn thành' })
+                break;
+            }
+            else {
+                //chuyển status của Project
+                await updateProjectApi(idCurProject, { ...curProject.data, status: 'Đã hoàn thành' })
+            }
+        }
+        if (item?.idProjectContent)
+            setShowDropdown(false)
     }
 
     const handleSaveDes = async () => {

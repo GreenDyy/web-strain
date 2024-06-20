@@ -45,10 +45,11 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
+
                     .icon-project {
-                       width: 25px;
-                       margin-right: 5px;
-                       object-fit: contain;
+                        width: 25px;
+                        margin-right: 5px;
+                        object-fit: contain;
                     }
                 }
 
@@ -61,7 +62,23 @@
             .row-2 {
                 font-size: 12px;
                 font-style: italic;
+
+            }
+
+            .status-complete {
+                margin-top: 0;
+                font-size: 12px;
+                font-style: italic;
                 padding-bottom: 40px;
+                color: #53B158;
+            }
+
+            .status-notcomplete {
+                margin-top: 0;
+                font-size: 12px;
+                font-style: italic;
+                padding-bottom: 40px;
+                color: #FF4966;
             }
         }
     }
