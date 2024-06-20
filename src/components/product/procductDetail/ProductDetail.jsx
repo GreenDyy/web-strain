@@ -253,67 +253,67 @@ function ProductDetail() {
                                                     <p>Điều kiện sống</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>Strain number</p>
+                                                    <p>Mã</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>Species</p>
+                                                    <p>Loài</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>Class</p>
+                                                    <p>Lớp</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>Genus</p>
+                                                    <p>Chi</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>Phylum</p>
-                                                </div>
-
-                                                <div className="cell">
-                                                    <p>scientificName</p>
-                                                </div>
-                                                <div className="cell">
-                                                    <p>synonymStrain</p>
-                                                </div>
-                                                <div className="cell">
-                                                    <p>formerName</p>
-                                                </div>
-                                                <div className="cell">
-                                                    <p>commonName</p>
-                                                </div>
-                                                <div className="cell">
-                                                    <p>cellSize</p>
-                                                </div>
-                                                <div className="cell">
-                                                    <p>organization</p>
+                                                    <p>Ngành</p>
                                                 </div>
 
                                                 <div className="cell">
-                                                    <p>characteristics</p>
+                                                    <p>Tên khoa học</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>collectionSite</p>
+                                                    <p>Tên gọi khác</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>continent</p>
+                                                    <p>Tên gọi cũ</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>country</p>
+                                                    <p>Tên gọi chung</p>
+                                                </div>
+                                                <div className="cell">
+                                                    <p>Kích thước tế bào</p>
+                                                </div>
+                                                <div className="cell">
+                                                    <p>Tổ chức</p>
                                                 </div>
 
                                                 <div className="cell">
-                                                    <p>isolationSource</p>
+                                                    <p>Đặc trưng</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>toxinProducer</p>
+                                                    <p>Vị trí thu thập</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>stateOfStrain</p>
+                                                    <p>Lục địa</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>agitationResistance</p>
+                                                    <p>Quốc gia</p>
+                                                </div>
+
+                                                <div className="cell">
+                                                    <p>Nguồn cách ly</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>remarks</p>
+                                                    <p>Nhà sản xuất độc tố</p>
+                                                </div>
+                                                <div className="cell">
+                                                    <p>Tình trạng chủng</p>
+                                                </div>
+                                                <div className="cell">
+                                                    <p>Kháng kích động</p>
+                                                </div>
+                                                <div className="cell">
+                                                    <p>Nhận xét</p>
                                                 </div>
                                             </div>
 

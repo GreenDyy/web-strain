@@ -108,7 +108,6 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
         //call api update Strains
         try {
             let newStrain = { ...dataStrain }
-            console.log('strain update nè', newStrain)
             await updateStrainApi(strain?.idStrain, newStrain)
             toastSuccess('Cập nhật thành công')
             onUpdateData()
@@ -193,7 +192,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                     <div className="wrap-all-input">
                         <div className="wrap-row">
                             <div className="wrap-input">
-                                <p className="label">Scientific Name<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Tên khoa học<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.scientificName}
                                         onChange={(event) => handleOnChance('scientificName', event.target.value)}
@@ -202,7 +201,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input">
-                                <p className="label">Synonym Name<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Tên gọi khác<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.synonymStrain}
                                         onChange={(event) => handleOnChance('synonymStrain', event.target.value,)}
@@ -211,7 +210,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input">
-                                <p className="label">Former Name<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Tên gọi cũ<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.formerName}
                                         onChange={(event) => handleOnChance('formerName', event.target.value,)}
@@ -222,7 +221,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
 
                         <div className="wrap-row">
                             <div className="wrap-input">
-                                <p className="label">Common Name<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Tên gọi chung<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.commonName}
                                         onChange={(event) => handleOnChance('commonName', event.target.value,)}
@@ -231,7 +230,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input">
-                                <p className="label">Cell Size<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Kích thước tế bào<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.cellSize}
                                         onChange={(event) => handleOnChance('cellSize', event.target.value,)}
@@ -240,7 +239,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input">
-                                <p className="label">Organization<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Tổ chức<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.organization}
                                         onChange={(event) => handleOnChance('organization', event.target.value,)}
@@ -251,7 +250,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
 
                         <div className="wrap-row" ref={dropdownSpeciesRef}>
                             <div className="wrap-input" style={{ width: '50%' }}>
-                                <p className="label">Species<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Loài<span style={{ color: 'red' }}>*</span></p>
 
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.idSpecies}
@@ -277,7 +276,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
 
                             </div>
                             <div className="wrap-input" style={{ width: '50%' }} ref={dropdownConditionRef}>
-                                <p className="label">Condition<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Điều kiện sống<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.idCondition}
                                         onChange={(event) => handleOnChance('idCondition', event.target.value,)}
@@ -305,7 +304,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
 
                         <div className="wrap-row">
                             <div className="wrap-input">
-                                <p className="label">Characteristics</p>
+                                <p className="label">Đặc trưng</p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.characteristics}
                                         onChange={(event) => handleOnChance('characteristics', event.target.value,)}
@@ -314,7 +313,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input" style={{ width: '70%' }}>
-                                <p className="label">Colection Site<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Vị trí thu thập<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.collectionSite}
                                         onChange={(event) => handleOnChance('collectionSite', event.target.value,)}
@@ -325,7 +324,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
 
                         <div className="wrap-row">
                             <div className="wrap-input">
-                                <p className="label">Continent<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Lục địa<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.continent}
                                         onChange={(event) => handleOnChance('continent', event.target.value,)}
@@ -334,7 +333,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input">
-                                <p className="label">Country</p>
+                                <p className="label">Quốc gia</p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.country}
                                         onChange={(event) => handleOnChance('country', event.target.value,)}
@@ -343,7 +342,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input">
-                                <p className="label">Isolation Source</p>
+                                <p className="label">Nguồn cách ly</p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.isolationSource}
                                         onChange={(event) => handleOnChance('isolationSource', event.target.value,)}
@@ -354,7 +353,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
 
                         <div className="wrap-row">
                             <div className="wrap-input">
-                                <p className="label">Toxin Producer</p>
+                                <p className="label">Nhà sản xuất độc tố</p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.toxinProducer}
                                         onChange={(event) => handleOnChance('toxinProducer', event.target.value,)}
@@ -363,7 +362,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input">
-                                <p className="label">State Of Strain</p>
+                                <p className="label">Tình trạng chủng</p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.stateOfStrain}
                                         onChange={(event) => handleOnChance('stateOfStrain', event.target.value,)}
@@ -372,7 +371,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input">
-                                <p className="label">Agitation Resistance</p>
+                                <p className="label">Kháng kích động</p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.agitationResistance}
                                         onChange={(event) => handleOnChance('agitationResistance', event.target.value,)}
@@ -383,7 +382,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
 
                         <div className="wrap-row">
                             <div className="wrap-input">
-                                <p className="label">Remarks<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Nhận xét<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.remarks}
                                         onChange={(event) => handleOnChance('remarks', event.target.value,)}
@@ -391,7 +390,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                                 </div>
                             </div>
                             <div className="wrap-input" style={{ width: '70%' }}>
-                                <p className="label">Gene Information</p>
+                                <p className="label">Thông tin gen</p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.geneInformation}
                                         onChange={(event) => handleOnChance('geneInformation', event.target.value,)}
@@ -402,7 +401,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
 
                         <div className="wrap-row">
                             <div className="wrap-input">
-                                <p className="label">Publications</p>
+                                <p className="label">Ấn phẩm</p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.publications}
                                         onChange={(event) => handleOnChance('publications', event.target.value,)}
@@ -411,7 +410,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                             </div>
 
                             <div className="wrap-input" style={{ width: '70%' }}>
-                                <p className="label">Recommended For Teaching<span style={{ color: 'red' }}>*</span></p>
+                                <p className="label">Đề xuất cho việc giảng dạy<span style={{ color: 'red' }}>*</span></p>
                                 <div className="input-box">
                                     <input type="text" value={dataStrain.recommendedForTeaching}
                                         onChange={(event) => handleOnChance('recommendedForTeaching', event.target.value,)}
@@ -437,7 +436,7 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                     </div>
                     <div className="col-2">
                         <div className="wrap-input">
-                            <p className="label">Image Strain</p>
+                            <p className="label">Hình ảnh chủng</p>
                             <div className="input-box">
                                 <input type="text" value={dataStrain.imageStrain}
                                     onChange={(event) => handleOnChance('imageStrain', event.target.value,)}

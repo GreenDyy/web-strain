@@ -204,7 +204,7 @@
                         display: flex;
                         justify-content: center;
                         color: white;
-                        font-size: 18px;
+                        font-size: 22px;
                     }
 
                     .table-content {
@@ -221,6 +221,9 @@
                                 border-top: 1px solid gray;
                                 font-weight: 700;
                             }
+                        }
+                        .table-col-1 {
+                            color: black;
                         }
 
                         .table-col-2 {
