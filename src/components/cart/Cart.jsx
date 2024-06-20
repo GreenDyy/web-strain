@@ -276,17 +276,17 @@ function Cart() {
                                 <div>
                                     <p>{formatCurrency(tongTien)} VNĐ</p>
                                     <p>{formatCurrency(tongThue)} VNĐ</p>
-                                    <p>{formatCurrency(thanhTien)} VNĐ</p>
+                                    <p style={{fontWeight: 700, fontStyle: 'italic'}}>{formatCurrency(thanhTien)} VNĐ</p>
                                 </div>
                             </div>
 
-                            <div>
+                            {/* <div>
                                 <p>Áp dụng voucher</p>
                                 <div className='box-voucher'>
                                     <input type='text' placeholder='Mã Voucher' />
                                     <button onClick={()=>{toastWarning('Tính năng đang phát triển')}}>Áp dụng</button>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <p>Phương thức thanh toán</p>
                             <div className='wrap-payment-method'>

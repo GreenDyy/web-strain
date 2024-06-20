@@ -73,13 +73,6 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
         }
     }
 
-    // const handleChangeStatusWork = async (status, endDateActual) => {
-    //     const newWork = { ...dataWork, status: status, endDateActual: endDateActual };
-    //     await updateContentWorkApi(dataWork.idContentWork, newWork);
-    //     updateWorkStatus(dataWork.idContentWork, status);
-    //     setDataWork(newWork);
-    //     setShowDropdown(false);
-    // }
     const handleChangeStatusWork = async (status, endDateActual) => {
         const tempProjectContent = await getProjectContentByIdProjectContentApi(item?.idProjectContent)
         const newWork = { ...item, status: status, endDateActual: endDateActual };
