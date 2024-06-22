@@ -46,6 +46,9 @@ const getStrainByIdApi = async (id) => {
     return await axios.get(`${domain}/api/Strain/${id}`);
 };
 
+const getStrainApprovalHistoryByIdApi = async (id) => {
+    return await axios.get(`${domain}/api/StrainApprovalHistory/${id}`);
+};
 // Class
 const getClassByIdApi = async (id) => {
     return await axios.get(`${domain}/api/Class/${id}`);
@@ -191,4 +194,5 @@ export {
     addStrainApprovalHistoryApi,
     updateStrainApi,
     getAllStrainForEmployeeApi,
+    getStrainApprovalHistoryByIdApi,
 };

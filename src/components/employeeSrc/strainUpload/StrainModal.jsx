@@ -4,7 +4,7 @@ import { images } from "../../../constants";
 import { RxDropdownMenu } from "react-icons/rx";
 import { toastError, toastSuccess, toastWarning } from '../../Toast/Toast';
 import { convertImageByte } from "../../../utils/Utils";
-import { addIsolatorStrainApi, addStrainApi, addStrainApprovalHistoryApi, getAllConditionApi, getAllSpeciesApi, updateStrainApi } from "../../../apis/apiStrain";
+import { addIsolatorStrainApi, addStrainApi, addStrainApprovalHistoryApi, getAllConditionApi, getAllSpeciesApi, getStrainApprovalHistoryByIdApi, updateStrainApi } from "../../../apis/apiStrain";
 
 const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, isGlobal = false }) => {
     const [dataSpeices, setDataSpecies] = useState([])
@@ -39,8 +39,11 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
         publications: '',
         recommendedForTeaching: '',
         imageStrain: '',
-        dateAdd: new Date().toJSON().slice(0, 10)
+        dateAdd: new Date().toJSON().slice(0, 10),
+        strainApprovalHistories: '',
     })
+    const [dataApprovalHistories, setDataApprovalHistories] = useState(null)
+
     const inputImgRef = useRef(null)
     const dataRecommendedForTeaching = ['Yes', 'No']
     useEffect(() => {
@@ -72,8 +75,20 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
     }, []);
 
     useEffect(() => {
-        setDataStrain({ ...strain })
-    }, [strain])
+        setDataStrain({ ...strain });
+        if (strain.idStrain) {
+            const fetchApprovalHistory = async () => {
+                try {
+                    const approvalHistory = await getStrainApprovalHistoryByIdApi(strain.idStrain);
+                    setDataApprovalHistories(approvalHistory.data);
+                } catch (e) {
+                    toastError('Error fetching approval history');
+                }
+            };
+            fetchApprovalHistory();
+        }
+    }, [strain]);
+
 
     const handleOnChance = (key, value) => {
         let temp = { ...dataStrain }
@@ -457,18 +472,15 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
                         </div>
                         {strain ?
                             <>
-
                                 {strain?.strainNumber ?
-                                    // <p className="strain-da-duyet">ĐÃ DUYỆT</p>
                                     <img className='img-approved' src={images.approved} />
                                     : (!isGlobal ? <button className="btn-update" onClick={handleUpdateStrain}>Cập nhật</button>
                                         : <img className='img-approved' src={images.notapproved} />
                                     )
-
                                 }
+                                {dataApprovalHistories?.reason && <p className="reason">Bị từ chối duyệt, lý do: {dataApprovalHistories?.reason}</p>}
 
                             </>
-
                             :
                             <>
                                 <button className={`btn-add ${processing ? 'disable' : ''}`} onClick={handleAddStrain} disabled={processing}>Thêm chủng mới</button>
