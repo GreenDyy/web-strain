@@ -12,16 +12,18 @@ function Order() {
     const customerData = useSelector(state => state.customer.customerData)
     const [listOrder, setListOrder] = useState([])
     const [tab, setTab] = useState(1)
+    const [reloadData, setReloadData] = useState(false)
     const navigate = useNavigate()
     const tinhTrangs = ['Tất cả', 'Đang chờ xử lý', 'Đang được xử lý', 'Đang vận chuyển', 'Đã hoàn thành']
 
     useEffect(() => {
         const fetchDataOrder = async () => {
-            const dataOrder = await getAllOrderByIdCustomerApi(customerData.idCustomer)
+            const dataOrder = await getAllOrderByIdCustomerApi(customerData?.idCustomer)
             setListOrder(dataOrder.data)
+            setReloadData(false)
         }
         fetchDataOrder()
-    }, [])
+    }, [reloadData])
 
     const handleDestroyOrder = (idOrder) => {
         toast.dark(
@@ -57,6 +59,7 @@ function Order() {
                 await deleteOrderDetail(orderDetail.idOrderDetail)
             }
             await deleteOrder(idOrder)
+            setReloadData(true)
             toast.dismiss()
             toastSuccess("Hủy đơn hàng thành công")
         }
@@ -154,7 +157,7 @@ function Order() {
                 </div>
                 :
                 <div className='empty-order'>
-                    <img className='img-empty-order' src={images.emptyorder} />
+                    <img className='img-empty-order' src={images.emptyorder}/>
                     <h2 className='title'>Bạn chưa có đơn hàng nào</h2>
                     <p className='content'>Hãy đến trang chủ và khám phá các sản phẩm của chúng tôi</p>
                     <button className='btn-login' onClick={() => navigate('/')}>Đi tới trang chủ</button>
