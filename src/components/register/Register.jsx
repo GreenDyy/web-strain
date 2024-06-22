@@ -90,7 +90,7 @@ function Register() {
                 status: "Đang hoạt động"
             })
             //nếu đăng ký thành công thì cho login
-            if (dataRegister.status == 200) {
+            if (dataRegister.status === 200) {
                 const user = await loginCustomerApi(username, password)
                 const cart = await getCartByIdCustomerApi(user.data.idCustomer)
                 const allTotalProductInCart = await getAllTotalQuantityApi(cart.data.idCart)
@@ -236,7 +236,7 @@ function Register() {
                         <FaLock className="icon" />
                     </div>
                 </div>
-                <button className="btn-register" type="button" onClick={handleRegister}>Đăng ký</button>
+                <button className="btn-register" type="button" onClick={handleRegister} disabled={spinner}>Đăng ký</button>
                 <HashLoader
                     color="white"
                     loading={spinner}

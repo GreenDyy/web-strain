@@ -78,6 +78,7 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
         const newWork = { ...item, status: status, endDateActual: endDateActual };
         await updateContentWorkApi(item.idContentWork, newWork)
         updateWorkStatus(item.idContentWork, status);
+        setDataWork(newWork);
 
         //check list cong viec trong content work done het thi chuyen ProjectContent thành đã hoàn thành
         //chuyển status của ProjectContent

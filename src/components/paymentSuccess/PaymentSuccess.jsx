@@ -50,11 +50,11 @@ function PaymentSuccess() {
         //lấy data request từ bên Payment nảy gửi lên stogare ấy 
         const dataOrder = getDataLocalStorage('dataOrder')
         const dataListDetailCart = getDataLocalStorage('dataListDetailCart')
-        
+
         //tạo đơn
         if (vnpParams) {
-            
-            const newOrder = await createOrderApi(dataOrder?.idCustomer, vnpParams?.vnp_Amount, dataOrder?.note, 
+
+            const newOrder = await createOrderApi(dataOrder?.idCustomer, vnpParams?.vnp_Amount / 100, dataOrder?.note,
                 dataOrder?.address, dataOrder?.paymentMethod, dataOrder?.statusOrder)
             //tạo các detail đơn
             for (const detailCart of dataListDetailCart) {
