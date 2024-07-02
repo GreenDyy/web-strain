@@ -51,7 +51,7 @@ function NavbarEmployee({ employee, setScreenName }) {
             <div className="wrap-avatar-name">
                 <div className="wrap-name-nav">
                     <p className="name">{employee?.fullName}</p>
-                    <p className="role">{employee?.roleName}</p>
+                    <p className="role">Nghiên cứu viên</p>
                 </div>
                 <img src={employee?.imageEmployee ? convertImageByte(employee?.imageEmployee) : images.avatarnull}
                     onClick={() => setShowDrawerRight(true)}

@@ -34,7 +34,7 @@ const DrawerRight = ({ handleCloseDrawerRight, setScreenName, employee }) => {
                         <img src={employee?.imageEmployee ? convertImageByte(employee?.imageEmployee) : images.avatarnull} />
                         <div className="wrap-name">
                             <p className="name">{employee?.fullName}</p>
-                            <p className="role">{employee?.roleName}</p>
+                            <p className="role">Nghiên cứu viên</p>
                         </div>
                     </div>
 

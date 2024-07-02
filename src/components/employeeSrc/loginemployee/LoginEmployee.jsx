@@ -26,12 +26,7 @@ function LoginEmployee() {
         try {
             const employee = await loginEmployeeApi(employeename, password)
             if (employee.data) {
-<<<<<<< HEAD
                 // if(employee.data.idRole !== 1) {
-=======
-                //3 là nghien cuu vien
-                // if(employee.data.idRole !== 3) {
->>>>>>> 025de756deefead678db28f779aec67a1577bbef
                 //     toastWarning('Bạn không có quyền đăng nhập vào trang này')
                 //     return
                 // }

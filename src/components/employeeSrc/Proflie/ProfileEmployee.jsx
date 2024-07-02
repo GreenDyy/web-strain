@@ -91,7 +91,7 @@ function ProfileEmployee({ employee }) {
                     />
                     <div className="wrap-name">
                         <p className="name">{employee?.fullName}</p>
-                        <p className="role">{employee?.roleName}</p>
+                        <p className="role">Nghiên cứu viên</p>
                     </div>
                 </div>
                 <div className="card-profile">
