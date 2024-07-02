@@ -76,10 +76,10 @@ const StrainModal = ({ strain = {}, handleCloseModal, employee, onUpdateData, is
 
     useEffect(() => {
         setDataStrain({ ...strain });
-        if (strain.idStrain) {
+        if (strain?.idStrain) {
             const fetchApprovalHistory = async () => {
                 try {
-                    const approvalHistory = await getStrainApprovalHistoryByIdApi(strain.idStrain);
+                    const approvalHistory = await getStrainApprovalHistoryByIdApi(strain?.idStrain);
                     setDataApprovalHistories(approvalHistory.data);
                 } catch (e) {
                     toastError('Error fetching approval history');
