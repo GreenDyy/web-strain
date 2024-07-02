@@ -99,6 +99,11 @@ const updateProjectApi = async (idProject, project) => {
     })
 }
 
+const getAllEmployeeByIdProjectApi = async (idProject) => {
+    const response = await axios.get(`${domain}/api/Employee/GetAllEmployeeFromIdProject?idProject=${idProject}`)
+    return response
+}
+
 export {
     getAllContentWorkApi, updateContentWorkApi, getContentWorkApi, getProjectContentApi, getProjecttApi,
     getAllProjectEmployeeApi,
@@ -107,7 +112,7 @@ export {
     getAllProjectContentByIdProjectApi,
     getProjectContentByIdProjectContentApi,
     getProjectByIdProjectApi,
-
+    getAllEmployeeByIdProjectApi,
     updateProjectContentApi,
     updateProjectApi,
     updateFileSavedApi,
