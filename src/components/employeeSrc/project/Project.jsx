@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './Project.scss'
-import { getAllEmployeeByIdProjectApi, getAllProjectEmployeeApi } from "../../../apis/apiTask";
+import { getAllEmployeeByIdProjectApi, getAllProjectEmployeeApi, getProjectByIdProjectApi } from "../../../apis/apiTask";
 import { getEmployeeByIdApi } from "../../../apis/apiLoginEmployee";
 import { icons } from "../../../constants";
 import { formatDate } from "../../../utils/Utils";
@@ -35,6 +35,7 @@ function Project({ employee }) {
     const [projects, setProjects] = useState([])
     const [dataModal, setDataModal] = useState(null)
     const [showModal, setShowModal] = useState(false)
+    const [nameProjectSelected, setNameProjectSelected] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,8 +47,11 @@ function Project({ employee }) {
 
     const handleShowDetail = async (idProject) => {
         const response = await getAllEmployeeByIdProjectApi(idProject)
+        // setDataModal({ ...response.data, projectName: item.projectName })
         setDataModal(response.data)
         setShowModal(true)
+        const projectSelected = await getProjectByIdProjectApi(idProject)
+        setNameProjectSelected(projectSelected?.data?.projectName)
     }
 
     console.log(projects)
@@ -62,7 +66,7 @@ function Project({ employee }) {
 
             </div>
             {showModal && (
-                <DetailProject item={dataModal} handleCloseModal={() => setShowModal(false)} />
+                <DetailProject title={nameProjectSelected} item={dataModal} handleCloseModal={() => setShowModal(false)} />
             )}
         </div>
     )

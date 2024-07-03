@@ -29,8 +29,11 @@
             align-items: center;
             padding: 0 10px;
 
-            h2 {
+            .title-work {
                 margin-top: 0;
+                font-weight: 500;
+                font-size: 15px;
+                padding-right: 10px;
             }
 
             .btn-back {
