@@ -144,7 +144,7 @@ function ContentWork({ employee }) {
         setSapToiHan(dataContentWork.filter(cw => {
             const endDate = moment(cw.endDate);
             const differenceInDays = endDate.diff(moment(), 'days');
-            return differenceInDays > 0 && differenceInDays <= 1 && differenceInDays <= 1 && cw.status !== 'Đã hoàn thành'
+            return differenceInDays > 0 && differenceInDays <= 3 && cw.status !== 'Đã hoàn thành'
         }).length)
     }, [dataContentWork])
 
