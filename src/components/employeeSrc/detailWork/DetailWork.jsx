@@ -15,6 +15,7 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
     const [projectContent, setProjectContent] = useState(null)
     const [showDropdown, setShowDropdown] = useState(false)
     const [notification, setNotification] = useState('')
+    const [result, setResult] = useState('')
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,6 +26,7 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
                 setProjectContent(projectContent.data);
                 setProject(project.data);
                 setNotification(item?.notificattion)
+                setResult(item?.results)
             }
         };
         fetchData();
@@ -124,6 +126,18 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
         }
     }
 
+    const handleSaveResult = async () => {
+        try {
+            const newWork = { ...dataWork, results: result };
+            await updateContentWorkApi(dataWork.idContentWork, newWork);
+            setDataWork(newWork);
+            toastSuccess('Đã cập nhật kết quả')
+        }
+        catch {
+            toastError('Cập nhật kết quả thất bại')
+        }
+    }
+
     return (
         <div className="DetailWork">
             <div className="modal">
@@ -218,6 +232,13 @@ const DetailWork = ({ item, handleCloseModal, updateWorkStatus }) => {
                             )}
                             <input ref={inputFileRef} type="file" onChange={handleFileChange} hidden />
                         </div>
+
+                        <div className="wrap-attach">
+                            <p>BÁO CÁO KẾT QUẢ</p>
+                            <button className="btn-save" onClick={handleSaveResult}>Báo cáo kết quả</button>
+                        </div>
+
+                        <textarea className="field-result" value={result} onChange={(e) => { setResult(e.target.value) }} />
                     </div>
                 </div>
 

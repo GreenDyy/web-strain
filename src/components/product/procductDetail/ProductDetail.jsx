@@ -322,56 +322,56 @@ function ProductDetail() {
                                                     <p>{condition?.medium} {condition?.temperature} {condition?.lightIntensity} {condition?.duration}   </p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.strainNumber}</p>
+                                                    <p>{product?.strainNumber || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{species?.nameSpecies}</p>
+                                                    <p>{species?.nameSpecies || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{classes?.nameClass}</p>
+                                                    <p>{classes?.nameClass || "-"}</p>
                                                 </div>
                                                 <div className="cell">
                                                     <p>{genus?.nameGenus}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{phylum?.namePhylum}</p>
+                                                    <p>{phylum?.namePhylum || "-"}</p>
                                                 </div>
 
                                                 <div className="cell">
-                                                    <p>{product?.scientificName}</p>
+                                                    <p>{product?.scientificName || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.synonymStrain}</p>
+                                                    <p>{product?.synonymStrain || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.formerName}</p>
+                                                    <p>{product?.formerName || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.commonName}</p>
+                                                    <p>{product?.commonName || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.cellSize}</p>
+                                                    <p>{product?.cellSize || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.organization}</p>
+                                                    <p>{product?.organization || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.characteristics}</p>
+                                                    <p>{product?.characteristics || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.collectionSite}</p>
+                                                    <p>{product?.collectionSite || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.continent}</p>
+                                                    <p>{product?.continent || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.country}</p>
+                                                    <p>{product?.country || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.isolationSource}</p>
+                                                    <p>{product?.isolationSource || "-"}</p>
                                                 </div>
                                                 <div className="cell">
-                                                    <p>{product?.toxinProducer}</p>
+                                                    <p>{product?.toxinProducer || "-"}</p>
                                                 </div>
                                                 <div className="cell">
                                                     <p>{product?.stateOfStrain || "-"}</p>
