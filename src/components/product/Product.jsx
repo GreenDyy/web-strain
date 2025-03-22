@@ -11,7 +11,7 @@ import {
 } from '../../apis/apiStrain';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toastError } from '../Toast/Toast';
-import { BsSearchHeart } from "react-icons/bs";
+import { BsSearch, BsSearchHeart } from "react-icons/bs";
 import TreeView from './treeview/TreeView';
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
 import ItemProduct from './ItemProduct/ItemProduct';
@@ -161,7 +161,7 @@ function Product() {
                                 setSearch(e.target.value);
                             }}
                         />
-                        <BsSearchHeart className='icon-search' />
+                        <BsSearch className='icon-search' />
                     </div>
 
                     <TreeView data={treeData} onSelectNode={handleSelectNode} />

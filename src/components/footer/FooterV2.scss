@@ -78,3 +78,103 @@
         }
     }
 }
+
+// Responsive cho tablet
+@media screen and (max-width: 1024px) {
+    .FooterV2 {
+        height: auto;
+
+        .row-1-footer {
+            padding: 40px 15%;
+        }
+
+        .row-2-footer {
+            padding: 20px 10%;
+        }
+    }
+}
+
+// Responsive cho mobile
+@media screen and (max-width: 768px) {
+    .FooterV2 {
+        .row-1-footer {
+            padding: 30px 5%;
+
+            .title-row-1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .wrap-all-icon {
+                .icon {
+                    font-size: 24px;
+                    margin: 0 10px;
+                }
+            }
+
+            .wrap-all-feature {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+
+                .feature {
+                    border: none;
+                    padding: 0 10px;
+                }
+            }
+        }
+
+        .row-2-footer {
+            padding: 15px 5%;
+
+            p {
+                font-size: 12px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+// Responsive cho mobile nhỏ
+@media screen and (max-width: 480px) {
+    .FooterV2 {
+        .row-1-footer {
+            padding: 20px 3%;
+
+            .title-row-1 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 12px;
+            }
+
+            .wrap-all-icon {
+                .icon {
+                    font-size: 20px;
+                    margin: 0 5px;
+                }
+            }
+
+            .wrap-all-feature {
+                gap: 10px;
+
+                .feature {
+                    font-size: 12px;
+                    padding: 0 5px;
+                }
+            }
+        }
+
+        .row-2-footer {
+            padding: 10px 3%;
+
+            p {
+                font-size: 10px;
+            }
+        }
+    }
+}

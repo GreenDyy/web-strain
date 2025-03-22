@@ -61,6 +61,7 @@ const Navbar = () => {
     const [search, setSearch] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const [dataSearch, setDataSearch] = useState([])
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     const dropdownRef = useRef(null);
 
@@ -101,28 +102,38 @@ const Navbar = () => {
     };
     const srcAvatar = customerData?.image ? convertImageByte(customerData.image) : images.avatarnull
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen)
+    }
+
     return (
         <div>
             <nav className='Navbar'>
                 <img src={icons.logo} alt='Logo App-logo' className='logo' onClick={() => navigate('/')} />
-                <ul >
+
+                <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <ul className={isMenuOpen ? 'active' : ''}>
                     {
                         listNavbarItem.map((item, index) => (
-                            <li key={index}>
+                            <li key={index} onClick={() => {
+                                setIsSelected(index + 1)
+                                removeDataLocalStorage('node')
+                                setIsMenuOpen(false)
+                            }}>
                                 <Link
                                     className="Link"
-                                    to={item.to}
-                                    onClick={() => {
-                                        setIsSelected(index + 1)
-                                        removeDataLocalStorage('node')
-                                    }}>
+                                    to={item.to}>
                                     {item.title}
                                 </Link>
                             </li>
                         ))
                     }
                 </ul>
-
 
                 <div className='col-user'>
                     <div className='wrap-search-content' ref={dropdownRef}>

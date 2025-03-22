@@ -26,7 +26,7 @@ function Home() {
                     </button>
                 </div>
                 <div className="col-2">
-                    <img className="img-circle" src="https://w.forfun.com/fetch/5a/5aa54d794911a4d82c0e13ebda44ef52.jpeg" />
+                    <img className="img-circle" src={images.imgcircle} />
                 </div>
             </div>
 

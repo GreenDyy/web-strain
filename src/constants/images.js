@@ -16,6 +16,7 @@ import illustration6 from '../assets/images/illustration1.jpg'
 import illustration7 from '../assets/images/illustration7.jpg'
 import illustration8 from '../assets/images/illustration8.jpg'
 import illustration9 from '../assets/images/illustration9.jpg'
+import imgcircle from '../assets/images/imgcircle.jpg'
 
 
 import approved from '../assets/images/approved.png'
@@ -45,6 +46,7 @@ const images = {
     bannercontact,
     bannernewspaper,
     bgprofile,
+    imgcircle
 }
 
 export default images
